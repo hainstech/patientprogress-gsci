@@ -9,8 +9,6 @@ jobs:
   build:
     docker:
       - image: node:16.1.0
-        environment:
-          NODE_ENV: production
 
     working_directory: ~/repo
 
