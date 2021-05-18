@@ -8,7 +8,7 @@ jobs:
       - run: ssh -oStrictHostKeyChecking=no -v $USER@$IP "./patientprogress/deploy.sh"
   build:
     docker:
-      - image: node:10.12.0
+      - image: node:16.1.0
         environment:
           NODE_ENV: production
 
