@@ -26,7 +26,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "dev": "npm start",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "netlify:deploy": "netlify deploy --dir=./build -p -m \"$(git log -1 --pretty=%B)\"",
+    "ci:deploy": "npm run build && npm run netlify:deploy"
   },
   "eslintConfig": {
     "extends": [

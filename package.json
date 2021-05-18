@@ -5,10 +5,11 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "echo passed",
+    "ci:test": "echo passed",
     "dev": "lerna run dev --stream",
     "new-version": "lerna version --conventional-commits --yes",
-    "diff": "lerna diff"
+    "diff": "lerna diff",
+    "ci:deploy": "lerna run ci:deploy --since $TAG"
   },
   "version": "0.1.0",
   "author": "Dominic Hains",
