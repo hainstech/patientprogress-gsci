@@ -39,7 +39,6 @@ jobs:
 
       - run: npm install --g lerna
       - run: npm install netlify-cli -g
-      - run: yarn new-version
 
       - run: git tag
       - run: yarn ci:deploy
