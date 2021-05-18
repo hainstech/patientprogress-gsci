@@ -4,7 +4,7 @@ import { setAlert } from './alert';
 import { GET_QUESTIONNAIRE, QUESTIONNAIRE_ERROR } from './types';
 
 const URI =
-  process.env.NODE_ENV === 'production' ? 'api.patientprogress.ca' : '';
+  process.env.NODE_ENV === 'production' ? 'https://api.patientprogress.ca' : '';
 
 // Get questionnaire with the params id
 export const getQuestionnaire = (id) => async (dispatch) => {

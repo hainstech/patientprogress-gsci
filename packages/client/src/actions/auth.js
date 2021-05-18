@@ -13,7 +13,7 @@ import {
 } from './types';
 
 const URI =
-  process.env.NODE_ENV === 'production' ? 'api.patientprogress.ca' : '';
+  process.env.NODE_ENV === 'production' ? 'https://api.patientprogress.ca' : '';
 
 // Load User
 export const loadUser = () => async (dispatch) => {
@@ -22,7 +22,7 @@ export const loadUser = () => async (dispatch) => {
   }
 
   try {
-    const res = await axios.get('/api/auth');
+    const res = await axios.get(`${URI}/api/auth`);
 
     dispatch({
       type: USER_LOADED,
