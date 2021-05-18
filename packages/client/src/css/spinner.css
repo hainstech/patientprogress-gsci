@@ -1,0 +1,12 @@
+.spinner {
+  height: 30px;
+  width: 30px;
+  animation: spinner 0.7s linear infinite;
+  color: #f44336;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
