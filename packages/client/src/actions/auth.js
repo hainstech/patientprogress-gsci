@@ -12,6 +12,9 @@ import {
   CLEAR_PROFILE,
 } from './types';
 
+const URI =
+  process.env.NODE_ENV === 'production' ? 'api.patientprogress.ca' : '';
+
 // Load User
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
@@ -33,55 +36,48 @@ export const loadUser = () => async (dispatch) => {
 };
 
 // Register User
-export const register = ({
-  name,
-  language,
-  gender,
-  dob,
-  email,
-  password,
-  research,
-  professional,
-}) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+export const register =
+  ({ name, language, gender, dob, email, password, research, professional }) =>
+  async (dispatch) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
 
-  console.log(research);
+    console.log(research);
 
-  const body = JSON.stringify({
-    name,
-    language,
-    gender,
-    dob,
-    email,
-    password,
-    research,
-    professional,
-  });
-  console.log(body);
-  try {
-    const res = await axios.post('/api/users', body, config);
-
-    dispatch({
-      type: REGISTER_SUCCESS,
-      payload: res.data,
+    const body = JSON.stringify({
+      name,
+      language,
+      gender,
+      dob,
+      email,
+      password,
+      research,
+      professional,
     });
-    dispatch(loadUser());
-  } catch (err) {
-    const errors = err.response.data.errors;
+    console.log(body);
+    try {
+      const res = await axios.post(`${URI}/api/users`, body, config);
 
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data,
+      });
+      dispatch(loadUser());
+    } catch (err) {
+      const errors = err.response.data.errors;
+
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+      }
+
+      dispatch({
+        type: REGISTER_FAIL,
+      });
     }
-
-    dispatch({
-      type: REGISTER_FAIL,
-    });
-  }
-};
+  };
 
 // Login User
 export const login = (email, password) => async (dispatch) => {
@@ -94,7 +90,7 @@ export const login = (email, password) => async (dispatch) => {
   const body = JSON.stringify({ email, password });
 
   try {
-    const res = await axios.post('/api/auth', body, config);
+    const res = await axios.post(`${URI}/api/auth`, body, config);
 
     dispatch({
       type: LOGIN_SUCCESS,

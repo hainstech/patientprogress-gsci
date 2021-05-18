@@ -3,10 +3,13 @@ import { setAlert } from './alert';
 
 import { GET_QUESTIONNAIRE, QUESTIONNAIRE_ERROR } from './types';
 
+const URI =
+  process.env.NODE_ENV === 'production' ? 'api.patientprogress.ca' : '';
+
 // Get questionnaire with the params id
 export const getQuestionnaire = (id) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/questionnaires/${id}`);
+    const res = await axios.get(`${URI}/api/questionnaires/${id}`);
 
     dispatch({
       type: GET_QUESTIONNAIRE,
@@ -37,7 +40,7 @@ export const createQuestionnaire = (schema, uischema) => async (dispatch) => {
       title: schema.title,
     };
 
-    await axios.post(`/api/questionnaires`, questionnaire, config);
+    await axios.post(`${URI}/api/questionnaires`, questionnaire, config);
 
     dispatch(setAlert('Questionnaire created', 'success'));
   } catch (err) {
@@ -59,7 +62,11 @@ export const addQuestionnaire =
         data: data,
       };
 
-      await axios.post(`/api/questionnaires/${id}`, questionnaire, config);
+      await axios.post(
+        `${URI}/api/questionnaires/${id}`,
+        questionnaire,
+        config
+      );
 
       dispatch(setAlert('Questionnaire filled and sent', 'success'));
 

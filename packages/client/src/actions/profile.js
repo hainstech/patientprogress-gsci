@@ -3,10 +3,13 @@ import { setAlert } from './alert';
 
 import { GET_PROFILE, PROFILE_ERROR } from './types';
 
+const URI =
+  process.env.NODE_ENV === 'production' ? 'api.patientprogress.ca' : '';
+
 // Get current users profile
 export const getCurrentProfile = (type) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/${type}s/me`);
+    const res = await axios.get(`${URI}/api/${type}s/me`);
 
     dispatch({
       type: GET_PROFILE,
@@ -34,7 +37,7 @@ export const editProfile = (type, formData, history) => async (dispatch) => {
 
     console.log(formData);
 
-    await axios.put(`/api/${type}s`, formData, config);
+    await axios.put(`${URI}/api/${type}s`, formData, config);
 
     dispatch(setAlert('Updated successfully', 'success'));
     switch (type) {
