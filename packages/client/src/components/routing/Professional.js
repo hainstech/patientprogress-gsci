@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 
-import ProfessionalDashboard from '../professional/ProfessionalDashboard';
+import Invite from '../professional/Invite';
 import Preferences from '../professional/Preferences';
 import Search from '../professional/Search';
 
@@ -15,16 +15,7 @@ const Professional = () => {
         path='/professional/patients'
         component={Search}
       />
-      <ProfessionalRoute
-        exact
-        path='/professional/profile'
-        component={ProfessionalDashboard}
-      />
-      <ProfessionalRoute
-        exact
-        path='/professional/invite'
-        component={ProfessionalDashboard}
-      />
+      <ProfessionalRoute exact path='/professional/invite' component={Invite} />
       <ProfessionalRoute
         exact
         path='/professional/preferences'

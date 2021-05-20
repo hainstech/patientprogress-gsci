@@ -8,11 +8,7 @@ import { getCurrentProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
 import { Link } from 'react-router-dom';
 
-function Search({
-  getPatients,
-  profile: { profile, loading },
-  getCurrentProfile,
-}) {
+function Search({ profile: { profile, loading }, getCurrentProfile }) {
   useEffect(() => {
     if (!profile) getCurrentProfile('professional');
   }, [profile, getCurrentProfile, loading]);
