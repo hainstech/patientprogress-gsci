@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
+var nodemailer = require('nodemailer');
 
 const Professional = require('../../models/Professional');
 
@@ -67,7 +68,7 @@ router.get('/myprofessional', patient, async (req, res) => {
   }
 });
 
-// @route PUT api/professional
+// @route PUT api/professionals
 // @desc Update professional's profile
 // @access Professional
 router.put(
@@ -104,6 +105,52 @@ router.put(
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
+    }
+  }
+);
+
+// @route POST api/professionals/invite
+// @desc Invite a new patient
+// @access Professional
+router.post(
+  '/invite',
+  [professional, check('email', 'Please include a valid email').isEmail()],
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+
+      const { _id: id } = await Professional.findOne({
+        user: req.user.id,
+      }).select('_id');
+
+      const url = `https://app.patientprogress.ca/register/${id}`;
+
+      const transporter = nodemailer.createTransport({
+        host: '***REMOVED***',
+        port: 465,
+        secure: true,
+        auth: {
+          user: 'dominic@hainstech.com',
+          pass: '***REMOVED***',
+        },
+      });
+
+      const emailContent = {
+        from: '"PatientProgress" <no-reply@hainstech.com>',
+        to: req.body.email,
+        subject: 'PatientProgress Invitation Link',
+        html: `<h3>Welcome to PatientProgress!</h3><a href="${url}">Click here to register into the application.</a><br><p>Thank you,</p><p>The PatientProgress Team</p>`,
+      };
+
+      transporter.sendMail(emailContent);
+
+      res.status(202).json({ msg: 'sent' });
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).json({ msg: 'Server Error' });
     }
   }
 );

@@ -17,8 +17,17 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
     research: false,
   });
 
-  const { name, language, gender, dob, email, password, password2, research } =
-    formData;
+  const {
+    firstName,
+    lastName,
+    language,
+    gender,
+    dob,
+    email,
+    password,
+    password2,
+    research,
+  } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,7 +38,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
       setAlert('Passwords do not match', 'danger');
     } else {
       register({
-        name,
+        name: `${firstName} ${lastName}`,
         language,
         gender,
         dob,
@@ -46,7 +55,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
       case 'patient':
         return <Redirect to={`/patient/questionnaires`} />;
       case 'professional':
-        return <Redirect to={`/professional/dashboard`} />;
+        return <Redirect to={`/professional/patients`} />;
       default:
         return <Redirect to={`/${type}/dashboard`} />;
     }
@@ -61,16 +70,30 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
           <div className='card-body'>
             <form onSubmit={(e) => onSubmit(e)}>
               <div className='row'>
-                <div className='col-12'>
+                <div className='col-6'>
                   <div className='form-group bmd-form-group'>
-                    <label className='bmd-label-static'>Nom/Name</label>
+                    <label className='bmd-label-static'>
+                      Prénom/First Name
+                    </label>
                     <input
-                      name='name'
-                      type='name'
+                      name='firstName'
                       className='form-control'
                       required
-                      placeholder='John Doe'
-                      value={name}
+                      placeholder='John'
+                      value={firstName}
+                      onChange={(e) => onChange(e)}
+                    />
+                  </div>
+                </div>
+                <div className='col-6'>
+                  <div className='form-group bmd-form-group'>
+                    <label className='bmd-label-static'>Nom/Last Name</label>
+                    <input
+                      name='lastName'
+                      className='form-control'
+                      required
+                      placeholder='Smith'
+                      value={lastName}
                       onChange={(e) => onChange(e)}
                     />
                   </div>
