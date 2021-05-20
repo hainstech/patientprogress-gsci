@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import DayJS from 'react-dayjs';
 
 import { getCurrentProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
@@ -81,7 +82,9 @@ function Search({
                         {results.map(({ _id, name, dob }) => (
                           <tr key={_id}>
                             <td>{name}</td>
-                            <td>{dob}</td>
+                            <td>
+                              <DayJS format='YYYY/MM/DD'>{dob}</DayJS>
+                            </td>
                             <td>
                               <Link
                                 to={`/professional/patients/${_id}`}
