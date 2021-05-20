@@ -35,8 +35,6 @@ export const editProfile = (type, formData, history) => async (dispatch) => {
       },
     };
 
-    console.log(formData);
-
     await axios.put(`${URI}/api/${type}s`, formData, config);
 
     dispatch(setAlert('Updated successfully', 'success'));
@@ -65,7 +63,5 @@ export const editProfile = (type, formData, history) => async (dispatch) => {
         status: err.response.status,
       },
     });
-
-    console.log(err);
   }
 };

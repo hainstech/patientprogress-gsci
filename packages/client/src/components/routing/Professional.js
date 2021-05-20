@@ -3,6 +3,7 @@ import { Switch } from 'react-router-dom';
 
 import ProfessionalDashboard from '../professional/ProfessionalDashboard';
 import Preferences from '../professional/Preferences';
+import Search from '../professional/Search';
 
 import ProfessionalRoute from './ProfessionalRoute';
 
@@ -12,7 +13,7 @@ const Professional = () => {
       <ProfessionalRoute
         exact
         path='/professional/patients'
-        component={ProfessionalDashboard}
+        component={Search}
       />
       <ProfessionalRoute
         exact

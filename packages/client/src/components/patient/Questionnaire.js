@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Form from 'react-jsonschema-form';
 
 import { getCurrentProfile } from '../../actions/profile';
@@ -73,4 +74,4 @@ export default connect(mapStateToProps, {
   getQuestionnaire,
   addQuestionnaire,
   getCurrentProfile,
-})(Questionnaire);
+})(withRouter(Questionnaire));

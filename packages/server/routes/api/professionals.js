@@ -17,7 +17,6 @@ router.get('/', admin, async (req, res) => {
     const professionals = await Professional.find();
     res.json(professionals);
   } catch (err) {
-    console.log(err);
     res.status(500).json({ msg: 'Server Error' });
   }
 });
@@ -27,8 +26,9 @@ router.get('/', admin, async (req, res) => {
 // @access Professional
 router.get('/me', professional, async (req, res) => {
   try {
-    const professional = await Professional.findOne({ user: req.user.id });
-
+    const professional = await Professional.findOne({
+      user: req.user.id,
+    }).populate('patients');
     res.json(professional);
   } catch (err) {
     console.log(err);

@@ -19,7 +19,6 @@ router.get('/', admin, async (req, res) => {
     const patients = await Patient.find();
     res.json(patients);
   } catch (err) {
-    console.log(err);
     res.status(500).json({ msg: 'Server Error' });
   }
 });
@@ -174,7 +173,6 @@ router.put('/:id', professional, async (req, res) => {
 
     res.json(patient);
   } catch (err) {
-    console.log(err);
     if (err.kind == 'ObjectId') {
       return res.status(404).json({ msg: 'Object error' });
     }
