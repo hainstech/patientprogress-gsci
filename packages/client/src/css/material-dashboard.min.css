@@ -13,6 +13,17 @@
 
  */
 
+#searchPatient::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+#searchPatient {
+  color: white;
+  width: 80%;
+  display: inline-block;
+}
+
 .card {
   font-size: 0.875rem;
 }

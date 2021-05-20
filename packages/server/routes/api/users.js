@@ -166,7 +166,6 @@ router.post(
     } = req.body;
 
     if (language != 'en' && 'fr') {
-      console.log(language);
       return res.status(400).json({ errors: [{ msg: 'Invalid language' }] });
     }
 

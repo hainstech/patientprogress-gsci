@@ -45,8 +45,6 @@ export const register =
       },
     };
 
-    console.log(research);
-
     const body = JSON.stringify({
       name,
       language,
@@ -57,7 +55,7 @@ export const register =
       research,
       professional,
     });
-    console.log(body);
+
     try {
       const res = await axios.post(`${URI}/api/users`, body, config);
 
