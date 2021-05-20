@@ -28,9 +28,7 @@ function Search({
       setResults(
         profile.patients.filter(({ name }) => name.indexOf(query) !== -1)
       );
-      // setResults(profile.patients.filter(({ name }) => true));
       setQueried(true);
-      console.log(query);
     }
   };
 

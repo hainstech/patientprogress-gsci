@@ -14,10 +14,4 @@ const devTools =
 
 const store = createStore(rootReducer, initialState, devTools);
 
-// const store = createStore(
-//   rootReducer,
-//   initialState,
-//   composeWithDevTools(applyMiddleware(...middleware))
-// );
-
 export default store;
