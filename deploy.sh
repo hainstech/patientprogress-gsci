@@ -1,10 +1,7 @@
 #!/bin/bash
 
-# go into the directory
-cd patientprogress
-
-# pull from the branch
-git pull origin master
+# pull from the master branch in the right directory
+git -C patientprogress pull origin master
 
 # install dependencies and restart pm2
 yarn install
