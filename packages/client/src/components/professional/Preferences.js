@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { editProfile, getCurrentProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
@@ -14,6 +15,7 @@ const Preferences = ({
   history,
 }) => {
   const { reset, register, handleSubmit } = useForm();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!profile) getCurrentProfile('professional');
@@ -42,15 +44,21 @@ const Preferences = ({
           <div className='col-md-10 mx-auto'>
             <div className='card'>
               <div className='card-header card-header-danger'>
-                <h4 className='card-title'>Preferences</h4>
-                <p className='card-category'>Choose your preferences</p>
+                <h4 className='card-title'>
+                  {t('professional.preferences.title')}
+                </h4>
+                <p className='card-category'>
+                  {t('professional.preferences.description')}
+                </p>
               </div>
               <div className='card-body'>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className='row'>
                     <div className='col-md-4'>
                       <div className='form-group'>
-                        <label className='bmd-label-static'>Full Name</label>
+                        <label className='bmd-label-static'>
+                          {t('professional.preferences.name')}
+                        </label>
                         <input
                           {...register('name')}
                           type='text'
@@ -61,7 +69,9 @@ const Preferences = ({
                     </div>
                     <div className='col-md-4'>
                       <div className='form-group'>
-                        <label className='bmd-label-static'>Clinic Name</label>
+                        <label className='bmd-label-static'>
+                          {t('professional.preferences.clinic')}
+                        </label>
                         <input
                           {...register('clinic')}
                           type='text'
@@ -72,7 +82,9 @@ const Preferences = ({
                     </div>
                     <div className='col-md-4'>
                       <div className='form-group'>
-                        <label className='bmd-label-static'>Phone Number</label>
+                        <label className='bmd-label-static'>
+                          {t('professional.preferences.phone')}
+                        </label>
                         <input
                           {...register('phone')}
                           type='text'
@@ -86,7 +98,7 @@ const Preferences = ({
                     <div className='col-md-12'>
                       <div className='form-group'>
                         <label className='bmd-label-static'>
-                          Your description
+                          {t('professional.preferences.yourDescription')}
                         </label>
                         <div className='form-group'>
                           <textarea
@@ -102,7 +114,9 @@ const Preferences = ({
                   <div className='row'>
                     <div className='col-md-4'>
                       <div className='form-group'>
-                        <label className='bmd-label-static'>Language</label>
+                        <label className='bmd-label-static'>
+                          {t('professional.preferences.language')}
+                        </label>
                         <select
                           {...register('language')}
                           type='text'
@@ -116,7 +130,7 @@ const Preferences = ({
                     </div>
                   </div>
                   <button type='submit' className='btn btn-danger pull-right'>
-                    Update Preferences
+                    {t('professional.preferences.submit')}
                   </button>
                   <div className='clearfix'></div>
                 </form>
