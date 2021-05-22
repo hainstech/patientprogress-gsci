@@ -1,13 +1,15 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const About = () => {
+  const { t } = useTranslation();
   return (
     <div>
       <div className='row'>
         <div className='col-12 mx-auto'>
           <div className='card'>
             <div className='card-header card-header-danger'>
-              <h4 className='card-title'>About PatientProgress</h4>
+              <h4 className='card-title'>{t('about.title')}</h4>
             </div>
             <div className='card-body'>
               <p>

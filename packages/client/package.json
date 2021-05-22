@@ -11,6 +11,7 @@
     "dayjs": "^1.10.4",
     "i18next": "^20.2.4",
     "i18next-browser-languagedetector": "^6.1.1",
+    "i18next-http-backend": "^1.2.4",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-dayjs": "^0.3.2",

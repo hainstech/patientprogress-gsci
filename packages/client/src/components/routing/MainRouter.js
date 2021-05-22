@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Navbar from '../../components/layout/Navbar';
@@ -16,7 +18,18 @@ import PatientRoute from './PatientRoute';
 import Admin from './Admin';
 import AdminRoute from './AdminRoute';
 
-const MainRouter = (props) => {
+const MainRouter = ({
+  auth: { isAuthenticated, loading },
+  profile: { profile, loading: ploading },
+}) => {
+  const { i18n } = useTranslation();
+  useEffect(() => {
+    //get language from state profile
+    if (!loading && isAuthenticated && !ploading && profile) {
+      i18n.changeLanguage(profile.language);
+    }
+  }, [isAuthenticated, loading, profile, ploading, i18n]);
+
   return (
     <div>
       <Switch>
@@ -54,6 +67,14 @@ const MainRouter = (props) => {
   );
 };
 
-MainRouter.propTypes = {};
+MainRouter.propTypes = {
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+};
 
-export default MainRouter;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  profile: state.profile,
+});
+
+export default connect(mapStateToProps)(MainRouter);

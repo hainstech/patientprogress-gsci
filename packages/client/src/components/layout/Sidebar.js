@@ -3,8 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
+import { useTranslation } from 'react-i18next';
 
 const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
+  const { i18n } = useTranslation();
   const location = useLocation();
   const { pathname } = location;
   const splitLocation = pathname.split('/');
@@ -99,13 +101,21 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
         </Link>
       </li>
       <li className='nav-item'>
-        <a className='nav-link' onClick={logout} href='/'>
+        <Link className='nav-link' onClick={logout} to='/'>
           <i className='material-icons'>logout</i>
           <p>Logout</p>
-        </a>
+        </Link>
       </li>
     </ul>
   );
+
+  const getOtherLang = () => {
+    return i18n.language === 'en' ? 'Français' : 'English';
+  };
+
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language === 'en' ? 'fr' : 'en');
+  };
 
   const guestLinks = (
     <ul className='nav'>
@@ -121,6 +131,12 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
         <Link className='nav-link' to='/login'>
           <i className='material-icons'>login</i>
           <p>Sign In</p>
+        </Link>
+      </li>
+      <li className='nav-item'>
+        <Link className='nav-link' onClick={() => toggleLanguage()} to='/'>
+          <i className='material-icons'>language</i>
+          <p>{getOtherLang()}</p>
         </Link>
       </li>
     </ul>
