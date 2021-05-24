@@ -62,14 +62,11 @@ const MainRouter = ({
       </div>
       {/* makes the js work in developement */}
       <Helmet>
-        <script defer src='/js/core/jquery.min.js'></script>
-        <script defer src='/js/core/popper.min.js'></script>
-        <script defer src='/js/core/bootstrap-material-design.min.js'></script>
-        <script
-          defer
-          src='/js/plugins/perfect-scrollbar.jquery.min.js'
-        ></script>
-        <script defer src='/js/material-dashboard.js?v=2.1.1'></script>
+        <script src='/js/core/jquery.min.js'></script>
+        <script src='/js/core/popper.min.js'></script>
+        <script src='/js/core/bootstrap-material-design.min.js'></script>
+        <script src='/js/plugins/perfect-scrollbar.jquery.min.js'></script>
+        <script src='/js/material-dashboard.js?v=2.1.1'></script>
       </Helmet>
     </HelmetProvider>
   );
