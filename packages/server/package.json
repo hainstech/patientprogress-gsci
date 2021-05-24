@@ -1,6 +1,6 @@
 {
   "name": "@patientprogress/server",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Clinician-Patient interface and data collector for research purposes",
   "main": "server.js",
   "scripts": {

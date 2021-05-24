@@ -1,6 +1,6 @@
 {
   "name": "@patientprogress/client",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@ginkgo-bioworks/react-json-schema-form-builder": "^2.4.2",
