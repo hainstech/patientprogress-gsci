@@ -1,6 +1,23 @@
 {
   "guest": {
-    "about": { "title": "À propos de PatientProgress" },
+    "about": {
+      "title": "À propos de PatientProgress",
+      "p1": "L'application Web PatientProgress est conçue pour faciliter la recherche médicale, tout en étant très pratique et facile d'utilisation pour le professionnel et le patient.",
+      "features": "Caractéristiques",
+      "patient": "Pour le patient",
+      "patient1": "Remplissez les questionnaires requis par votre professionnel",
+      "patient2": "Visualisez votre progression avec des graphiques générés avec vos données",
+      "patient3": "Accès facile aux coordonnées de votre professionnel",
+      "professional": "Pour le professionnel",
+      "professional1": "Choisissez les questionnaires que vous souhaitez que le patient remplisse",
+      "professional2": "Consultez les questionnaires remplis et exportez-les au format PDF",
+      "professional3": "Rédiger des rapports éventuellement pré-remplis avec les données du patient",
+      "professional4": "Schedule questionnaires for a individual patient",
+      "professional5": "Visualize the progress of all your patient in a interactive graph",
+      "researcher": "Pour le chercheur",
+      "researcher1": "Accédez au puissant API PatientProgress pour récupérer des données patient anonymisées",
+      "researcher2": "Toutes les données anonymisées du patient et du professionnel sont traitables en raison de leur format JSON"
+    },
     "login": {
       "title": "Se connecter à l'application",
       "email": "Courriel",

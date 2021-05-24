@@ -1,6 +1,23 @@
 {
   "guest": {
-    "about": { "title": "About PatientProgress" },
+    "about": {
+      "title": "About PatientProgress",
+      "p1": "The PatientProgress web-app is made to facilitate medical research, while being very convenient and time-saving for the professional and the patient.",
+      "features": "Features",
+      "patient": "For the patient",
+      "patient1": "Fill the questionnaires required by your professional",
+      "patient2": "Visualize your progress with graphs generated with your data",
+      "patient3": "Easy access to contact information about your professional",
+      "professional": "For the professional",
+      "professional1": "Choose which questionnaires you want the patient to fill",
+      "professional2": "See the filled questionnaires and export them to PDF",
+      "professional3": "Write reports that are optionally pre-filled with patient data",
+      "professional4": "Schedule questionnaires for a individual patient",
+      "professional5": "Visualize the progress of all your patient in a interactive graph",
+      "researcher": "For the researcher",
+      "researcher1": "Access the powerful PatientProgress API to retrieve anonymized patient data",
+      "researcher2": "All the patient's & professional's anonymized data are treatable because of their JSON format"
+    },
     "login": {
       "title": "Sign into the application",
       "email": "Email",
