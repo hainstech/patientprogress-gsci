@@ -3,11 +3,13 @@ import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
+import { useTranslation } from 'react-i18next';
 
 const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
   const location = useLocation();
   const { pathname } = location;
   const splitLocation = pathname.split('/');
+  const { t, i18n } = useTranslation();
 
   const professionalLinks = (
     <ul className='nav'>
@@ -18,7 +20,7 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
       >
         <Link className='nav-link' to={`/${type}/patients`}>
           <i className='material-icons'>group</i>
-          <p>My Patients</p>
+          <p>{t('sidebar.professional.patients')}</p>
         </Link>
       </li>
       <li
@@ -26,7 +28,7 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
       >
         <Link className='nav-link' to={`/${type}/invite`}>
           <i className='material-icons'>group_add</i>
-          <p>Invite a patient</p>
+          <p>{t('sidebar.professional.invite')}</p>
         </Link>
       </li>
       <li
@@ -36,17 +38,18 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
       >
         <Link className='nav-link' to={`/${type}/preferences`}>
           <i className='material-icons'>settings</i>
-          <p>Preferences</p>
+          <p>{t('sidebar.professional.preferences')}</p>
         </Link>
       </li>
       <li className='nav-item'>
         <a className='nav-link' onClick={logout} href='/'>
           <i className='material-icons'>logout</i>
-          <p>Logout</p>
+          <p>{t('sidebar.professional.logout')}</p>
         </a>
       </li>
     </ul>
   );
+
   const patientLinks = (
     <ul className='nav'>
       <li
@@ -56,7 +59,7 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
       >
         <Link className='nav-link' to={`/${type}/questionnaires`}>
           <i className='material-icons'>quiz</i>
-          <p>Questionnaires</p>
+          <p>{t('sidebar.patient.questionnaires')}</p>
         </Link>
       </li>
       <li
@@ -64,7 +67,7 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
       >
         <Link className='nav-link' to={`/${type}/profile`}>
           <i className='material-icons'>person</i>
-          <p>My Profile</p>
+          <p>{t('sidebar.patient.profile')}</p>
         </Link>
       </li>
       <li
@@ -74,14 +77,14 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
       >
         <Link className='nav-link' to={`/${type}/professional`}>
           <i className='material-icons'>local_hospital</i>
-          <p>My Professional</p>
+          <p>{t('sidebar.patient.professional')}</p>
         </Link>
       </li>
       <li className='nav-item'>
-        <a className='nav-link' onClick={logout} href='/'>
+        <Link className='nav-link' onClick={logout} to='/'>
           <i className='material-icons'>logout</i>
-          <p>Logout</p>
-        </a>
+          <p>{t('sidebar.patient.logout')}</p>
+        </Link>
       </li>
     </ul>
   );
@@ -99,20 +102,28 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
         </Link>
       </li>
       <li className='nav-item'>
-        <a className='nav-link' onClick={logout} href='/'>
+        <Link className='nav-link' onClick={logout} to='/'>
           <i className='material-icons'>logout</i>
           <p>Logout</p>
-        </a>
+        </Link>
       </li>
     </ul>
   );
+
+  const getOtherLang = () => {
+    return i18n.language === 'en' ? 'Français' : 'English';
+  };
+
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language === 'en' ? 'fr' : 'en');
+  };
 
   const guestLinks = (
     <ul className='nav'>
       <li className={`nav-item ${pathname === '/' ? 'active' : ''}`}>
         <Link className='nav-link' to='/'>
           <i className='material-icons'>info</i>
-          <p>About This Application</p>
+          <p>{t('sidebar.guest.about')}</p>
         </Link>
       </li>
       <li
@@ -120,7 +131,13 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
       >
         <Link className='nav-link' to='/login'>
           <i className='material-icons'>login</i>
-          <p>Sign In</p>
+          <p>{t('sidebar.guest.login')}</p>
+        </Link>
+      </li>
+      <li className='nav-item'>
+        <Link className='nav-link' onClick={() => toggleLanguage()} to='#'>
+          <i className='material-icons'>language</i>
+          <p>{getOtherLang()}</p>
         </Link>
       </li>
     </ul>

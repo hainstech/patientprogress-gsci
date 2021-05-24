@@ -4,11 +4,15 @@ import { Link } from 'react-router-dom';
 import { getCurrentProfile } from '../../actions/profile';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
+import { useTranslation } from 'react-i18next';
 
 const QuestionnaireList = ({ getCurrentProfile, profile: { profile } }) => {
   useEffect(() => {
     if (!profile) getCurrentProfile('patient');
   }, [getCurrentProfile, profile]);
+
+  const { t } = useTranslation();
+
   return (
     <Fragment>
       {profile === null ? (
@@ -18,9 +22,11 @@ const QuestionnaireList = ({ getCurrentProfile, profile: { profile } }) => {
           <div className='col-md-10 mx-auto'>
             <div className='card'>
               <div className='card-header card-header-danger'>
-                <h4 className='card-title'>Questionnaires to fill out</h4>
+                <h4 className='card-title'>
+                  {t('patient.questionnaireList.title')}
+                </h4>
                 <p className='card-category'>
-                  Click on the pen icon to start filling a questionnaire
+                  {t('patient.questionnaireList.description')}
                 </p>
               </div>
 

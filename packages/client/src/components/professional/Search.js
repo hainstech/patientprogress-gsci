@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import DayJS from 'react-dayjs';
+import { useTranslation } from 'react-i18next';
 
 import { getCurrentProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
@@ -12,6 +13,8 @@ function Search({ profile: { profile, loading }, getCurrentProfile }) {
   useEffect(() => {
     if (!profile) getCurrentProfile('professional');
   }, [profile, getCurrentProfile, loading]);
+
+  const { t } = useTranslation();
 
   const [queried, setQueried] = useState(false);
 
@@ -38,7 +41,7 @@ function Search({ profile: { profile, loading }, getCurrentProfile }) {
           <div className='col-10 mx-auto'>
             <div className='card'>
               <div className='card-header card-header-danger'>
-                <h4 className='card-title'>Patients</h4>
+                <h4 className='card-title'>{t('professional.search.title')}</h4>
                 <div className='input-group no-border'>
                   <form
                     onSubmit={handleSubmit(onSubmit)}
@@ -48,7 +51,7 @@ function Search({ profile: { profile, loading }, getCurrentProfile }) {
                       {...register('query')}
                       type='text'
                       className='form-control'
-                      placeholder='Enter the name...'
+                      placeholder={t('professional.search.placeholder')}
                       name='query'
                       id='searchPatient'
                       autoComplete='off'
@@ -69,8 +72,8 @@ function Search({ profile: { profile, loading }, getCurrentProfile }) {
                     <table className='table table-hover'>
                       <thead className='text-danger'>
                         <tr>
-                          <th>Name</th>
-                          <th>Date of Birth</th>
+                          <th>{t('professional.search.name')}</th>
+                          <th>{t('professional.search.dob')}</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -86,7 +89,7 @@ function Search({ profile: { profile, loading }, getCurrentProfile }) {
                                 to={`/professional/patients/${_id}`}
                                 className='btn btn-danger btn-sm pull-right'
                               >
-                                OPEN FILE
+                                {t('professional.search.open')}
                               </Link>
                             </td>
                           </tr>

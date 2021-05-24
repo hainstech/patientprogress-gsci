@@ -3,12 +3,14 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
+import { useTranslation } from 'react-i18next';
 
 const Login = ({ login, isAuthenticated, type }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  const { t } = useTranslation();
 
   const { email, password } = formData;
 
@@ -38,7 +40,7 @@ const Login = ({ login, isAuthenticated, type }) => {
       <div className='col-md-5 col-sm-12 mx-auto'>
         <div className='card'>
           <div className='card-header card-header-danger'>
-            <h4 className='card-title'>Sign into the application</h4>
+            <h4 className='card-title'>{t('guest.login.title')}</h4>
           </div>
           <div className='card-body'>
             <form onSubmit={(e) => onSubmit(e)}>
@@ -52,7 +54,7 @@ const Login = ({ login, isAuthenticated, type }) => {
                       name='email'
                       value={email}
                       onChange={(e) => onChange(e)}
-                      placeholder='Email'
+                      placeholder={t('guest.login.email')}
                     />
                   </div>
                 </div>
@@ -68,7 +70,7 @@ const Login = ({ login, isAuthenticated, type }) => {
                       value={password}
                       onChange={(e) => onChange(e)}
                       minLength='6'
-                      placeholder='Password'
+                      placeholder={t('guest.login.password')}
                       autoComplete='on'
                     />
                   </div>
@@ -76,7 +78,7 @@ const Login = ({ login, isAuthenticated, type }) => {
               </div>
 
               <button type='submit' className='btn btn-danger'>
-                Sumbit
+                {t('guest.login.submit')}
               </button>
               <div className='clearfix'></div>
             </form>

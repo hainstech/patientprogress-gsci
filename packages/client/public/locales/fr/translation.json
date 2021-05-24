@@ -1,0 +1,67 @@
+{
+  "guest": {
+    "about": { "title": "À propos de PatientProgress" },
+    "login": {
+      "title": "Se connecter à l'application",
+      "email": "Courriel",
+      "password": "Mot de passe",
+      "submit": "connexion"
+    }
+  },
+  "patient": {
+    "questionnaireList": {
+      "title": "Questionnaires à remplir",
+      "description": "Cliquez sur le crayon  pour remplir le questionnaire"
+    },
+    "profile": {
+      "title": "Modifier votre profil",
+      "description": "Completer ou corriger des informations",
+      "name": "Nom complet",
+      "language": "Langue",
+      "dob": "Date de naissance",
+      "submit": "Mettre à jour"
+    }
+  },
+  "professional": {
+    "search": {
+      "title": "Rechercher un patient",
+      "placeholder": "Entrer le nom...",
+      "name": "Nom",
+      "dob": "Date De Naissance",
+      "open": "ouvrir"
+    },
+    "invite": {
+      "title": "Inviter un nouveau patient par courriel",
+      "email": "Courriel",
+      "submit": "Envoyer"
+    },
+    "preferences": {
+      "title": "Réglages",
+      "description": "Choisissez vos réglages",
+      "name": "Nom Complet",
+      "clinic": "Nom de la clinique",
+      "phone": "Numéro de Téléphone",
+      "yourDescription": "Votre description",
+      "language": "Langue",
+      "submit": "Mettre À Jour"
+    }
+  },
+  "sidebar": {
+    "patient": {
+      "questionnaires": "Questionnaires",
+      "profile": "Votre profil",
+      "professional": "Votre professionnel",
+      "logout": "Déconnexion"
+    },
+    "professional": {
+      "patients": "Vos Patients",
+      "invite": "Inviter un Patient",
+      "preferences": "Réglages",
+      "logout": "Déconnexion"
+    },
+    "guest": {
+      "about": "À propos",
+      "login": "Connexion"
+    }
+  }
+}
