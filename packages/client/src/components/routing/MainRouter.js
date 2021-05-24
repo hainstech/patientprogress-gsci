@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import Navbar from '../../components/layout/Navbar';
 import Sidebar from '../../components/layout/Sidebar';
@@ -31,39 +32,43 @@ const MainRouter = ({
   }, [isAuthenticated, loading, profile, ploading, i18n]);
 
   return (
-    <div>
-      <Switch>
-        <>
-          <div className='wrapper'>
-            <Sidebar />
-            <div className='main-panel'>
-              <Navbar />
-              <div className='content'>
-                <div className='container-fluid'>
-                  <div className='row'>
-                    <div className='col-10 mx-auto'>
-                      <Alert />
-                    </div>
-                  </div>
-                  <Switch>
-                    <Route exact path='/' component={About} />
-                    <Route exact path='/login' component={Login} />
-                    <Route exact path='/register/:id' component={Register} />
-                    {/* User-type routes */}
-                    <PatientRoute path='/patient' component={Patient} />
-                    <ProfessionalRoute
-                      path='/professional'
-                      component={Professional}
-                    />
-                    <AdminRoute path='/admin' component={Admin} />
-                  </Switch>
+    <HelmetProvider>
+      <div className='wrapper'>
+        <Sidebar />
+        <div className='main-panel'>
+          <Navbar />
+          <div className='content'>
+            <div className='container-fluid'>
+              <div className='row'>
+                <div className='col-10 mx-auto'>
+                  <Alert />
                 </div>
               </div>
+              <Switch>
+                <Route exact path='/' component={About} />
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/register/:id' component={Register} />
+                {/* User-type routes */}
+                <PatientRoute path='/patient' component={Patient} />
+                <ProfessionalRoute
+                  path='/professional'
+                  component={Professional}
+                />
+                <AdminRoute path='/admin' component={Admin} />
+              </Switch>
             </div>
           </div>
-        </>
-      </Switch>
-    </div>
+        </div>
+      </div>
+      {/* might want to add defer="true" if its bugging, but for now it works */}
+      <Helmet>
+        <script src='/js/core/jquery.min.js'></script>
+        <script src='/js/core/popper.min.js'></script>
+        <script src='/js/core/bootstrap-material-design.min.js'></script>
+        <script src='/js/plugins/perfect-scrollbar.jquery.min.js'></script>
+        <script src='/js/material-dashboard.js?v=2.1.1'></script>
+      </Helmet>
+    </HelmetProvider>
   );
 };
 
