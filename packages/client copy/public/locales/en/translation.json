@@ -1,0 +1,84 @@
+{
+  "guest": {
+    "about": {
+      "title": "About PatientProgress",
+      "p1": "The PatientProgress web-app is made to facilitate medical research, while being very convenient and time-saving for the professional and the patient.",
+      "features": "Features",
+      "patient": "For the patient",
+      "patient1": "Fill the questionnaires required by your professional",
+      "patient2": "Visualize your progress with graphs generated with your data",
+      "patient3": "Easy access to contact information about your professional",
+      "professional": "For the professional",
+      "professional1": "Choose which questionnaires you want the patient to fill",
+      "professional2": "See the filled questionnaires and export them to PDF",
+      "professional3": "Write reports that are optionally pre-filled with patient data",
+      "professional4": "Schedule questionnaires for a individual patient",
+      "professional5": "Visualize the progress of all your patient in a interactive graph",
+      "researcher": "For the researcher",
+      "researcher1": "Access the powerful PatientProgress API to retrieve anonymized patient data",
+      "researcher2": "All the patient's & professional's anonymized data are treatable because of their JSON format"
+    },
+    "login": {
+      "title": "Sign into the application",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Submit"
+    }
+  },
+  "patient": {
+    "questionnaireList": {
+      "title": "Questionnaires to fill out",
+      "description": "Click on the pen icon to start filling a questionnaire"
+    },
+    "profile": {
+      "title": "Edit profile",
+      "description": "Complete your profile",
+      "name": "Full Name",
+      "language": "Language",
+      "dob": "Date of Birth",
+      "submit": "Update Profile"
+    }
+  },
+  "professional": {
+    "search": {
+      "title": "Look for a patient",
+      "placeholder": "Enter a name...",
+      "name": "Name",
+      "dob": "Date Of Birth",
+      "open": "open"
+    },
+    "invite": {
+      "title": "Invite a new patient by email",
+      "email": "Email",
+      "submit": "Send"
+    },
+    "preferences": {
+      "title": "Preferences",
+      "description": "Choose your preferences",
+      "name": "Full Name",
+      "clinic": "Clinic Name",
+      "phone": "Phone Number",
+      "yourDescription": "Your description",
+      "language": "Language",
+      "submit": "Update Preferences"
+    }
+  },
+  "sidebar": {
+    "patient": {
+      "questionnaires": "Questionnaires",
+      "profile": "Your profile",
+      "professional": "Your professional",
+      "logout": "Sign Out"
+    },
+    "professional": {
+      "patients": "Your Patients",
+      "invite": "Invite A Patient",
+      "preferences": "Preferences",
+      "logout": "Sign out"
+    },
+    "guest": {
+      "about": "About This Application",
+      "login": "Sign In"
+    }
+  }
+}
