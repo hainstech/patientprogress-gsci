@@ -7,16 +7,13 @@ import PropTypes from 'prop-types';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 // core components
-import Navbar from '../components/Navbars/Navbar.js';
-import Sidebar from '../components/Sidebar/Sidebar.js';
+import Navbar from '../components/Navbars/Navbar';
+import Sidebar from '../components/Sidebar/Sidebar';
 
 import styles from '../assets/jss/material-dashboard-react/layouts/adminStyle.js';
 
 import bgImage from '../assets/img/sidebar.jpg';
 import logo from '../assets/img/logo.svg';
-
-import Navbar from '../components/Navbars/Navbar';
-import Sidebar from '../components/Sidebar/Sidebar';
 
 import ProfessionalRoute from './ProfessionalRoute';
 import PatientRoute from './PatientRoute';
@@ -82,7 +79,7 @@ const switchGuest = (
   </Switch>
 );
 
-const switchadmin = (
+const switchAdmin = (
   <Switch>
     {adminLinks.map(({ layout, path, component }, key) => {
       return (
@@ -100,10 +97,17 @@ const switchadmin = (
 const useStyles = makeStyles(styles);
 
 const MainRouter = ({
-  auth: { isAuthenticated, loading },
+  auth: { isAuthenticated, loading, type },
   profile: { profile, loading: ploading },
   ...rest
 }) => {
+  // styles
+  const classes = useStyles();
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
   const { i18n } = useTranslation();
   useEffect(() => {
     //get language from state profile
@@ -112,7 +116,71 @@ const MainRouter = ({
     }
   }, [isAuthenticated, loading, profile, ploading, i18n]);
 
-  return <div></div>;
+  return (
+    <div className={classes.wrapper}>
+      <Sidebar
+        routes={
+          isAuthenticated
+            ? type === 'patient'
+              ? patientLinks
+              : type === 'professional'
+              ? professionalLinks
+              : type === 'admin'
+              ? adminLinks
+              : guestLinks
+            : guestLinks
+        }
+        logoText={'PatientProgress'}
+        logo={logo}
+        image={bgImage}
+        handleDrawerToggle={handleDrawerToggle}
+        open={mobileOpen}
+        color={'red'}
+        {...rest}
+      />
+      <div className={classes.mainPanel}>
+        <Navbar
+          routes={
+            isAuthenticated
+              ? type === 'patient'
+                ? patientLinks
+                : type === 'professional'
+                ? professionalLinks
+                : type === 'admin'
+                ? adminLinks
+                : guestLinks
+              : guestLinks
+          }
+          type={
+            isAuthenticated
+              ? type === 'patient'
+                ? 'patient'
+                : type === 'professional'
+                ? 'professional'
+                : type === 'admin'
+                ? 'admin'
+                : 'guest'
+              : 'guest'
+          }
+          handleDrawerToggle={handleDrawerToggle}
+          {...rest}
+        />
+        <div className={classes.content}>
+          <div className={classes.container}>
+            {isAuthenticated
+              ? type === 'patient'
+                ? switchPatient
+                : type === 'professional'
+                ? switchProfessional
+                : type === 'admin'
+                ? switchAdmin
+                : switchGuest
+              : switchGuest}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 MainRouter.propTypes = {

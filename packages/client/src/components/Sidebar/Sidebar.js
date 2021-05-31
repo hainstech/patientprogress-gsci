@@ -12,10 +12,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '@material-ui/core/Icon';
 // core components
-import AdminNavbarLinks from 'components/Navbars/AdminNavbarLinks.js';
-import RTLNavbarLinks from 'components/Navbars/RTLNavbarLinks.js';
+import AdminNavbarLinks from '../Navbars/AdminNavbarLinks.js';
 
-import styles from 'assets/jss/material-dashboard-react/components/sidebarStyle.js';
+import styles from '../../assets/jss/material-dashboard-react/components/sidebarStyle.js';
 
 const useStyles = makeStyles(styles);
 
@@ -65,7 +64,7 @@ export default function Sidebar(props) {
                 />
               )}
               <ListItemText
-                primary={props.rtlActive ? prop.rtlName : prop.name}
+                primary={prop.name}
                 className={classNames(classes.itemText, whiteFontClasses)}
                 disableTypography={true}
               />
@@ -94,7 +93,7 @@ export default function Sidebar(props) {
       <Hidden mdUp implementation='css'>
         <Drawer
           variant='temporary'
-          anchor={props.rtlActive ? 'left' : 'right'}
+          anchor={'right'}
           open={props.open}
           classes={{
             paper: classNames(classes.drawerPaper),
@@ -141,7 +140,6 @@ export default function Sidebar(props) {
 }
 
 Sidebar.propTypes = {
-  rtlActive: PropTypes.bool,
   handleDrawerToggle: PropTypes.func,
   bgColor: PropTypes.oneOf(['purple', 'blue', 'green', 'orange', 'red']),
   logo: PropTypes.string,

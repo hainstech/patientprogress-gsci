@@ -1,16 +1,16 @@
-import React from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
+import React from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
+import { makeStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
 // @material-ui/icons
-import Clear from "@material-ui/icons/Clear";
-import Check from "@material-ui/icons/Check";
+import Clear from '@material-ui/icons/Clear';
+import Check from '@material-ui/icons/Check';
 // core components
-import styles from "assets/jss/material-dashboard-react/components/customInputStyle.js";
+import styles from '../../assets/jss/material-dashboard-react/components/customInputStyle.js';
 
 const useStyles = makeStyles(styles);
 
@@ -28,9 +28,9 @@ export default function CustomInput(props) {
   } = props;
 
   const labelClasses = classNames({
-    [" " + classes.labelRootError]: error,
-    [" " + classes.labelRootSuccess]: success && !error,
-    [" " + classes.labelRTL]: rtlActive,
+    [' ' + classes.labelRootError]: error,
+    [' ' + classes.labelRootSuccess]: success && !error,
+    [' ' + classes.labelRTL]: rtlActive,
   });
   const underlineClasses = classNames({
     [classes.underlineError]: error,
@@ -50,7 +50,7 @@ export default function CustomInput(props) {
   return (
     <FormControl
       {...formControlProps}
-      className={formControlProps.className + " " + classes.formControl}
+      className={formControlProps.className + ' ' + classes.formControl}
     >
       {labelText !== undefined ? (
         <InputLabel
@@ -72,9 +72,9 @@ export default function CustomInput(props) {
         inputProps={newInputProps}
       />
       {error ? (
-        <Clear className={classes.feedback + " " + classes.labelRootError} />
+        <Clear className={classes.feedback + ' ' + classes.labelRootError} />
       ) : success ? (
-        <Check className={classes.feedback + " " + classes.labelRootSuccess} />
+        <Check className={classes.feedback + ' ' + classes.labelRootSuccess} />
       ) : null}
     </FormControl>
   );
