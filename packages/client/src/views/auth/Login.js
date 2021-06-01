@@ -64,7 +64,7 @@ const Login = ({ login, isAuthenticated, type }) => {
             <CardBody>
               <GridContainer>
                 <GridItem xs={12}>
-                  <FormControl fullWidth className={inputClasses.formControl}>
+                  <FormControl fullWidth>
                     <InputLabel
                       className={inputClasses.labelRoot}
                       htmlFor='email'

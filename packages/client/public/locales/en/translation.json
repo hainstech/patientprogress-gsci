@@ -73,5 +73,19 @@
     "logout": "Sign out",
     "about": "About This Application",
     "login": "Sign In"
+  },
+  "register": {
+    "passwordError": "Passwords do not match",
+    "title": "Register into the application",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "language": "Language",
+    "gender": "Gender",
+    "dob": "Date of Birth",
+    "email": "Email",
+    "password": "Password",
+    "passwordConfirmation": "Confirm your password",
+    "consent": "I consent to this",
+    "submit": "Submit"
   }
 }
