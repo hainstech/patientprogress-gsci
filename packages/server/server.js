@@ -65,5 +65,3 @@ app.listen(PORT, () =>
     `Server running in ${process.env.NODE_ENV} on port ${PORT}`.green.bold
   )
 );
-
-// tutorial https://learning.oreilly.com/videos/node-js-api-masterclass/

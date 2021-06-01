@@ -94,16 +94,17 @@ export const guestLinks = [
     component: Login,
     layout: '',
   },
+];
+
+export const guestRoutes = [
   {
-    path: '/register/:idd',
+    path: '/register/:id',
     name: 'Sign In',
     icon: Language,
     component: Register,
     layout: '',
   },
 ];
-
-export const guestRoutes = [];
 
 // Admin Routing
 export const adminLinks = [

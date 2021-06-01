@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 
-import Invite from '../professional/Invite';
-import Preferences from '../professional/Preferences';
-import Search from '../professional/Search';
+import Invite from '../views/professional/Invite';
+import Preferences from '../views/professional/Preferences';
+import Search from '../views/professional/Search';
 
 import ProfessionalRoute from './ProfessionalRoute';
 

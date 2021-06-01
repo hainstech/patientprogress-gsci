@@ -19,6 +19,14 @@ import ProfessionalRoute from './ProfessionalRoute';
 import PatientRoute from './PatientRoute';
 import AdminRoute from './AdminRoute';
 
+import About from '../views/About';
+import Login from '../views/auth/Login';
+import Register from '../views/auth/Register';
+
+import Patient from './Patient';
+import Professional from './Professional';
+import Admin from './Admin';
+
 import {
   patientLinks,
   patientRoutes,
@@ -167,15 +175,18 @@ const MainRouter = ({
         />
         <div className={classes.content}>
           <div className={classes.container}>
-            {isAuthenticated
-              ? type === 'patient'
-                ? switchPatient
-                : type === 'professional'
-                ? switchProfessional
-                : type === 'admin'
-                ? switchAdmin
-                : switchGuest
-              : switchGuest}
+            <Switch>
+              <Route exact path='/' component={About} />
+              <Route exact path='/login' component={Login} />
+              <Route exact path='/register/:id' component={Register} />
+              {/* User-type routes */}
+              <PatientRoute path='/patient' component={Patient} />
+              <ProfessionalRoute
+                path='/professional'
+                component={Professional}
+              />
+              <AdminRoute path='/admin' component={Admin} />
+            </Switch>
           </div>
         </div>
       </div>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 
-import QuestionnaireList from '../patient/QuestionnaireList';
-import Questionnaire from '../patient/Questionnaire';
-import Profile from '../patient/Profile';
-import MyProfessional from '../patient/MyProfessional';
+import QuestionnaireList from '../views/patient/QuestionnaireList';
+import Questionnaire from '../views/patient/Questionnaire';
+import Profile from '../views/patient/Profile';
+import MyProfessional from '../views/patient/MyProfessional';
 
 import PatientRoute from './PatientRoute';
 

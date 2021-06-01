@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 
-import QuestionnaireBuilder from '../admin/QuestionnaireBuilder';
+import QuestionnaireBuilder from '../views/admin/QuestionnaireBuilder';
 
 import AdminRoute from './AdminRoute';
 
