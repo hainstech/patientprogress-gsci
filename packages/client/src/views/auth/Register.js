@@ -1,54 +1,89 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
+
+import {
+  FormControl,
+  InputLabel,
+  Input,
+  NativeSelect,
+  Box,
+  Switch,
+  FormControlLabel,
+} from '@material-ui/core';
+import classNames from 'classnames';
+import { useFormik } from 'formik';
+
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+
+import GridContainer from '../../components/Grid/GridContainer';
+import GridItem from '../../components/Grid/GridItem.js';
+import Card from '../../components/Card/Card.js';
+import CardHeader from '../../components/Card/CardHeader.js';
+import CardBody from '../../components/Card/CardBody.js';
+import CardFooter from '../../components/Card/CardFooter.js';
+import Button from '../../components/CustomButtons/Button.js';
+import Alert from '../layout/Alert';
+
+import { makeStyles } from '@material-ui/core/styles';
+import styles from '../../assets/jss/material-dashboard-react/views/dashboardStyle';
+import inputStyles from '../../assets/jss/material-dashboard-react/components/customInputStyle.js';
+const useStyles = makeStyles(styles);
+const useInputStyles = makeStyles(inputStyles);
 
 const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    language: '',
-    gender: '',
-    dob: '',
-    email: '',
-    password: '',
-    password2: '',
-    research: false,
+  const classes = useStyles();
+  const inputClasses = useInputStyles();
+
+  const { t } = useTranslation();
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      language: '',
+      gender: '',
+      dob: null,
+      email: '',
+      password: '',
+      password2: '',
+      research: false,
+    },
+    onSubmit: ({
+      firstName,
+      lastName,
+      language,
+      gender,
+      dob,
+      email,
+      password,
+      password2,
+      research,
+    }) => {
+      if (password !== password2) {
+        setAlert(t('register.passwordError'), 'danger');
+      } else {
+        register({
+          name: `${firstName} ${lastName}`,
+          language,
+          gender,
+          dob,
+          email,
+          password,
+          research,
+          professional: match.params.id,
+        });
+      }
+    },
   });
-
-  const {
-    firstName,
-    lastName,
-    language,
-    gender,
-    dob,
-    email,
-    password,
-    password2,
-    research,
-  } = formData;
-
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (password !== password2) {
-      setAlert('Passwords do not match', 'danger');
-    } else {
-      register({
-        name: `${firstName} ${lastName}`,
-        language,
-        gender,
-        dob,
-        email,
-        password,
-        research,
-        professional: match.params.id,
-      });
-    }
-  };
 
   if (isAuthenticated && type) {
     switch (type) {
@@ -60,198 +95,236 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
         return <Redirect to={`/${type}/dashboard`} />;
     }
   }
+
   return (
-    <div className='row'>
-      <div className='col-md-5 col-sm-12 mx-auto'>
-        <div className='card'>
-          <div className='card-header card-header-danger'>
-            <h4 className='card-title'>Register into the application</h4>
-          </div>
-          <div className='card-body'>
-            <form onSubmit={(e) => onSubmit(e)}>
-              <div className='row'>
-                <div className='col-6'>
-                  <div className='form-group bmd-form-group'>
-                    <label className='bmd-label-static'>
-                      Prénom/First Name
-                    </label>
-                    <input
-                      name='firstName'
-                      className='form-control'
-                      required
-                      placeholder='John'
-                      value={firstName}
-                      onChange={(e) => onChange(e)}
-                    />
-                  </div>
-                </div>
-                <div className='col-6'>
-                  <div className='form-group bmd-form-group'>
-                    <label className='bmd-label-static'>Nom/Last Name</label>
-                    <input
-                      name='lastName'
-                      className='form-control'
-                      required
-                      placeholder='Smith'
-                      value={lastName}
-                      onChange={(e) => onChange(e)}
-                    />
-                  </div>
-                </div>
-              </div>
+    <>
+      <GridContainer justify='center'>
+        <GridItem xs={12} lg={6}>
+          <Alert />
+          <Card>
+            <CardHeader color='danger'>
+              <h4 className={classes.cardTitleWhite}>{t('register.title')}</h4>
+            </CardHeader>
+            <form noValidate autoComplete='off' onSubmit={formik.handleSubmit}>
+              <CardBody>
+                <GridContainer>
+                  <GridItem xs={12} xl={6}>
+                    <FormControl fullWidth className={inputClasses.formControl}>
+                      <InputLabel
+                        className={inputClasses.labelRoot}
+                        htmlFor='firstName'
+                      >
+                        {t('register.firstName')}
+                      </InputLabel>
 
-              <div className='row'>
-                <div className='col-12'>
-                  <div className='form-group bmd-form-group'>
-                    <label className='bmd-label-static'>Langue/Language</label>
-                    <select
-                      name='language'
-                      className='form-control'
-                      value={language}
-                      onChange={(e) => onChange(e)}
-                    >
-                      <option value='' defaultValue disabled>
-                        Choose/Choisissez
-                      </option>
-                      <option value='en'>English</option>
-                      <option value='fr'>Français</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div className='row'>
-                <div className='col-12'>
-                  <div className='form-group bmd-form-group'>
-                    <label className='bmd-label-static'>Genre/Gender</label>
-                    <select
-                      name='gender'
-                      className='form-control'
-                      value={gender}
-                      onChange={(e) => onChange(e)}
-                    >
-                      <option value='' defaultValue disabled>
-                        Choose/Choisissez
-                      </option>
-                      <option value='Male'>Homme/Male</option>
-                      <option value='Female'>Femme/Female</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div className='row'>
-                <div className='col-12'>
-                  <div className='form-group bmd-form-group'>
-                    <label className='bmd-label-static'>
-                      Date de Naissance/Date of Birth
-                    </label>
-                    <input
-                      type='date'
-                      className='form-control'
-                      name='dob'
-                      placeholder='YYYY/MM/DD'
-                      value={dob}
-                      onChange={(e) => onChange(e)}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className='row'>
-                <div className='col-12'>
-                  <div className='form-group bmd-form-group'>
-                    <input
-                      type='email'
-                      name='email'
-                      className='form-control'
-                      placeholder='Email'
-                      value={email}
-                      onChange={(e) => onChange(e)}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className='row'>
-                <div className='col-12'>
-                  <div className='form-group bmd-form-group'>
-                    <input
-                      type='password'
-                      className='form-control'
-                      required
-                      placeholder='Password'
-                      name='password'
-                      value={password}
-                      onChange={(e) => onChange(e)}
-                      minLength='6'
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className='row'>
-                <div className='col-12'>
-                  <div className='form-group bmd-form-group'>
-                    <input
-                      type='password'
-                      className='form-control'
-                      required
-                      placeholder='Password'
-                      name='password2'
-                      value={password2}
-                      onChange={(e) => onChange(e)}
-                      minLength='6'
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className='row'>
-                <div className='col-12'>
-                  <div className='form-group bmd-form-group'>
-                    <fieldset>
-                      <label>
-                        Des données anonymes de notre application peuvent être
-                        utilisées à des fins de recherche. Si vous souhaitez
-                        participer, veuillez cochez cette case./Anonymous data
-                        from our application can be used for research purposes.
-                        If you would like to participate, please check this box.
-                      </label>
-                      <input
-                        type='checkbox'
-                        name='research'
-                        value={research}
-                        checked={research}
-                        onChange={(e) => {
-                          setFormData({ ...formData, research: !research });
+                      <Input
+                        classes={{
+                          disabled: inputClasses.disabled,
+                          underline: classNames(
+                            inputClasses.underlineError,
+                            inputClasses.underline
+                          ),
                         }}
+                        type='text'
+                        id={'firstName'}
+                        value={formik.values.firstName}
+                        onChange={formik.handleChange}
                       />
-                    </fieldset>
-                  </div>
-                </div>
-              </div>
+                    </FormControl>
+                  </GridItem>
+                  <GridItem xs={12} xl={6}>
+                    <FormControl fullWidth className={inputClasses.formControl}>
+                      <InputLabel
+                        className={inputClasses.labelRoot}
+                        htmlFor='lastName'
+                      >
+                        {t('register.lastName')}
+                      </InputLabel>
 
-              <button type='submit' className='btn btn-danger'>
-                Sumbit
-              </button>
-              <div className='clearfix'></div>
+                      <Input
+                        classes={{
+                          disabled: inputClasses.disabled,
+                          underline: classNames(
+                            inputClasses.underlineError,
+                            inputClasses.underline
+                          ),
+                        }}
+                        type='text'
+                        id={'lastName'}
+                        value={formik.values.lastName}
+                        onChange={formik.handleChange}
+                      />
+                    </FormControl>
+                  </GridItem>
+                  <GridItem xs={12} xl={6}>
+                    <FormControl fullWidth className={inputClasses.formControl}>
+                      <InputLabel
+                        className={inputClasses.labelRoot}
+                        htmlFor='language'
+                      >
+                        {t('register.language')}
+                      </InputLabel>
+
+                      <NativeSelect
+                        value={formik.values.language}
+                        onChange={formik.handleChange}
+                        inputProps={{
+                          type: 'text',
+                          id: 'language',
+                        }}
+                      >
+                        <option value='' defaultValue disabled></option>
+                        <option value='en'>English</option>
+                        <option value='fr'>Français</option>
+                      </NativeSelect>
+                    </FormControl>
+                  </GridItem>
+                  <GridItem xs={12} xl={6}>
+                    <FormControl fullWidth className={inputClasses.formControl}>
+                      <InputLabel
+                        className={inputClasses.labelRoot}
+                        htmlFor='gender'
+                      >
+                        {t('register.gender')}
+                      </InputLabel>
+
+                      <NativeSelect
+                        value={formik.values.gender}
+                        onChange={formik.handleChange}
+                        inputProps={{
+                          id: 'gender',
+                        }}
+                      >
+                        <option value='' defaultValue disabled></option>
+                        <option value='Male'>Homme/Male</option>
+                        <option value='Female'>Femme/Female</option>
+                      </NativeSelect>
+                    </FormControl>
+                  </GridItem>
+                  <GridItem xs={12} xl={6}>
+                    <Box className={inputClasses.formControl}>
+                      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                          format='MM/dd/yyyy'
+                          id='dob'
+                          variant='inline'
+                          label={t('register.dob')}
+                          value={formik.values.dob}
+                          onChange={(value) =>
+                            formik.setFieldValue('dob', value)
+                          }
+                          KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                          }}
+                        />
+                      </MuiPickersUtilsProvider>
+                    </Box>
+                  </GridItem>
+                  <GridItem xs={12} xl={6}>
+                    <FormControl fullWidth className={inputClasses.formControl}>
+                      <InputLabel
+                        className={inputClasses.labelRoot}
+                        htmlFor='email'
+                      >
+                        {t('register.email')}
+                      </InputLabel>
+
+                      <Input
+                        classes={{
+                          disabled: inputClasses.disabled,
+                          underline: classNames(
+                            inputClasses.underlineError,
+                            inputClasses.underline
+                          ),
+                        }}
+                        type='text'
+                        id={'email'}
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                      />
+                    </FormControl>
+                  </GridItem>
+                  <GridItem xs={12} xl={6}>
+                    <FormControl fullWidth className={inputClasses.formControl}>
+                      <InputLabel
+                        className={inputClasses.labelRoot}
+                        htmlFor='password'
+                      >
+                        {t('register.password')}
+                      </InputLabel>
+
+                      <Input
+                        classes={{
+                          disabled: inputClasses.disabled,
+                          underline: classNames(
+                            inputClasses.underlineError,
+                            inputClasses.underline
+                          ),
+                        }}
+                        type='password'
+                        id={'password'}
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                      />
+                    </FormControl>
+                  </GridItem>
+                  <GridItem xs={12} xl={6}>
+                    <FormControl fullWidth className={inputClasses.formControl}>
+                      <InputLabel
+                        className={inputClasses.labelRoot}
+                        htmlFor='password2'
+                      >
+                        {t('register.passwordConfirmation')}
+                      </InputLabel>
+
+                      <Input
+                        classes={{
+                          disabled: inputClasses.disabled,
+                          underline: classNames(
+                            inputClasses.underlineError,
+                            inputClasses.underline
+                          ),
+                        }}
+                        type='password'
+                        id={'password2'}
+                        value={formik.values.password2}
+                        onChange={formik.handleChange}
+                      />
+                    </FormControl>
+                  </GridItem>
+                  <GridItem xs={12} xl={6}>
+                    <FormControlLabel
+                      className={inputClasses.formControl}
+                      control={
+                        <Switch
+                          checked={formik.values.research}
+                          onChange={formik.handleChange}
+                          name='research'
+                        />
+                      }
+                      label={t('register.consent')}
+                    />
+                  </GridItem>
+                </GridContainer>
+              </CardBody>
+              <CardFooter>
+                <Button color='danger' type='submit'>
+                  {t('register.submit')}
+                </Button>
+              </CardFooter>
             </form>
-            <p className='my-1'>
-              Already have an account? <Link to='/login'>Sign In</Link>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Card>
+        </GridItem>
+      </GridContainer>
+    </>
   );
 };
 
 Register.propTypes = {
-  setAlert: PropTypes.func.isRequired, //ptfr
+  setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  type: PropTypes.string.isRequired,
+  isAuthenticated: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({

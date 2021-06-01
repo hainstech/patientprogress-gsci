@@ -54,7 +54,7 @@ const Login = ({ login, isAuthenticated, type }) => {
   }
   return (
     <GridContainer justify='center'>
-      <GridItem xs={6}>
+      <GridItem xs={12} md={6}>
         <Alert />
         <Card>
           <CardHeader color='danger'>

@@ -21,7 +21,7 @@ import AdminRoute from './AdminRoute';
 
 import About from '../views/About';
 import Login from '../views/auth/Login';
-import Register from '../views/auth/Register2';
+import Register from '../views/auth/Register';
 
 import Patient from './Patient';
 import Professional from './Professional';
