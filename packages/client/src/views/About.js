@@ -1,17 +1,30 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import GridContainer from '../components/Grid/GridContainer';
+import GridItem from '../components/Grid/GridItem.js';
+import Card from '../components/Card/Card.js';
+import CardHeader from '../components/Card/CardHeader.js';
+import CardBody from '../components/Card/CardBody.js';
+
+import { makeStyles } from '@material-ui/core/styles';
+import styles from '../assets/jss/material-dashboard-react/views/dashboardStyle';
+const useStyles = makeStyles(styles);
+
 const About = () => {
+  const classes = useStyles();
   const { t } = useTranslation();
   return (
     <div>
-      <div className='row'>
-        <div className='col-12 mx-auto'>
-          <div className='card'>
-            <div className='card-header card-header-danger'>
-              <h4 className='card-title'>{t('guest.about.title')}</h4>
-            </div>
-            <div className='card-body'>
+      <GridContainer>
+        <GridItem xs={12}>
+          <Card>
+            <CardHeader color='danger'>
+              <h4 className={classes.cardTitleWhite}>
+                {t('guest.about.title')}
+              </h4>
+            </CardHeader>
+            <CardBody>
               <p>{t('guest.about.p1')}</p>
               <p>
                 <b>{t('guest.about.features')}:</b>
@@ -35,10 +48,10 @@ const About = () => {
                 <li>{t('guest.about.researcher1')}</li>
                 <li>{t('guest.about.researcher2')}</li>
               </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+            </CardBody>
+          </Card>
+        </GridItem>
+      </GridContainer>
     </div>
   );
 };

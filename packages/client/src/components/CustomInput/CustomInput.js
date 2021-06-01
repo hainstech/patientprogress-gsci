@@ -7,8 +7,8 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 // @material-ui/icons
-import Clear from '@material-ui/icons/Clear';
-import Check from '@material-ui/icons/Check';
+// import Clear from '@material-ui/icons/Clear';
+// import Check from '@material-ui/icons/Check';
 // core components
 import styles from '../../assets/jss/material-dashboard-react/components/customInputStyle.js';
 
@@ -71,11 +71,11 @@ export default function CustomInput(props) {
         {...inputProps}
         inputProps={newInputProps}
       />
-      {error ? (
+      {/* {error ? (
         <Clear className={classes.feedback + ' ' + classes.labelRootError} />
       ) : success ? (
         <Check className={classes.feedback + ' ' + classes.labelRootSuccess} />
-      ) : null}
+      ) : null} */}
     </FormControl>
   );
 }

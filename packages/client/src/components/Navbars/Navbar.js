@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -22,6 +23,7 @@ const useStyles = makeStyles(styles);
 export default function Header(props) {
   const classes = useStyles();
   const routeName = useRouteName(props.type);
+  const { t } = useTranslation();
   const { color } = props;
   const appBarClasses = classNames({
     [' ' + classes[color]]: color,
@@ -32,7 +34,7 @@ export default function Header(props) {
         <div className={classes.flex}>
           {/* Here we create navbar brand, based on route name */}
           <Button color='transparent' href='#' className={classes.title}>
-            {routeName}
+            {t(`sidebar.${routeName}`)}
           </Button>
         </div>
         <Hidden mdUp implementation='css'>

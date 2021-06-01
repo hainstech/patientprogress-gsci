@@ -3,6 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -11,14 +12,27 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '@material-ui/core/Icon';
+import LanguageIcon from '@material-ui/icons/Language';
 
 import styles from '../../assets/jss/material-dashboard-react/components/sidebarStyle.js';
+import { logout } from '../../actions/auth';
 
 const useStyles = makeStyles(styles);
 
 export default function Sidebar(props) {
   const classes = useStyles();
   let location = useLocation();
+
+  const { t, i18n } = useTranslation();
+
+  const getOtherLang = () => {
+    return i18n.language === 'en' ? 'Français' : 'English';
+  };
+
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language === 'en' ? 'fr' : 'en');
+  };
+
   // verifies if routeName is the one active (in browser input)
   function activeRoute(routeName) {
     return location.pathname === routeName;
@@ -56,7 +70,7 @@ export default function Sidebar(props) {
                 />
               )}
               <ListItemText
-                primary={prop.name}
+                primary={t(`sidebar.${prop.name}`)}
                 className={classNames(classes.itemText, whiteFontClasses)}
                 disableTypography={true}
               />
@@ -64,6 +78,22 @@ export default function Sidebar(props) {
           </NavLink>
         );
       })}
+      {routes[0].layout === '' && (
+        <NavLink
+          className={' ' + classes.item}
+          onClick={() => toggleLanguage()}
+          to='#'
+        >
+          <ListItem button className={classes.itemLink}>
+            <LanguageIcon className={classes.itemIcon} />
+            <ListItemText
+              primary={getOtherLang()}
+              className={classes.itemText}
+              disableTypography={true}
+            />
+          </ListItem>
+        </NavLink>
+      )}
     </List>
   );
   var brand = (

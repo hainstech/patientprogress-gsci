@@ -64,21 +64,14 @@
     }
   },
   "sidebar": {
-    "patient": {
-      "questionnaires": "Questionnaires",
-      "profile": "Your profile",
-      "professional": "Your professional",
-      "logout": "Sign Out"
-    },
-    "professional": {
-      "patients": "Your Patients",
-      "invite": "Invite A Patient",
-      "preferences": "Preferences",
-      "logout": "Sign out"
-    },
-    "guest": {
-      "about": "About This Application",
-      "login": "Sign In"
-    }
+    "questionnaires": "Questionnaires",
+    "profile": "Your profile",
+    "professional": "Your professional",
+    "patients": "Your Patients",
+    "invite": "Invite A Patient",
+    "preferences": "Preferences",
+    "logout": "Sign out",
+    "about": "About This Application",
+    "login": "Sign In"
   }
 }

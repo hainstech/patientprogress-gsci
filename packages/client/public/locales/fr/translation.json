@@ -64,21 +64,14 @@
     }
   },
   "sidebar": {
-    "patient": {
-      "questionnaires": "Questionnaires",
-      "profile": "Votre profil",
-      "professional": "Votre professionnel",
-      "logout": "Déconnexion"
-    },
-    "professional": {
-      "patients": "Vos Patients",
-      "invite": "Inviter un Patient",
-      "preferences": "Réglages",
-      "logout": "Déconnexion"
-    },
-    "guest": {
-      "about": "À propos",
-      "login": "Connexion"
-    }
+    "questionnaires": "Questionnaires",
+    "profile": "Votre profil",
+    "professional": "Votre professionnel",
+    "patients": "Vos Patients",
+    "invite": "Inviter un Patient",
+    "preferences": "Réglages",
+    "logout": "Déconnexion",
+    "about": "À propos",
+    "login": "Connexion"
   }
 }

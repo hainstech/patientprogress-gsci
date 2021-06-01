@@ -2,6 +2,8 @@
 import Dashboard from '@material-ui/icons/Dashboard';
 import Person from '@material-ui/icons/Person';
 import Language from '@material-ui/icons/Language';
+import Info from '@material-ui/icons/Info';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 // core components/views for Admin layout
 import QuestionnaireList from '../views/patient/QuestionnaireList';
 import Profile from '../views/patient/Profile';
@@ -22,21 +24,21 @@ import QuestionnaireBuilder from '../views/admin/QuestionnaireBuilder';
 export const patientLinks = [
   {
     path: '/questionnaires',
-    name: 'Questionnaires',
+    name: 'questionnaires',
     icon: Dashboard,
     component: QuestionnaireList,
     layout: '/patient',
   },
   {
     path: '/profile',
-    name: 'Profile',
+    name: 'profile',
     icon: Person,
     component: Profile,
     layout: '/patient',
   },
   {
     path: '/professional',
-    name: 'Your Professional',
+    name: 'professional',
     icon: Person,
     component: MyProfessional,
     layout: '/patient',
@@ -55,21 +57,21 @@ export const patientRoutes = [
 export const professionalLinks = [
   {
     path: '/patients',
-    name: 'Your Patients',
+    name: 'patients',
     icon: Dashboard,
     component: Search,
     layout: '/professional',
   },
   {
     path: '/preferences',
-    name: 'Preferences',
+    name: 'preferences',
     icon: Dashboard,
     component: Preferences,
     layout: '/professional',
   },
   {
     path: '/patients',
-    name: 'Invite a patient',
+    name: 'invite',
     icon: Dashboard,
     component: Invite,
     layout: '/professional',
@@ -82,15 +84,15 @@ export const professionalRoutes = [];
 export const guestLinks = [
   {
     path: '/',
-    name: 'About',
-    icon: Dashboard,
+    name: 'about',
+    icon: Info,
     component: About,
     layout: '',
   },
   {
     path: '/login',
-    name: 'Sign In',
-    icon: Language,
+    name: 'login',
+    icon: ExitToApp,
     component: Login,
     layout: '',
   },
@@ -99,7 +101,7 @@ export const guestLinks = [
 export const guestRoutes = [
   {
     path: '/register/:id',
-    name: 'Sign In',
+    name: 'login',
     icon: Language,
     component: Register,
     layout: '',
@@ -110,7 +112,7 @@ export const guestRoutes = [
 export const adminLinks = [
   {
     path: '/questionnaire-builder',
-    name: 'Dashboard',
+    name: 'dashboard',
     icon: Dashboard,
     component: QuestionnaireBuilder,
     layout: '/admin',

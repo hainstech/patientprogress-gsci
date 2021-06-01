@@ -13,7 +13,7 @@ import Sidebar from '../components/Sidebar/Sidebar';
 import styles from '../assets/jss/material-dashboard-react/layouts/adminStyle.js';
 
 import bgImage from '../assets/img/sidebar.jpg';
-import logo from '../assets/img/logo.svg';
+import logo from '../assets/img/sidebar-logo.png';
 
 import ProfessionalRoute from './ProfessionalRoute';
 import PatientRoute from './PatientRoute';
@@ -29,78 +29,10 @@ import Admin from './Admin';
 
 import {
   patientLinks,
-  patientRoutes,
   professionalLinks,
-  professionalRoutes,
   guestLinks,
-  guestRoutes,
   adminLinks,
-  adminRoutes,
 } from './routes';
-
-const switchPatient = (
-  <Switch>
-    {patientLinks.map(({ layout, path, component }, key) => {
-      return (
-        <PatientRoute path={layout + path} component={component} key={key} />
-      );
-    })}
-    {patientRoutes.map(({ layout, path, component }, key) => {
-      return (
-        <PatientRoute path={layout + path} component={component} key={key} />
-      );
-    })}
-  </Switch>
-);
-
-const switchProfessional = (
-  <Switch>
-    {professionalLinks.map(({ layout, path, component }, key) => {
-      return (
-        <ProfessionalRoute
-          path={layout + path}
-          component={component}
-          key={key}
-        />
-      );
-    })}
-    {professionalRoutes.map(({ layout, path, component }, key) => {
-      return (
-        <ProfessionalRoute
-          path={layout + path}
-          component={component}
-          key={key}
-        />
-      );
-    })}
-  </Switch>
-);
-
-const switchGuest = (
-  <Switch>
-    {guestLinks.map(({ layout, path, component }, key) => {
-      return <Route path={layout + path} component={component} key={key} />;
-    })}
-    {guestRoutes.map(({ layout, path, component }, key) => {
-      return <Route path={layout + path} component={component} key={key} />;
-    })}
-  </Switch>
-);
-
-const switchAdmin = (
-  <Switch>
-    {adminLinks.map(({ layout, path, component }, key) => {
-      return (
-        <AdminRoute path={layout + path} component={component} key={key} />
-      );
-    })}
-    {adminRoutes.map(({ layout, path, component }, key) => {
-      return (
-        <AdminRoute path={layout + path} component={component} key={key} />
-      );
-    })}
-  </Switch>
-);
 
 const useStyles = makeStyles(styles);
 
