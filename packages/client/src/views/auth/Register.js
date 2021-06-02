@@ -105,7 +105,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
             <CardHeader color='danger'>
               <h4 className={classes.cardTitleWhite}>{t('register.title')}</h4>
             </CardHeader>
-            <form noValidate autoComplete='off' onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit}>
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} xl={6}>

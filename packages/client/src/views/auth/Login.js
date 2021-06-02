@@ -60,7 +60,7 @@ const Login = ({ login, isAuthenticated, type }) => {
           <CardHeader color='danger'>
             <h4 className={classes.cardTitleWhite}>{t('guest.login.title')}</h4>
           </CardHeader>
-          <form noValidate autoComplete='off' onSubmit={formik.handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
             <CardBody>
               <GridContainer>
                 <GridItem xs={12}>

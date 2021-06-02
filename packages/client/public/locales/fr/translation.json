@@ -28,7 +28,7 @@
   "patient": {
     "questionnaireList": {
       "title": "Questionnaires à remplir",
-      "description": "Cliquez sur le crayon  pour remplir le questionnaire"
+      "description": "Cliquez sur le bouton pour remplir le questionnaire"
     },
     "profile": {
       "title": "Modifier votre profil",

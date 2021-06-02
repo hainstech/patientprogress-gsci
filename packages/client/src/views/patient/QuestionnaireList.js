@@ -6,7 +6,20 @@ import { connect } from 'react-redux';
 import Spinner from '../../components/Spinner/Spinner';
 import { useTranslation } from 'react-i18next';
 
+import GridContainer from '../../components/Grid/GridContainer';
+import GridItem from '../../components/Grid/GridItem.js';
+import Card from '../../components/Card/Card.js';
+import CardHeader from '../../components/Card/CardHeader.js';
+import CardBody from '../../components/Card/CardBody.js';
+import Button from '../../components/CustomButtons/Button.js';
+import EditIcon from '@material-ui/icons/Edit';
+
+import { makeStyles } from '@material-ui/core/styles';
+import styles from '../../assets/jss/material-dashboard-react/views/dashboardStyle';
+const useStyles = makeStyles(styles);
+
 const QuestionnaireList = ({ getCurrentProfile, profile: { profile } }) => {
+  const classes = useStyles();
   useEffect(() => {
     if (!profile) getCurrentProfile('patient');
   }, [getCurrentProfile, profile]);
@@ -18,62 +31,38 @@ const QuestionnaireList = ({ getCurrentProfile, profile: { profile } }) => {
       {profile === null ? (
         <Spinner />
       ) : (
-        <div className='row'>
-          <div className='col-md-10 mx-auto'>
-            <div className='card'>
-              <div className='card-header card-header-danger'>
-                <h4 className='card-title'>
+        <GridContainer justify='center'>
+          <GridItem xs={12} md={6}>
+            <Card>
+              <CardHeader color='danger'>
+                <h4 className={classes.cardTitleWhite}>
                   {t('patient.questionnaireList.title')}
                 </h4>
-                <p className='card-category'>
+                <p className={classes.cardCategoryWhite}>
                   {t('patient.questionnaireList.description')}
                 </p>
-              </div>
-
-              <div className='card-body'>
-                <div className='tab-content'>
-                  <div className='tab-pane active' id='profile'>
-                    <table className='table'>
-                      <tbody>
-                        {profile.questionnairesToFill.length > 0 ? (
-                          profile.questionnairesToFill.map(
-                            (questionnaire, index) => (
-                              <tr key={index}>
-                                <td> {questionnaire.title} </td>
-                                <td className='td-actions text-right'>
-                                  <button
-                                    type='button'
-                                    title='Fill'
-                                    className='btn btn-primary btn-link btn-sm'
-                                  >
-                                    <Link
-                                      to={`/patient/questionnaires/${questionnaire._id}`}
-                                    >
-                                      <i className='material-icons'>edit</i>
-                                    </Link>
-                                  </button>
-                                </td>
-                              </tr>
-                            )
-                          )
-                        ) : (
-                          <tr className='text-center'>
-                            <td>
-                              <p>
-                                Thank you, all the required questionnaires are
-                                filled.
-                              </p>
-                            </td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+              </CardHeader>
+              <CardBody align='center'>
+                {profile.questionnairesToFill.length > 0 ? (
+                  profile.questionnairesToFill.map((questionnaire, index) => (
+                    <p>
+                      <Button color='success'>
+                        <Link
+                          className={classes.questionnaireLink}
+                          to={`/patient/questionnaires/${questionnaire._id}`}
+                        >
+                          {questionnaire.title}
+                        </Link>
+                      </Button>
+                    </p>
+                  ))
+                ) : (
+                  <p>Thank you, all the required questionnaires are filled.</p>
+                )}
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
       )}
     </Fragment>
   );

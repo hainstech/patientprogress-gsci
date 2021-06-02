@@ -4,6 +4,13 @@ import { getCurrentProfile } from '../../actions/profile';
 import { connect } from 'react-redux';
 import Spinner from '../../components/Spinner/Spinner';
 
+import GridContainer from '../../components/Grid/GridContainer';
+import GridItem from '../../components/Grid/GridItem.js';
+import Card from '../../components/Card/Card.js';
+import CardBody from '../../components/Card/CardBody.js';
+import Button from '../../components/CustomButtons/Button.js';
+import CallIcon from '@material-ui/icons/Call';
+
 const Questionnaires = ({ getCurrentProfile, profile: { profile } }) => {
   useEffect(() => {
     if (!profile) getCurrentProfile('patient');
@@ -13,27 +20,24 @@ const Questionnaires = ({ getCurrentProfile, profile: { profile } }) => {
       {profile === null ? (
         <Spinner />
       ) : (
-        <div className='row'>
-          <div className='col-md-10 mx-auto'>
-            <div className='card card-profile'>
-              <div className='card-body'>
-                <h6 className='card-category text-gray'>
-                  {profile.professional.clinic}
-                </h6>
-                <h4 className='card-title'>{profile.professional.name}</h4>
-                <p className='card-description'>
-                  {profile.professional.description}
-                </p>
-                <a
+        <GridContainer>
+          <GridItem xs={12} md={10}>
+            <Card profile>
+              <CardBody profile>
+                <h6>{profile.professional.clinic}</h6>
+                <h4>{profile.professional.name}</h4>
+                <p>{profile.professional.description}</p>
+                <Button
+                  color='danger'
+                  round
                   href={`tel:${profile.professional.phone}`}
-                  className='btn btn-danger btn-round'
                 >
-                  <i className='material-icons'>call</i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+                  <CallIcon />
+                </Button>
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
       )}
     </Fragment>
   );
