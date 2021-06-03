@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 // core components
 import Navbar from '../components/Navbars/Navbar';
 import Sidebar from '../components/Sidebar/Sidebar';
+import Footer from '../components/Footer/Footer';
 
 import styles from '../assets/jss/material-dashboard-react/layouts/adminStyle.js';
 
@@ -121,6 +122,7 @@ const MainRouter = ({
             </Switch>
           </div>
         </div>
+        <Footer />
       </div>
     </div>
   );
