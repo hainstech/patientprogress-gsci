@@ -72,7 +72,8 @@
     "preferences": "Preferences",
     "logout": "Sign out",
     "about": "About This Application",
-    "login": "Sign In"
+    "login": "Sign In",
+    "builder": "Builder"
   },
   "register": {
     "passwordError": "Passwords do not match",

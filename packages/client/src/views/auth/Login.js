@@ -115,7 +115,7 @@ const Login = ({ login, isAuthenticated, type }) => {
               </GridContainer>
             </CardBody>
             <CardFooter>
-              <Button color='danger' type='submit'>
+              <Button color='success' type='submit'>
                 {t('guest.login.submit')}
               </Button>
             </CardFooter>

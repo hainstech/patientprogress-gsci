@@ -9,7 +9,28 @@ import { getCurrentProfile } from '../../actions/profile';
 import Spinner from '../../components/Spinner/Spinner';
 import { Link } from 'react-router-dom';
 
-function Search({ profile: { profile, loading }, getCurrentProfile }) {
+import { useFormik } from 'formik';
+
+import SearchIcon from '@material-ui/icons/Search';
+
+import GridContainer from '../../components/Grid/GridContainer';
+import GridItem from '../../components/Grid/GridItem.js';
+import Card from '../../components/Card/Card.js';
+import CardHeader from '../../components/Card/CardHeader.js';
+import CustomInput from '../../components/CustomInput/CustomInput';
+import CardBody from '../../components/Card/CardBody.js';
+import Table from '../../components/Table/Table.js';
+import Button from '../../components/CustomButtons/Button.js';
+
+import { makeStyles } from '@material-ui/core/styles';
+import styles from '../../assets/jss/material-dashboard-react/views/dashboardStyle';
+import searchStyles from '../../assets/jss/material-dashboard-react/components/headerLinksStyle.js';
+const useStyles = makeStyles(styles);
+const useSearchStyles = makeStyles(searchStyles);
+
+const Search = ({ profile: { profile, loading }, getCurrentProfile }) => {
+  const classes = useStyles();
+  const searchClasses = useSearchStyles();
   useEffect(() => {
     if (!profile) getCurrentProfile('professional');
   }, [profile, getCurrentProfile, loading]);
@@ -32,83 +53,101 @@ function Search({ profile: { profile, loading }, getCurrentProfile }) {
     }
   };
 
+  const formik = useFormik({
+    initialValues: {
+      query: '',
+    },
+    onSubmit: async ({ query }) => {
+      // Affiche les patients correspondants au query
+      if (query.length > 0) {
+        setResults(
+          //Format: [name, dob, Button]
+          profile.patients
+            .filter(({ name }) => name.indexOf(query) !== -1)
+            .map(({ name, dob, _id }) => {
+              return [
+                name,
+                <DayJS format='YYYY/MM/DD'>{dob}</DayJS>,
+                <Link to={`/professional/patients/${_id}`}>
+                  <Button color='success'>
+                    {t('professional.search.open')}
+                  </Button>
+                </Link>,
+              ];
+            })
+        );
+        setQueried(true);
+      }
+    },
+  });
+
   return (
     <Fragment>
       {profile === null ? (
         <Spinner />
       ) : (
-        <div className='row'>
-          <div className='col-10 mx-auto'>
-            <div className='card'>
-              <div className='card-header card-header-danger'>
-                <h4 className='card-title'>{t('professional.search.title')}</h4>
-                <div className='input-group no-border'>
-                  <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    style={{ width: '100%' }}
-                  >
-                    <input
-                      {...register('query')}
-                      type='text'
-                      className='form-control'
-                      placeholder={t('professional.search.placeholder')}
-                      name='query'
-                      id='searchPatient'
-                      autoComplete='off'
+        <GridContainer justify='center'>
+          <GridItem xs={12} lg={6}>
+            <Card>
+              <CardHeader color='danger'>
+                <h4 className={classes.cardTitleWhite}>
+                  {t('professional.search.title')}
+                </h4>
+                <form onSubmit={formik.handleSubmit}>
+                  <div className={searchClasses.searchWrapper}>
+                    <CustomInput
+                      formControlProps={{
+                        className: searchClasses.margin,
+                      }}
+                      error
+                      inputProps={{
+                        placeholder: t('professional.search.placeholder'),
+                        name: 'query',
+                        inputProps: {
+                          'aria-label': 'Search',
+                        },
+                        className: searchClasses.search,
+                        value: formik.values.description,
+                        onChange: formik.handleChange,
+                      }}
                     />
-                    <button
+                    <Button
+                      color='white'
+                      aria-label='edit'
+                      justIcon
+                      round
                       type='submit'
-                      className='btn btn-white btn-round btn-just-icon'
                     >
-                      <i className='material-icons'>search</i>
-                      <div className='ripple-container'></div>
-                    </button>
-                  </form>
-                </div>
-              </div>
-              <div className='card-body table-responsive'>
+                      <SearchIcon />
+                    </Button>
+                  </div>
+                </form>
+              </CardHeader>
+              <CardBody>
                 {queried &&
                   (results.length > 0 ? (
-                    <table className='table table-hover'>
-                      <thead className='text-danger'>
-                        <tr>
-                          <th>{t('professional.search.name')}</th>
-                          <th>{t('professional.search.dob')}</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {results.map(({ _id, name, dob }) => (
-                          <tr key={_id}>
-                            <td>{name}</td>
-                            <td>
-                              <DayJS format='YYYY/MM/DD'>{dob}</DayJS>
-                            </td>
-                            <td>
-                              <Link
-                                to={`/professional/patients/${_id}`}
-                                className='btn btn-danger btn-sm pull-right'
-                              >
-                                {t('professional.search.open')}
-                              </Link>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                    <Table
+                      tableHeaderColor='danger'
+                      tableHead={[
+                        t('professional.search.name'),
+                        t('professional.search.dob'),
+                        '',
+                      ]}
+                      tableData={results}
+                    />
                   ) : (
                     <p style={{ textAlign: 'center', margin: '0' }}>
                       No results
                     </p>
                   ))}
-              </div>
-            </div>
-          </div>
-        </div>
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
       )}
     </Fragment>
   );
-}
+};
 
 Search.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,

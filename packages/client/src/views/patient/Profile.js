@@ -169,8 +169,8 @@ const EditProfile = ({
                   </GridContainer>
                 </CardBody>
                 <CardFooter>
-                  <Button color='danger' type='submit'>
-                    {t('register.submit')}
+                  <Button color='success' type='submit'>
+                    {t('patient.profile.submit')}
                   </Button>
                 </CardFooter>
               </form>

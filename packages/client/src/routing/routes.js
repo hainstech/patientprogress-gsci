@@ -1,9 +1,14 @@
 // @material-ui/icons
-import Dashboard from '@material-ui/icons/Dashboard';
 import Person from '@material-ui/icons/Person';
 import Language from '@material-ui/icons/Language';
 import Info from '@material-ui/icons/Info';
 import ExitToApp from '@material-ui/icons/ExitToApp';
+import HelpIcon from '@material-ui/icons/Help';
+import GroupIcon from '@material-ui/icons/Group';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import SettingsIcon from '@material-ui/icons/Settings';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import MarkunreadIcon from '@material-ui/icons/Markunread';
 // core components/views for Admin layout
 import QuestionnaireList from '../views/patient/QuestionnaireList';
 import Profile from '../views/patient/Profile';
@@ -25,7 +30,7 @@ export const patientLinks = [
   {
     path: '/questionnaires',
     name: 'questionnaires',
-    icon: Dashboard,
+    icon: MarkunreadIcon,
     component: QuestionnaireList,
     layout: '/patient',
   },
@@ -39,7 +44,7 @@ export const patientLinks = [
   {
     path: '/professional',
     name: 'professional',
-    icon: Person,
+    icon: LocalHospitalIcon,
     component: MyProfessional,
     layout: '/patient',
   },
@@ -58,21 +63,21 @@ export const professionalLinks = [
   {
     path: '/patients',
     name: 'patients',
-    icon: Dashboard,
+    icon: GroupIcon,
     component: Search,
     layout: '/professional',
   },
   {
     path: '/preferences',
     name: 'preferences',
-    icon: Dashboard,
+    icon: SettingsIcon,
     component: Preferences,
     layout: '/professional',
   },
   {
-    path: '/patients',
+    path: '/invite',
     name: 'invite',
-    icon: Dashboard,
+    icon: GroupAddIcon,
     component: Invite,
     layout: '/professional',
   },
@@ -112,8 +117,8 @@ export const guestRoutes = [
 export const adminLinks = [
   {
     path: '/questionnaire-builder',
-    name: 'dashboard',
-    icon: Dashboard,
+    name: 'builder',
+    icon: HelpIcon,
     component: QuestionnaireBuilder,
     layout: '/admin',
   },

@@ -30,6 +30,7 @@ const Questionnaires = ({ getCurrentProfile, profile: { profile } }) => {
                 <Button
                   color='danger'
                   round
+                  justIcon
                   href={`tel:${profile.professional.phone}`}
                 >
                   <CallIcon />

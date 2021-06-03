@@ -72,7 +72,8 @@
     "preferences": "Réglages",
     "logout": "Déconnexion",
     "about": "À propos",
-    "login": "Connexion"
+    "login": "Connexion",
+    "builder": "Constructeur"
   },
   "register": {
     "passwordError": "Les mots de passe ne correspondent pas",

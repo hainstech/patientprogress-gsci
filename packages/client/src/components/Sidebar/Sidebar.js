@@ -97,7 +97,9 @@ const Sidebar = (props) => {
           </ListItem>
         </NavLink>
       )}
-      {routes[0].layout === '/patient' && (
+      {(routes[0].layout === '/patient' ||
+        routes[0].layout === '/professional' ||
+        routes[0].layout === '/admin') && (
         <NavLink
           className={' ' + classes.item}
           onClick={() => props.logout()}
