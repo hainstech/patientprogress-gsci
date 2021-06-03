@@ -104,6 +104,7 @@ const Login = ({ login, isAuthenticated, type }) => {
                           inputClasses.underline
                         ),
                       }}
+                      autoComplete='true'
                       type='password'
                       id={'password'}
                       value={formik.values.password}

@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { getCurrentProfile } from '../../actions/profile';
 import { connect } from 'react-redux';
 import Spinner from '../../components/Spinner/Spinner';
@@ -12,19 +11,26 @@ import Card from '../../components/Card/Card.js';
 import CardHeader from '../../components/Card/CardHeader.js';
 import CardBody from '../../components/Card/CardBody.js';
 import Button from '../../components/CustomButtons/Button.js';
-import EditIcon from '@material-ui/icons/Edit';
 
 import { makeStyles } from '@material-ui/core/styles';
 import styles from '../../assets/jss/material-dashboard-react/views/dashboardStyle';
 const useStyles = makeStyles(styles);
 
-const QuestionnaireList = ({ getCurrentProfile, profile: { profile } }) => {
+const QuestionnaireList = ({
+  getCurrentProfile,
+  profile: { profile },
+  history,
+}) => {
   const classes = useStyles();
   useEffect(() => {
     if (!profile) getCurrentProfile('patient');
   }, [getCurrentProfile, profile]);
 
   const { t } = useTranslation();
+
+  const goToQuestionnaire = (id) => {
+    history.push(`/patient/questionnaires/${id}`);
+  };
 
   return (
     <Fragment>
@@ -45,14 +51,12 @@ const QuestionnaireList = ({ getCurrentProfile, profile: { profile } }) => {
               <CardBody align='center'>
                 {profile.questionnairesToFill.length > 0 ? (
                   profile.questionnairesToFill.map((questionnaire, index) => (
-                    <p>
-                      <Button color='success'>
-                        <Link
-                          className={classes.questionnaireLink}
-                          to={`/patient/questionnaires/${questionnaire._id}`}
-                        >
-                          {questionnaire.title}
-                        </Link>
+                    <p key={index}>
+                      <Button
+                        color='success'
+                        onClick={() => goToQuestionnaire(questionnaire._id)}
+                      >
+                        {questionnaire.title}
                       </Button>
                     </p>
                   ))

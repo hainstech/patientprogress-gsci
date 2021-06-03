@@ -6,15 +6,6 @@ import {
 } from '../../material-dashboard-react';
 
 const dashboardStyle = {
-  questionnaireLink: {
-    color: whiteColor,
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    textDecoration: 'none',
-    '&:hover': {
-      color: whiteColor,
-    },
-  },
-
   successText: {
     color: successColor[0],
   },

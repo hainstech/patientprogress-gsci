@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -13,13 +14,15 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '@material-ui/core/Icon';
 import LanguageIcon from '@material-ui/icons/Language';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import styles from '../../assets/jss/material-dashboard-react/components/sidebarStyle.js';
 import { logout } from '../../actions/auth';
+import { setAlert } from '../../actions/alert';
 
 const useStyles = makeStyles(styles);
 
-export default function Sidebar(props) {
+const Sidebar = (props) => {
   const classes = useStyles();
   let location = useLocation();
 
@@ -94,6 +97,22 @@ export default function Sidebar(props) {
           </ListItem>
         </NavLink>
       )}
+      {routes[0].layout === '/patient' && (
+        <NavLink
+          className={' ' + classes.item}
+          onClick={() => props.logout()}
+          to={'/'}
+        >
+          <ListItem button className={classes.itemLink}>
+            <ExitToAppIcon className={classes.itemIcon} />
+            <ListItemText
+              primary={t('sidebar.logout')}
+              className={classes.itemText}
+              disableTypography={true}
+            />
+          </ListItem>
+        </NavLink>
+      )}
     </List>
   );
   var brand = (
@@ -152,7 +171,7 @@ export default function Sidebar(props) {
       </Hidden>
     </div>
   );
-}
+};
 
 Sidebar.propTypes = {
   handleDrawerToggle: PropTypes.func,
@@ -162,4 +181,8 @@ Sidebar.propTypes = {
   logoText: PropTypes.string,
   routes: PropTypes.arrayOf(PropTypes.object),
   open: PropTypes.bool,
+  logout: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
+
+export default connect(null, { setAlert, logout })(Sidebar);

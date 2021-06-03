@@ -34,7 +34,7 @@ export default function Header(props) {
         <div className={classes.flex}>
           {/* Here we create navbar brand, based on route name */}
           <Button color='transparent' href='#' className={classes.title}>
-            {t(`sidebar.${routeName}`)}
+            {routeName ? t(`sidebar.${routeName}`) : 'Patient Progress'}
           </Button>
         </div>
         <Hidden mdUp implementation='css'>
