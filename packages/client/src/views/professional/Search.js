@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { useForm } from 'react-hook-form';
 import DayJS from 'react-dayjs';
 import { useTranslation } from 'react-i18next';
 
@@ -40,18 +39,6 @@ const Search = ({ profile: { profile, loading }, getCurrentProfile }) => {
   const [queried, setQueried] = useState(false);
 
   const [results, setResults] = useState([]);
-
-  const { register, handleSubmit } = useForm();
-
-  const onSubmit = ({ query }) => {
-    // Affiche les patients correspondants au query
-    if (query.length > 0) {
-      setResults(
-        profile.patients.filter(({ name }) => name.indexOf(query) !== -1)
-      );
-      setQueried(true);
-    }
-  };
 
   const formik = useFormik({
     initialValues: {
