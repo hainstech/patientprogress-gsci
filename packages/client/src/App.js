@@ -5,14 +5,14 @@ import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 
 // Routing
-import MainRouter from './components/routing/MainRouter';
+import MainRouter from './routing/MainRouter';
 
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
 
 // Style
-import './css/material-dashboard.min.css';
+import './assets/css/material-dashboard-react.css?v=1.10.0';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);

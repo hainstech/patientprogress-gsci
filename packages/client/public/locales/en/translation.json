@@ -28,7 +28,7 @@
   "patient": {
     "questionnaireList": {
       "title": "Questionnaires to fill out",
-      "description": "Click on the pen icon to start filling a questionnaire"
+      "description": "Click on the button to start filling a questionnaire"
     },
     "profile": {
       "title": "Edit profile",
@@ -64,21 +64,29 @@
     }
   },
   "sidebar": {
-    "patient": {
-      "questionnaires": "Questionnaires",
-      "profile": "Your profile",
-      "professional": "Your professional",
-      "logout": "Sign Out"
-    },
-    "professional": {
-      "patients": "Your Patients",
-      "invite": "Invite A Patient",
-      "preferences": "Preferences",
-      "logout": "Sign out"
-    },
-    "guest": {
-      "about": "About This Application",
-      "login": "Sign In"
-    }
+    "questionnaires": "Questionnaires",
+    "profile": "Your profile",
+    "professional": "Your professional",
+    "patients": "Your Patients",
+    "invite": "Invite A Patient",
+    "preferences": "Preferences",
+    "logout": "Sign out",
+    "about": "About This Application",
+    "login": "Sign In",
+    "builder": "Builder"
+  },
+  "register": {
+    "passwordError": "Passwords do not match",
+    "title": "Register into the application",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "language": "Language",
+    "gender": "Gender",
+    "dob": "Date of Birth",
+    "email": "Email",
+    "password": "Password",
+    "passwordConfirmation": "Confirm your password",
+    "consent": "I consent to this",
+    "submit": "Submit"
   }
 }

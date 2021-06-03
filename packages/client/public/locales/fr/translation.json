@@ -28,7 +28,7 @@
   "patient": {
     "questionnaireList": {
       "title": "Questionnaires à remplir",
-      "description": "Cliquez sur le crayon  pour remplir le questionnaire"
+      "description": "Cliquez sur le bouton pour remplir le questionnaire"
     },
     "profile": {
       "title": "Modifier votre profil",
@@ -64,21 +64,29 @@
     }
   },
   "sidebar": {
-    "patient": {
-      "questionnaires": "Questionnaires",
-      "profile": "Votre profil",
-      "professional": "Votre professionnel",
-      "logout": "Déconnexion"
-    },
-    "professional": {
-      "patients": "Vos Patients",
-      "invite": "Inviter un Patient",
-      "preferences": "Réglages",
-      "logout": "Déconnexion"
-    },
-    "guest": {
-      "about": "À propos",
-      "login": "Connexion"
-    }
+    "questionnaires": "Questionnaires",
+    "profile": "Votre profil",
+    "professional": "Votre professionnel",
+    "patients": "Vos Patients",
+    "invite": "Inviter un Patient",
+    "preferences": "Réglages",
+    "logout": "Déconnexion",
+    "about": "À propos",
+    "login": "Connexion",
+    "builder": "Constructeur"
+  },
+  "register": {
+    "passwordError": "Les mots de passe ne correspondent pas",
+    "title": "S'inscrire dans l'application",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "language": "Langue",
+    "gender": "Genre",
+    "dob": "Date de Naissance",
+    "email": "Courriel",
+    "password": "Mot de passe",
+    "passwordConfirmation": "Confirmez votre mot de passe",
+    "consent": "Je consent a cela",
+    "submit": "Soumettre"
   }
 }
