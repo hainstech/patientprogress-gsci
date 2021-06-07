@@ -4,6 +4,7 @@ import { Switch } from 'react-router-dom';
 import Invite from '../views/professional/Invite';
 import Preferences from '../views/professional/Preferences';
 import Search from '../views/professional/Search';
+import PatientOverview from '../views/professional/PatientOverview';
 
 import ProfessionalRoute from './ProfessionalRoute';
 
@@ -20,6 +21,11 @@ const Professional = () => {
         exact
         path='/professional/preferences'
         component={Preferences}
+      />
+      <ProfessionalRoute
+        exact
+        path='/professional/patients/:id'
+        component={PatientOverview}
       />
     </Switch>
   );

@@ -123,9 +123,7 @@ const Search = ({ profile: { profile, loading }, getCurrentProfile }) => {
                       tableData={results}
                     />
                   ) : (
-                    <p style={{ textAlign: 'center', margin: '0' }}>
-                      No results
-                    </p>
+                    <p style={{ textAlign: 'center' }}>No results</p>
                   ))}
               </CardBody>
             </Card>
