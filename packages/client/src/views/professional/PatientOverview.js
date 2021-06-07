@@ -102,6 +102,7 @@ const PatientOverview = ({
                 {patient.questionnaires.length > 0 ? (
                   <div style={{ height: 400, width: '100%' }}>
                     <DataGrid
+                      disableSelectionOnClick
                       rows={patient.questionnaires
                         .map(({ title, time, _id }) => {
                           return {
