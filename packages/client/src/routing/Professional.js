@@ -5,6 +5,7 @@ import Invite from '../views/professional/Invite';
 import Preferences from '../views/professional/Preferences';
 import Search from '../views/professional/Search';
 import PatientOverview from '../views/professional/PatientOverview';
+import Questionnaire from '../views/professional/Questionnaire';
 
 import ProfessionalRoute from './ProfessionalRoute';
 
@@ -26,6 +27,11 @@ const Professional = () => {
         exact
         path='/professional/patients/:id'
         component={PatientOverview}
+      />
+      <ProfessionalRoute
+        exact
+        path='/professional/patients/:id/questionnaires/:questionnaire_id'
+        component={Questionnaire}
       />
     </Switch>
   );
