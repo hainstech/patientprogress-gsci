@@ -13,9 +13,7 @@ import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem.js';
 import Card from '../../components/Card/Card.js';
 import CardHeader from '../../components/Card/CardHeader.js';
-import CustomInput from '../../components/CustomInput/CustomInput';
 import CardBody from '../../components/Card/CardBody.js';
-import Table from '../../components/Table/Table.js';
 import Button from '../../components/CustomButtons/Button.js';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -77,16 +75,16 @@ const PatientOverview = ({
               </CardHeader>
               <CardBody>
                 <GridContainer justify='center'>
-                  <GridItem xs={12} sm={4}>
+                  <GridItem xs={12} xl={4}>
                     Name: {patient.name}
                   </GridItem>
 
-                  <GridItem xs={12} sm={4}>
+                  <GridItem xs={12} xl={4}>
                     Date of Birth:{' '}
                     <DayJS format='YYYY/MM/DD'>{patient.dob}</DayJS>
                   </GridItem>
 
-                  <GridItem xs={12} sm={4}>
+                  <GridItem xs={12} xl={4}>
                     Gender: {patient.gender}
                   </GridItem>
                 </GridContainer>
