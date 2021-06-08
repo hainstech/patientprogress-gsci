@@ -156,7 +156,9 @@ const PatientOverview = ({
             </Card>
             <Card>
               <CardHeader color='danger'>
-                <h4 className={classes.cardTitleWhite}>Send a questionnaire</h4>
+                <h4 className={classes.cardTitleWhite}>
+                  {t('professional.patient.sendQuestionnaire')}
+                </h4>
               </CardHeader>
               <CardBody>
                 <form onSubmit={formik.handleSubmit}>
@@ -169,7 +171,10 @@ const PatientOverview = ({
                           options={displayList}
                           getOptionLabel={(option) => option.title}
                           renderInput={(params) => (
-                            <TextField {...params} label='Questionnaire' />
+                            <TextField
+                              {...params}
+                              label={t('professional.patient.questionnaire')}
+                            />
                           )}
                           value={formik.values.questionnaire}
                           onChange={(e, value) =>
@@ -181,7 +186,7 @@ const PatientOverview = ({
 
                     <GridItem xs={12} sm={6}>
                       <Button type='submit' color='success'>
-                        Send
+                        {t('professional.invite.submit')}
                       </Button>
                     </GridItem>
                   </GridContainer>
@@ -191,7 +196,7 @@ const PatientOverview = ({
             <Card>
               <CardHeader color='danger'>
                 <h4 className={classes.cardTitleWhite}>
-                  Pending questionnaires
+                  {t('professional.patient.pendingQuestionnaires')}
                 </h4>
               </CardHeader>
               <CardBody>
@@ -211,7 +216,9 @@ const PatientOverview = ({
                       columns={[
                         {
                           field: 'title',
-                          headerName: `Questionnaire`,
+                          headerName: `${t(
+                            'professional.patient.questionnaire'
+                          )}`,
                           width: 200,
                         },
                       ]}

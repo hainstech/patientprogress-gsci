@@ -73,7 +73,9 @@
       "gender": "Gender",
       "back": "Back",
       "filledQuestionnaires": "Filled Questionnaires",
-      "useID": "Use abbreviated question identifiers"
+      "useID": "Use abbreviated question identifiers",
+      "sendQuestionnaire": "Send a questionnaire to fill",
+      "pendingQuestionnaires": "Pending questionnaires to fill"
     }
   },
   "sidebar": {
