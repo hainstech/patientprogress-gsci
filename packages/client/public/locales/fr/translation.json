@@ -75,7 +75,10 @@
       "filledQuestionnaires": "Questionnaires Complétés",
       "useID": "Utiliser les identifiants de question abrégés",
       "sendQuestionnaire": "Envoyer un questionnaire à remplir",
-      "pendingQuestionnaires": "Questionnaires envoyés en attente d'être remplis"
+      "pendingQuestionnaires": "Questionnaires envoyés en attente d'être remplis",
+      "Male": "Homme",
+      "Female": "Femme",
+      "Other": "Autre"
     }
   },
   "sidebar": {
