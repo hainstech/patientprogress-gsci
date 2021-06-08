@@ -20,7 +20,7 @@ for the professional and the patient.
 
 - Choose which questionnaires you want the patient to fill
 - See the filled questionnaires and export them to PDF
-- Write reports that are optionnaly pre-filled with patient data
+- Write reports that are optionally pre-filled with patient data
 - Schedule questionnaires for a individual patient
 - Visualize the progress of all your patient in a interactive graph
 

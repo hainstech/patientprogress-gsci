@@ -20,7 +20,7 @@ const Questionnaires = ({ getCurrentProfile, profile: { profile } }) => {
       {profile === null ? (
         <Spinner />
       ) : (
-        <GridContainer>
+        <GridContainer justify='center'>
           <GridItem xs={12} md={10}>
             <Card profile>
               <CardBody profile>

@@ -30,7 +30,33 @@ router.get('/me', professional, async (req, res) => {
     const professional = await Professional.findOne({
       user: req.user.id,
     }).populate('patients');
-    res.json(professional);
+    const {
+      _id,
+      name,
+      clinic,
+      description,
+      language,
+      phone,
+      user,
+      profession,
+      patients,
+    } = professional;
+
+    // Return only the essential fields for optimisation
+    const shortProfessional = {
+      _id,
+      name,
+      clinic,
+      description,
+      language,
+      phone,
+      user,
+      profession,
+      patients: patients.map(({ name, _id, dob }) => {
+        return { name, _id, dob };
+      }),
+    };
+    res.json(shortProfessional);
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: 'Server Error' });
