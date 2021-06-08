@@ -61,7 +61,7 @@ const QuestionnaireList = ({
                     </p>
                   ))
                 ) : (
-                  <p>Thank you, all the required questionnaires are filled.</p>
+                  <p>{t('patient.questionnaireList.empty')}</p>
                 )}
               </CardBody>
             </Card>

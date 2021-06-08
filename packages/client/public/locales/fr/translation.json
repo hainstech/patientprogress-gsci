@@ -28,7 +28,8 @@
   "patient": {
     "questionnaireList": {
       "title": "Questionnaires à remplir",
-      "description": "Cliquez sur le bouton pour remplir le questionnaire"
+      "description": "Cliquez sur le bouton pour remplir le questionnaire",
+      "empty": "Merci, tous les questionnaires requis sont remplis."
     },
     "profile": {
       "title": "Modifier votre profil",

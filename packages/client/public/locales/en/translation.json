@@ -28,7 +28,8 @@
   "patient": {
     "questionnaireList": {
       "title": "Questionnaires to fill out",
-      "description": "Click on the button to start filling a questionnaire"
+      "description": "Click on the button to start filling a questionnaire",
+      "empty": "Thank you, all the required questionnaires are filled."
     },
     "profile": {
       "title": "Edit profile",
