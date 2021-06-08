@@ -50,7 +50,7 @@ const PatientOverview = ({
       field: 'id',
       headerName: `${t('professional.patient.answers')}`,
       sortable: false,
-      width: 110,
+      width: 115,
       disableClickEventBubbling: true,
       renderCell: renderButton,
     },
