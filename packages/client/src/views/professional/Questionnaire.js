@@ -103,15 +103,15 @@ const Questionnaire = ({
                       color='primary'
                     />
                   }
-                  label='Use Question IDs'
+                  label={t('professional.patient.useID')}
                 />
                 {questionnaire.answers.map((answer) => {
                   return useId ? (
-                    <p>
+                    <p key={answer.questionId}>
                       <strong>{answer.questionId}:</strong> {answer.answer}
                     </p>
                   ) : (
-                    <p>
+                    <p key={answer.questionId}>
                       <strong>
                         {
                           questionnaire.questionnaire.schema.properties[
@@ -127,7 +127,7 @@ const Questionnaire = ({
               </CardBody>
               <CardFooter>
                 <Button onClick={() => history.goBack()} color='danger'>
-                  back
+                  {t('professional.patient.back')}
                 </Button>
               </CardFooter>
             </Card>

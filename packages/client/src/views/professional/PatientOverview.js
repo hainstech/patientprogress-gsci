@@ -40,7 +40,7 @@ const PatientOverview = ({
       <Link
         to={`/professional/patients/${match.params.id}/questionnaires/${params.row.id}`}
       >
-        <Button color='success'>{t('professional.search.open')}</Button>
+        <Button color='success'>{t('professional.patient.view')}</Button>
       </Link>
     );
   };
@@ -48,16 +48,20 @@ const PatientOverview = ({
   const columns = [
     {
       field: 'id',
-      headerName: 'Answers',
+      headerName: `${t('professional.patient.answers')}`,
       sortable: false,
       width: 110,
       disableClickEventBubbling: true,
       renderCell: renderButton,
     },
-    { field: 'title', headerName: 'Questionnaire', width: 200 },
+    {
+      field: 'title',
+      headerName: `${t('professional.patient.questionnaire')}`,
+      width: 200,
+    },
     {
       field: 'time',
-      headerName: 'Date',
+      headerName: `${t('professional.patient.date')}`,
       width: 110,
     },
   ];
@@ -71,21 +75,23 @@ const PatientOverview = ({
           <GridItem xs={12} lg={6}>
             <Card>
               <CardHeader color='danger'>
-                <h4 className={classes.cardTitleWhite}>Patient Details</h4>
+                <h4 className={classes.cardTitleWhite}>
+                  {t('professional.patient.detailsTitle')}
+                </h4>
               </CardHeader>
               <CardBody>
                 <GridContainer justify='center'>
                   <GridItem xs={12} xl={4}>
-                    Name: {patient.name}
+                    {t('professional.patient.name')}: {patient.name}
                   </GridItem>
 
                   <GridItem xs={12} xl={4}>
-                    Date of Birth:{' '}
+                    {t('professional.patient.dob')}:{' '}
                     <DayJS format='YYYY/MM/DD'>{patient.dob}</DayJS>
                   </GridItem>
 
                   <GridItem xs={12} xl={4}>
-                    Gender: {patient.gender}
+                    {t('professional.patient.gender')}: {patient.gender}
                   </GridItem>
                 </GridContainer>
               </CardBody>
@@ -95,7 +101,7 @@ const PatientOverview = ({
             <Card>
               <CardHeader color='danger'>
                 <h4 className={classes.cardTitleWhite}>
-                  Filled Questionnaires
+                  {t('professional.patient.filledQuestionnaires')}
                 </h4>
               </CardHeader>
               <CardBody>

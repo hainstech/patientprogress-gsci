@@ -61,6 +61,19 @@
       "yourDescription": "Your description",
       "language": "Language",
       "submit": "Update Preferences"
+    },
+    "patient": {
+      "view": "view",
+      "answers": "Answers",
+      "questionnaire": "Questionnaire",
+      "date": "Date",
+      "detailsTitle": "Patient Details",
+      "name": "Full Name",
+      "dob": "Date of Birth",
+      "gender": "Gender",
+      "back": "Back",
+      "filledQuestionnaires": "Filled Questionnaires",
+      "useID": "Use abbreviated question identifiers"
     }
   },
   "sidebar": {

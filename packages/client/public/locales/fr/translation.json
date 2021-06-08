@@ -61,6 +61,19 @@
       "yourDescription": "Votre description",
       "language": "Langue",
       "submit": "Mettre À Jour"
+    },
+    "patient": {
+      "view": "voir",
+      "answers": "Réponses",
+      "questionnaire": "Questionnaire",
+      "date": "Date",
+      "detailsTitle": "Détails du Patient",
+      "name": "Nom Complet",
+      "dob": "Date de Naissance",
+      "gender": "Genre",
+      "back": "Retour",
+      "filledQuestionnaires": "Questionnaires Complétés",
+      "useID": "Utiliser les identifiants de question abrégés"
     }
   },
   "sidebar": {
