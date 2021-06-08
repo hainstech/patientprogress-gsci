@@ -7,6 +7,7 @@ const Patient = require('../../models/Patient');
 const admin = require('../../middleware/admin');
 const auth = require('../../middleware/auth');
 const patient = require('../../middleware/patient');
+const professional = require('../../middleware/professional');
 
 // @route GET api/questionnaires
 // @desc Get all questionnaires
@@ -16,6 +17,22 @@ router.get('/', admin, async (req, res) => {
     const questionnaires = await Questionnaire.find();
     res.json(questionnaires);
   } catch (err) {
+    res.status(500).json({ msg: 'Server Error' });
+  }
+});
+
+// @route GET api/questionnaires/list
+// @desc Get all questionnaires in list format
+// @access Professional
+router.get('/list', professional, async (req, res) => {
+  try {
+    let questionnaires = await Questionnaire.find();
+    questionnaires = questionnaires.map(({ _id, title, language }) => {
+      return { id: _id, title, language };
+    });
+    res.json(questionnaires);
+  } catch (err) {
+    console.log(err);
     res.status(500).json({ msg: 'Server Error' });
   }
 });

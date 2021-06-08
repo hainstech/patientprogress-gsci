@@ -27,6 +27,28 @@ export const invitePatient = (email) => async (dispatch) => {
   }
 };
 
+// Send questionnaire to patient
+export const sendQuestionnaire =
+  (id, questionnaireToFill) => async (dispatch) => {
+    try {
+      const config = {
+        hearders: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      await axios.put(
+        `${URI}/api/patients/${id}`,
+        { questionnaireToFill },
+        config
+      );
+
+      dispatch(setAlert(`Sent successfully`, 'success'));
+    } catch (err) {
+      dispatch(setAlert(err.message, 'danger'));
+    }
+  };
+
 // Get patient by ID
 export const getPatient = (id) => async (dispatch) => {
   try {
@@ -44,5 +66,15 @@ export const getPatient = (id) => async (dispatch) => {
         status: err.response.status,
       },
     });
+  }
+};
+
+// Get Questionnaire List
+export const getQuestionnaireList = () => async (dispatch) => {
+  try {
+    const res = await axios.get(`${URI}/api/questionnaires/list`);
+    return res;
+  } catch (err) {
+    return [];
   }
 };
