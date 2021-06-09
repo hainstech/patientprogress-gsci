@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Form from '@rjsf/material-ui';
+import InputLabel from '@material-ui/core/InputLabel';
+import NativeSelect from '@material-ui/core/NativeSelect';
 
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem.js';
@@ -16,6 +18,34 @@ import {
   addQuestionnaire,
 } from '../../actions/questionnaire';
 import Spinner from '../../components/Spinner/Spinner';
+
+const nativeSelect = function (props) {
+  const handleChange = (event) => {
+    const value = event.target.value;
+    props.onChange(value);
+  };
+
+  return (
+    <>
+      <InputLabel htmlFor={props.label}>{props.label}</InputLabel>
+      <NativeSelect
+        value={props.value}
+        onChange={handleChange}
+        inputProps={{
+          name: props.id,
+          id: props.label,
+        }}
+      >
+        <option aria-label='None' value='' />
+        {props.options.enumOptions.map(({ label, value }) => (
+          <option key={`${label}:${value}`} value={value}>
+            {label}
+          </option>
+        ))}
+      </NativeSelect>
+    </>
+  );
+};
 
 function Questionnaire({
   getQuestionnaire,
@@ -41,6 +71,10 @@ function Questionnaire({
 
   const [formData, setFormData] = useState(null);
 
+  const widgets = {
+    nativeSelect,
+  };
+
   return (
     <Fragment>
       {questionnaire === null ? (
@@ -51,6 +85,7 @@ function Questionnaire({
             <Card>
               <CardBody>
                 <Form
+                  widgets={widgets}
                   schema={questionnaire.schema}
                   uiSchema={questionnaire.uischema}
                   formData={formData}
