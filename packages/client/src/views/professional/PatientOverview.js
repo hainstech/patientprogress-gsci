@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import DayJS from 'react-dayjs';
 import { Link } from 'react-router-dom';
 import { DataGrid } from '@material-ui/data-grid';
 import { format, parseISO } from 'date-fns';
@@ -80,11 +79,13 @@ const PatientOverview = ({
         const foundQ = questionnaireList.find(
           (q) => q.title === title && q.language === patient.language
         );
-        id =
-          foundQ.id ||
-          questionnaireList.find(
+        if (foundQ) {
+          id = foundQ.id;
+        } else {
+          id = questionnaireList.find(
             (q) => q.title === title && q.language === 'en'
           ).id;
+        }
 
         sendQuestionnaire(patient._id, id);
         getPatient(match.params.id);
@@ -147,7 +148,13 @@ const PatientOverview = ({
 
                   <GridItem xs={12} xl={4}>
                     {t('professional.patient.dob')}:{' '}
-                    <DayJS format='YYYY/MM/DD'>{patient.dob}</DayJS>
+                    {format(
+                      zonedTimeToUtc(
+                        parseISO(patient.dob),
+                        Intl.DateTimeFormat().resolvedOptions().timeZone
+                      ),
+                      'yyyy/MM/dd'
+                    )}
                   </GridItem>
 
                   <GridItem xs={12} xl={4}>
