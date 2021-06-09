@@ -5,7 +5,9 @@ import { useTranslation } from 'react-i18next';
 import DayJS from 'react-dayjs';
 import { Link } from 'react-router-dom';
 import { DataGrid } from '@material-ui/data-grid';
-import dayjs from 'dayjs';
+import { format, parseISO } from 'date-fns';
+import { zonedTimeToUtc } from 'date-fns-tz';
+
 import { useFormik } from 'formik';
 
 import { TextField, FormControl } from '@material-ui/core';
@@ -205,15 +207,24 @@ const PatientOverview = ({
                   <div style={{ height: 250, width: '100%' }}>
                     <DataGrid
                       disableSelectionOnClick
-                      rows={patient.questionnairesToFill.map((id, i) => {
-                        const title = questionnaireList.find(
-                          (q) => q.id === id
-                        ).title;
-                        return {
-                          id: i,
-                          title,
-                        };
-                      })}
+                      rows={patient.questionnairesToFill.map(
+                        ({ questionnaire, date }, i) => {
+                          const title = questionnaireList.find(
+                            (q) => q.id === questionnaire
+                          ).title;
+                          return {
+                            id: i,
+                            title,
+                            time: format(
+                              zonedTimeToUtc(
+                                parseISO(date),
+                                Intl.DateTimeFormat().resolvedOptions().timeZone
+                              ),
+                              'yyyy/MM/dd'
+                            ),
+                          };
+                        }
+                      )}
                       columns={[
                         {
                           field: 'title',
@@ -221,6 +232,11 @@ const PatientOverview = ({
                             'professional.patient.questionnaire'
                           )}`,
                           width: 200,
+                        },
+                        {
+                          field: 'time',
+                          headerName: `${t('professional.patient.dateSent')}`,
+                          width: 160,
                         },
                       ]}
                       pageSize={2}
@@ -249,7 +265,13 @@ const PatientOverview = ({
                           return {
                             id: _id,
                             title,
-                            time: dayjs(time).format('YYYY/MM/DD'),
+                            time: format(
+                              zonedTimeToUtc(
+                                parseISO(time),
+                                Intl.DateTimeFormat().resolvedOptions().timeZone
+                              ),
+                              'yyyy/MM/dd'
+                            ),
                           };
                         })
                         .reverse()}

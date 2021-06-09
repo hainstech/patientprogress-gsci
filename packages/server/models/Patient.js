@@ -122,8 +122,14 @@ var patientSchema = new mongoose.Schema({
   ],
   questionnairesToFill: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Questionnaire',
+      questionnaire: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Questionnaire',
+      },
+      date: {
+        type: Date,
+        required: true,
+      },
     },
   ],
 });

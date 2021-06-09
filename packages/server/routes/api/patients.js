@@ -29,7 +29,7 @@ router.get('/', admin, async (req, res) => {
 router.get('/me', patient, async (req, res) => {
   try {
     const patient = await Patient.findOne({ user: req.user.id }).populate(
-      'user professional questionnairesToFill'
+      'user professional questionnairesToFill.questionnaire'
     );
     patient.professional.patients = undefined;
     patient.professional.user = undefined;
@@ -167,7 +167,10 @@ router.put('/:id', professional, async (req, res) => {
 
     if (req.body.report) patient.reports.push(req.body.report);
     if (req.body.questionnaireToFill)
-      patient.questionnairesToFill.push(req.body.questionnaireToFill);
+      patient.questionnairesToFill.push({
+        questionnaire: req.body.questionnaireToFill,
+        date: new Date(),
+      });
 
     await patient.save();
 
