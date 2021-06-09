@@ -50,7 +50,6 @@ export default function Footer(props) {
             >
               PatientProgress
             </a>
-            , made for better medical research
           </span>
         </p>
       </div>
