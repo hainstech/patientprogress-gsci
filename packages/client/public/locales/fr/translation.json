@@ -79,7 +79,8 @@
       "pendingQuestionnaires": "Questionnaires envoyés en attente d'être remplis",
       "Male": "Homme",
       "Female": "Femme",
-      "Other": "Autre"
+      "Other": "Autre",
+      "dateSent": "Date d'envoi"
     }
   },
   "sidebar": {

@@ -235,8 +235,8 @@ const PatientOverview = ({
                         },
                         {
                           field: 'time',
-                          headerName: `${t('professional.patient.date')}`,
-                          width: 110,
+                          headerName: `${t('professional.patient.dateSent')}`,
+                          width: 160,
                         },
                       ]}
                       pageSize={2}

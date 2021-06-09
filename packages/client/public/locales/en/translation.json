@@ -79,7 +79,8 @@
       "pendingQuestionnaires": "Pending questionnaires to fill",
       "Male": "Male",
       "Female": "Female",
-      "Other": "Other"
+      "Other": "Other",
+      "dateSent": "Date sent"
     }
   },
   "sidebar": {
