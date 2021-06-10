@@ -51,12 +51,16 @@ function Questionnaire({
   getQuestionnaire,
   addQuestionnaire,
   getCurrentProfile,
-  questionnaire: { questionnaire },
   match,
   history,
 }) {
+  const [questionnaire, setQuestionnaire] = useState(null);
+
   useEffect(() => {
-    getQuestionnaire(match.params.id);
+    (async () => {
+      const questionnaire = await getQuestionnaire(match.params.id);
+      setQuestionnaire(questionnaire);
+    })();
   }, [getQuestionnaire, match.params.id]);
 
   const onSubmit = async (e) => {
@@ -103,16 +107,11 @@ function Questionnaire({
 
 Questionnaire.propTypes = {
   getQuestionnaire: PropTypes.func.isRequired,
-  questionnaire: PropTypes.object.isRequired,
   addQuestionnaire: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  questionnaire: state.questionnaire,
-});
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   getQuestionnaire,
   addQuestionnaire,
   getCurrentProfile,

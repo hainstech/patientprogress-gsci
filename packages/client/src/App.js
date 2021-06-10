@@ -14,6 +14,8 @@ import store from './store';
 // Style
 import './assets/css/material-dashboard-react.css?v=1.10.0';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }

@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 
-import { GET_QUESTIONNAIRE, QUESTIONNAIRE_ERROR } from './types';
-
 const URI =
   process.env.NODE_ENV === 'production' ? 'https://api.patientprogress.ca' : '';
 
@@ -10,19 +8,9 @@ const URI =
 export const getQuestionnaire = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`${URI}/api/questionnaires/${id}`);
-
-    dispatch({
-      type: GET_QUESTIONNAIRE,
-      payload: res.data,
-    });
+    return res.data;
   } catch (err) {
-    dispatch({
-      type: QUESTIONNAIRE_ERROR,
-      payload: {
-        msg: err.response.statusText,
-        status: err.response.status,
-      },
-    });
+    console.log(err);
   }
 };
 
