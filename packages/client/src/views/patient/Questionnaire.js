@@ -36,9 +36,10 @@ const nativeSelect = function (props) {
           id: props.label,
         }}
       >
-        <option aria-label='None' value='' />
-        {props.options.enumOptions.map(({ label, value }) => (
-          <option key={`${label}:${value}`} value={value}>
+        {!props.default && <option aria-label='None' value='' />}
+
+        {props.schema.enum.map((label) => (
+          <option key={`${label}`} value={label}>
             {label}
           </option>
         ))}
