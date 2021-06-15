@@ -110,7 +110,7 @@ const Questionnaire = ({
                 {Object.entries(flatten(questionnaire.answers)).map(
                   ([key, value]) => {
                     key = key.replace(/^"|"$/g, '');
-                    value = value.replace(/^"|"$/g, '');
+                    value = value;
                     return useId ? (
                       <p key={key}>
                         <strong>{key}:</strong> {value}
