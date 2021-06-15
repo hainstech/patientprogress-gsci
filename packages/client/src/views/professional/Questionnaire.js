@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import { withRouter } from 'react-router-dom';
+import flatten from 'flat';
+
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
@@ -105,25 +107,28 @@ const Questionnaire = ({
                   }
                   label={t('professional.patient.useID')}
                 />
-                {questionnaire.answers.map((answer) => {
-                  return useId ? (
-                    <p key={answer.questionId}>
-                      <strong>{answer.questionId}:</strong> {answer.answer}
-                    </p>
-                  ) : (
-                    <p key={answer.questionId}>
-                      <strong>
-                        {
-                          questionnaire.questionnaire.schema.properties[
-                            answer.questionId
-                          ].title
-                        }
-                        :
-                      </strong>{' '}
-                      {answer.answer}
-                    </p>
-                  );
-                })}
+                {Object.entries(flatten(questionnaire.answers)).map(
+                  ([key, value]) => {
+                    key = key.replace(/^"|"$/g, '');
+                    value = value.replace(/^"|"$/g, '');
+                    return useId ? (
+                      <p key={key}>
+                        <strong>{key}:</strong> {value}
+                      </p>
+                    ) : (
+                      <p key={key}>
+                        <strong>
+                          {
+                            questionnaire.questionnaire.schema.properties[key]
+                              .title
+                          }
+                          :
+                        </strong>{' '}
+                        {value}
+                      </p>
+                    );
+                  }
+                )}
               </CardBody>
               <CardFooter>
                 <Button onClick={() => history.goBack()} color='danger'>
