@@ -42,12 +42,10 @@ var patientSchema = new mongoose.Schema({
         type: Date,
         required: true,
       },
-      answers: [
-        {
-          questionId: String,
-          answer: String,
-        },
-      ],
+      answers: {
+        type: mongoose.Schema.Types.Mixed,
+        require: true,
+      },
       title: {
         type: String,
         required: true,

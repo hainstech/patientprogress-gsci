@@ -79,16 +79,10 @@ router.post('/:id', patient, async (req, res) => {
   try {
     const { title, data } = req.body;
 
-    let answers = [];
-
-    Object.entries(data).forEach(([key, value]) => {
-      answers.push({ questionId: key, answer: value.toString() });
-    });
-
     var completedQuestionnaire = {
       questionnaire: req.params.id,
       time: new Date(),
-      answers,
+      answers: data,
       title,
     };
 
