@@ -108,23 +108,61 @@ const Questionnaire = ({
                   label={t('professional.patient.useID')}
                 />
                 {Object.entries(flatten(questionnaire.answers)).map(
-                  ([key, value]) => {
-                    key = key.replace(/^"|"$/g, '');
-                    value = value;
+                  ([key, value], i) => {
+                    key = key.replace(/^"|"$/g, '').replace(/\.\d+/g, '');
+                    let nestedKey = key.split('.');
+                    if (nestedKey.length > 0) {
+                      nestedKey.splice(1, 0, 'properties');
+                    }
+                    let dependencyKey = [nestedKey[0], 'dependencies'];
+
+                    const schemaProperties =
+                      questionnaire.questionnaire.schema.properties[key];
+
+                    const nestedProperties = nestedKey.reduce(
+                      (p, c) => (p && p[c]) || null,
+                      questionnaire.questionnaire.schema.properties
+                    );
+
+                    let title;
+                    if (schemaProperties && schemaProperties.title !== '') {
+                      title = schemaProperties.title;
+                    } else if (
+                      nestedProperties &&
+                      nestedProperties.title !== ''
+                    ) {
+                      title = nestedProperties.title;
+                    } else {
+                      dependencyKey
+                        .reduce(
+                          (p, c) => (p && p[c]) || null,
+                          questionnaire.questionnaire.schema.properties
+                        )
+                        [
+                          Object.keys(
+                            dependencyKey.reduce(
+                              (p, c) => (p && p[c]) || null,
+                              questionnaire.questionnaire.schema.properties
+                            )
+                          )
+                        ]['oneOf'].forEach((item) => {
+                          if (
+                            item.properties[nestedKey[nestedKey.length - 1]]
+                          ) {
+                            title =
+                              item.properties[nestedKey[nestedKey.length - 1]]
+                                .title;
+                          }
+                        });
+                    }
+
                     return useId ? (
-                      <p key={key}>
+                      <p key={`${key}-${i}`}>
                         <strong>{key}:</strong> {value}
                       </p>
                     ) : (
-                      <p key={key}>
-                        <strong>
-                          {
-                            questionnaire.questionnaire.schema.properties[key]
-                              .title
-                          }
-                          :
-                        </strong>{' '}
-                        {value}
+                      <p key={`${key}-${i}`}>
+                        <strong>{title}:</strong> {value}
                       </p>
                     );
                   }
