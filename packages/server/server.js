@@ -9,6 +9,7 @@ const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
 const cors = require('cors');
 const morgan = require('morgan');
+const startBot = require('./telegramBot').startBot;
 
 const app = express();
 
@@ -65,3 +66,7 @@ app.listen(PORT, () =>
     `Server running in ${process.env.NODE_ENV} on port ${PORT}`.green.bold
   )
 );
+
+if (process.env.NODE_ENV === 'production') {
+  startBot();
+}
