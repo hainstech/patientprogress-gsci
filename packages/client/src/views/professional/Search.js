@@ -48,9 +48,11 @@ const Search = ({ profile: { profile, loading }, getCurrentProfile }) => {
       // Affiche les patients correspondants au query
       if (query.length > 0) {
         setResults(
-          //Format: [name, dob, Button]
           profile.patients
-            .filter(({ name }) => name.indexOf(query) !== -1)
+            .filter(
+              ({ name }) =>
+                name.toLowerCase().indexOf(query.toLowerCase()) !== -1
+            )
             .map(({ name, dob, _id }) => {
               return [
                 name,
