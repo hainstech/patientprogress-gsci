@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/hainsdominic/patientprogress/compare/v1.0.0...v1.0.1) (2021-06-16)
+
+
+### Features
+
+* **API:** Email Notification ([3eb5635](https://github.com/hainsdominic/patientprogress/commit/3eb563574d784eca8b7daf65fa7b5950436cf514))
+* **client:** Questionnaire Deletion ([030d949](https://github.com/hainsdominic/patientprogress/commit/030d94912f14b28546fa9e3e583025789dd900a6))
+
+
+
+
+
 # [1.0.0](https://github.com/hainsdominic/patientprogress/compare/v0.3.0...v1.0.0) (2021-06-16)
 
 
