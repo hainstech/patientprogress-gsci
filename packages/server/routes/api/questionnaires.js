@@ -88,12 +88,74 @@ router.post('/:id', patient, async (req, res) => {
 
     const patient = await Patient.findOne({ user: req.user.id });
 
-    patient.questionnaires.push(completedQuestionnaire);
-
     patient.questionnairesToFill.splice(
       patient.questionnairesToFill.indexOf(req.params.id),
       1
     );
+
+    if (title === 'Initial Intake Form') {
+      let questionnairesToSend = [];
+
+      let questionnaires = await Questionnaire.find();
+
+      let questionnaireList = questionnaires.map(({ _id, title, language }) => {
+        return { id: _id, title, language };
+      });
+
+      const getQuestionnaireId = (title) => {
+        const foundQ = questionnaireList.find(
+          (q) => q.title === title && q.language === patient.language
+        );
+
+        if (foundQ) {
+          return foundQ.id;
+        } else {
+          return questionnaireList.find(
+            (q) => q.title === title && q.language === 'en'
+          ).id;
+        }
+      };
+
+      switch (data.chiefComplaintRegion) {
+        case 'Cou':
+        case 'Neck pain':
+          questionnairesToSend.push(
+            getQuestionnaireId('Neck Disability Index')
+          );
+          break;
+        case 'Bas du dos':
+        case 'Low back pain':
+          questionnairesToSend.push(
+            getQuestionnaireId('Oswestry Disability Index'),
+            getQuestionnaireId('The Keele STarT Back Screening Tool')
+          );
+          break;
+        case 'Membre supérieur (épaule, coude ou poignet)':
+        case 'Upper extremity (shoulder, elbow or wrist)':
+          questionnairesToSend.push(getQuestionnaireId('QuickDASH'));
+          break;
+        case 'Membre inférieur (hanche,genou ou cheville)':
+        case 'Lower extremity (hip, knee or ankle)':
+          questionnairesToSend.push(
+            getQuestionnaireId('Lower Extremity Functional Scale (LEFS)')
+          );
+          break;
+        case 'Aucune de ces régions':
+        case 'Not in the options':
+          break;
+        default:
+          break;
+      }
+
+      questionnairesToSend.forEach((id) => {
+        patient.questionnairesToFill.push({
+          questionnaire: id,
+          date: new Date(),
+        });
+      });
+    }
+
+    patient.questionnaires.push(completedQuestionnaire);
 
     await patient.save();
 
