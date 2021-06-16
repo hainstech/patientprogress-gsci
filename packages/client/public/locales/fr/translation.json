@@ -80,7 +80,8 @@
       "Male": "Homme",
       "Female": "Femme",
       "Other": "Autre",
-      "dateSent": "Date d'envoi"
+      "dateSent": "Date d'envoi",
+      "remove": "Retirer"
     }
   },
   "sidebar": {

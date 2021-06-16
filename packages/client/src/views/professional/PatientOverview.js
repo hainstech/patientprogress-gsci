@@ -11,6 +11,7 @@ import { useFormik } from 'formik';
 
 import { TextField, FormControl } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import Spinner from '../../components/Spinner/Spinner';
 
@@ -26,6 +27,7 @@ import {
   getPatient,
   getQuestionnaireList,
   sendQuestionnaire,
+  removeQuestionnaire,
 } from '../../actions/professional';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -38,6 +40,7 @@ const PatientOverview = ({
   getPatient,
   getQuestionnaireList,
   sendQuestionnaire,
+  removeQuestionnaire,
 }) => {
   const classes = useStyles();
 
@@ -88,14 +91,13 @@ const PatientOverview = ({
         }
 
         sendQuestionnaire(patient._id, id);
-        getPatient(match.params.id);
       }
     },
   });
 
   const { t } = useTranslation();
 
-  const renderButton = (params) => {
+  const renderViewButton = (params) => {
     return (
       <Link
         to={`/professional/patients/${match.params.id}/questionnaires/${params.row.id}`}
@@ -105,26 +107,19 @@ const PatientOverview = ({
     );
   };
 
-  const columns = [
-    {
-      field: 'id',
-      headerName: `${t('professional.patient.answers')}`,
-      sortable: false,
-      width: 115,
-      disableClickEventBubbling: true,
-      renderCell: renderButton,
-    },
-    {
-      field: 'title',
-      headerName: `${t('professional.patient.questionnaire')}`,
-      width: 200,
-    },
-    {
-      field: 'time',
-      headerName: `${t('professional.patient.date')}`,
-      width: 110,
-    },
-  ];
+  const renderDeleteButton = (params) => {
+    return (
+      <Button
+        color='danger'
+        justIcon
+        onClick={() => {
+          removeQuestionnaire(match.params.id, params.row.questionnaire);
+        }}
+      >
+        <DeleteIcon />
+      </Button>
+    );
+  };
 
   return (
     <>
@@ -221,6 +216,7 @@ const PatientOverview = ({
                           ).title;
                           return {
                             id: i,
+                            questionnaire,
                             title,
                             time: format(
                               zonedTimeToUtc(
@@ -244,6 +240,14 @@ const PatientOverview = ({
                           field: 'time',
                           headerName: `${t('professional.patient.dateSent')}`,
                           width: 160,
+                        },
+                        {
+                          field: 'id',
+                          headerName: `${t('professional.patient.remove')}`,
+                          sortable: false,
+                          width: 110,
+                          disableClickEventBubbling: true,
+                          renderCell: renderDeleteButton,
                         },
                       ]}
                       pageSize={2}
@@ -282,7 +286,28 @@ const PatientOverview = ({
                           };
                         })
                         .reverse()}
-                      columns={columns}
+                      columns={[
+                        {
+                          field: 'id',
+                          headerName: `${t('professional.patient.answers')}`,
+                          sortable: false,
+                          width: 115,
+                          disableClickEventBubbling: true,
+                          renderCell: renderViewButton,
+                        },
+                        {
+                          field: 'title',
+                          headerName: `${t(
+                            'professional.patient.questionnaire'
+                          )}`,
+                          width: 200,
+                        },
+                        {
+                          field: 'time',
+                          headerName: `${t('professional.patient.date')}`,
+                          width: 110,
+                        },
+                      ]}
                       pageSize={5}
                     />
                   </div>
@@ -303,6 +328,7 @@ PatientOverview.propTypes = {
   professional: PropTypes.object.isRequired,
   getQuestionnaireList: PropTypes.func.isRequired,
   sendQuestionnaire: PropTypes.func.isRequired,
+  removeQuestionnaire: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -313,4 +339,5 @@ export default connect(mapStateToProps, {
   getPatient,
   getQuestionnaireList,
   sendQuestionnaire,
+  removeQuestionnaire,
 })(PatientOverview);

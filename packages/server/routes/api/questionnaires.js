@@ -89,7 +89,9 @@ router.post('/:id', patient, async (req, res) => {
     const patient = await Patient.findOne({ user: req.user.id });
 
     patient.questionnairesToFill.splice(
-      patient.questionnairesToFill.indexOf(req.params.id),
+      patient.questionnairesToFill
+        .map((q) => q.questionnaire)
+        .indexOf(req.params.id),
       1
     );
 

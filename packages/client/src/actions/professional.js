@@ -37,15 +37,24 @@ export const sendQuestionnaire =
         },
       };
 
-      await axios.put(
+      const res = await axios.put(
         `${URI}/api/patients/${id}`,
         { questionnaireToFill },
         config
       );
 
-      dispatch(setAlert(`Sent successfully`, 'success'));
+      dispatch({
+        type: GET_PATIENT,
+        payload: res.data,
+      });
     } catch (err) {
-      dispatch(setAlert(err.message, 'danger'));
+      dispatch({
+        type: PATIENT_ERROR,
+        payload: {
+          msg: err.response.statusText,
+          status: err.response.status,
+        },
+      });
     }
   };
 
@@ -76,5 +85,27 @@ export const getQuestionnaireList = () => async (dispatch) => {
     return res;
   } catch (err) {
     return [];
+  }
+};
+
+// Remove Questionnaire from the questionnaireToSend list
+export const removeQuestionnaire = (patient, id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(
+      `${URI}/api/patients/questionnairesToFill/${patient}/${id}`
+    );
+
+    dispatch({
+      type: GET_PATIENT,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PATIENT_ERROR,
+      payload: {
+        msg: err.response.statusText,
+        status: err.response.status,
+      },
+    });
   }
 };

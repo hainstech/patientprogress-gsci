@@ -223,4 +223,41 @@ router.put('/:id', professional, async (req, res) => {
   }
 });
 
+// @route delete api/patients/questionnairesToFill/:id
+// @desc Remove a questionnaire to fill
+// @access professional
+router.delete(
+  '/questionnairesToFill/:patient/:id',
+  professional,
+  async (req, res) => {
+    try {
+      const currentUser = await User.findById(req.user.id);
+      const patient = await Patient.findById(req.params.patient);
+
+      if (!patient) {
+        return res.status(404).json({ msg: 'Patient not found' });
+      }
+
+      if (
+        patient.professional.toString() != currentUser.professionalId.toString()
+      ) {
+        return res.status(403).json({ msg: 'Permission denied' });
+      }
+
+      patient.questionnairesToFill.splice(
+        patient.questionnairesToFill
+          .map((q) => q.questionnaire)
+          .indexOf(req.params.id),
+        1
+      );
+
+      await patient.save();
+
+      res.json(patient);
+    } catch (err) {
+      res.status(500).json({ msg: 'Server Error' });
+    }
+  }
+);
+
 module.exports = router;
