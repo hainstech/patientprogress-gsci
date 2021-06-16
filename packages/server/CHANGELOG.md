@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/hainsdominic/patientprogress/compare/v0.3.0...v1.0.0) (2021-06-16)
+
+
+### Features
+
+* **api:** initial intake push ([947f08e](https://github.com/hainsdominic/patientprogress/commit/947f08e805afcbeaf39f8c6aa7e833619c7b25e0))
+* **api:** questionnaires answers saving ([3bbb478](https://github.com/hainsdominic/patientprogress/commit/3bbb478f08567a5b993f34b49024bb2cb0a6dce8))
+* **client:** questionnaire to fill timed ([8568cf8](https://github.com/hainsdominic/patientprogress/commit/8568cf860b733223dc9da188802c6a1be2564902))
+
+
+
+
+
 # [0.3.0](https://github.com/hainsdominic/patientprogress/compare/v0.2.0...v0.3.0) (2021-06-08)
 
 

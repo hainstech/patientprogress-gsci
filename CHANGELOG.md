@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/hainsdominic/patientprogress/compare/v0.3.0...v1.0.0) (2021-06-16)
+
+
+### Bug Fixes
+
+* **client:** answers visualization for professional ([7965ab1](https://github.com/hainsdominic/patientprogress/commit/7965ab1e7b216e6c360d2af9c56391a9195540e4))
+* **client:** fixed questionnaire affichage ([79f6ee5](https://github.com/hainsdominic/patientprogress/commit/79f6ee50ce91ec3d5d3bc99a01ba8569c1bf3676))
+* **client:** nativeSelect value ([441d4c1](https://github.com/hainsdominic/patientprogress/commit/441d4c150388c67ee97fd48efc8cddc5b7977e06))
+* **client:** professional questionnaire visualization ([ac4d83f](https://github.com/hainsdominic/patientprogress/commit/ac4d83f992c083e571ea1f17c87e2892128b44ac))
+* **client:** questionnaire answers ([1b11ff1](https://github.com/hainsdominic/patientprogress/commit/1b11ff18c4e91463c11ccd02a20e2ba9b39662fa))
+* **client:** removed bootstrap ([9f85b94](https://github.com/hainsdominic/patientprogress/commit/9f85b94aecf59d4a7d8c1c8d55ea992ee00e0cb5))
+* **client:** removed strict mode ([073fa7c](https://github.com/hainsdominic/patientprogress/commit/073fa7cbb38d128c576595a3e5a3cf3cc01594d2))
+* **footer:** added footer back ([81a424c](https://github.com/hainsdominic/patientprogress/commit/81a424c8e063d4053ffccf9ec91c986c6ea3f671))
+* **professional:** questionnaire sending ([0eb7742](https://github.com/hainsdominic/patientprogress/commit/0eb7742404f60849d4ce66c57c3bed557e98ca04))
+* **rsjf:** nativeSelect default ([a49a8d6](https://github.com/hainsdominic/patientprogress/commit/a49a8d676fc33612e24a3f9e8b6641d45f220f83))
+
+
+### Features
+
+* **admin:** questionnaire builder ([37e8064](https://github.com/hainsdominic/patientprogress/commit/37e8064a5d93aa7c489fc51b52883430ce91a55b))
+* **api:** initial intake push ([947f08e](https://github.com/hainsdominic/patientprogress/commit/947f08e805afcbeaf39f8c6aa7e833619c7b25e0))
+* **api:** questionnaires answers saving ([3bbb478](https://github.com/hainsdominic/patientprogress/commit/3bbb478f08567a5b993f34b49024bb2cb0a6dce8))
+* **client:** questionnaire to fill timed ([8568cf8](https://github.com/hainsdominic/patientprogress/commit/8568cf860b733223dc9da188802c6a1be2564902))
+* **patient:** translation for questionnaireList ([9fe45bb](https://github.com/hainsdominic/patientprogress/commit/9fe45bb3eafb17d3a863eb87ad797e9502cf20ca))
+* **professional:** date sent translation ([68794e5](https://github.com/hainsdominic/patientprogress/commit/68794e579c1e23bdf78ef95f57b0d44c8724805b))
+* **rjsf:** custom nativeSelect widget ([095b23c](https://github.com/hainsdominic/patientprogress/commit/095b23cfaccd6f40630d48296dad651d3b2dfee9))
+
+
+
+
+
 # [0.3.0](https://github.com/hainsdominic/patientprogress/compare/v0.2.0...v0.3.0) (2021-06-08)
 
 
