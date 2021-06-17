@@ -13,6 +13,8 @@ const startBot = require('./telegramBot').startBot;
 
 const app = express();
 
+app.use(require('express-status-monitor')());
+
 // Connect database
 connectDB();
 
