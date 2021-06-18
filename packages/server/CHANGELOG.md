@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/hainsdominic/patientprogress/compare/v1.0.1...v1.1.0) (2021-06-18)
+
+
+### Features
+
+* **API:** status route ([76ab0e3](https://github.com/hainsdominic/patientprogress/commit/76ab0e32b914de6d7a4f7f33e206f340f3f0b54d))
+* **API:** Telegram bot ([4bb57d0](https://github.com/hainsdominic/patientprogress/commit/4bb57d0533fb89791600b31f3d194a3b3fc9429d))
+
+
+
+
+
 ## [1.0.1](https://github.com/hainsdominic/patientprogress/compare/v1.0.0...v1.0.1) (2021-06-16)
 
 

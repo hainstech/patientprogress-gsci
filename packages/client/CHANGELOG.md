@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/hainsdominic/patientprogress/compare/v1.0.1...v1.1.0) (2021-06-18)
+
+
+### Bug Fixes
+
+* **client:** Changed style of questionnaires ([cd886be](https://github.com/hainsdominic/patientprogress/commit/cd886be654b3633520aeb83a840e0411f6cdcec7))
+* **client:** Professional search ([ff593c1](https://github.com/hainsdominic/patientprogress/commit/ff593c1f152c93b3bdc4ee4316b4e8e767c36cdd))
+
+
+### Features
+
+* **client:** Questionnaire PDFs ([727b8c1](https://github.com/hainsdominic/patientprogress/commit/727b8c1596ab99f01d67f50af101594375cfdf29))
+
+
+
+
+
 ## [1.0.1](https://github.com/hainsdominic/patientprogress/compare/v1.0.0...v1.0.1) (2021-06-16)
 
 
