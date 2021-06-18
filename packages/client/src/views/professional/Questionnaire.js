@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import { withRouter } from 'react-router-dom';
 import flatten from 'flat';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import PDF from './PDF';
 
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -38,6 +40,8 @@ const Questionnaire = ({
   const [questionnaire, setQuestionnaire] = useState({});
 
   const [useId, setUseId] = useState(true);
+
+  const answersData = [];
 
   const getQuestionnaire = useCallback(
     (newPatient) => {
@@ -156,6 +160,8 @@ const Questionnaire = ({
                         });
                     }
 
+                    answersData.push({ title, value });
+
                     return useId ? (
                       <p key={`${key}-${i}`}>
                         <strong>{key}:</strong> {value}
@@ -172,6 +178,18 @@ const Questionnaire = ({
                 <Button onClick={() => history.goBack()} color='danger'>
                   {t('professional.patient.back')}
                 </Button>
+                <PDFDownloadLink
+                  document={
+                    <PDF
+                      questionnaire={questionnaire}
+                      patient={patient}
+                      answers={answersData}
+                    />
+                  }
+                  fileName={`${questionnaire.title}.pdf`}
+                >
+                  <Button color='info'>Export to PDF</Button>
+                </PDFDownloadLink>
               </CardFooter>
             </Card>
           </GridItem>
