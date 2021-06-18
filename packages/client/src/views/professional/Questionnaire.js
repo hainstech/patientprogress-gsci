@@ -160,7 +160,11 @@ const Questionnaire = ({
                         });
                     }
 
-                    answersData.push({ title, value });
+                    if (useId) {
+                      answersData.push({ title: key, value });
+                    } else {
+                      answersData.push({ title, value });
+                    }
 
                     return useId ? (
                       <p key={`${key}-${i}`}>

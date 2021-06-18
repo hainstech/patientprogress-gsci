@@ -16,9 +16,11 @@ const styles = StyleSheet.create({
     margin: 10,
     flexGrow: 1,
   },
+  answersContainer: {
+    margin: 10,
+  },
   answer: {
     fontSize: 12,
-    marginLeft: 10,
     marginBottom: 4,
   },
 });
@@ -39,7 +41,7 @@ const PDF = ({ questionnaire, patient, answers }) => {
             questionnaire.time
           ).format('YYYY/MM/DD')}`}</Text>
         </View>
-        <View>
+        <View style={styles.answersContainer}>
           {answers.map(({ title, value }, i) => (
             <Text style={styles.answer}>{`${title}: ${value}`}</Text>
           ))}
