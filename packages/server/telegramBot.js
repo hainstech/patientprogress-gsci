@@ -1,4 +1,4 @@
-const request = require('request');
+const got = require('got');
 var CronJob = require('cron').CronJob;
 const Patient = require('./models/Patient');
 
@@ -13,7 +13,7 @@ module.exports = {
           const patientCount = await Patient.countDocuments();
           const professionalCount = await Professional.countDocuments();
           const Message = `API running in ${process.env.NODE_ENV} ✅ \n${patientCount} patients 👦 \n${professionalCount} professionals 👨‍⚕️`;
-          request(
+          got.post(
             encodeURI(
               `https://api.telegram.org/bot${TelegramAPIKey}/sendMessage?***REMOVED***&text=${Message}`
             )

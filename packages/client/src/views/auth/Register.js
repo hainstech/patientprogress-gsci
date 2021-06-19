@@ -5,6 +5,7 @@ import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import {
   FormControl,
@@ -43,6 +44,8 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
   const classes = useStyles();
   const inputClasses = useInputStyles();
 
+  const recaptchaRef = React.createRef();
+
   const { t } = useTranslation();
 
   const formik = useFormik({
@@ -71,6 +74,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
       if (password !== password2) {
         setAlert(t('register.passwordError'), 'danger');
       } else {
+        const recaptchaValue = recaptchaRef.current.getValue();
         register({
           name: `${firstName} ${lastName}`,
           language,
@@ -80,6 +84,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
           password,
           research,
           professional: match.params.id,
+          recaptchaValue,
         });
       }
     },
@@ -306,6 +311,14 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                     />
                   </GridItem>
                 </GridContainer>
+                <GridItem xs={12}>
+                  <Box mt={3}>
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      sitekey='6LcFZ0EbAAAAAO3o623ERVuLe5mb17Oj_UT9LNG4'
+                    />
+                  </Box>
+                </GridItem>
               </CardBody>
               <CardFooter>
                 <Button color='danger' type='submit'>

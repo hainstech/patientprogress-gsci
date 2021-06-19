@@ -37,7 +37,17 @@ export const loadUser = () => async (dispatch) => {
 
 // Register User
 export const register =
-  ({ name, language, gender, dob, email, password, research, professional }) =>
+  ({
+    name,
+    language,
+    gender,
+    dob,
+    email,
+    password,
+    research,
+    professional,
+    recaptchaValue,
+  }) =>
   async (dispatch) => {
     const config = {
       headers: {
@@ -54,6 +64,7 @@ export const register =
       password,
       research,
       professional,
+      recaptchaValue,
     });
 
     try {
@@ -78,14 +89,14 @@ export const register =
   };
 
 // Login User
-export const login = (email, password) => async (dispatch) => {
+export const login = (email, password, recaptchaValue) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  const body = JSON.stringify({ email, password });
+  const body = JSON.stringify({ email, password, recaptchaValue });
 
   try {
     const res = await axios.post(`${URI}/api/auth`, body, config);

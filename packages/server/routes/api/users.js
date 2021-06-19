@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
+const got = require('got');
 
 const User = require('../../models/User');
 const Professional = require('../../models/Professional');
@@ -47,9 +48,27 @@ router.post(
       language,
       research,
       professional,
+      recaptchaValue,
     } = req.body;
 
     try {
+      if (!recaptchaValue) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Please complete reCaptcha' }] });
+      }
+
+      const { body } = await got.post(
+        `https://www.google.com/recaptcha/api/siteverify?secret=${config.get(
+          'recaptchaSecret'
+        )}&response=${recaptchaValue}`,
+        { responseType: 'json' }
+      );
+
+      if (!body.success) {
+        return res.status(400).json({ errors: [{ msg: 'Invalid reCaptcha' }] });
+      }
+
       let professionalFound = await Professional.findById(professional);
 
       if (!professionalFound) {
@@ -116,9 +135,12 @@ router.post(
       );
     } catch (err) {
       if (err.kind == 'ObjectId') {
-        return res.status(404).json({ msg: 'Invalid professional ID' });
+        return res
+          .status(404)
+          .json({ errors: [{ msg: 'Invalid professional ID' }] });
       }
       res.status(500).send('Server error');
+      console.log(err.message);
     }
   }
 );

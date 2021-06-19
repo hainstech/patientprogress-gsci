@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
 import { useTranslation } from 'react-i18next';
-import { FormControl, InputLabel, Input } from '@material-ui/core';
+import { FormControl, InputLabel, Input, Box } from '@material-ui/core';
 import classNames from 'classnames';
 import { useFormik } from 'formik';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem.js';
@@ -27,6 +28,8 @@ const Login = ({ login, isAuthenticated, type }) => {
   const classes = useStyles();
   const inputClasses = useInputStyles();
 
+  const recaptchaRef = React.createRef();
+
   const { t } = useTranslation();
 
   const formik = useFormik({
@@ -35,7 +38,8 @@ const Login = ({ login, isAuthenticated, type }) => {
       password: '',
     },
     onSubmit: ({ email, password }) => {
-      login(email, password);
+      const recaptchaValue = recaptchaRef.current.getValue();
+      login(email, password, recaptchaValue);
     },
   });
 
@@ -52,6 +56,7 @@ const Login = ({ login, isAuthenticated, type }) => {
         return <Redirect to={`/${type}/dashboard`} />;
     }
   }
+
   return (
     <GridContainer justify='center'>
       <GridItem xs={12} md={6}>
@@ -111,6 +116,14 @@ const Login = ({ login, isAuthenticated, type }) => {
                       onChange={formik.handleChange}
                     />
                   </FormControl>
+                </GridItem>
+                <GridItem xs={12}>
+                  <Box mt={3}>
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      sitekey='6LcFZ0EbAAAAAO3o623ERVuLe5mb17Oj_UT9LNG4'
+                    />
+                  </Box>
                 </GridItem>
               </GridContainer>
             </CardBody>

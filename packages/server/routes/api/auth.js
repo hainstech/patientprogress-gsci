@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
+const got = require('got');
 
 const User = require('../../models/User');
 
@@ -36,9 +37,26 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body;
+    const { email, password, recaptchaValue } = req.body;
 
     try {
+      if (!recaptchaValue) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Please complete reCaptcha' }] });
+      }
+
+      const { body } = await got.post(
+        `https://www.google.com/recaptcha/api/siteverify?secret=${config.get(
+          'recaptchaSecret'
+        )}&response=${recaptchaValue}`,
+        { responseType: 'json' }
+      );
+
+      if (!body.success) {
+        return res.status(400).json({ errors: [{ msg: 'Invalid reCaptcha' }] });
+      }
+
       let user = await User.findOne({ email });
 
       if (!user) {
