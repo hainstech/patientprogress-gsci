@@ -160,6 +160,9 @@ const Questionnaire = ({
                         });
                     }
 
+                    // Removes double :: because its ugly
+                    title = title.replace(':', '');
+
                     if (useId) {
                       answersData.push({ title: key, value });
                     } else {

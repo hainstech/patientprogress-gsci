@@ -43,7 +43,7 @@ const PDF = ({ questionnaire, patient, answers }) => {
         </View>
         <View style={styles.answersContainer}>
           {answers.map(({ title, value }, i) => (
-            <Text style={styles.answer}>{`${title}: ${value}`}</Text>
+            <Text key={i} style={styles.answer}>{`${title}: ${value}`}</Text>
           ))}
         </View>
       </Page>
