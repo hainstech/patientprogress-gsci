@@ -81,7 +81,9 @@
       "Female": "Femme",
       "Other": "Autre",
       "dateSent": "Date d'envoi",
-      "remove": "Retirer"
+      "remove": "Retirer",
+      "none": "Aucun",
+      "export": "Exporter au format PDF"
     }
   },
   "sidebar": {

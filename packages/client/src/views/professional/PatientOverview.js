@@ -254,7 +254,9 @@ const PatientOverview = ({
                     />
                   </div>
                 ) : (
-                  <p style={{ textAlign: 'center' }}>None</p>
+                  <p style={{ textAlign: 'center' }}>
+                    {t('professional.patient.none')}
+                  </p>
                 )}
               </CardBody>
             </Card>
@@ -312,7 +314,9 @@ const PatientOverview = ({
                     />
                   </div>
                 ) : (
-                  <p style={{ textAlign: 'center' }}>None</p>
+                  <p style={{ textAlign: 'center' }}>
+                    {t('professional.patient.none')}
+                  </p>
                 )}
               </CardBody>
             </Card>

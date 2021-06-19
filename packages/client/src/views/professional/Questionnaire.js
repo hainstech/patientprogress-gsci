@@ -192,7 +192,9 @@ const Questionnaire = ({
                   }
                   fileName={`${questionnaire.title}.pdf`}
                 >
-                  <Button color='info'>Export to PDF</Button>
+                  <Button color='info'>
+                    {t('professional.patient.export')}
+                  </Button>
                 </PDFDownloadLink>
               </CardFooter>
             </Card>
