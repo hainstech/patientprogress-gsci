@@ -110,6 +110,10 @@
     "password": "Mot de passe",
     "passwordConfirmation": "Confirmez votre mot de passe",
     "consent": "Je consent a cela",
-    "submit": "Soumettre"
+    "submit": "Soumettre",
+    "male": "Homme",
+    "female": "Femme",
+    "other": "Autre",
+    "genderOther": "Spécifiez votre genre"
   }
 }

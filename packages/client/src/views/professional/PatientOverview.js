@@ -154,7 +154,9 @@ const PatientOverview = ({
 
                   <GridItem xs={12} xl={4}>
                     {t('professional.patient.gender')}:{' '}
-                    {t(`professional.patient.${patient.gender}`)}
+                    {patient.gender === 'Male' || patient.gender === 'Female'
+                      ? t(`professional.patient.${patient.gender}`)
+                      : patient.gender}
                   </GridItem>
                 </GridContainer>
               </CardBody>

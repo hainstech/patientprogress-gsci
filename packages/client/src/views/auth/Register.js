@@ -54,6 +54,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
       lastName: '',
       language: '',
       gender: '',
+      genderOther: '',
       dob: null,
       email: '',
       password: '',
@@ -65,6 +66,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
       lastName,
       language,
       gender,
+      genderOther,
       dob,
       email,
       password,
@@ -78,7 +80,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
         register({
           name: `${firstName} ${lastName}`,
           language,
-          gender,
+          gender: gender === 'Other' ? genderOther : gender,
           dob,
           email,
           password,
@@ -201,11 +203,41 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                         }}
                       >
                         <option value='' defaultValue disabled></option>
-                        <option value='Male'>Homme/Male</option>
-                        <option value='Female'>Femme/Female</option>
+                        <option value='Male'>{t('register.male')}</option>
+                        <option value='Female'>{t('register.female')}</option>
+                        <option value='Other'>{t('register.other')}</option>
                       </NativeSelect>
                     </FormControl>
                   </GridItem>
+                  {formik.values.gender === 'Other' && (
+                    <GridItem xs={12}>
+                      <FormControl
+                        fullWidth
+                        className={inputClasses.formControl}
+                      >
+                        <InputLabel
+                          className={inputClasses.labelRoot}
+                          htmlFor='genderOther'
+                        >
+                          {t('register.genderOther')}
+                        </InputLabel>
+
+                        <Input
+                          classes={{
+                            disabled: inputClasses.disabled,
+                            underline: classNames(
+                              inputClasses.underlineError,
+                              inputClasses.underline
+                            ),
+                          }}
+                          type='text'
+                          id={'genderOther'}
+                          value={formik.values.genderOther}
+                          onChange={formik.handleChange}
+                        />
+                      </FormControl>
+                    </GridItem>
+                  )}
                   <GridItem xs={12} xl={6}>
                     <Box className={inputClasses.formControl}>
                       <MuiPickersUtilsProvider utils={DateFnsUtils}>
