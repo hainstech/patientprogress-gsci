@@ -27,6 +27,7 @@ const nativeSelect = function (props) {
 
   return (
     <>
+      {/* Add shrink below */}
       <InputLabel htmlFor={props.label}>{props.label}</InputLabel>
       <NativeSelect
         value={props.value}
