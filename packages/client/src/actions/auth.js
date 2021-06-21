@@ -120,6 +120,29 @@ export const login = (email, password, recaptchaValue) => async (dispatch) => {
   }
 };
 
+// Send Password reset email
+export const sendForgotEmail = (email, recaptchaValue) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const body = JSON.stringify({ email, recaptchaValue });
+
+  try {
+    await axios.post(`${URI}/api/auth/forgot`, body, config);
+
+    dispatch(setAlert('Sent', 'success'));
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+  }
+};
+
 // Logout / Clear Profile
 export const logout = () => (dispatch) => {
   dispatch({

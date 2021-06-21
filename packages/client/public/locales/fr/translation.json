@@ -96,7 +96,8 @@
     "logout": "Déconnexion",
     "about": "À propos",
     "login": "Connexion",
-    "builder": "Constructeur"
+    "builder": "Constructeur",
+    "forgot": "Mot de passe oublié"
   },
   "register": {
     "passwordError": "Les mots de passe ne correspondent pas",

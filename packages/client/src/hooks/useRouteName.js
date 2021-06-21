@@ -10,7 +10,14 @@ export const useRouteName = (type) => {
   let routes;
   switch (type) {
     case 'guest':
-      routes = guestLinks;
+      routes = [
+        ...guestLinks,
+        {
+          path: '/forgot',
+          name: 'forgot',
+          layout: '',
+        },
+      ];
       break;
     case 'professional':
       routes = professionalLinks;

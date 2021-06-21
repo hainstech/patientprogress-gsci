@@ -96,4 +96,50 @@ router.post(
   }
 );
 
+// @route POST api/auth/forgot
+// @desc Send password reset email to provided email address
+// @access Public
+router.post(
+  '/forgot',
+  [check('email', 'Please include a valid email').isEmail()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { email, recaptchaValue } = req.body;
+
+    try {
+      if (!recaptchaValue) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Please complete reCaptcha' }] });
+      }
+
+      const { body } = await got.post(
+        `https://www.google.com/recaptcha/api/siteverify?secret=${config.get(
+          'recaptchaSecret'
+        )}&response=${recaptchaValue}`,
+        { responseType: 'json' }
+      );
+
+      if (!body.success) {
+        return res.status(400).json({ errors: [{ msg: 'Invalid reCaptcha' }] });
+      }
+
+      let user = await User.findOne({ email });
+
+      if (!user) {
+        return res.status(200).send('OK');
+      }
+
+      console.log(user.password);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server error');
+    }
+  }
+);
+
 module.exports = router;
