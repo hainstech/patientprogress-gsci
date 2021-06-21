@@ -29,7 +29,6 @@ export default function Header(props) {
     [' ' + classes[color]]: color,
   });
 
-  console.log(routeName);
   return (
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>

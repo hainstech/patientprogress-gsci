@@ -133,7 +133,12 @@ export const sendForgotEmail = (email, recaptchaValue) => async (dispatch) => {
   try {
     await axios.post(`${URI}/api/auth/forgot`, body, config);
 
-    dispatch(setAlert('Sent', 'success'));
+    dispatch(
+      setAlert(
+        'A password-reset link has been sent to your email address',
+        'success'
+      )
+    );
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -142,6 +147,39 @@ export const sendForgotEmail = (email, recaptchaValue) => async (dispatch) => {
     }
   }
 };
+
+// Reset password
+export const setNewPassword =
+  (password, id, token, recaptchaValue, history) => async (dispatch) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const body = JSON.stringify({
+      password,
+      id,
+      token,
+      recaptchaValue,
+    });
+
+    try {
+      await axios.post(`${URI}/api/auth/passwordreset`, body, config);
+
+      dispatch(
+        setAlert('Your password has been reset successfully', 'success')
+      );
+
+      history.push(`/login`);
+    } catch (err) {
+      const errors = err.response.data.errors;
+
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+      }
+    }
+  };
 
 // Logout / Clear Profile
 export const logout = () => (dispatch) => {
