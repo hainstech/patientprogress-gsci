@@ -23,6 +23,8 @@ import AdminRoute from './AdminRoute';
 import About from '../views/About';
 import Login from '../views/auth/Login';
 import Register from '../views/auth/Register';
+import Forgot from '../views/auth/Forgot';
+import NewPassword from '../views/auth/NewPassword';
 
 import Patient from './Patient';
 import Professional from './Professional';
@@ -112,6 +114,8 @@ const MainRouter = ({
               <Route exact path='/' component={About} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/register/:id' component={Register} />
+              <Route exact path='/forgot' component={Forgot} />
+              <Route exact path='/forgot/:id/:token' component={NewPassword} />
               {/* User-type routes */}
               <PatientRoute path='/patient' component={Patient} />
               <ProfessionalRoute

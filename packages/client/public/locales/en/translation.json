@@ -96,7 +96,8 @@
     "logout": "Sign out",
     "about": "About This Application",
     "login": "Sign In",
-    "builder": "Builder"
+    "builder": "Builder",
+    "forgot": "Forgot Password"
   },
   "register": {
     "passwordError": "Passwords do not match",

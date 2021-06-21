@@ -1,9 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { login } from '../../actions/auth';
+import { sendForgotEmail } from '../../actions/auth';
 import { useTranslation } from 'react-i18next';
 import { FormControl, InputLabel, Input, Box } from '@material-ui/core';
 import classNames from 'classnames';
@@ -25,7 +24,7 @@ import inputStyles from '../../assets/jss/material-dashboard-react/components/cu
 const useStyles = makeStyles(styles);
 const useInputStyles = makeStyles(inputStyles);
 
-const Login = ({ login, isAuthenticated, type }) => {
+const Forgot = ({ sendForgotEmail, isAuthenticated, type }) => {
   const classes = useStyles();
   const inputClasses = useInputStyles();
 
@@ -36,11 +35,10 @@ const Login = ({ login, isAuthenticated, type }) => {
   const formik = useFormik({
     initialValues: {
       email: '',
-      password: '',
     },
-    onSubmit: ({ email, password }) => {
+    onSubmit: ({ email }) => {
       const recaptchaValue = recaptchaRef.current.getValue();
-      login(email, password, recaptchaValue);
+      sendForgotEmail(email, recaptchaValue);
     },
   });
 
@@ -64,7 +62,7 @@ const Login = ({ login, isAuthenticated, type }) => {
         <Alert />
         <Card>
           <CardHeader color='danger'>
-            <h4 className={classes.cardTitleWhite}>{t('guest.login.title')}</h4>
+            <h4 className={classes.cardTitleWhite}>Password reset</h4>
           </CardHeader>
           <form onSubmit={formik.handleSubmit}>
             <CardBody>
@@ -93,31 +91,7 @@ const Login = ({ login, isAuthenticated, type }) => {
                     />
                   </FormControl>
                 </GridItem>
-                <GridItem xs={12}>
-                  <FormControl fullWidth className={inputClasses.formControl}>
-                    <InputLabel
-                      className={inputClasses.labelRoot}
-                      htmlFor='password'
-                    >
-                      {t('guest.login.password')}
-                    </InputLabel>
 
-                    <Input
-                      classes={{
-                        disabled: inputClasses.disabled,
-                        underline: classNames(
-                          inputClasses.underlineError,
-                          inputClasses.underline
-                        ),
-                      }}
-                      autoComplete='true'
-                      type='password'
-                      id={'password'}
-                      value={formik.values.password}
-                      onChange={formik.handleChange}
-                    />
-                  </FormControl>
-                </GridItem>
                 <GridItem xs={12}>
                   <Box mt={3}>
                     <ReCAPTCHA
@@ -130,9 +104,8 @@ const Login = ({ login, isAuthenticated, type }) => {
             </CardBody>
             <CardFooter>
               <Button color='success' type='submit'>
-                {t('guest.login.submit')}
+                {t('register.submit')}
               </Button>
-              <Link to='/forgot'>Forgot password?</Link>
             </CardFooter>
           </form>
         </Card>
@@ -141,8 +114,8 @@ const Login = ({ login, isAuthenticated, type }) => {
   );
 };
 
-Login.propTypes = {
-  login: PropTypes.func.isRequired,
+Forgot.propTypes = {
+  sendForgotEmail: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
   type: PropTypes.string,
 };
@@ -152,4 +125,4 @@ const mapStateToProps = (state) => ({
   type: state.auth.type,
 });
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { sendForgotEmail })(Forgot);
