@@ -50,18 +50,16 @@ const QuestionnaireList = ({
               </CardHeader>
               <CardBody align='center'>
                 {profile.questionnairesToFill.length > 0 ? (
-                  profile.questionnairesToFill.map(
-                    ({ questionnaire }, index) => (
-                      <p key={index}>
-                        <Button
-                          color='success'
-                          onClick={() => goToQuestionnaire(questionnaire._id)}
-                        >
-                          {questionnaire.title}
-                        </Button>
-                      </p>
-                    )
-                  )
+                  profile.questionnairesToFill.map(({ questionnaire, _id }) => (
+                    <p key={_id}>
+                      <Button
+                        color='success'
+                        onClick={() => goToQuestionnaire(questionnaire._id)}
+                      >
+                        {questionnaire.title}
+                      </Button>
+                    </p>
+                  ))
                 ) : (
                   <p>{t('patient.questionnaireList.empty')}</p>
                 )}

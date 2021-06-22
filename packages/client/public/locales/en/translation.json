@@ -83,7 +83,8 @@
       "dateSent": "Date sent",
       "remove": "Remove",
       "none": "None",
-      "export": "Export to PDF"
+      "export": "Export to PDF",
+      "score": "Score"
     }
   },
   "sidebar": {
@@ -116,5 +117,10 @@
     "female": "Female",
     "other": "Other",
     "genderOther": "Specify your gender"
+  },
+  "forgot": {
+    "newPassword": "Enter your new password",
+    "reset": "Enter your email associated with your account",
+    "directions": "A link will be sent to your email"
   }
 }

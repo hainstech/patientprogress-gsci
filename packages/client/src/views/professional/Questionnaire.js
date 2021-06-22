@@ -111,6 +111,7 @@ const Questionnaire = ({
                   }
                   label={t('professional.patient.useID')}
                 />
+                <h3>{t('professional.patient.answers')}:</h3>
                 {Object.entries(flatten(questionnaire.answers)).map(
                   ([key, value], i) => {
                     key = key.replace(/^"|"$/g, '').replace(/\.\d+/g, '');
@@ -179,6 +180,16 @@ const Questionnaire = ({
                       </p>
                     );
                   }
+                )}
+                {questionnaire.score.length > 0 && (
+                  <>
+                    <h3>{t('professional.patient.score')}:</h3>
+                    {questionnaire.score.map(({ title, value }) => (
+                      <p key={title}>
+                        <strong>{title}:</strong> {value}
+                      </p>
+                    ))}
+                  </>
                 )}
               </CardBody>
               <CardFooter>

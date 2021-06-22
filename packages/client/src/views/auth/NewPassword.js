@@ -82,7 +82,9 @@ const NewPassword = ({
         <Alert />
         <Card>
           <CardHeader color='danger'>
-            <h4 className={classes.cardTitleWhite}>New Password</h4>
+            <h4 className={classes.cardTitleWhite}>
+              {t('forgot.newPassword')}
+            </h4>
           </CardHeader>
           <form onSubmit={formik.handleSubmit}>
             <CardBody>

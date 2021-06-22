@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const scoreCalculator = require('../../scoreCalculator').scoreCalculator;
+
 const Questionnaire = require('../../models/Questionnaire');
 const Patient = require('../../models/Patient');
 
@@ -84,6 +86,7 @@ router.post('/:id', patient, async (req, res) => {
       time: new Date(),
       answers: data,
       title,
+      score: scoreCalculator(title, data),
     };
 
     const patient = await Patient.findOne({ user: req.user.id });
