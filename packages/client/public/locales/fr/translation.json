@@ -122,5 +122,11 @@
     "newPassword": "Entrez un nouveau mot de passe",
     "reset": "Entrez l'addresse courriel liée à votre compte",
     "directions": "Un lien vous sera envoyé via courriel"
+  },
+  "pdf": {
+    "generated": "Généré par PatientProgress",
+    "redflags": "Drapeaux Rouges",
+    "commorbidities": "Commorbidités",
+    "familyHistory": "Antécédants Familiaux"
   }
 }

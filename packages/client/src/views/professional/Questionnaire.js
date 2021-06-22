@@ -164,10 +164,13 @@ const Questionnaire = ({
                     // Removes double :: because its ugly
                     title = title.replace(':', '');
 
-                    if (useId) {
-                      answersData.push({ title: key, value });
+                    if (
+                      useId &&
+                      !(questionnaire.title === 'Initial Intake Form')
+                    ) {
+                      answersData.push({ key, title: key, value });
                     } else {
-                      answersData.push({ title, value });
+                      answersData.push({ key, title, value });
                     }
 
                     return useId ? (
