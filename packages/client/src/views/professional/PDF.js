@@ -72,7 +72,7 @@ const checkOther = (answers, answer) => {
 
 const getMultipleAnswer = (answers, key) => {
   const answersArray = answers.filter((e) => e.key === key);
-  if (answersArray) {
+  if (answersArray.length > 0) {
     const valueArray = answersArray.map(({ value }) => value);
     return `${answersArray[0].title}: ${valueArray.toString()}`;
   }
@@ -502,12 +502,11 @@ const PDF = ({ questionnaire, patient, answers }) => {
                 </Text>
               )}
             </View>
+
             <View wrap={false} style={styles.answerRow}>
-              {checkAffirmative(answers, 'surgerySelector.surgery') && (
-                <Text style={styles.answer}>
-                  {getAnswer(answers, 'surgerySelector.surgery').text}
-                </Text>
-              )}
+              <Text style={styles.answer}>
+                {getAnswer(answers, 'surgerySelector.surgery').text}
+              </Text>
             </View>
             <View wrap={false} style={styles.answerRow}>
               {checkAffirmative(answers, 'surgerySelector.surgery') && (
@@ -518,19 +517,12 @@ const PDF = ({ questionnaire, patient, answers }) => {
             </View>
 
             <View wrap={false} style={styles.answerRow}>
-              {checkAffirmative(
-                answers,
-                'hospitalizationSelector.hospitalization'
-              ) && (
-                <Text style={styles.answer}>
-                  {
-                    getAnswer(
-                      answers,
-                      'hospitalizationSelector.hospitalization'
-                    ).text
-                  }
-                </Text>
-              )}
+              <Text style={styles.answer}>
+                {
+                  getAnswer(answers, 'hospitalizationSelector.hospitalization')
+                    .text
+                }
+              </Text>
             </View>
             <View wrap={false} style={styles.answerRow}>
               {checkAffirmative(
@@ -547,14 +539,9 @@ const PDF = ({ questionnaire, patient, answers }) => {
             </View>
 
             <View wrap={false} style={styles.answerRow}>
-              {checkAffirmative(
-                answers,
-                'severeTraumaSelector.severeTrauma'
-              ) && (
-                <Text style={styles.answer}>
-                  {getAnswer(answers, 'severeTraumaSelector.severeTrauma').text}
-                </Text>
-              )}
+              <Text style={styles.answer}>
+                {getAnswer(answers, 'severeTraumaSelector.severeTrauma').text}
+              </Text>
             </View>
             <View wrap={false} style={styles.answerRow}>
               {checkAffirmative(
