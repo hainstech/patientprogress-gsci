@@ -50,6 +50,12 @@ var patientSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      score: [
+        {
+          title: { type: String, required: true },
+          value: { type: String, required: true },
+        },
+      ],
     },
   ],
   reports: [

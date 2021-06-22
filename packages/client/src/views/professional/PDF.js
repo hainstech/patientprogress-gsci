@@ -1,6 +1,7 @@
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 
 const styles = StyleSheet.create({
   credits: {
@@ -23,10 +24,15 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 4,
   },
+  subtitle: {
+    fontSize: 16,
+    margin: 10,
+  },
 });
 
 // Create Document Component
 const PDF = ({ questionnaire, patient, answers }) => {
+  const { t } = useTranslation();
   return (
     <Document>
       <Page size='A4'>
@@ -41,11 +47,30 @@ const PDF = ({ questionnaire, patient, answers }) => {
             questionnaire.time
           ).format('YYYY/MM/DD')}`}</Text>
         </View>
+        <View style={styles.subtitle}>
+          <Text>{t('professional.patient.answers')}:</Text>
+        </View>
         <View style={styles.answersContainer}>
           {answers.map(({ title, value }, i) => (
             <Text key={i} style={styles.answer}>{`${title}: ${value}`}</Text>
           ))}
         </View>
+
+        {questionnaire.score.length > 0 && (
+          <>
+            <View style={styles.subtitle}>
+              <Text>{t('professional.patient.score')}:</Text>
+            </View>
+            <View style={styles.answersContainer}>
+              {questionnaire.score.map(({ title, value }) => (
+                <Text
+                  key={title}
+                  style={styles.answer}
+                >{`${title}: ${value}`}</Text>
+              ))}
+            </View>
+          </>
+        )}
       </Page>
     </Document>
   );

@@ -62,7 +62,10 @@ const Forgot = ({ sendForgotEmail, isAuthenticated, type }) => {
         <Alert />
         <Card>
           <CardHeader color='danger'>
-            <h4 className={classes.cardTitleWhite}>Password reset</h4>
+            <h4 className={classes.cardTitleWhite}>{t('forgot.reset')}</h4>
+            <p className={classes.cardCategoryWhite}>
+              {t('forgot.directions')}
+            </p>
           </CardHeader>
           <form onSubmit={formik.handleSubmit}>
             <CardBody>
