@@ -24,8 +24,8 @@ const Questionnaires = ({ getCurrentProfile, profile: { profile } }) => {
           <GridItem xs={12} md={10}>
             <Card profile>
               <CardBody profile>
-                <h6>{profile.professional.clinic}</h6>
-                <h4>{profile.professional.name}</h4>
+                <h5>{profile.professional.clinic}</h5>
+                <h3>{profile.professional.name}</h3>
                 <p>{profile.professional.description}</p>
                 <Button
                   color='danger'
