@@ -40,6 +40,7 @@ router.get('/me', professional, async (req, res) => {
       user,
       profession,
       patients,
+      profile,
     } = professional;
 
     // Return only the essential fields for optimisation
@@ -52,6 +53,7 @@ router.get('/me', professional, async (req, res) => {
       phone,
       user,
       profession,
+      profile,
       patients: patients.map(({ name, _id, dob }) => {
         return { name, _id, dob };
       }),
@@ -115,7 +117,20 @@ router.put(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, clinic, description, language, phone } = req.body;
+    const {
+      name,
+      clinic,
+      description,
+      language,
+      phone,
+      yearDegree,
+      country,
+      meanNbPatients,
+      practiceDescription,
+      otherDegree,
+      manipulativeTechniques,
+      nonAdjustiveTechniques,
+    } = req.body;
 
     try {
       const professional = await Professional.findOne({ user: req.user.id });
@@ -124,6 +139,13 @@ router.put(
       professional.description = description;
       professional.language = language;
       professional.phone = phone;
+      professional.profile.yearDegree = yearDegree;
+      professional.profile.country = country;
+      professional.profile.meanNbPatients = meanNbPatients;
+      professional.profile.practiceDescription = practiceDescription;
+      professional.profile.otherDegree = otherDegree;
+      professional.profile.manipulativeTechniques = manipulativeTechniques;
+      professional.profile.nonAdjustiveTechniques = nonAdjustiveTechniques;
 
       await professional.save();
 
