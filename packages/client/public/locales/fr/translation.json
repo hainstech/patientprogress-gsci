@@ -84,7 +84,17 @@
       "remove": "Retirer",
       "none": "Aucun",
       "export": "Exporter au format PDF",
-      "score": "Résultats"
+      "score": {
+        "score": "Pointage",
+        "total": "Pointage total",
+        "pain": "Douleur",
+        "interference": "Interférence",
+        "sub": "Pointage partiel",
+        "risk": "Risque",
+        "work": "Travail",
+        "sport": "Sport",
+        "disability/symptom": "Incapacité/Symptôme"
+      }
     }
   },
   "sidebar": {

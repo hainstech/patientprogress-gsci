@@ -675,14 +675,13 @@ const PDF = ({ questionnaire, patient, answers }) => {
         {questionnaire.score.length > 0 && (
           <>
             <View wrap={false} style={styles.subtitle}>
-              <Text>{t('professional.patient.score')}:</Text>
+              <Text>{t('professional.patient.score.score')}:</Text>
             </View>
             <View wrap={false} style={styles.answersContainer}>
               {questionnaire.score.map(({ title, value }) => (
-                <Text
-                  key={title}
-                  style={styles.answer}
-                >{`${title}: ${value}`}</Text>
+                <Text key={title} style={styles.answer}>
+                  {t(`professional.patient.score.${title}`)}: {value}
+                </Text>
               ))}
             </View>
           </>

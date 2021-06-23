@@ -5,7 +5,7 @@ module.exports = {
       case 'Neck Disability Index':
         scores = [
           {
-            title: 'Total',
+            title: 'total',
             value:
               Object.values(answers).reduce((a, b) => a + parseInt(b), 0) * 2 +
               '/100',
@@ -15,14 +15,14 @@ module.exports = {
       case 'Brief Pain Inventory':
         scores = [
           {
-            title: 'Pain',
+            title: 'pain',
             value:
               Object.values(answers)
                 .slice(0, 4)
                 .reduce((a, b) => a + parseInt(b), 0) + '/40',
           },
           {
-            title: 'Interference',
+            title: 'interference',
             value:
               Object.values(answers)
                 .slice(4)
@@ -62,15 +62,15 @@ module.exports = {
           );
         scores = [
           {
-            title: 'Total score',
+            title: 'total',
             value: total,
           },
           {
-            title: 'Sub score',
+            title: 'sub',
             value: sub,
           },
           {
-            title: 'Risk',
+            title: 'risk',
             value: total < 4 ? 'Low' : sub < 4 ? 'Medium' : 'High',
           },
         ];
@@ -82,7 +82,7 @@ module.exports = {
         });
         scores = [
           {
-            title: 'Total',
+            title: 'total',
             value:
               Object.values(answers).reduce(
                 (a, b) => a + (parseInt(b) > 0 ? parseInt(b) : 0),
@@ -94,7 +94,7 @@ module.exports = {
       case 'QuickDASH':
         scores = [
           {
-            title: 'Disability/Symptom',
+            title: 'disability/symptom',
             value:
               Math.round(
                 ((Object.values(answers.activities).reduce(
@@ -114,7 +114,7 @@ module.exports = {
 
         if (answers.work.work === 'Oui' || answers.work.work === 'Yes')
           scores.push({
-            title: 'Work',
+            title: 'work',
             value:
               Math.round(
                 (Object.values(answers.work).reduce(
@@ -128,7 +128,7 @@ module.exports = {
           });
         if (answers.sport.sport === 'Oui' || answers.sport.sport === 'Yes')
           scores.push({
-            title: 'Sport',
+            title: 'sport',
             value:
               Math.round(
                 (Object.values(answers.work).reduce(
@@ -144,7 +144,7 @@ module.exports = {
       case 'Lower Extremity Functional Scale (LEFS)':
         scores = [
           {
-            title: 'Total',
+            title: 'total',
             value:
               Object.values(answers).reduce((a, b) => a + parseInt(b), 0) +
               '/80',

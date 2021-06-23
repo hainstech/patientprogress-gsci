@@ -186,10 +186,13 @@ const Questionnaire = ({
                 )}
                 {questionnaire.score.length > 0 && (
                   <>
-                    <h3>{t('professional.patient.score')}:</h3>
+                    <h3>{t('professional.patient.score.score')}:</h3>
                     {questionnaire.score.map(({ title, value }) => (
                       <p key={title}>
-                        <strong>{title}:</strong> {value}
+                        <strong>
+                          {t(`professional.patient.score.${title}`)}:
+                        </strong>{' '}
+                        {value}
                       </p>
                     ))}
                   </>

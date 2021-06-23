@@ -84,7 +84,17 @@
       "remove": "Remove",
       "none": "None",
       "export": "Export to PDF",
-      "score": "Score"
+      "score": {
+        "score": "Score",
+        "total": "Total Score",
+        "pain": "Pain",
+        "interference": "Interference",
+        "sub": "Subtotal Score",
+        "risk": "Risk",
+        "work": "Work",
+        "sport": "Sport",
+        "disability/symptom": "Disability/Symptom"
+      }
     }
   },
   "sidebar": {
