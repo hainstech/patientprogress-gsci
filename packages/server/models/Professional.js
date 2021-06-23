@@ -29,6 +29,14 @@ const ProfessionalSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
+  yearOfBirth: {
+    type: String,
+    required: true,
+  },
+  gender: {
+    type: String,
+    required: true,
+  },
 
   patients: [
     {
@@ -36,6 +44,16 @@ const ProfessionalSchema = new mongoose.Schema({
       ref: 'Patient',
     },
   ],
+
+  profile: {
+    yearDegree: { type: String },
+    country: { code: { type: String }, label: { type: String } },
+    otherDegree: [{ type: String }],
+    meanNbPatients: { type: String },
+    practiceDescription: { type: String },
+    manipulativeTechniques: [{ type: String }],
+    nonAdjustiveTechniques: [{ type: String }],
+  },
 });
 
 module.exports = Professional = mongoose.model(

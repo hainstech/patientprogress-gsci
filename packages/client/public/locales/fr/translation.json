@@ -54,8 +54,8 @@
       "submit": "Envoyer"
     },
     "preferences": {
-      "title": "Réglages",
-      "description": "Choisissez vos réglages",
+      "title": "Préférences",
+      "description": "Choisissez vos préférences",
       "name": "Nom Complet",
       "clinic": "Nom de la clinique",
       "phone": "Numéro de Téléphone",
@@ -93,7 +93,7 @@
     "professional": "Votre professionnel",
     "patients": "Vos Patients",
     "invite": "Inviter un Patient",
-    "preferences": "Réglages",
+    "preferences": "Préférences",
     "logout": "Déconnexion",
     "about": "À propos",
     "login": "Connexion",
