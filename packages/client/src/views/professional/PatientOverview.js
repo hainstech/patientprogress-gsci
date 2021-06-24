@@ -217,7 +217,7 @@ const PatientOverview = ({
                             (q) => q.id === questionnaire
                           ).title;
                           return {
-                            id: i,
+                            id: `${i}-${questionnaire}`,
                             questionnaire,
                             title,
                             time: format(
