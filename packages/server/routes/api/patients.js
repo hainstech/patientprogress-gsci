@@ -148,11 +148,10 @@ router.put(
   }
 );
 
-// @route PUT api/patients/:id
-// @desc Update patient by ID
+// @route POST api/patients/:id/questionnaireToFill
+// @desc Add a questionnaire to fill to a patient by ID
 // @access professional
-//# TODO refactor and split in 2 routes
-router.put('/:id', professional, async (req, res) => {
+router.post('/:id/questionnaireToFill', professional, async (req, res) => {
   try {
     const currentUser = await User.findById(req.user.id);
     const patient = await Patient.findById(req.params.id);
@@ -168,49 +167,78 @@ router.put('/:id', professional, async (req, res) => {
       return res.status(403).json({ msg: 'Permission denied' });
     }
 
-    if (req.body.report) patient.reports.push(req.body.report);
-    if (req.body.questionnaireToFill) {
-      patient.questionnairesToFill.push({
-        questionnaire: req.body.questionnaireToFill,
-        date: new Date(),
-      });
+    patient.questionnairesToFill.push({
+      questionnaire: req.body.questionnaireToFill,
+      date: new Date(),
+    });
 
-      // Send a email notification
-      const transporter = nodemailer.createTransport({
-        host: '***REMOVED***',
-        port: 465,
-        secure: true,
-        auth: {
-          user: 'dominic@hainstech.com',
-          pass: '***REMOVED***',
-        },
-      });
+    // Send a email notification
+    const transporter = nodemailer.createTransport({
+      host: '***REMOVED***',
+      port: 465,
+      secure: true,
+      auth: {
+        user: 'dominic@hainstech.com',
+        pass: '***REMOVED***',
+      },
+    });
 
-      let message = '';
-      let subject = '';
-      switch (patient.language) {
-        case 'en':
-          message = `<h3>You have a new questionnaire to fill!</h3><p>Please <a href="https://app.patientprogress.ca/login">sign into the application</a> as soon as possible to fill it.</p><br><p>Thank you,</p><p>The PatientProgress Team</p>`;
-          subject = 'New questionnaire';
-          break;
-        case 'fr':
-          message = `<h3>Vous avez un nouveau questionnaire à remplir!</h3><p>Veuillez <a href="https://app.patientprogress.ca/login"> vous connecter</a> dès que possible afin de le remplir.</p><br><p>Merci,</p><p>L'équipe PatientProgress</p>`;
-          subject = 'Nouveau questionnaire';
-          break;
+    let message = '';
+    let subject = '';
+    switch (patient.language) {
+      case 'en':
+        message = `<h3>You have a new questionnaire to fill!</h3><p>Please <a href="https://app.patientprogress.ca/login">sign into the application</a> as soon as possible to fill it.</p><br><p>Thank you,</p><p>The PatientProgress Team</p>`;
+        subject = 'New questionnaire';
+        break;
+      case 'fr':
+        message = `<h3>Vous avez un nouveau questionnaire à remplir!</h3><p>Veuillez <a href="https://app.patientprogress.ca/login"> vous connecter</a> dès que possible afin de le remplir.</p><br><p>Merci,</p><p>L'équipe PatientProgress</p>`;
+        subject = 'Nouveau questionnaire';
+        break;
 
-        default:
-          break;
-      }
-
-      const emailContent = {
-        from: '"PatientProgress" <no-reply@hainstech.com>',
-        to: patientUser.email,
-        subject: subject,
-        html: message,
-      };
-
-      transporter.sendMail(emailContent);
+      default:
+        break;
     }
+
+    const emailContent = {
+      from: '"PatientProgress" <no-reply@hainstech.com>',
+      to: patientUser.email,
+      subject: subject,
+      html: message,
+    };
+
+    transporter.sendMail(emailContent);
+
+    await patient.save();
+
+    res.json(patient);
+  } catch (err) {
+    if (err.kind == 'ObjectId') {
+      return res.status(404).json({ msg: 'Object error' });
+    }
+    res.status(500).json({ msg: 'Server Error' });
+  }
+});
+
+// @route POST api/patients/:id/report
+// @desc Add a questionnaire to fill to a patient by ID
+// @access professional
+router.post('/:id/report', professional, async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.user.id);
+    const patient = await Patient.findById(req.params.id);
+    const patientUser = await User.findById(patient.user);
+
+    if (!patient) {
+      return res.status(404).json({ msg: 'Patient not found' });
+    }
+
+    if (
+      patient.professional.toString() != currentUser.professionalId.toString()
+    ) {
+      return res.status(403).json({ msg: 'Permission denied' });
+    }
+
+    patient.reports.push(req.body.report);
 
     await patient.save();
 

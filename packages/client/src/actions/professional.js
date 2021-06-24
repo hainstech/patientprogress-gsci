@@ -37,8 +37,8 @@ export const sendQuestionnaire =
         },
       };
 
-      const res = await axios.put(
-        `${URI}/api/patients/${id}`,
+      const res = await axios.post(
+        `${URI}/api/patients/${id}/questionnaireToFill`,
         { questionnaireToFill },
         config
       );
