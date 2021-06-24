@@ -60,23 +60,95 @@ var patientSchema = new mongoose.Schema({
   ],
   reports: [
     {
-      time: {
+      intakeUsed: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Questionnaire',
+        required: true,
+      },
+      date: {
         type: Date,
         required: true,
       },
+      professionalName: {
+        type: String,
+        required: true,
+      },
+      // Social demographics
+      civilStatus: {
+        type: String,
+        required: true,
+      },
+      nbChildrens: {
+        type: String,
+        required: true,
+      },
+      // Work demographics
+      occupation: {
+        type: String,
+        required: true,
+      },
+      employmentStatus: {
+        type: String,
+        required: true,
+      },
+      physicalActivityVitalSign: {
+        type: String,
+        required: true,
+      },
+      // Chief complaint
       chiefComplaint: {
         type: String,
         required: true,
       },
-      chiefComplaintStart: {
+      chiefRegion: {
+        type: String,
+        required: true,
+      },
+      chiefComplaintAppear: {
         type: Date,
         required: true,
       },
+      chiefComplaintAppearDescription: {
+        type: String,
+        required: true,
+      },
+      chiefComplaintEvolving: {
+        type: String,
+        required: true,
+      },
+      chiefComplaintRecurrence: {
+        type: String,
+        required: true,
+      },
+      otherComplaints: {
+        type: String,
+        required: true,
+      },
+      comorbidities: [
+        {
+          name: { type: String, required: true },
+          treatment: { type: String, required: true },
+          activityLimitation: { type: String, required: true },
+        },
+      ],
+      redFlgs: [String],
+      // Facultative scores
+      BPIPain: { type: String },
+      BPIInterference: { type: String },
+      BPIActivityInterference: { type: String },
+      BPIAffectiveInterference: { type: String },
+      NDI: { type: String },
+      Oswestry: { type: String },
+      // Quality of Life
+      health: { type: String, required: true },
+      qualityOfLife: { type: String, required: true },
+      healthSatisfaction: { type: String, required: true },
+      globalExpectationOfChange: { type: String, required: true },
       diagnosis: {
         type: String,
         required: true,
       },
-      txNb: {
+      numberOfTreatments: {
         type: String,
         required: true,
       },
@@ -85,43 +157,10 @@ var patientSchema = new mongoose.Schema({
         required: true,
       },
       objectives: [String],
-      recommendations: [String],
-      recommendationDetails: String,
-      comorbidity: String, //change to array later
-      redFlags: String,
-      yellowFlags: [String],
-      complications: [String],
-      complicationsOther: String,
-      expectationPain: {
-        type: Number,
-        required: true,
-      },
-      expectationFunction: {
-        type: Number,
-        required: true,
-      },
-      expectationQualityOfLife: {
-        type: Number,
-        required: true,
-      },
-      expectationClinicalChange: {
-        type: Number,
-        required: true,
-      },
-      physicalActivityVitalSign: {
-        type: Number,
-        required: true,
-      },
-      consent: String,
-      consentComment: String,
-      BPIPain: {
-        type: Number,
-        required: true,
-      },
-      BPIFunction: {
-        type: Number,
-        required: true,
-      },
+      planOfManagement: [String],
+      planOfManagementOther: [String],
+      planOfManagementExternalConsultation: { type: String },
+      globalExpectationOfClinicalChange: { type: String, required: true },
     },
   ],
   questionnairesToFill: [

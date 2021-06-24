@@ -163,6 +163,22 @@ const PatientOverview = ({
             </Card>
             <Card>
               <CardHeader color='danger'>
+                <h4 className={classes.cardTitleWhite}>Reports</h4>
+              </CardHeader>
+              <CardBody>
+                <GridContainer justify='center'>
+                  <GridItem xs={12}>
+                    <Link
+                      to={`/professional/patients/${match.params.id}/report`}
+                    >
+                      <Button color='success'>Fill a new report</Button>
+                    </Link>
+                  </GridItem>
+                </GridContainer>
+              </CardBody>
+            </Card>
+            <Card>
+              <CardHeader color='danger'>
                 <h4 className={classes.cardTitleWhite}>
                   {t('professional.patient.sendQuestionnaire')}
                 </h4>
@@ -200,6 +216,8 @@ const PatientOverview = ({
                 </form>
               </CardBody>
             </Card>
+          </GridItem>
+          <GridItem xs={12} lg={6}>
             <Card>
               <CardHeader color='danger'>
                 <h4 className={classes.cardTitleWhite}>
@@ -262,8 +280,6 @@ const PatientOverview = ({
                 )}
               </CardBody>
             </Card>
-          </GridItem>
-          <GridItem xs={12} lg={6}>
             <Card>
               <CardHeader color='danger'>
                 <h4 className={classes.cardTitleWhite}>
