@@ -67,6 +67,8 @@ export const getPatient = (id) => async (dispatch) => {
       type: GET_PATIENT,
       payload: res.data,
     });
+
+    return res.data;
   } catch (err) {
     dispatch({
       type: PATIENT_ERROR,

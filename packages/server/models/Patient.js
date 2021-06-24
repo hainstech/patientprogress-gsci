@@ -62,7 +62,7 @@ var patientSchema = new mongoose.Schema({
     {
       intakeUsed: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Questionnaire',
+        ref: 'Patient.questionnaires',
         required: true,
       },
       date: {
@@ -100,7 +100,7 @@ var patientSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      chiefRegion: {
+      chiefComplaintRegion: {
         type: String,
         required: true,
       },
@@ -131,14 +131,14 @@ var patientSchema = new mongoose.Schema({
           activityLimitation: { type: String, required: true },
         },
       ],
-      redFlgs: [String],
+      redFlags: [String],
       // Facultative scores
-      BPIPain: { type: String },
-      BPIInterference: { type: String },
-      BPIActivityInterference: { type: String },
-      BPIAffectiveInterference: { type: String },
-      NDI: { type: String },
-      Oswestry: { type: String },
+      relevantScore: [
+        {
+          name: { type: String },
+          score: [{ title: { type: String }, value: { type: String } }],
+        },
+      ],
       // Quality of Life
       health: { type: String, required: true },
       qualityOfLife: { type: String, required: true },
