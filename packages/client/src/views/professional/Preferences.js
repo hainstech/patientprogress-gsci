@@ -297,33 +297,32 @@ const Preferences = ({
                       </FormControl>
                     </GridItem>
                     <GridItem xs={12} lg={6}>
-                      <Autocomplete
-                        id='country-select'
-                        style={{ width: 300 }}
-                        options={countries}
-                        classes={{
-                          option: countryInputStyles.option,
-                        }}
-                        autoHighlight
-                        getOptionLabel={(option) =>
-                          option.label ? option.label : ''
-                        }
-                        getOptionSelected={(option) =>
-                          option.label
-                            ? option.label === formik.values.country.label
-                            : option.label === ''
-                        }
-                        renderOption={(option) => (
-                          <>
-                            <span>{countryToFlag(option.code)}</span>
-                            {option.label} ({option.code})
-                          </>
-                        )}
-                        renderInput={(params) => (
-                          <FormControl
-                            fullWidth
-                            className={inputClasses.formControl}
-                          >
+                      <FormControl
+                        fullWidth
+                        className={inputClasses.formControl}
+                      >
+                        <Autocomplete
+                          id='country-select'
+                          options={countries}
+                          classes={{
+                            option: countryInputStyles.option,
+                          }}
+                          autoHighlight
+                          getOptionLabel={(option) =>
+                            option.label ? option.label : ''
+                          }
+                          getOptionSelected={(option) =>
+                            option.label
+                              ? option.label === formik.values.country.label
+                              : option.label === ''
+                          }
+                          renderOption={(option) => (
+                            <>
+                              <span>{countryToFlag(option.code)}</span>
+                              {option.label} ({option.code})
+                            </>
+                          )}
+                          renderInput={(params) => (
                             <TextField
                               {...params}
                               label='Choose a country'
@@ -332,13 +331,16 @@ const Preferences = ({
                                 autoComplete: 'new-password', // disable autocomplete and autofill
                               }}
                             />
-                          </FormControl>
-                        )}
-                        value={formik.values.country}
-                        onChange={(e, value) =>
-                          formik.setFieldValue('country', value ? value : null)
-                        }
-                      />
+                          )}
+                          value={formik.values.country}
+                          onChange={(e, value) =>
+                            formik.setFieldValue(
+                              'country',
+                              value ? value : null
+                            )
+                          }
+                        />
+                      </FormControl>
                     </GridItem>
                     <GridItem xs={12}>
                       <FormControl
