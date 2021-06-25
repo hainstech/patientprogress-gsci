@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { format, parseISO } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 import { withRouter } from 'react-router-dom';
-import { PDFDownloadLink } from '@react-pdf/renderer';
 
 import Spinner from '../../components/Spinner/Spinner';
 
