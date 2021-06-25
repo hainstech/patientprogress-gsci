@@ -104,8 +104,12 @@ var patientSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      chiefComplaintStart: {
+        type: String,
+        required: true,
+      },
       chiefComplaintAppear: {
-        type: Date,
+        type: String,
         required: true,
       },
       chiefComplaintAppearDescription: {
@@ -122,7 +126,6 @@ var patientSchema = new mongoose.Schema({
       },
       otherComplaints: {
         type: String,
-        required: true,
       },
       comorbidities: [
         {
@@ -143,7 +146,11 @@ var patientSchema = new mongoose.Schema({
       health: { type: String, required: true },
       qualityOfLife: { type: String, required: true },
       healthSatisfaction: { type: String, required: true },
-      globalExpectationOfChange: { type: String, required: true },
+      globalExpectationOfChange: {
+        pain: { type: String, required: true },
+        function: { type: String, required: true },
+        qualityOfLife: { type: String, required: true },
+      },
       diagnosis: {
         type: String,
         required: true,

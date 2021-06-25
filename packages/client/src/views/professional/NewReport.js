@@ -1,22 +1,20 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import { DataGrid } from '@material-ui/data-grid';
-import { format, parseISO } from 'date-fns';
-import { zonedTimeToUtc } from 'date-fns-tz';
+import { format } from 'date-fns';
 
 import {
   FormControl,
-  InputLabel,
-  NativeSelect,
+  Typography,
   TextField,
   FormLabel,
   FormGroup,
   FormControlLabel,
   Checkbox,
   Radio,
+  Slider,
   RadioGroup,
 } from '@material-ui/core';
 
@@ -32,7 +30,7 @@ import CardBody from '../../components/Card/CardBody.js';
 import Button from '../../components/CustomButtons/Button.js';
 import Alert from '../layout/Alert';
 
-import { getPatient } from '../../actions/professional';
+import { getPatient, sendReport } from '../../actions/professional';
 import { getCurrentProfile } from '../../actions/profile';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -307,6 +305,8 @@ const NewReport = ({
   getCurrentProfile,
   match,
   getPatient,
+  sendReport,
+  history,
 }) => {
   const classes = useStyles();
   const inputClasses = useInputStyles();
@@ -340,6 +340,7 @@ const NewReport = ({
           // Chief complaint
           chiefComplaint: lastIntake.answers.chiefComplaint,
           chiefComplaintRegion: lastIntake.answers.chiefComplaintRegion,
+          chiefComplaintStart: lastIntake.answers.chiefComplaintStart,
           chiefComplaintAppear: lastIntake.answers.chiefComplaintAppear,
           chiefComplaintAppearDescription:
             lastIntake.answers.chiefComplaintAppearDescription,
@@ -384,13 +385,21 @@ const NewReport = ({
 
   const formik = useFormik({
     initialValues: {
+      diagnosis: '',
       numberOfTreatments: '',
       frequency: null,
       planOfManagementOther: '',
       planOfManagementExternalConsultation: '',
+      globalExpectationOfClinicalChange: 0,
     },
     onSubmit: (data) => {
-      console.log(data);
+      sendReport(match.params.id, {
+        ...data,
+        ...intake,
+        objectives,
+        planOfManagement,
+      });
+      history.goBack();
     },
   });
 
@@ -466,6 +475,29 @@ const NewReport = ({
                       <GridItem xs={12}>
                         Chief complaint: {intake.chiefComplaint}
                       </GridItem>
+                      <GridItem xs={12}>
+                        Chief complaint region: {intake.chiefComplaintRegion}
+                      </GridItem>
+                      <GridItem xs={12}>
+                        Chief complaint start: {intake.chiefComplaintStart}
+                      </GridItem>
+                      <GridItem xs={12}>
+                        Chief complaint appearance:{' '}
+                        {intake.chiefComplaintAppear}
+                      </GridItem>
+                      <GridItem xs={12}>
+                        Chief complaint description:{' '}
+                        {intake.chiefComplaintAppearDescription}
+                      </GridItem>
+                      <GridItem xs={12}>
+                        Chief complaint evolving:{' '}
+                        {intake.chiefComplaintEvolving}
+                      </GridItem>
+                      <GridItem xs={12}>
+                        Chief complaint reccurence:{' '}
+                        {intake.chiefComplaintRecurrence}
+                      </GridItem>
+
                       {intake.otherComplaints && (
                         <GridItem xs={12}>
                           Other complaints: {intake.otherComplaints}
@@ -473,6 +505,7 @@ const NewReport = ({
                       )}
 
                       <GridItem xs={12}>
+                        <br />
                         Occupation: {intake.occupation}
                       </GridItem>
                       <GridItem xs={12}>
@@ -585,6 +618,21 @@ const NewReport = ({
                           >
                             <TextField
                               required
+                              label='Diagnosis'
+                              type='text'
+                              id={'diagnosis'}
+                              value={formik.values.diagnosis}
+                              onChange={formik.handleChange}
+                            />
+                          </FormControl>
+                        </GridItem>
+                        <GridItem xs={12} sm={4}>
+                          <FormControl
+                            fullWidth
+                            className={inputClasses.formControl}
+                          >
+                            <TextField
+                              required
                               label='Number of treatments'
                               type='number'
                               id={'numberOfTreatments'}
@@ -593,6 +641,7 @@ const NewReport = ({
                             />
                           </FormControl>
                         </GridItem>
+
                         <GridItem xs={12}>
                           <FormControl
                             fullWidth
@@ -784,8 +833,48 @@ const NewReport = ({
                             />
                           </FormControl>
                         </GridItem>
+                        <GridItem xs={12} sm={6}>
+                          <FormControl
+                            fullWidth
+                            className={inputClasses.formControl}
+                          >
+                            <Typography id='discrete-slider' gutterBottom>
+                              Global Expectation Of Clinical Change
+                            </Typography>
+                            <Slider
+                              onChange={(element, value) =>
+                                formik.setFieldValue(
+                                  'globalExpectationOfClinicalChange',
+                                  value
+                                )
+                              }
+                              defaultValue={0}
+                              value={
+                                formik.values.globalExpectationOfClinicalChange
+                              }
+                              aria-labelledby='discrete-slider'
+                              valueLabelDisplay='auto'
+                              step={1}
+                              min={0}
+                              max={10}
+                            />
+                          </FormControl>
+                        </GridItem>
+                      </GridContainer>
+                      <GridContainer>
                         <GridItem xs={12}>
-                          <Button color='success' type='submit'>
+                          <Button
+                            onClick={() => history.goBack()}
+                            color='danger'
+                            justify='center'
+                          >
+                            {t('professional.patient.back')}
+                          </Button>
+                          <Button
+                            color='success'
+                            type='submit'
+                            style={{ marginLeft: 15 }}
+                          >
                             {t('professional.invite.submit')}
                           </Button>
                         </GridItem>
@@ -805,6 +894,7 @@ const NewReport = ({
 NewReport.propTypes = {
   getPatient: PropTypes.func.isRequired,
   professional: PropTypes.object.isRequired,
+  sendReport: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -815,4 +905,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getPatient,
   getCurrentProfile,
-})(NewReport);
+  sendReport,
+})(withRouter(NewReport));

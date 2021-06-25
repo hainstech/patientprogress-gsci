@@ -111,3 +111,33 @@ export const removeQuestionnaire = (patient, id) => async (dispatch) => {
     });
   }
 };
+
+// Send report
+export const sendReport = (id, report) => async (dispatch) => {
+  try {
+    const config = {
+      hearders: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const res = await axios.post(
+      `${URI}/api/patients/${id}/report`,
+      { report },
+      config
+    );
+
+    dispatch({
+      type: GET_PATIENT,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PATIENT_ERROR,
+      payload: {
+        msg: err.response.statusText,
+        status: err.response.status,
+      },
+    });
+  }
+};
