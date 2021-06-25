@@ -324,9 +324,11 @@ const NewReport = ({
           'Initial Intake Form'
         );
         setIntake({
+          age: getAge(patient.dob),
           intakeUsed: lastIntake._id,
           date: new Date(),
           professionalName: professional.name,
+          professionalProfession: professional.profession,
           // Social demographics
           civilStatus: lastIntake.answers.civilStatus,
           nbChildrens: lastIntake.answers.nbChildrens,
@@ -392,13 +394,14 @@ const NewReport = ({
       planOfManagementExternalConsultation: '',
       globalExpectationOfClinicalChange: 0,
     },
-    onSubmit: (data) => {
-      sendReport(match.params.id, {
+    onSubmit: async (data) => {
+      await sendReport(match.params.id, {
         ...data,
         ...intake,
         objectives,
         planOfManagement,
       });
+      await getCurrentProfile('patient');
       history.goBack();
     },
   });
@@ -435,7 +438,7 @@ const NewReport = ({
                           ? t(`professional.patient.${patient.gender}`)
                           : patient.gender}
                       </GridItem>
-                      <GridItem xs={12}>Age: {getAge(patient.dob)}</GridItem>
+                      <GridItem xs={12}>Age: {intake.age}</GridItem>
                     </GridContainer>
                   </GridItem>
                   <GridItem xs={12} sm={6}>
@@ -444,11 +447,11 @@ const NewReport = ({
                         Date: {format(intake.date, 'yyyy/MM/dd')}
                       </GridItem>
                       <GridItem xs={12}>
-                        Professional's Name: {profile.name}
+                        Professional's Name: {intake.professionalName}
                       </GridItem>
                       <GridItem xs={12}>
                         {/* #TODO Translate the profession */}
-                        Profession: {profile.profession}
+                        Profession: {intake.professionalProfession}
                       </GridItem>
                     </GridContainer>
                   </GridItem>

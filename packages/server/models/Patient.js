@@ -60,6 +60,10 @@ var patientSchema = new mongoose.Schema({
   ],
   reports: [
     {
+      age: {
+        type: String,
+        required: true,
+      },
       intakeUsed: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Patient.questionnaires',
@@ -70,6 +74,10 @@ var patientSchema = new mongoose.Schema({
         required: true,
       },
       professionalName: {
+        type: String,
+        required: true,
+      },
+      professionalProfession: {
         type: String,
         required: true,
       },
