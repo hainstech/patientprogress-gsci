@@ -97,10 +97,20 @@ const PatientOverview = ({
 
   const { t } = useTranslation();
 
-  const renderViewButton = (params) => {
+  const renderQuestionnaireViewButton = (params) => {
     return (
       <Link
         to={`/professional/patients/${match.params.id}/questionnaires/${params.row.id}`}
+      >
+        <Button color='success'>{t('professional.patient.view')}</Button>
+      </Link>
+    );
+  };
+
+  const renderReportViewButton = (params) => {
+    return (
+      <Link
+        to={`/professional/patients/${match.params.id}/reports/${params.row.id}`}
       >
         <Button color='success'>{t('professional.patient.view')}</Button>
       </Link>
@@ -163,6 +173,66 @@ const PatientOverview = ({
             </Card>
             <Card>
               <CardHeader color='danger'>
+                <h4 className={classes.cardTitleWhite}>Reports</h4>
+              </CardHeader>
+              <CardBody>
+                {patient.questionnaires.filter(
+                  ({ title }) => title === 'Initial Intake Form'
+                ).length > 0 ? (
+                  <Link to={`/professional/patients/${match.params.id}/report`}>
+                    <Button color='success' style={{ marginBottom: 15 }}>
+                      Fill a new report
+                    </Button>
+                  </Link>
+                ) : (
+                  'No initial intake filled yet'
+                )}
+
+                {patient.reports.length > 0 ? (
+                  <div style={{ height: 400, width: '100%' }}>
+                    <DataGrid
+                      disableSelectionOnClick
+                      rows={patient.reports
+                        .map(({ date, _id }) => {
+                          return {
+                            id: _id,
+                            time: format(
+                              zonedTimeToUtc(
+                                parseISO(date),
+                                Intl.DateTimeFormat().resolvedOptions().timeZone
+                              ),
+                              'yyyy/MM/dd'
+                            ),
+                          };
+                        })
+                        .reverse()}
+                      columns={[
+                        {
+                          field: 'id',
+                          headerName: `View`,
+                          sortable: false,
+                          width: 115,
+                          disableClickEventBubbling: true,
+                          renderCell: renderReportViewButton,
+                        },
+                        {
+                          field: 'time',
+                          headerName: `${t('professional.patient.date')}`,
+                          width: 110,
+                        },
+                      ]}
+                      pageSize={5}
+                    />
+                  </div>
+                ) : (
+                  <p style={{ textAlign: 'center' }}>
+                    {t('professional.patient.none')}
+                  </p>
+                )}
+              </CardBody>
+            </Card>
+            <Card>
+              <CardHeader color='danger'>
                 <h4 className={classes.cardTitleWhite}>
                   {t('professional.patient.sendQuestionnaire')}
                 </h4>
@@ -200,6 +270,8 @@ const PatientOverview = ({
                 </form>
               </CardBody>
             </Card>
+          </GridItem>
+          <GridItem xs={12} lg={6}>
             <Card>
               <CardHeader color='danger'>
                 <h4 className={classes.cardTitleWhite}>
@@ -262,8 +334,6 @@ const PatientOverview = ({
                 )}
               </CardBody>
             </Card>
-          </GridItem>
-          <GridItem xs={12} lg={6}>
             <Card>
               <CardHeader color='danger'>
                 <h4 className={classes.cardTitleWhite}>
@@ -297,7 +367,7 @@ const PatientOverview = ({
                           sortable: false,
                           width: 115,
                           disableClickEventBubbling: true,
-                          renderCell: renderViewButton,
+                          renderCell: renderQuestionnaireViewButton,
                         },
                         {
                           field: 'title',

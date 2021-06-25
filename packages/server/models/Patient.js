@@ -60,23 +60,110 @@ var patientSchema = new mongoose.Schema({
   ],
   reports: [
     {
-      time: {
+      age: {
+        type: String,
+        required: true,
+      },
+      intakeUsed: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Patient.questionnaires',
+        required: true,
+      },
+      date: {
         type: Date,
         required: true,
       },
+      professionalName: {
+        type: String,
+        required: true,
+      },
+      professionalProfession: {
+        type: String,
+        required: true,
+      },
+      // Social demographics
+      civilStatus: {
+        type: String,
+        required: true,
+      },
+      nbChildrens: {
+        type: String,
+        required: true,
+      },
+      // Work demographics
+      occupation: {
+        type: String,
+        required: true,
+      },
+      employmentStatus: {
+        type: String,
+        required: true,
+      },
+      physicalActivityVitalSign: {
+        type: String,
+        required: true,
+      },
+      // Chief complaint
       chiefComplaint: {
         type: String,
         required: true,
       },
-      chiefComplaintStart: {
-        type: Date,
+      chiefComplaintRegion: {
+        type: String,
         required: true,
+      },
+      chiefComplaintStart: {
+        type: String,
+        required: true,
+      },
+      chiefComplaintAppear: {
+        type: String,
+        required: true,
+      },
+      chiefComplaintAppearDescription: {
+        type: String,
+        required: true,
+      },
+      chiefComplaintEvolving: {
+        type: String,
+        required: true,
+      },
+      chiefComplaintRecurrence: {
+        type: String,
+        required: true,
+      },
+      otherComplaints: {
+        type: String,
+      },
+      comorbidities: [
+        {
+          name: { type: String, required: true },
+          treatment: { type: String, required: true },
+          activityLimitation: { type: String, required: true },
+        },
+      ],
+      redFlags: [String],
+      // Facultative scores
+      relevantScore: [
+        {
+          name: { type: String },
+          score: [{ title: { type: String }, value: { type: String } }],
+        },
+      ],
+      // Quality of Life
+      health: { type: String, required: true },
+      qualityOfLife: { type: String, required: true },
+      healthSatisfaction: { type: String, required: true },
+      globalExpectationOfChange: {
+        pain: { type: String, required: true },
+        function: { type: String, required: true },
+        qualityOfLife: { type: String, required: true },
       },
       diagnosis: {
         type: String,
         required: true,
       },
-      txNb: {
+      numberOfTreatments: {
         type: String,
         required: true,
       },
@@ -85,43 +172,10 @@ var patientSchema = new mongoose.Schema({
         required: true,
       },
       objectives: [String],
-      recommendations: [String],
-      recommendationDetails: String,
-      comorbidity: String, //change to array later
-      redFlags: String,
-      yellowFlags: [String],
-      complications: [String],
-      complicationsOther: String,
-      expectationPain: {
-        type: Number,
-        required: true,
-      },
-      expectationFunction: {
-        type: Number,
-        required: true,
-      },
-      expectationQualityOfLife: {
-        type: Number,
-        required: true,
-      },
-      expectationClinicalChange: {
-        type: Number,
-        required: true,
-      },
-      physicalActivityVitalSign: {
-        type: Number,
-        required: true,
-      },
-      consent: String,
-      consentComment: String,
-      BPIPain: {
-        type: Number,
-        required: true,
-      },
-      BPIFunction: {
-        type: Number,
-        required: true,
-      },
+      planOfManagement: [String],
+      planOfManagementOther: [String],
+      planOfManagementExternalConsultation: { type: String },
+      globalExpectationOfClinicalChange: { type: String, required: true },
     },
   ],
   questionnairesToFill: [

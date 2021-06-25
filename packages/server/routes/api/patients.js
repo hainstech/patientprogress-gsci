@@ -226,7 +226,6 @@ router.post('/:id/report', professional, async (req, res) => {
   try {
     const currentUser = await User.findById(req.user.id);
     const patient = await Patient.findById(req.params.id);
-    const patientUser = await User.findById(patient.user);
 
     if (!patient) {
       return res.status(404).json({ msg: 'Patient not found' });
@@ -247,6 +246,7 @@ router.post('/:id/report', professional, async (req, res) => {
     if (err.kind == 'ObjectId') {
       return res.status(404).json({ msg: 'Object error' });
     }
+    console.log(err.message);
     res.status(500).json({ msg: 'Server Error' });
   }
 });

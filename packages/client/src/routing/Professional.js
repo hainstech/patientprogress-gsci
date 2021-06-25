@@ -6,6 +6,8 @@ import Preferences from '../views/professional/Preferences';
 import Search from '../views/professional/Search';
 import PatientOverview from '../views/professional/PatientOverview';
 import Questionnaire from '../views/professional/Questionnaire';
+import NewReport from '../views/professional/NewReport';
+import Report from '../views/professional/Report';
 
 import ProfessionalRoute from './ProfessionalRoute';
 
@@ -32,6 +34,16 @@ const Professional = () => {
         exact
         path='/professional/patients/:id/questionnaires/:questionnaire_id'
         component={Questionnaire}
+      />
+      <ProfessionalRoute
+        exact
+        path='/professional/patients/:id/report'
+        component={NewReport}
+      />
+      <ProfessionalRoute
+        exact
+        path='/professional/patients/:id/reports/:report_id'
+        component={Report}
       />
     </Switch>
   );
