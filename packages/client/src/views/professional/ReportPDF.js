@@ -135,7 +135,6 @@ const ReportPDF = ({ report, patient }) => {
               </Text>
             )}
           </View>
-
           {report.comorbidities.length === 0 && (
             <View wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>No commorbidities</Text>
@@ -219,6 +218,7 @@ const ReportPDF = ({ report, patient }) => {
                 : 'None'}
             </Text>
           </View>
+          {/* {marker} */}
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
               Plan of management:{' '}
@@ -230,7 +230,8 @@ const ReportPDF = ({ report, patient }) => {
                 : 'None'}
             </Text>
           </View>
-          {report.planOfManagementExternalConsultation && (
+
+          {report.planOfManagementExternalConsultation !== '' && (
             <View wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>
                 External Consultation:{' '}
@@ -238,6 +239,7 @@ const ReportPDF = ({ report, patient }) => {
               </Text>
             </View>
           )}
+
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
               Global Expectation Of Clinical Change:{' '}
