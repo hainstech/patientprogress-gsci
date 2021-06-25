@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/hainsdominic/patientprogress/compare/v1.1.0...v1.2.0) (2021-06-25)
+
+
+### Bug Fixes
+
+* **client:** score translation ([a49df32](https://github.com/hainsdominic/patientprogress/commit/a49df32cadf11805fca879ec2b670b5bb9d0ae0c)), closes [#21](https://github.com/hainsdominic/patientprogress/issues/21)
+
+
+### Features
+
+* **all:** reCaptcha ([94a6f65](https://github.com/hainsdominic/patientprogress/commit/94a6f65c009fcfc0d4d53aa2ead1e04c2469bb18))
+* **api:** report pushing to db ([136e161](https://github.com/hainsdominic/patientprogress/commit/136e161dfcc880df0951ef3d9d727eeb741cbe47))
+* **client:** forgot component and email form ([4d664c6](https://github.com/hainsdominic/patientprogress/commit/4d664c66c487689611ef826d757133d5bbad04c5))
+* **client:** password reset ([1110029](https://github.com/hainsdominic/patientprogress/commit/111002955f89ddeb5e60f893065a980278eb20fe))
+* **client:** professional profile ([58ecb3c](https://github.com/hainsdominic/patientprogress/commit/58ecb3c145619a851c02b055a4253cf2eaaf5272))
+* **client:** questionnaire score calculation and display ([2822e93](https://github.com/hainsdominic/patientprogress/commit/2822e93a6940115e71250f5df9a8a5c3ef2af9b3))
+* **client:** report form ([6c3b4b4](https://github.com/hainsdominic/patientprogress/commit/6c3b4b447ecd4fe442c486f14f125fa17a507a93))
+* **client:** report viewing ([61b98f2](https://github.com/hainsdominic/patientprogress/commit/61b98f2ca09bd8b2ead71620146bb81d7a157e2d))
+
+
+### Performance Improvements
+
+* **api:** report model ([df7acd2](https://github.com/hainsdominic/patientprogress/commit/df7acd2ea22a0a9aabbb42d8a25f7f0866255380))
+* **api:** split routes ([4069344](https://github.com/hainsdominic/patientprogress/commit/40693440543a565d3f3d5b46e7add84a9223ae15))
+
+
+
+
+
 # [1.1.0](https://github.com/hainsdominic/patientprogress/compare/v1.0.1...v1.1.0) (2021-06-18)
 
 

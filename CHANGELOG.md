@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/hainsdominic/patientprogress/compare/v1.1.0...v1.2.0) (2021-06-25)
+
+
+### Bug Fixes
+
+* **client:** disabled i18n debug in prod ([764ca49](https://github.com/hainsdominic/patientprogress/commit/764ca4988c2c7178bbae5a067f22fc00fe92a7e4))
+* **client:** pdf parsing ([4d50bd3](https://github.com/hainsdominic/patientprogress/commit/4d50bd3f0bb7be729ad285ecf1f7e60719f80c1c))
+* **client:** Questionnaire PDF ([abc5a53](https://github.com/hainsdominic/patientprogress/commit/abc5a53db691b74f98a386223f7ee424026daa21))
+* **client:** questionnaire shrink label ([3ec8466](https://github.com/hainsdominic/patientprogress/commit/3ec8466432295057a2d5b3a1aa296566c4d5bfc4))
+* **client:** score translation ([a49df32](https://github.com/hainsdominic/patientprogress/commit/a49df32cadf11805fca879ec2b670b5bb9d0ae0c)), closes [#21](https://github.com/hainsdominic/patientprogress/issues/21)
+* **client:** spacing ([ac03e61](https://github.com/hainsdominic/patientprogress/commit/ac03e614d798624623eb0d2de90bb81103d4b7c8))
+* **client:** text-size myProfessional ([9543052](https://github.com/hainsdominic/patientprogress/commit/95430528ee79d50a421392bfff574277888d6214))
+* **client:** translation ([ac0a909](https://github.com/hainsdominic/patientprogress/commit/ac0a909a16d2d06958b369f6f2fd5bfca7613223))
+* **client:** unused imports ([81be625](https://github.com/hainsdominic/patientprogress/commit/81be625b2edd7a0403f15b6f4d6ab6f538d96d32))
+* **various bug fixes:** added key mapping and  removed :: in questionnaire ([de50374](https://github.com/hainsdominic/patientprogress/commit/de50374f02506372b089fd5b31da379d38c3d97e))
+
+
+### Features
+
+* **all:** reCaptcha ([94a6f65](https://github.com/hainsdominic/patientprogress/commit/94a6f65c009fcfc0d4d53aa2ead1e04c2469bb18))
+* **api:** report pushing to db ([136e161](https://github.com/hainsdominic/patientprogress/commit/136e161dfcc880df0951ef3d9d727eeb741cbe47))
+* **client:** Ability to choose and specify another gender ([e895d15](https://github.com/hainsdominic/patientprogress/commit/e895d1585ad53d5e7a0d52e5dcb3de1a9bcef2ae))
+* **client:** customized pdf for intake ([576025d](https://github.com/hainsdominic/patientprogress/commit/576025da234893e2b8e33de648b9950fca656477))
+* **client:** forgot component and email form ([4d664c6](https://github.com/hainsdominic/patientprogress/commit/4d664c66c487689611ef826d757133d5bbad04c5))
+* **client:** password reset ([1110029](https://github.com/hainsdominic/patientprogress/commit/111002955f89ddeb5e60f893065a980278eb20fe))
+* **client:** professional profile ([58ecb3c](https://github.com/hainsdominic/patientprogress/commit/58ecb3c145619a851c02b055a4253cf2eaaf5272))
+* **client:** questionnaire score calculation and display ([2822e93](https://github.com/hainsdominic/patientprogress/commit/2822e93a6940115e71250f5df9a8a5c3ef2af9b3))
+* **client:** report form ([6c3b4b4](https://github.com/hainsdominic/patientprogress/commit/6c3b4b447ecd4fe442c486f14f125fa17a507a93))
+* **client:** report pdf ([703867f](https://github.com/hainsdominic/patientprogress/commit/703867f0f6441147edd2cdcfe76aa90c39371f69)), closes [#27](https://github.com/hainsdominic/patientprogress/issues/27)
+* **client:** report viewing ([61b98f2](https://github.com/hainsdominic/patientprogress/commit/61b98f2ca09bd8b2ead71620146bb81d7a157e2d))
+* **client:** translation and spacing of pdf ([5cfd425](https://github.com/hainsdominic/patientprogress/commit/5cfd425742d0a93ca017620256911f12ed3f9b64))
+
+
+### Performance Improvements
+
+* **api:** report model ([df7acd2](https://github.com/hainsdominic/patientprogress/commit/df7acd2ea22a0a9aabbb42d8a25f7f0866255380))
+* **api:** split routes ([4069344](https://github.com/hainsdominic/patientprogress/commit/40693440543a565d3f3d5b46e7add84a9223ae15))
+* **client:** apple-touch-icon fix ([96124e0](https://github.com/hainsdominic/patientprogress/commit/96124e077ed0f5ba7f2f4dbbe62d877da0d189a2))
+* **client:** id of questionnaire to fill is now unique ([d083046](https://github.com/hainsdominic/patientprogress/commit/d0830462d5e408acebf1c065a468591cfb790333))
+* **client:** logo for pwa ([be4bd74](https://github.com/hainsdominic/patientprogress/commit/be4bd74c79232d3457d4dba066dbeeb9f43f6132))
+* **client:** manifest ([18adada](https://github.com/hainsdominic/patientprogress/commit/18adada8254a679f262b0a2218b0849e90a6c795))
+
+
+
+
+
 # [1.1.0](https://github.com/hainsdominic/patientprogress/compare/v1.0.1...v1.1.0) (2021-06-18)
 
 
