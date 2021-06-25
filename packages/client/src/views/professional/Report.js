@@ -5,6 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { format, parseISO } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 import { withRouter } from 'react-router-dom';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+
+import ReportPDF from './ReportPDF';
 
 import Spinner from '../../components/Spinner/Spinner';
 
@@ -152,14 +155,6 @@ const Report = ({
                           Other complaints: {report.otherComplaints}
                         </GridItem>
                       )}
-
-                      <GridItem xs={12}>
-                        <br />
-                        Occupation: {report.occupation}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        Employment status: {report.employmentStatus}
-                      </GridItem>
                     </GridContainer>
                   </GridItem>
                   <GridItem xs={12}>
@@ -277,8 +272,8 @@ const Report = ({
                       <GridItem xs={12}>
                         <br />
                         Plan of management:{' '}
-                        {report.objectives.toString()
-                          ? report.objectives.toString() +
+                        {report.planOfManagement.toString()
+                          ? report.planOfManagement.toString() +
                             (report.planOfManagementOther.toString()
                               ? report.planOfManagementOther.toString()
                               : '')
@@ -304,6 +299,14 @@ const Report = ({
                 <Button onClick={() => history.goBack()} color='danger'>
                   {t('professional.patient.back')}
                 </Button>
+                <PDFDownloadLink
+                  document={<ReportPDF report={report} patient={patient} />}
+                  fileName={`report-${patient.name}.pdf`}
+                >
+                  <Button color='info'>
+                    {t('professional.patient.export')}
+                  </Button>
+                </PDFDownloadLink>
               </CardFooter>
             </Card>
           </GridItem>
@@ -316,7 +319,6 @@ const Report = ({
 Report.propTypes = {
   getPatient: PropTypes.func.isRequired,
   professional: PropTypes.object.isRequired,
-  getCurrentProfile: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

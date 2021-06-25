@@ -135,7 +135,7 @@ const GetCommorbidities = ({ answers }) => {
 };
 
 // Create Document Component
-const PDF = ({ questionnaire, patient, answers }) => {
+const QuestionnairePDF = ({ questionnaire, patient, answers }) => {
   const { t } = useTranslation();
   return (
     <Document>
@@ -691,4 +691,4 @@ const PDF = ({ questionnaire, patient, answers }) => {
   );
 };
 
-export default PDF;
+export default QuestionnairePDF;

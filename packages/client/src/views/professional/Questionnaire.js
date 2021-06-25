@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import { withRouter } from 'react-router-dom';
 import flatten from 'flat';
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import PDF from './PDF';
+import QuestionnairePDF from './QuestionnairePDF';
 
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -204,7 +204,7 @@ const Questionnaire = ({
                 </Button>
                 <PDFDownloadLink
                   document={
-                    <PDF
+                    <QuestionnairePDF
                       questionnaire={questionnaire}
                       patient={patient}
                       answers={answersData}
