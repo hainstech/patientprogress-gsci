@@ -9,6 +9,7 @@ const got = require('got');
 const User = require('../../models/User');
 const Professional = require('../../models/Professional');
 const Patient = require('../../models/Patient');
+const Questionnaire = require('../../models/Questionnaire');
 
 const admin = require('../../middleware/admin');
 const auth = require('../../middleware/auth');
@@ -97,6 +98,16 @@ router.post(
 
       //@feature create patient file
 
+      // Get initial questionnaires to send: intake + BPI
+      const initialIntake = await Questionnaire.findOne({
+        title: 'Initial Intake Form',
+        language,
+      });
+      const BPI = await Questionnaire.findOne({
+        title: 'Brief Pain Inventory',
+        language,
+      });
+
       let patient = new Patient({
         name,
         dob,
@@ -105,6 +116,16 @@ router.post(
         research,
         user: user.id,
         professional,
+        questionnairesToFill: [
+          {
+            questionnaire: initialIntake._id,
+            date: new Date(),
+          },
+          {
+            questionnaire: BPI._id,
+            date: new Date(),
+          },
+        ],
       });
 
       user.patientId = patient.id;
