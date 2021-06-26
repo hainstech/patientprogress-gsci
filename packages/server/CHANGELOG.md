@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/hainsdominic/patientprogress/compare/v1.2.0...v1.2.1) (2021-06-26)
+
+
+### Features
+
+* **api:** rate-limiter and rate-slower ([054bfb9](https://github.com/hainsdominic/patientprogress/commit/054bfb9a9c6c16666bfa078d886bf52910a8d155))
+* **client:** initial questionnaire sending ([2ee6df8](https://github.com/hainsdominic/patientprogress/commit/2ee6df82c1043e829df1a3121ddf472cbb2de890))
+
+
+
+
+
 # [1.2.0](https://github.com/hainsdominic/patientprogress/compare/v1.1.0...v1.2.0) (2021-06-25)
 
 

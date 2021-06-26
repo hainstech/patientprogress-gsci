@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/hainsdominic/patientprogress/compare/v1.2.0...v1.2.1) (2021-06-26)
+
+
+### Bug Fixes
+
+* **client:** patient questionnaires titles in the right lang. ([4a29623](https://github.com/hainsdominic/patientprogress/commit/4a2962359bf9c689d0436b449f10c7914a974b66))
+* **client:** pdf report bug ([2b048d6](https://github.com/hainsdominic/patientprogress/commit/2b048d6748c801bf2eb727730c11dc29396fda64))
+
+
+
+
+
 # [1.2.0](https://github.com/hainsdominic/patientprogress/compare/v1.1.0...v1.2.0) (2021-06-25)
 
 
