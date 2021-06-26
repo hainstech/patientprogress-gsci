@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
 const got = require('got');
+const rateLimit = require('express-rate-limit');
 
 const User = require('../../models/User');
 const Professional = require('../../models/Professional');
@@ -14,25 +15,37 @@ const Questionnaire = require('../../models/Questionnaire');
 const admin = require('../../middleware/admin');
 const auth = require('../../middleware/auth');
 
+// Rate limiter for register route
+const registerLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 60 minutes
+  max: 5, // 5 requests per hour
+  handler: function (req, res) {
+    return res.status(429).json({ errors: [{ msg: 'Try again later.' }] });
+  },
+});
+
 // @route POST api/users/
 // @desc Register patient: creates user and patient file
 // @access Public
 router.post(
   '/',
   [
-    check('email', 'Please include a valid email').isEmail(),
-    check(
-      'password',
-      'Please enter a password with 6 or more characters'
-    ).isLength({ min: 6 }),
-    check('name', 'Name is required').not().isEmpty(),
-    check('dob', 'Enter a valid date following the YYYY-MM-DD format')
-      .isISO8601()
-      .toDate(),
-    check('gender', 'Gender is required').not().isEmpty(),
-    check('language', 'Language is required').not().isEmpty(),
-    check('research', 'research is required').isBoolean(),
-    check('professional', 'Professionals id is required').not().isEmpty(),
+    registerLimiter,
+    [
+      check('email', 'Please include a valid email').isEmail(),
+      check(
+        'password',
+        'Please enter a password with 6 or more characters'
+      ).isLength({ min: 6 }),
+      check('name', 'Name is required').not().isEmpty(),
+      check('dob', 'Enter a valid date following the YYYY-MM-DD format')
+        .isISO8601()
+        .toDate(),
+      check('gender', 'Gender is required').not().isEmpty(),
+      check('language', 'Language is required').not().isEmpty(),
+      check('research', 'research is required').isBoolean(),
+      check('professional', 'Professionals id is required').not().isEmpty(),
+    ],
   ],
   async (req, res) => {
     const errors = validationResult(req);
