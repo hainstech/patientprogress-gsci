@@ -56,7 +56,7 @@ const QuestionnaireList = ({
                         color='success'
                         onClick={() => goToQuestionnaire(questionnaire._id)}
                       >
-                        {questionnaire.title}
+                        {questionnaire.schema.title}
                       </Button>
                     </p>
                   ))
