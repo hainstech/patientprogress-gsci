@@ -7,8 +7,20 @@ const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const { check, validationResult } = require('express-validator');
 const got = require('got');
+const slowDown = require('express-slow-down');
 
 const User = require('../../models/User');
+
+// Slow down requests
+const speedLimiter = slowDown({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  delayAfter: 100, // allow 100 requests per 15 minutes, then...
+  delayMs: 500, // begin adding 500ms of delay per request above 100:
+  // request # 101 is delayed by  500ms
+  // request # 102 is delayed by 1000ms
+  // request # 103 is delayed by 1500ms
+  // etc.
+});
 
 // @route GET api/auth
 // @desc Get logged-in users data
@@ -29,8 +41,11 @@ router.get('/', auth, async (req, res) => {
 router.post(
   '/',
   [
-    check('email', 'Please include a valid email').isEmail(),
-    check('password', 'Please enter a password').exists(),
+    speedLimiter,
+    [
+      check('email', 'Please include a valid email').isEmail(),
+      check('password', 'Please enter a password').exists(),
+    ],
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -102,7 +117,7 @@ router.post(
 // @access Public
 router.post(
   '/forgot',
-  [check('email', 'Please include a valid email').isEmail()],
+  [speedLimiter, [check('email', 'Please include a valid email').isEmail()]],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

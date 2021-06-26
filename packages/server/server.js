@@ -5,13 +5,17 @@ const dotenv = require('dotenv');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const xss = require('xss-clean');
-const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
 const cors = require('cors');
 const morgan = require('morgan');
 const startBot = require('./telegramBot').startBot;
 
 const app = express();
+
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
+  startBot();
+}
 
 app.use(require('express-status-monitor')());
 
@@ -38,14 +42,6 @@ if (process.env.NODE_ENV === 'developement') {
   app.use(morgan('dev'));
 }
 
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 10 minutes
-  max: 100,
-});
-
-app.use(limiter);
-
 // Prevent http param pollution
 app.use(hpp());
 
@@ -68,7 +64,3 @@ app.listen(PORT, () =>
     `Server running in ${process.env.NODE_ENV} on port ${PORT}`.green.bold
   )
 );
-
-if (process.env.NODE_ENV === 'production') {
-  startBot();
-}

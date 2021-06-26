@@ -7175,6 +7175,13 @@ express-rate-limit@^5.2.6:
   resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-5.2.6.tgz#b454e1be8a252081bda58460e0a25bf43ee0f7b0"
   integrity sha512-nE96xaxGfxiS5jP3tD3kIW1Jg9yQgX0rXCs3rCkZtmbWHEGyotwaezkLj7bnB41Z0uaOLM8W4AX6qHao4IZ2YA==
 
+express-slow-down@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/express-slow-down/-/express-slow-down-1.4.0.tgz#89e0aef6c3bb3602b70f06e0824889bd2362cc21"
+  integrity sha512-Tw5aa0plPj2STiuc2SyMw2VSjMvBgLGQHHoPhkIL4iPQcFZDueWBaiLxFZ3SrwrJhiu3b3sHNcsP6lXeWnbwAw==
+  dependencies:
+    defaults "^1.0.3"
+
 express-status-monitor@^1.3.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/express-status-monitor/-/express-status-monitor-1.3.3.tgz#72a80af9e2a04fd9f0a5b9f690f1b08da0d76a6a"
