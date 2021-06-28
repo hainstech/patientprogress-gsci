@@ -60,7 +60,7 @@ const getCommorbidities = (lastIntake) => {
       case 'commorbidityHeart':
         if (
           lastIntake[key]['heartDisease'] === 'Oui' ||
-          lastIntake['heartDisease'] === 'Yes'
+          lastIntake[key]['heartDisease'] === 'Yes'
         ) {
           comorbidities.push({
             name: key,
@@ -72,7 +72,7 @@ const getCommorbidities = (lastIntake) => {
       case 'commorbidityBloodPressure':
         if (
           lastIntake[key]['highBloodPressure'] === 'Oui' ||
-          lastIntake['highBloodPressure'] === 'Yes'
+          lastIntake[key]['highBloodPressure'] === 'Yes'
         ) {
           comorbidities.push({
             name: key,
@@ -84,7 +84,7 @@ const getCommorbidities = (lastIntake) => {
       case 'commorbidityLungDisease':
         if (
           lastIntake[key]['lungDisease'] === 'Oui' ||
-          lastIntake['lungDisease'] === 'Yes'
+          lastIntake[key]['lungDisease'] === 'Yes'
         ) {
           comorbidities.push({
             name: key,
@@ -96,7 +96,7 @@ const getCommorbidities = (lastIntake) => {
       case 'commorbidityDiabetes':
         if (
           lastIntake[key]['diabetes'] === 'Oui' ||
-          lastIntake['diabetes'] === 'Yes'
+          lastIntake[key]['diabetes'] === 'Yes'
         ) {
           comorbidities.push({
             name: key,
@@ -108,7 +108,7 @@ const getCommorbidities = (lastIntake) => {
       case 'commorbidityUlcer':
         if (
           lastIntake[key]['ulcerStomachDisease'] === 'Oui' ||
-          lastIntake['ulcerStomachDisease'] === 'Yes'
+          lastIntake[key]['ulcerStomachDisease'] === 'Yes'
         ) {
           comorbidities.push({
             name: key,
@@ -120,7 +120,7 @@ const getCommorbidities = (lastIntake) => {
       case 'commorbidityKidney':
         if (
           lastIntake[key]['kidneyDisease'] === 'Oui' ||
-          lastIntake['kidneyDisease'] === 'Yes'
+          lastIntake[key]['kidneyDisease'] === 'Yes'
         ) {
           comorbidities.push({
             name: key,
@@ -132,7 +132,7 @@ const getCommorbidities = (lastIntake) => {
       case 'commorbidityLiver':
         if (
           lastIntake[key]['liverDisease'] === 'Oui' ||
-          lastIntake['liverDisease'] === 'Yes'
+          lastIntake[key]['liverDisease'] === 'Yes'
         ) {
           comorbidities.push({
             name: key,
@@ -144,7 +144,7 @@ const getCommorbidities = (lastIntake) => {
       case 'commorbidityAnemia':
         if (
           lastIntake[key]['anemia'] === 'Oui' ||
-          lastIntake['anemia'] === 'Yes'
+          lastIntake[key]['anemia'] === 'Yes'
         ) {
           comorbidities.push({
             name: key,
@@ -156,7 +156,7 @@ const getCommorbidities = (lastIntake) => {
       case 'commorbidityCancer':
         if (
           lastIntake[key]['cancer'] === 'Oui' ||
-          lastIntake['cancer'] === 'Yes'
+          lastIntake[key]['cancer'] === 'Yes'
         ) {
           comorbidities.push({
             name: key,
@@ -168,7 +168,7 @@ const getCommorbidities = (lastIntake) => {
       case 'commorbidityDepression':
         if (
           lastIntake[key]['depression'] === 'Oui' ||
-          lastIntake['depression'] === 'Yes'
+          lastIntake[key]['depression'] === 'Yes'
         ) {
           comorbidities.push({
             name: key,
@@ -180,7 +180,7 @@ const getCommorbidities = (lastIntake) => {
       case 'commorbidityOsteoarthritis':
         if (
           lastIntake[key]['osteoarthritis'] === 'Oui' ||
-          lastIntake['osteoarthritis'] === 'Yes'
+          lastIntake[key]['osteoarthritis'] === 'Yes'
         ) {
           comorbidities.push({
             name: key,
@@ -192,7 +192,7 @@ const getCommorbidities = (lastIntake) => {
       case 'commorbidityRheumatoidArthritis':
         if (
           lastIntake[key]['rheumatoidArthritis'] === 'Oui' ||
-          lastIntake['rheumatoidArthritis'] === 'Yes'
+          lastIntake[key]['rheumatoidArthritis'] === 'Yes'
         ) {
           comorbidities.push({
             name: key,
