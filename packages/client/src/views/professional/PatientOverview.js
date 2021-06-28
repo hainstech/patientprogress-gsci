@@ -190,7 +190,7 @@ const PatientOverview = ({
                   'No initial intake filled yet'
                 )}
 
-                {patient.reports.length > 0 ? (
+                {patient.reports.length > 0 && (
                   <div style={{ height: 400, width: '100%' }}>
                     <DataGrid
                       disableSelectionOnClick
@@ -226,10 +226,6 @@ const PatientOverview = ({
                       pageSize={5}
                     />
                   </div>
-                ) : (
-                  <p style={{ textAlign: 'center' }}>
-                    {t('professional.patient.none')}
-                  </p>
                 )}
               </CardBody>
             </Card>
