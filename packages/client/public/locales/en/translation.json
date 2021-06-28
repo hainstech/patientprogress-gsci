@@ -62,6 +62,7 @@
       "yourDescription": "Your description",
       "language": "Language",
       "submit": "Update Preferences",
+      "aboutYourself": "About yourself",
       "about": "About your practice",
       "yearDegree": "Year of chiropractic degree obtention",
       "country": "Choose a country",
@@ -81,7 +82,7 @@
       "nonAdjustive": "Non adjustive techniques & procedures"
     },
     "patient": {
-      "view": "view",
+      "view": "View",
       "answers": "Answers",
       "questionnaire": "Questionnaire",
       "date": "Date",
@@ -111,7 +112,9 @@
         "work": "Work",
         "sport": "Sport",
         "disability/symptom": "Disability/Symptom"
-      }
+      },
+      "reports": "Reports",
+      "newReport": "New report"
     }
   },
   "sidebar": {
@@ -168,7 +171,6 @@
     "occupation": "Occupation",
     "employmentStatus": "Employment Status",
     "chiefComplaint": "Chief complaint",
-    "chiefComplaintfr": "Chief complaint",
     "onsetDate": "Date of onset",
     "onsetType": "Type of onset",
     "injuryMechanism": "Mecanism of injury",

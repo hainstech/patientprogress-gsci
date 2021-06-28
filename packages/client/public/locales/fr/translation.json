@@ -62,6 +62,7 @@
       "yourDescription": "Votre description",
       "language": "Langue",
       "submit": "Mettre À Jour",
+      "aboutYourself": "À propos de vous",
       "about": "À propos de votre pratique",
       "yearDegree": "Année d'obtention du diplôme en chiropratique",
       "country": "Choisissez un pays",
@@ -81,7 +82,7 @@
       "nonAdjustive": "Techniques et procédures non ajustives"
     },
     "patient": {
-      "view": "voir",
+      "view": "Voir",
       "answers": "Réponses",
       "questionnaire": "Questionnaire",
       "date": "Date",
@@ -111,7 +112,9 @@
         "work": "Travail",
         "sport": "Sport",
         "disability/symptom": "Incapacité/Symptôme"
-      }
+      },
+      "reports": "Rapports",
+      "newReport": "Nouveau Rapport"
     }
   },
   "sidebar": {

@@ -173,7 +173,9 @@ const PatientOverview = ({
             </Card>
             <Card>
               <CardHeader color='danger'>
-                <h4 className={classes.cardTitleWhite}>Reports</h4>
+                <h4 className={classes.cardTitleWhite}>
+                  {t('professional.patient.reports')}
+                </h4>
               </CardHeader>
               <CardBody>
                 {patient.questionnaires.filter(
@@ -181,7 +183,7 @@ const PatientOverview = ({
                 ).length > 0 ? (
                   <Link to={`/professional/patients/${match.params.id}/report`}>
                     <Button color='success' style={{ marginBottom: 15 }}>
-                      Fill a new report
+                      {t('professional.patient.newReport')}
                     </Button>
                   </Link>
                 ) : (
@@ -209,7 +211,7 @@ const PatientOverview = ({
                       columns={[
                         {
                           field: 'id',
-                          headerName: `View`,
+                          headerName: t('professional.patient.view'),
                           sortable: false,
                           width: 115,
                           disableClickEventBubbling: true,

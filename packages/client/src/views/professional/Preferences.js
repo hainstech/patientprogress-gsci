@@ -193,7 +193,7 @@ const Preferences = ({
               </CardHeader>
               <form onSubmit={formik.handleSubmit}>
                 <CardBody>
-                  <h5>About yourself</h5>
+                  <h5>{t('professional.preferences.aboutYourself')}</h5>
                   <GridContainer>
                     <GridItem xs={12} lg={6}>
                       <FormControl
