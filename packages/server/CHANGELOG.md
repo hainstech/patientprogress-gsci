@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/hainsdominic/patientprogress/compare/v1.2.1...v1.2.2) (2021-06-28)
+
+
+### Bug Fixes
+
+* **client:** translations and other fixes ([2d8c0cf](https://github.com/hainsdominic/patientprogress/commit/2d8c0cf5078be772a663b64f153e6042a8c0f627)), closes [#35](https://github.com/hainsdominic/patientprogress/issues/35)
+
+
+
+
+
 ## [1.2.1](https://github.com/hainsdominic/patientprogress/compare/v1.2.0...v1.2.1) (2021-06-26)
 
 
