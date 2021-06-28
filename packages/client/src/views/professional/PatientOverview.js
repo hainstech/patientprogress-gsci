@@ -66,7 +66,13 @@ const PatientOverview = ({
       parseDisplayList(await getQuestionnaireList());
     };
     fetchQuestionnaire();
-  }, [getPatient, getQuestionnaireList, match.params.id, parseDisplayList]);
+  }, [
+    getPatient,
+    patient,
+    getQuestionnaireList,
+    match.params.id,
+    parseDisplayList,
+  ]);
 
   const formik = useFormik({
     initialValues: {
