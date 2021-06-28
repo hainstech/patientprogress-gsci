@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
+import { zonedTimeToUtc } from 'date-fns-tz';
 
 import {
   FormControl,
@@ -235,14 +236,24 @@ const getRelevantScore = (lastIntake, questionnaires) => {
   let relevantScore = [];
   let last;
   let last2;
+  let BPI;
   switch (lastIntake.chiefComplaintRegion) {
     case 'Cou':
     case 'Neck pain':
       last = getLastQuestionnaire(questionnaires, 'Neck Disability Index');
+      BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
+      if (BPI) {
+        relevantScore.push({
+          name: BPI.questionnaire.schema.title,
+          score: BPI.score,
+          date: BPI.time,
+        });
+      }
       if (last) {
         relevantScore.push({
           name: last.questionnaire.schema.title,
           score: last.score,
+          date: last.time,
         });
       }
       break;
@@ -253,26 +264,45 @@ const getRelevantScore = (lastIntake, questionnaires) => {
         questionnaires,
         'The Keele STarT Back Screening Tool'
       );
+      BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
+      if (BPI) {
+        relevantScore.push({
+          name: BPI.questionnaire.schema.title,
+          score: BPI.score,
+          date: BPI.time,
+        });
+      }
       if (last) {
         relevantScore.push({
           name: last.questionnaire.schema.title,
           score: last.score,
+          date: last.time,
         });
       }
       if (last2) {
         relevantScore.push({
           name: last2.questionnaire.schema.title,
           score: last2.score,
+          date: last2.time,
         });
       }
       break;
     case 'Membre supérieur (épaule, coude ou poignet)':
     case 'Upper extremity (shoulder, elbow or wrist)':
       last = getLastQuestionnaire(questionnaires, 'QuickDASH');
+      BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
+      if (BPI) {
+        relevantScore.push({
+          name: BPI.questionnaire.schema.title,
+          score: BPI.score,
+          date: BPI.time,
+        });
+      }
       if (last) {
         relevantScore.push({
           name: last.questionnaire.schema.title,
           score: last.score,
+          date: last.time,
         });
       }
       break;
@@ -283,15 +313,32 @@ const getRelevantScore = (lastIntake, questionnaires) => {
         questionnaires,
         'Lower Extremity Functional Scale (LEFS)'
       );
+      BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
+      if (BPI) {
+        relevantScore.push({
+          name: BPI.questionnaire.schema.title,
+          score: BPI.score,
+          date: BPI.time,
+        });
+      }
       if (last) {
         relevantScore.push({
           name: last.questionnaire.schema.title,
           score: last.score,
+          date: last.time,
         });
       }
       break;
     case 'Aucune de ces régions':
     case 'Not in the options':
+      BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
+      if (BPI) {
+        relevantScore.push({
+          name: BPI.questionnaire.schema.title,
+          score: BPI.score,
+          date: BPI.time,
+        });
+      }
       break;
     default:
       break;
@@ -388,6 +435,7 @@ const NewReport = ({
   const formik = useFormik({
     initialValues: {
       diagnosis: '',
+      comments: '',
       numberOfTreatments: '',
       frequency: null,
       planOfManagementOther: '',
@@ -422,14 +470,16 @@ const NewReport = ({
           <GridItem xs={12} lg={8}>
             <Card>
               <CardHeader color='danger'>
-                <h4 className={classes.cardTitleWhite}>New report</h4>
+                <h4 className={classes.cardTitleWhite}>
+                  {t('report.newReport')}
+                </h4>
               </CardHeader>
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={6}>
                     <GridContainer>
                       <GridItem xs={12}>
-                        Patient's Name: {patient.name}
+                        {t('report.name')}: {patient.name}
                       </GridItem>
                       <GridItem xs={12}>
                         {t('professional.patient.gender')}:{' '}
@@ -438,20 +488,23 @@ const NewReport = ({
                           ? t(`professional.patient.${patient.gender}`)
                           : patient.gender}
                       </GridItem>
-                      <GridItem xs={12}>Age: {intake.age}</GridItem>
+                      <GridItem xs={12}>
+                        {t('report.age')}: {intake.age}
+                      </GridItem>
                     </GridContainer>
                   </GridItem>
                   <GridItem xs={12} sm={6}>
                     <GridContainer>
                       <GridItem xs={12}>
-                        Date: {format(intake.date, 'yyyy/MM/dd')}
+                        {t('report.date')}: {format(intake.date, 'yyyy/MM/dd')}
                       </GridItem>
                       <GridItem xs={12}>
-                        Professional's Name: {intake.professionalName}
+                        {t('report.professional')}: {intake.professionalName}
                       </GridItem>
                       <GridItem xs={12}>
                         {/* #TODO Translate the profession */}
-                        Profession: {intake.professionalProfession}
+                        {t('report.profession')}:{' '}
+                        {intake.professionalProfession}
                       </GridItem>
                     </GridContainer>
                   </GridItem>
@@ -459,16 +512,17 @@ const NewReport = ({
                     <br />
                     <GridContainer>
                       <GridItem xs={12}>
-                        Civil status: {intake.civilStatus}
+                        {t('report.civilStatus')}: {intake.civilStatus}
                       </GridItem>
                       <GridItem xs={12}>
-                        Number of children: {intake.nbChildrens}
+                        {t('report.nbChildrens')}: {intake.nbChildrens}
                       </GridItem>
                       <GridItem xs={12}>
-                        Occupation: {intake.occupation}
+                        {t('report.occupation')}: {intake.occupation}
                       </GridItem>
                       <GridItem xs={12}>
-                        Employment status: {intake.employmentStatus}
+                        {t('report.employmentStatus')}:{' '}
+                        {intake.employmentStatus}
                       </GridItem>
                     </GridContainer>
                   </GridItem>
@@ -476,44 +530,32 @@ const NewReport = ({
                     <br />
                     <GridContainer>
                       <GridItem xs={12}>
-                        Chief complaint: {intake.chiefComplaint}
+                        {t('report.chiefComplaint')}: {intake.chiefComplaint}
                       </GridItem>
                       <GridItem xs={12}>
-                        Chief complaint region: {intake.chiefComplaintRegion}
+                        {t('report.onsetDate')}: {intake.chiefComplaintStart}
                       </GridItem>
                       <GridItem xs={12}>
-                        Chief complaint start: {intake.chiefComplaintStart}
+                        {t('report.onsetType')}: {intake.chiefComplaintAppear}
                       </GridItem>
                       <GridItem xs={12}>
-                        Chief complaint appearance:{' '}
-                        {intake.chiefComplaintAppear}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        Chief complaint description:{' '}
+                        {t('report.injuryMechanism')}:{' '}
                         {intake.chiefComplaintAppearDescription}
                       </GridItem>
                       <GridItem xs={12}>
-                        Chief complaint evolving:{' '}
-                        {intake.chiefComplaintEvolving}
+                        {t('report.evolution')}: {intake.chiefComplaintEvolving}
                       </GridItem>
                       <GridItem xs={12}>
-                        Chief complaint reccurence:{' '}
+                        {t('report.recurrence')}:{' '}
                         {intake.chiefComplaintRecurrence}
                       </GridItem>
 
                       {intake.otherComplaints && (
                         <GridItem xs={12}>
-                          Other complaints: {intake.otherComplaints}
+                          {t('report.secondaryComplaints')}:{' '}
+                          {intake.otherComplaints}
                         </GridItem>
                       )}
-
-                      <GridItem xs={12}>
-                        <br />
-                        Occupation: {intake.occupation}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        Employment status: {intake.employmentStatus}
-                      </GridItem>
                     </GridContainer>
                   </GridItem>
                   <GridItem xs={12}>
@@ -529,19 +571,21 @@ const NewReport = ({
                                 key={`${i}-${comorbidity.name}`}
                                 xs={12}
                               >
-                                Comorbidity: {comorbidity.name}
+                                {t('report.comorbidity')}:{' '}
+                                {t(`report.${comorbidity.name}`)}
                               </GridItem>
                               <GridItem
                                 key={`${i}-${comorbidity.treatment}`}
                                 xs={12}
                               >
-                                Is receiving treatment: {comorbidity.treatment}
+                                {t('report.isReveivingTreatment')}:{' '}
+                                {comorbidity.treatment}
                               </GridItem>
                               <GridItem
                                 key={`${i}-${comorbidity.activityLimitation}`}
                                 xs={12}
                               >
-                                Activity limitaion:{' '}
+                                {t('report.activityLimitation')}:{' '}
                                 {comorbidity.activityLimitation}
                               </GridItem>
                             </GridContainer>
@@ -549,9 +593,9 @@ const NewReport = ({
                       </GridItem>
                       <GridItem xs={12}>
                         <br />
-                        Red flags:{' '}
+                        {t('report.redFlags')}:{' '}
                         {intake.redFlags.toString()
-                          ? intake.redFlags.toString()
+                          ? intake.redFlags.join(', ')
                           : 'None'}
                       </GridItem>
                     </GridContainer>
@@ -560,17 +604,26 @@ const NewReport = ({
                     <br />
                     <GridContainer>
                       <GridItem xs={12}>
-                        Relevant scores:{' '}
+                        {t('report.relevantScores')}:{' '}
                         {intake.relevantScore.length === 0 && 'None'}
                         {intake.relevantScore &&
                           intake.relevantScore.map((score, i) => (
                             <GridContainer key={i}>
                               <GridItem key={`${i}-${score.name}`} xs={12}>
-                                {score.name}:
+                                {score.name} (
+                                {format(
+                                  zonedTimeToUtc(
+                                    parseISO(score.date),
+                                    Intl.DateTimeFormat().resolvedOptions()
+                                      .timeZone
+                                  ),
+                                  'yyyy/MM/dd'
+                                )}
+                                ):
                               </GridItem>
                               {score.score.map(({ title, value }, y) => (
                                 <GridItem key={y + i} xs={12}>
-                                  {title}: {value}
+                                  {t(`report.scores.${title}`)}: {value}
                                 </GridItem>
                               ))}
                             </GridContainer>
@@ -582,13 +635,13 @@ const NewReport = ({
                     <br />
                     <GridContainer>
                       <GridItem xs={12}>
-                        Perceived health quality: {intake.health}
+                        {t('report.healthQuality')}: {intake.health}
                       </GridItem>
                       <GridItem xs={12}>
-                        Perceived quality of life: {intake.qualityOfLife}
+                        {t('report.qualityOfLife')}: {intake.qualityOfLife}
                       </GridItem>
                       <GridItem xs={12}>
-                        Perceived health satisfaction:{' '}
+                        {t('report.healthSatisfaction')}:{' '}
                         {intake.healthSatisfaction}
                       </GridItem>
                     </GridContainer>
@@ -598,21 +651,37 @@ const NewReport = ({
                     <br />
                     <GridContainer>
                       <GridItem xs={12}>
-                        Global expection of change (pain):{' '}
+                        {t('report.gecPain')}:{' '}
                         {intake.globalExpectationOfChange.pain}/10
                       </GridItem>
                       <GridItem xs={12}>
-                        Global expection of change (function):{' '}
+                        {t('report.gecFunction')}:{' '}
                         {intake.globalExpectationOfChange.function}/10
                       </GridItem>
                       <GridItem xs={12}>
-                        Global expection of change (quality of life):{' '}
+                        {t('report.gecQualityOfLife')}:{' '}
                         {intake.globalExpectationOfChange.qualityOfLife}/10
                       </GridItem>
                     </GridContainer>
                   </GridItem>
                   <form onSubmit={formik.handleSubmit}>
                     <GridItem xs={12}>
+                      <GridContainer>
+                        <GridItem xs={12} sm={8}>
+                          <FormControl
+                            fullWidth
+                            className={inputClasses.formControl}
+                          >
+                            <TextField
+                              label={t('report.comments')}
+                              type='text'
+                              id={'comments'}
+                              value={formik.values.comments}
+                              onChange={formik.handleChange}
+                            />
+                          </FormControl>
+                        </GridItem>
+                      </GridContainer>
                       <GridContainer>
                         <GridItem xs={12} sm={4}>
                           <FormControl
@@ -621,7 +690,7 @@ const NewReport = ({
                           >
                             <TextField
                               required
-                              label='Diagnosis'
+                              label={t('report.diagnosis')}
                               type='text'
                               id={'diagnosis'}
                               value={formik.values.diagnosis}
@@ -629,6 +698,7 @@ const NewReport = ({
                             />
                           </FormControl>
                         </GridItem>
+
                         <GridItem xs={12} sm={4}>
                           <FormControl
                             fullWidth
@@ -636,7 +706,7 @@ const NewReport = ({
                           >
                             <TextField
                               required
-                              label='Number of treatments'
+                              label={t('report.nbTx')}
                               type='number'
                               id={'numberOfTreatments'}
                               value={formik.values.numberOfTreatments}
@@ -652,7 +722,7 @@ const NewReport = ({
                             component='fieldset'
                           >
                             <FormLabel component='legend'>
-                              Treatment frequency
+                              {t('report.frequency')}
                             </FormLabel>
 
                             <RadioGroup
@@ -664,17 +734,17 @@ const NewReport = ({
                               <FormControlLabel
                                 value='intensive'
                                 control={<Radio required />}
-                                label='Intensive'
+                                label={t('report.intensive')}
                               />
                               <FormControlLabel
                                 value='periodic'
                                 control={<Radio />}
-                                label='Periodic'
+                                label={t('report.periodic')}
                               />
                               <FormControlLabel
                                 value='prn'
                                 control={<Radio />}
-                                label='PRN'
+                                label={t('report.prn')}
                               />
                             </RadioGroup>
                           </FormControl>
@@ -686,7 +756,7 @@ const NewReport = ({
                             component='fieldset'
                           >
                             <FormLabel component='legend'>
-                              Objective(s)
+                              {t('report.objectives')}
                             </FormLabel>
                             <FormGroup>
                               <GridContainer>
@@ -698,7 +768,7 @@ const NewReport = ({
                                     onChange={handleObjectivesChange}
                                     name='painRelieving'
                                     control={<Checkbox name='painRelieving' />}
-                                    label='Pain relieving'
+                                    label={t('report.painRelieving')}
                                   />
                                 </GridItem>
                                 <GridItem xs={12} lg={6}>
@@ -711,7 +781,7 @@ const NewReport = ({
                                     control={
                                       <Checkbox name='improveFunction' />
                                     }
-                                    label='Improve function'
+                                    label={t('report.improveFunction')}
                                   />
                                 </GridItem>
                                 <GridItem xs={12} lg={6}>
@@ -722,7 +792,7 @@ const NewReport = ({
                                     onChange={handleObjectivesChange}
                                     name='readaptation'
                                     control={<Checkbox name='readaptation' />}
-                                    label='Readaptation'
+                                    label={t('report.readaptation')}
                                   />
                                 </GridItem>
                                 <GridItem xs={12} lg={6}>
@@ -731,7 +801,7 @@ const NewReport = ({
                                     onChange={handleObjectivesChange}
                                     name='maintenance'
                                     control={<Checkbox name='maintenance' />}
-                                    label='Maintenance'
+                                    label={t('report.maintenance')}
                                   />
                                 </GridItem>
                                 <GridItem xs={12} lg={6}>
@@ -740,7 +810,7 @@ const NewReport = ({
                                     onChange={handleObjectivesChange}
                                     name='prevention'
                                     control={<Checkbox name='prevention' />}
-                                    label='Prevention'
+                                    label={t('report.prevention')}
                                   />
                                 </GridItem>
                                 <GridItem xs={12} lg={6}>
@@ -753,7 +823,7 @@ const NewReport = ({
                                     control={
                                       <Checkbox name='therapeuticTrial' />
                                     }
-                                    label='Therapeutic trial'
+                                    label={t('report.therapeuticTrial')}
                                   />
                                 </GridItem>
                               </GridContainer>
@@ -767,7 +837,7 @@ const NewReport = ({
                             component='fieldset'
                           >
                             <FormLabel component='legend'>
-                              Plan of Management
+                              {t('report.planOfManagement')}
                             </FormLabel>
                             <FormGroup>
                               <GridContainer>
@@ -781,7 +851,9 @@ const NewReport = ({
                                         onChange={handlePlanOfManagementChange}
                                         name={technique}
                                         control={<Checkbox name={technique} />}
-                                        label={technique}
+                                        label={t(
+                                          `report.techniques.${technique}`
+                                        )}
                                       />
                                     </GridItem>
                                   )
@@ -796,7 +868,9 @@ const NewReport = ({
                                         onChange={handlePlanOfManagementChange}
                                         name={technique}
                                         control={<Checkbox name={technique} />}
-                                        label={technique}
+                                        label={t(
+                                          `report.techniques.${technique}`
+                                        )}
                                       />
                                     </GridItem>
                                   )
@@ -811,7 +885,7 @@ const NewReport = ({
                             className={inputClasses.formControl}
                           >
                             <TextField
-                              label='Other (separate by comma)'
+                              label={t('report.other')}
                               type='text'
                               id={'planOfManagementOther'}
                               value={formik.values.planOfManagementOther}
@@ -825,7 +899,7 @@ const NewReport = ({
                             className={inputClasses.formControl}
                           >
                             <TextField
-                              label='External Consultation'
+                              label={t('report.externalConsultation')}
                               type='text'
                               id={'planOfManagementExternalConsultation'}
                               value={
@@ -842,7 +916,7 @@ const NewReport = ({
                             className={inputClasses.formControl}
                           >
                             <Typography id='discrete-slider' gutterBottom>
-                              Global Expectation Of Clinical Change
+                              {t('report.gecc')}
                             </Typography>
                             <Slider
                               onChange={(element, value) =>

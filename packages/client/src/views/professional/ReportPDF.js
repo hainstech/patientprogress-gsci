@@ -65,106 +65,118 @@ const ReportPDF = ({ report, patient }) => {
         </View>
         <View style={styles.answersContainer}>
           <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>Patient's Name: {patient.name}</Text>
+            <Text style={styles.answer}>
+              {t('report.name')}: {patient.name}
+            </Text>
             <Text style={styles.answer}>
               {t('register.gender')}:{' '}
               {patient.gender === 'Male' || patient.gender === 'Female'
                 ? t(`professional.patient.${patient.gender}`)
                 : patient.gender}
             </Text>
-            <Text style={styles.answer}>Age: {report.age}</Text>
+            <Text style={styles.answer}>
+              {t('report.age')}: {report.age}
+            </Text>
           </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              Date:{' '}
+              {t('report.date')}:{' '}
               {format(zonedTimeToUtc(parseISO(report.date)), 'yyyy/MM/dd')}
             </Text>
             <Text style={styles.answer}>
-              Professional's Name: {report.professionalName}
+              {t('report.professional')}: {report.professionalName}
             </Text>
             <Text style={styles.answer}>
-              Profession: {report.professionalProfession}
-            </Text>
-          </View>
-          <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>
-              Civil status: {report.civilStatus}
-            </Text>
-            <Text style={styles.answer}>
-              Number of children: {report.nbChildrens}
-            </Text>
-          </View>
-          <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>Occupation: {report.occupation}</Text>
-            <Text style={styles.answer}>
-              Employment status: {report.employmentStatus}
+              {t('report.profession')}: {report.professionalProfession}
             </Text>
           </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              Chief complaint: {report.chiefComplaint}
+              {t('report.civilStatus')}: {report.civilStatus}
             </Text>
             <Text style={styles.answer}>
-              Chief complaint region: {report.chiefComplaintRegion}
-            </Text>
-            <Text style={styles.answer}>
-              Chief complaint start: {report.chiefComplaintStart}
+              {t('report.nbChildrens')}: {report.nbChildrens}
             </Text>
           </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              Chief complaint appearance: {report.chiefComplaintAppear}
+              {t('report.occupation')}: {report.occupation}
             </Text>
             <Text style={styles.answer}>
-              Chief complaint evolving: {report.chiefComplaintEvolving}
+              {t('report.employmentStatus')}: {report.employmentStatus}
             </Text>
           </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              Chief complaint description:{' '}
+              {t('report.chiefComplaint')}: {report.chiefComplaint}
+            </Text>
+            <Text style={styles.answer}>
+              {t('report.onsetDate')}: {report.chiefComplaintStart}
+            </Text>
+          </View>
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.onsetType')}: {report.chiefComplaintAppear}
+            </Text>
+            <Text style={styles.answer}>
+              {t('report.evolution')}: {report.chiefComplaintEvolving}
+            </Text>
+          </View>
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.injuryMechanism')}:{' '}
               {report.chiefComplaintAppearDescription}
             </Text>
           </View>
+          {/* here */}
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              Chief complaint reccurence: {report.chiefComplaintRecurrence}
+              {t('report.recurrence')}: {report.chiefComplaintRecurrence}
             </Text>
-            {report.otherComplaints && (
+            {report.otherComplaints !== '' && (
               <Text style={styles.answer}>
-                Other complaints: {report.otherComplaints}
+                {t('report.secondaryComplaints')}: {report.otherComplaints}
               </Text>
             )}
           </View>
-          {report.comorbidities.length === 0 && (
-            <View wrap={false} style={styles.answerRow}>
-              <Text style={styles.answer}>No commorbidities</Text>
-            </View>
-          )}
           {report.comorbidities.map((comorbidity, i) => (
             <View key={i} wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>
-                Comorbidity: {comorbidity.name}, Activity limitaion:{' '}
-                {comorbidity.activityLimitation}, Under treatment:{' '}
-                {comorbidity.treatment}
+                {t('report.comorbidity')}: {comorbidity.name},{' '}
+                {t('report.activityLimitation')}:{' '}
+                {comorbidity.activityLimitation},{' '}
+                {t('report.isReveivingTreatment')}: {comorbidity.treatment}
               </Text>
             </View>
           ))}
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
               Red flags:{' '}
-              {report.redFlags.toString() ? report.redFlags.toString() : 'None'}
+              {report.redFlags.toString()
+                ? report.redFlags.join(', ')
+                : t('report.none')}
             </Text>
           </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              Relevant scores: {report.relevantScore.length === 0 && 'None'}
+              Relevant scores:{' '}
+              {report.relevantScore.length === 0 && t('report.none')}
               {report.relevantScore &&
                 report.relevantScore.map((score, i) => (
                   <View key={i} wrap={false} style={styles.answerRow}>
                     <Text style={styles.answer}>
-                      {score.name},{' '}
+                      {score.name} (
+                      {format(
+                        zonedTimeToUtc(
+                          parseISO(score.date),
+                          Intl.DateTimeFormat().resolvedOptions().timeZone
+                        ),
+                        'yyyy/MM/dd'
+                      )}
+                      ):,{' '}
                       {score.score.map(
-                        ({ title, value }, y) => `${title}: ${value}`
+                        ({ title, value }) =>
+                          `${t(`report.scores.${title}`)}: ${value}`
                       )}
                     </Text>
                   </View>
@@ -173,30 +185,29 @@ const ReportPDF = ({ report, patient }) => {
           </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              Perceived health quality: {report.health}
+              {t('report.healthQuality')}: {report.health}
             </Text>
             <Text style={styles.answer}>
-              Perceived quality of life: {report.qualityOfLife}
-            </Text>
-          </View>
-          <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>
-              Perceived health satisfaction: {report.healthSatisfaction}
+              {t('report.qualityOfLife')}: {report.qualityOfLife}
             </Text>
           </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              Global expection of change (pain):{' '}
-              {report.globalExpectationOfChange.pain}/10
+              {t('report.healthSatisfaction')}: {report.healthSatisfaction}
+            </Text>
+          </View>
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.gecPain')}: {report.globalExpectationOfChange.pain}/10
             </Text>
             <Text style={styles.answer}>
-              Global expection of change (function):{' '}
+              {t('report.gecFunction')}:{' '}
               {report.globalExpectationOfChange.function}/10
             </Text>
           </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              Global expection of change (quality of life):{' '}
+              {t('report.gecQualityOfLife')}:{' '}
               {report.globalExpectationOfChange.qualityOfLife}/10
             </Text>
           </View>
@@ -204,37 +215,50 @@ const ReportPDF = ({ report, patient }) => {
             <Text>Filled by the professional</Text>
           </View>
           <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>Diagnosis: {report.diagnosis}</Text>
             <Text style={styles.answer}>
-              Number of treatment: {report.numberOfTreatments}
+              {t('report.comments')}: {report.comments}
             </Text>
-            <Text style={styles.answer}>Frequency : {report.frequency}</Text>
+          </View>
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.diagnosis')}: {report.diagnosis}
+            </Text>
+            <Text style={styles.answer}>
+              {t('report.nbTx')}: {report.numberOfTreatments}
+            </Text>
+            <Text style={styles.answer}>
+              {t('report.frequency')}: {report.frequency}
+            </Text>
           </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
               Objectives:{' '}
               {report.objectives.toString()
-                ? report.objectives.toString()
-                : 'None'}
+                ? report.objectives
+                    .map((item) => t(`report.${item}`))
+                    .join(', ')
+                : t('report.none')}
             </Text>
           </View>
-          {/* {marker} */}
+
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              Plan of management:{' '}
+              {t('report.planOfManagement')}:{' '}
               {report.planOfManagement.toString()
-                ? report.planOfManagement.toString() +
+                ? report.planOfManagement
+                    .map((item) => t(`report.techniques.${item}`))
+                    .join(', ') +
                   (report.planOfManagementOther.toString()
-                    ? report.planOfManagementOther.toString()
+                    ? ', ' + report.planOfManagementOther.join(', ')
                     : '')
-                : 'None'}
+                : t('report.none')}
             </Text>
           </View>
 
           {report.planOfManagementExternalConsultation !== '' && (
             <View wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>
-                External Consultation:{' '}
+                {t('report.externalConsultation')}:{' '}
                 {report.planOfManagementExternalConsultation}
               </Text>
             </View>
@@ -242,8 +266,7 @@ const ReportPDF = ({ report, patient }) => {
 
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              Global Expectation Of Clinical Change:{' '}
-              {report.globalExpectationOfClinicalChange}
+              {t('report.gecc')}: {report.globalExpectationOfClinicalChange}
             </Text>
           </View>
         </View>
