@@ -61,7 +61,8 @@ const PatientOverview = ({
 
   useEffect(() => {
     const fetchQuestionnaire = async () => {
-      await getPatient(match.params.id);
+      if (!patient || patient._id !== match.params.id)
+        await getPatient(match.params.id);
       parseDisplayList(await getQuestionnaireList());
     };
     fetchQuestionnaire();

@@ -60,7 +60,8 @@ const Questionnaire = ({
 
   useEffect(() => {
     const fetchQuestionnaire = async () => {
-      if (!patient) await getPatient(match.params.id);
+      if (!patient || patient._id !== match.params.id)
+        await getPatient(match.params.id);
       getQuestionnaire(patient);
     };
     fetchQuestionnaire();
