@@ -148,6 +148,7 @@ var patientSchema = new mongoose.Schema({
         {
           name: { type: String },
           score: [{ title: { type: String }, value: { type: String } }],
+          date: { type: Date },
         },
       ],
       // Quality of Life
@@ -176,6 +177,7 @@ var patientSchema = new mongoose.Schema({
       planOfManagementOther: [String],
       planOfManagementExternalConsultation: { type: String },
       globalExpectationOfClinicalChange: { type: String, required: true },
+      comments: { type: String },
     },
   ],
   questionnairesToFill: [
