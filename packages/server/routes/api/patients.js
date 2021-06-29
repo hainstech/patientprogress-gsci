@@ -34,6 +34,8 @@ router.get('/me', patient, async (req, res) => {
     );
     patient.professional.patients = undefined;
     patient.professional.user = undefined;
+    patient.professional.profile = undefined;
+    patient.professional.yearOfBirth = undefined;
     patient.user = undefined;
     patient.questionnaires = undefined;
     patient.reports = undefined;
