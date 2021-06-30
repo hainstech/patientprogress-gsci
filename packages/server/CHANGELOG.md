@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/hainsdominic/patientprogress/compare/v1.2.2...v1.3.0) (2021-06-30)
+
+
+### Features
+
+* **all:** multiple dates and questionnaires sending ([756567e](https://github.com/hainsdominic/patientprogress/commit/756567e02989da6c83b6e7ad8921531a5475d1cb))
+* **all:** scheduled update for questionnaires ([52de24f](https://github.com/hainsdominic/patientprogress/commit/52de24fbe49e18ed9147f2fa39c3243cc30bf92b))
+* **api:** score calculator for follow-up ([193dd99](https://github.com/hainsdominic/patientprogress/commit/193dd99e001b197b3dace66dfe8c889f1043262b))
+
+
+### Performance Improvements
+
+* **client:** remove professional profile when fetching pat../me ([2f20754](https://github.com/hainsdominic/patientprogress/commit/2f20754e63a304494e41b85b588b0d2bea7899ba))
+
+
+
+
+
 ## [1.2.2](https://github.com/hainsdominic/patientprogress/compare/v1.2.1...v1.2.2) (2021-06-28)
 
 

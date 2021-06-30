@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/hainsdominic/patientprogress/compare/v1.2.2...v1.3.0) (2021-06-30)
+
+
+### Bug Fixes
+
+* **client:** bigger questionnaireList ([8fb1303](https://github.com/hainsdominic/patientprogress/commit/8fb1303699d8b9031ddbc0822ea798bd2f5c096a))
+* **client:** depency useEffect ([feb3224](https://github.com/hainsdominic/patientprogress/commit/feb3224f455f146c0d27fe07dc425eddf9cf5c0b))
+* **client:** pdfs borders ([c184ec3](https://github.com/hainsdominic/patientprogress/commit/c184ec30579b1337716105bae1f207e68ac1ef12))
+
+
+### Features
+
+* **all:** multiple dates and questionnaires sending ([756567e](https://github.com/hainsdominic/patientprogress/commit/756567e02989da6c83b6e7ad8921531a5475d1cb))
+* **all:** scheduled update for questionnaires ([52de24f](https://github.com/hainsdominic/patientprogress/commit/52de24fbe49e18ed9147f2fa39c3243cc30bf92b))
+* **api:** score calculator for follow-up ([193dd99](https://github.com/hainsdominic/patientprogress/commit/193dd99e001b197b3dace66dfe8c889f1043262b))
+* **client:** conditional date selector ([d36da01](https://github.com/hainsdominic/patientprogress/commit/d36da016d5fb878accfd07aeb7b1b039f7a2c984))
+* **client:** reset recaptcha on submit ([99208d9](https://github.com/hainsdominic/patientprogress/commit/99208d96f0f78a9cd7fe0cc3f4b8f9c385381de3))
+
+
+### Performance Improvements
+
+* **client:** console warning key mapping and translation ([bf5a351](https://github.com/hainsdominic/patientprogress/commit/bf5a351d1eceb8cca1ba44157a2a9d5064972165))
+* **client:** prevent refretching on patientOverview ([9af4202](https://github.com/hainsdominic/patientprogress/commit/9af42024631468f7f0e71b817a6a3187144d54e2))
+* **client:** remove professional profile when fetching pat../me ([2f20754](https://github.com/hainsdominic/patientprogress/commit/2f20754e63a304494e41b85b588b0d2bea7899ba))
+
+
+
+
+
 ## [1.2.2](https://github.com/hainsdominic/patientprogress/compare/v1.2.1...v1.2.2) (2021-06-28)
 
 
