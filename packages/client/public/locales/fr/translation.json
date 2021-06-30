@@ -156,7 +156,7 @@
   "pdf": {
     "generated": "Généré par PatientProgress",
     "redflags": "Drapeaux Rouges",
-    "commorbidities": "Commorbidités",
+    "comorbidities": "Comorbidités",
     "familyHistory": "Antécédants Familiaux"
   },
   "report": {

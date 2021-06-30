@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     margin: 4,
     flexGrow: 1,
     padding: 4,
-    border: '1px solid black',
+    border: '1px solid #d3d3d3',
   },
   subSectionTitle: {
     fontSize: 12,
@@ -74,7 +74,7 @@ const getMultipleAnswer = (answers, key) => {
   const answersArray = answers.filter((e) => e.key === key);
   if (answersArray.length > 0) {
     const valueArray = answersArray.map(({ value }) => value);
-    return `${answersArray[0].title}: ${valueArray.toString()}`;
+    return `${answersArray[0].title}: ${valueArray.join(', ')}`;
   }
 
   return false;
@@ -177,16 +177,10 @@ const QuestionnairePDF = ({ questionnaire, patient, answers }) => {
             </View>
             <View wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>
-                {getAnswer(answers, 'address').text}
-              </Text>
-              <Text style={styles.answer}>
-                {getAnswer(answers, 'city').text}
-              </Text>
-              <Text style={styles.answer}>
-                {getAnswer(answers, 'province').text}
-              </Text>
-              <Text style={styles.answer}>
-                {getAnswer(answers, 'postalCode').text}
+                {getAnswer(answers, 'address').text},{' '}
+                {getAnswer(answers, 'city').value},{' '}
+                {getAnswer(answers, 'province').value},{' '}
+                {getAnswer(answers, 'postalCode').value}
               </Text>
             </View>
             <View wrap={false} style={styles.answerRow}>
@@ -196,6 +190,8 @@ const QuestionnairePDF = ({ questionnaire, patient, answers }) => {
               <Text style={styles.answer}>
                 {getAnswer(answers, 'officePhoneNumber').text}
               </Text>
+            </View>
+            <View wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>
                 {getAnswer(answers, 'cellularPhoneNumber').text}
               </Text>
@@ -206,11 +202,6 @@ const QuestionnairePDF = ({ questionnaire, patient, answers }) => {
               </Text>
               <Text style={styles.answer}>
                 {getAnswer(answers, 'nbChildrens').text}
-              </Text>
-            </View>
-            <View wrap={false} style={styles.answerRow}>
-              <Text style={styles.answer}>
-                {getAnswer(answers, 'educationCompleted').text}
               </Text>
             </View>
             <View wrap={false} style={styles.answerRow}>
@@ -464,9 +455,7 @@ const QuestionnairePDF = ({ questionnaire, patient, answers }) => {
                 </Text>
               )}
             </View>
-            <Text style={styles.subSectionTitle}>
-              {t('pdf.commorbidities')}
-            </Text>
+            <Text style={styles.subSectionTitle}>{t('pdf.comorbidities')}</Text>
             <GetCommorbidities answers={answers} />
             <View wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>
