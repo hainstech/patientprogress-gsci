@@ -41,6 +41,7 @@ const Login = ({ login, isAuthenticated, type }) => {
     onSubmit: ({ email, password }) => {
       const recaptchaValue = recaptchaRef.current.getValue();
       login(email, password, recaptchaValue);
+      recaptchaRef.current.reset();
     },
   });
 

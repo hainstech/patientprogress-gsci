@@ -88,6 +88,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
           professional: match.params.id,
           recaptchaValue,
         });
+        recaptchaRef.current.reset();
       }
     },
   });
