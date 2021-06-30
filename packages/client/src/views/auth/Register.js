@@ -75,8 +75,8 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
     }) => {
       if (password !== password2) {
         setAlert(t('register.passwordError'), 'danger');
+        recaptchaRef.current.reset();
       } else {
-        const recaptchaValue = recaptchaRef.current.getValue();
         register({
           name: `${firstName} ${lastName}`,
           language,
@@ -86,9 +86,8 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
           password,
           research,
           professional: match.params.id,
-          recaptchaValue,
+          recaptchaRef,
         });
-        recaptchaRef.current.reset();
       }
     },
   });

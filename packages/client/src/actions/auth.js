@@ -46,7 +46,7 @@ export const register =
     password,
     research,
     professional,
-    recaptchaValue,
+    recaptchaRef,
   }) =>
   async (dispatch) => {
     const config = {
@@ -54,6 +54,8 @@ export const register =
         'Content-Type': 'application/json',
       },
     };
+
+    const recaptchaValue = recaptchaRef.current.getValue();
 
     const body = JSON.stringify({
       name,
@@ -78,6 +80,8 @@ export const register =
     } catch (err) {
       const errors = err.response.data.errors;
 
+      recaptchaRef.current.reset();
+
       if (errors) {
         errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
       }
@@ -89,12 +93,14 @@ export const register =
   };
 
 // Login User
-export const login = (email, password, recaptchaValue) => async (dispatch) => {
+export const login = (email, password, recaptchaRef) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
+
+  const recaptchaValue = recaptchaRef.current.getValue();
 
   const body = JSON.stringify({ email, password, recaptchaValue });
 
@@ -109,6 +115,8 @@ export const login = (email, password, recaptchaValue) => async (dispatch) => {
     dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
+
+    recaptchaRef.current.reset();
 
     if (errors) {
       errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));

@@ -133,10 +133,12 @@ router.post(
           {
             questionnaire: initialIntake._id,
             date: new Date(),
+            sent: true,
           },
           {
             questionnaire: BPI._id,
             date: new Date(),
+            sent: true,
           },
         ],
       });
