@@ -104,9 +104,9 @@ const GetCommorbidities = ({ answers }) => {
   return (
     <>
       {keys.map(
-        (key) =>
+        (key, i) =>
           checkAffirmative(answers, key) && (
-            <>
+            <React.Fragment key={i}>
               <View wrap={false} style={styles.answerRow}>
                 <Text style={styles.answer}>
                   {getAnswer(answers, key).text}
@@ -127,7 +127,7 @@ const GetCommorbidities = ({ answers }) => {
                   {getAnswer(answers, `${key.split('.')[0]}.treatment`).text}
                 </Text>
               </View>
-            </>
+            </React.Fragment>
           )
       )}
     </>

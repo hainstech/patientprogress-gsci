@@ -95,6 +95,7 @@
       "useID": "Use abbreviated question identifiers",
       "sendQuestionnaire": "Send a questionnaire to fill",
       "scheduled": "Schedule a date in the future",
+      "selectDates": "Select the dates",
       "pendingQuestionnaires": "Pending questionnaires to fill",
       "Male": "Male",
       "Female": "Female",

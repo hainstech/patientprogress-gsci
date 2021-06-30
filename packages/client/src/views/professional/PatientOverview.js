@@ -307,7 +307,7 @@ const PatientOverview = ({
                   {scheduled && (
                     <GridContainer wrap='nowrap'>
                       <GridItem>
-                        <p>Select the dates:</p>
+                        <p>{t('professional.patient.selectDates')}:</p>
                       </GridItem>
                       <GridItem xs={5}>
                         <DatePicker
