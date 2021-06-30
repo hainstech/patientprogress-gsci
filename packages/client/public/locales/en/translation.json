@@ -111,7 +111,8 @@
         "risk": "Risk",
         "work": "Work",
         "sport": "Sport",
-        "disability/symptom": "Disability/Symptom"
+        "disability/symptom": "Disability/Symptom",
+        "globalImpressionOfChange": "Global Impression of Change"
       },
       "reports": "Reports",
       "newReport": "New report"

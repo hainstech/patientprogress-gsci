@@ -2,6 +2,20 @@ module.exports = {
   scoreCalculator: function (title, answers) {
     let scores = [];
     switch (title) {
+      case 'Follow-up questionnaire':
+        scores = [
+          {
+            title: 'globalImpressionOfChange',
+            value:
+              (Object.values(answers)
+                .slice(0, 3)
+                .reduce((a, b) => a + parseInt(b), 0) /
+                30) *
+                100 +
+              '/100',
+          },
+        ];
+        break;
       case 'Neck Disability Index':
         scores = [
           {

@@ -202,7 +202,8 @@
       "risk": "Risque",
       "disability/symptom": "Incapacité/Symptômes",
       "work": "Travail",
-      "sport": "Sport"
+      "sport": "Sport",
+      "globalImpressionOfChange": "Impression globale de changement"
     },
     "healthQuality": "Qualité de santé perçue",
     "qualityOfLife": "Qualité de vie perçue",
