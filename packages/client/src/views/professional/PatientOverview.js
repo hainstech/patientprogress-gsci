@@ -7,11 +7,18 @@ import { DataGrid } from '@material-ui/data-grid';
 import { format, parseISO } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 
-import { useFormik } from 'formik';
-
-import { TextField, FormControl } from '@material-ui/core';
+import {
+  TextField,
+  FormControl,
+  FormControlLabel,
+  Switch,
+} from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+import DatePicker from 'react-multi-date-picker';
+import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 
 import Spinner from '../../components/Spinner/Spinner';
 
@@ -26,7 +33,7 @@ import Alert from '../layout/Alert';
 import {
   getPatient,
   getQuestionnaireList,
-  sendQuestionnaire,
+  sendQuestionnaires,
   removeQuestionnaire,
 } from '../../actions/professional';
 
@@ -39,13 +46,16 @@ const PatientOverview = ({
   match,
   getPatient,
   getQuestionnaireList,
-  sendQuestionnaire,
+  sendQuestionnaires,
   removeQuestionnaire,
 }) => {
   const classes = useStyles();
 
   const [displayList, setDisplayList] = useState([]);
   const [questionnaireList, setQuestionnaireList] = useState([]);
+  const [scheduled, setScheduled] = useState(false);
+  const [dates, setDates] = useState([]);
+  const [questionnaires, setQuestionnaires] = useState([]);
 
   const parseDisplayList = useCallback(({ data: list }) => {
     setQuestionnaireList(list);
@@ -74,33 +84,53 @@ const PatientOverview = ({
     parseDisplayList,
   ]);
 
-  const formik = useFormik({
-    initialValues: {
-      questionnaire: null,
-    },
-    onSubmit: (data) => {
-      // sendQuestionnaire(questionnaire.id)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // For each questionnaire
+    // si il y a des dates => envoie aux dates
+    // sinon envoie maintenant
+
+    const toFill = [];
+
+    questionnaires.forEach((questionnaire) => {
       // @v trouver le ID a envoyer
       // on regarde si il existe dans la langue du patient
       // si oui on l'envoie sinon on l'envoie en anglais
-      if (data.questionnaire) {
-        let id;
-        const { title } = data.questionnaire;
-        const foundQ = questionnaireList.find(
-          (q) => q.title === title && q.language === patient.language
-        );
-        if (foundQ) {
-          id = foundQ.id;
-        } else {
-          id = questionnaireList.find(
-            (q) => q.title === title && q.language === 'en'
-          ).id;
-        }
 
-        sendQuestionnaire(patient._id, id);
+      let id;
+      const { title } = questionnaire;
+      const foundQ = questionnaireList.find(
+        (q) => q.title === title && q.language === patient.language
+      );
+      if (foundQ) {
+        id = foundQ.id;
+      } else {
+        id = questionnaireList.find(
+          (q) => q.title === title && q.language === 'en'
+        ).id;
       }
-    },
-  });
+
+      if (dates.length === 0) {
+        toFill.push({
+          questionnaire: id,
+          date: Date.now(),
+          sent: true,
+        });
+      } else {
+        dates.forEach((date) => {
+          toFill.push({
+            questionnaire: id,
+            date: date.toString(),
+            sent: false,
+          });
+        });
+      }
+    });
+    if (toFill.length > 0) {
+      sendQuestionnaires(patient._id, toFill);
+    }
+  };
 
   const { t } = useTranslation();
 
@@ -138,6 +168,19 @@ const PatientOverview = ({
     );
   };
 
+  const renderSent = (params) => {
+    return params.row.sent ? <CheckIcon /> : <ClearIcon />;
+  };
+
+  const toggleScheduled = (e) => {
+    setScheduled(e.target.checked);
+    setDates([]);
+  };
+
+  function handleDateChange(dates) {
+    setDates(dates);
+  }
+
   return (
     <>
       {patient === null || questionnaireList.length === 0 || loading ? (
@@ -145,7 +188,7 @@ const PatientOverview = ({
       ) : (
         <GridContainer justify='center'>
           <Alert />
-          <GridItem xs={12} lg={6}>
+          <GridItem xs={12} xl={6}>
             <Card>
               <CardHeader color='danger'>
                 <h4 className={classes.cardTitleWhite}>
@@ -243,40 +286,74 @@ const PatientOverview = ({
                 </h4>
               </CardHeader>
               <CardBody>
-                <form onSubmit={formik.handleSubmit}>
-                  <GridContainer>
-                    <GridItem xs={12} sm={6}>
-                      <FormControl fullWidth>
-                        <Autocomplete
-                          id='questionnaireToSend'
-                          name='questionnaire'
-                          options={displayList}
-                          getOptionLabel={(option) => option.title}
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                              label={t('professional.patient.questionnaire')}
-                            />
-                          )}
-                          value={formik.values.questionnaire}
-                          onChange={(e, value) =>
-                            formik.setFieldValue('questionnaire', value)
-                          }
-                        />
-                      </FormControl>
-                    </GridItem>
+                <GridContainer>
+                  <GridItem xs={12} sm={9}>
+                    <FormControl fullWidth>
+                      <Autocomplete
+                        multiple
+                        id='questionnaireToSend'
+                        name='questionnaire'
+                        options={displayList}
+                        getOptionLabel={(option) => option.title}
+                        getOptionSelected={(option) => {
+                          let val = false;
+                          questionnaires.forEach((q) => {
+                            if (q.title === option.title) val = true;
+                          });
+                          return val;
+                        }}
+                        value={questionnaires}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label={t('professional.patient.questionnaire')}
+                          />
+                        )}
+                        onChange={(e, value) => setQuestionnaires(value)}
+                      />
+                    </FormControl>
+                  </GridItem>
 
-                    <GridItem xs={12} sm={6}>
-                      <Button type='submit' color='success'>
-                        {t('professional.invite.submit')}
-                      </Button>
+                  <GridItem xs={12} sm={3}>
+                    <Button color='success' onClick={handleSubmit}>
+                      {t('professional.invite.submit')}
+                    </Button>
+                  </GridItem>
+
+                  <GridItem xs={12}>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={scheduled}
+                          onChange={toggleScheduled}
+                          name='scheduled'
+                          color='primary'
+                        />
+                      }
+                      label={t('professional.patient.scheduled')}
+                    />
+                  </GridItem>
+                </GridContainer>
+                {scheduled && (
+                  <GridContainer wrap='nowrap'>
+                    <GridItem>
+                      <p>{t('professional.patient.selectDates')}:</p>
+                    </GridItem>
+                    <GridItem xs={5}>
+                      <DatePicker
+                        style={{ margin: '14px 0px' }}
+                        value={dates}
+                        onChange={handleDateChange}
+                        multiple
+                        plugins={[<DatePanel />]}
+                      />
                     </GridItem>
                   </GridContainer>
-                </form>
+                )}
               </CardBody>
             </Card>
           </GridItem>
-          <GridItem xs={12} lg={6}>
+          <GridItem xs={12} xl={6}>
             <Card>
               <CardHeader color='danger'>
                 <h4 className={classes.cardTitleWhite}>
@@ -289,13 +366,14 @@ const PatientOverview = ({
                     <DataGrid
                       disableSelectionOnClick
                       rows={patient.questionnairesToFill.map(
-                        ({ questionnaire, date }, i) => {
+                        ({ questionnaire, date, sent }, i) => {
                           const title = questionnaireList.find(
                             (q) => q.id === questionnaire
                           ).title;
                           return {
                             id: `${i}-${questionnaire}`,
                             questionnaire,
+                            sent,
                             title,
                             time: format(
                               zonedTimeToUtc(
@@ -316,15 +394,23 @@ const PatientOverview = ({
                           width: 200,
                         },
                         {
+                          field: 'sent',
+                          headerName: `${t('professional.patient.sent')}`,
+                          sortable: false,
+                          width: 81,
+                          disableClickEventBubbling: true,
+                          renderCell: renderSent,
+                        },
+                        {
                           field: 'time',
-                          headerName: `${t('professional.patient.dateSent')}`,
-                          width: 160,
+                          headerName: `${t('professional.patient.date')}`,
+                          width: 105,
                         },
                         {
                           field: 'id',
                           headerName: `${t('professional.patient.remove')}`,
                           sortable: false,
-                          width: 110,
+                          width: 105,
                           disableClickEventBubbling: true,
                           renderCell: renderDeleteButton,
                         },
@@ -408,7 +494,7 @@ PatientOverview.propTypes = {
   getPatient: PropTypes.func.isRequired,
   professional: PropTypes.object.isRequired,
   getQuestionnaireList: PropTypes.func.isRequired,
-  sendQuestionnaire: PropTypes.func.isRequired,
+  sendQuestionnaires: PropTypes.func.isRequired,
   removeQuestionnaire: PropTypes.func.isRequired,
 };
 
@@ -419,6 +505,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getPatient,
   getQuestionnaireList,
-  sendQuestionnaire,
+  sendQuestionnaires,
   removeQuestionnaire,
 })(PatientOverview);

@@ -39,6 +39,9 @@ router.get('/me', patient, async (req, res) => {
     patient.user = undefined;
     patient.questionnaires = undefined;
     patient.reports = undefined;
+    patient.questionnairesToFill = patient.questionnairesToFill.filter(
+      (questionnaire) => questionnaire.sent
+    );
 
     res.json(patient);
   } catch (err) {
@@ -169,46 +172,49 @@ router.post('/:id/questionnaireToFill', professional, async (req, res) => {
       return res.status(403).json({ msg: 'Permission denied' });
     }
 
-    patient.questionnairesToFill.push({
-      questionnaire: req.body.questionnaireToFill,
-      date: new Date(),
+    const { questionnairesToFill } = req.body;
+
+    patient.questionnairesToFill.push(...questionnairesToFill);
+
+    questionnairesToFill.forEach((questionnaire) => {
+      if (questionnaire.sent) {
+        // Send a email notification
+        const transporter = nodemailer.createTransport({
+          host: '***REMOVED***',
+          port: 465,
+          secure: true,
+          auth: {
+            user: 'dominic@hainstech.com',
+            pass: '***REMOVED***',
+          },
+        });
+
+        let message = '';
+        let subject = '';
+        switch (patient.language) {
+          case 'en':
+            message = `<h3>You have a new questionnaire to fill!</h3><p>Please <a href="https://app.patientprogress.ca/login">sign into the application</a> as soon as possible to fill it.</p><br><p>Thank you,</p><p>The PatientProgress Team</p>`;
+            subject = 'New questionnaire';
+            break;
+          case 'fr':
+            message = `<h3>Vous avez un nouveau questionnaire à remplir!</h3><p>Veuillez <a href="https://app.patientprogress.ca/login"> vous connecter</a> dès que possible afin de le remplir.</p><br><p>Merci,</p><p>L'équipe PatientProgress</p>`;
+            subject = 'Nouveau questionnaire';
+            break;
+
+          default:
+            break;
+        }
+
+        const emailContent = {
+          from: '"PatientProgress" <no-reply@hainstech.com>',
+          to: patientUser.email,
+          subject: subject,
+          html: message,
+        };
+
+        transporter.sendMail(emailContent);
+      }
     });
-
-    // Send a email notification
-    const transporter = nodemailer.createTransport({
-      host: '***REMOVED***',
-      port: 465,
-      secure: true,
-      auth: {
-        user: 'dominic@hainstech.com',
-        pass: '***REMOVED***',
-      },
-    });
-
-    let message = '';
-    let subject = '';
-    switch (patient.language) {
-      case 'en':
-        message = `<h3>You have a new questionnaire to fill!</h3><p>Please <a href="https://app.patientprogress.ca/login">sign into the application</a> as soon as possible to fill it.</p><br><p>Thank you,</p><p>The PatientProgress Team</p>`;
-        subject = 'New questionnaire';
-        break;
-      case 'fr':
-        message = `<h3>Vous avez un nouveau questionnaire à remplir!</h3><p>Veuillez <a href="https://app.patientprogress.ca/login"> vous connecter</a> dès que possible afin de le remplir.</p><br><p>Merci,</p><p>L'équipe PatientProgress</p>`;
-        subject = 'Nouveau questionnaire';
-        break;
-
-      default:
-        break;
-    }
-
-    const emailContent = {
-      from: '"PatientProgress" <no-reply@hainstech.com>',
-      to: patientUser.email,
-      subject: subject,
-      html: message,
-    };
-
-    transporter.sendMail(emailContent);
 
     await patient.save();
 
@@ -217,6 +223,7 @@ router.post('/:id/questionnaireToFill', professional, async (req, res) => {
     if (err.kind == 'ObjectId') {
       return res.status(404).json({ msg: 'Object error' });
     }
+    console.log(err.message);
     res.status(500).json({ msg: 'Server Error' });
   }
 });
@@ -248,7 +255,6 @@ router.post('/:id/report', professional, async (req, res) => {
     if (err.kind == 'ObjectId') {
       return res.status(404).json({ msg: 'Object error' });
     }
-    console.log(err.message);
     res.status(500).json({ msg: 'Server Error' });
   }
 });

@@ -1,6 +1,5 @@
 const express = require('express');
 const connectDB = require('./config/db');
-const colors = require('colors');
 const dotenv = require('dotenv');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
@@ -8,13 +7,13 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cors = require('cors');
 const morgan = require('morgan');
-const startBot = require('./telegramBot').startBot;
+const { startBot } = require('./telegramBot');
+const { startSender } = require('./questionnaireSender');
 
 const app = express();
 
 if (process.env.NODE_ENV === 'production') {
   app.set('trust proxy', 1);
-  startBot();
 }
 
 app.use(require('express-status-monitor')());
@@ -64,3 +63,9 @@ app.listen(PORT, () =>
     `Server running in ${process.env.NODE_ENV} on port ${PORT}`.green.bold
   )
 );
+
+startSender();
+
+if (process.env.NODE_ENV === 'production') {
+  startBot();
+}

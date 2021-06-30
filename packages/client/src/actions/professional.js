@@ -28,8 +28,8 @@ export const invitePatient = (email) => async (dispatch) => {
 };
 
 // Send questionnaire to patient
-export const sendQuestionnaire =
-  (id, questionnaireToFill) => async (dispatch) => {
+export const sendQuestionnaires =
+  (id, questionnairesToFill) => async (dispatch) => {
     try {
       const config = {
         hearders: {
@@ -39,7 +39,7 @@ export const sendQuestionnaire =
 
       const res = await axios.post(
         `${URI}/api/patients/${id}/questionnaireToFill`,
-        { questionnaireToFill },
+        { questionnairesToFill },
         config
       );
 
