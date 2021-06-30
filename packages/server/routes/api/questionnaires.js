@@ -125,7 +125,8 @@ router.post('/:id', patient, async (req, res) => {
         case 'Cou':
         case 'Neck pain':
           questionnairesToSend.push(
-            getQuestionnaireId('Neck Disability Index')
+            getQuestionnaireId('Neck Disability Index'),
+            getQuestionnaireId('Modified MSK STarT Back Screening Tool')
           );
           break;
         case 'Bas du dos':
@@ -137,16 +138,23 @@ router.post('/:id', patient, async (req, res) => {
           break;
         case 'Membre supérieur (épaule, coude ou poignet)':
         case 'Upper extremity (shoulder, elbow or wrist)':
-          questionnairesToSend.push(getQuestionnaireId('QuickDASH'));
+          questionnairesToSend.push(
+            getQuestionnaireId('QuickDASH'),
+            getQuestionnaireId('Modified MSK STarT Back Screening Tool')
+          );
           break;
         case 'Membre inférieur (hanche,genou ou cheville)':
         case 'Lower extremity (hip, knee or ankle)':
           questionnairesToSend.push(
-            getQuestionnaireId('Lower Extremity Functional Scale (LEFS)')
+            getQuestionnaireId('Lower Extremity Functional Scale (LEFS)'),
+            getQuestionnaireId('Modified MSK STarT Back Screening Tool')
           );
           break;
         case 'Aucune de ces régions':
         case 'Not in the options':
+          questionnairesToSend.push(
+            getQuestionnaireId('Modified MSK STarT Back Screening Tool')
+          );
           break;
         default:
           break;

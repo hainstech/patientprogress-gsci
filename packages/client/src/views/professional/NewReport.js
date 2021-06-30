@@ -227,21 +227,26 @@ const getRedFlags = (lastIntake) => {
 };
 
 const getRelevantScore = (lastIntake, questionnaires) => {
-  // relevantScore: [
-  //   {
-  //     name: { type: String },
-  //     score: [{ title: { type: String }, value: { type: String } }],
-  //   },
-  // ];
   let relevantScore = [];
   let last;
-  let last2;
+  let sb;
   let BPI;
   switch (lastIntake.chiefComplaintRegion) {
     case 'Cou':
     case 'Neck pain':
       last = getLastQuestionnaire(questionnaires, 'Neck Disability Index');
       BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
+      sb = getLastQuestionnaire(
+        questionnaires,
+        'Modified MSK STarT Back Screening Tool'
+      );
+      if (sb) {
+        relevantScore.push({
+          name: sb.questionnaire.schema.title,
+          score: sb.score,
+          date: sb.time,
+        });
+      }
       if (BPI) {
         relevantScore.push({
           name: BPI.questionnaire.schema.title,
@@ -260,7 +265,7 @@ const getRelevantScore = (lastIntake, questionnaires) => {
     case 'Bas du dos':
     case 'Low back pain':
       last = getLastQuestionnaire(questionnaires, 'Oswestry Disability Index');
-      last2 = getLastQuestionnaire(
+      sb = getLastQuestionnaire(
         questionnaires,
         'The Keele STarT Back Screening Tool'
       );
@@ -279,11 +284,11 @@ const getRelevantScore = (lastIntake, questionnaires) => {
           date: last.time,
         });
       }
-      if (last2) {
+      if (sb) {
         relevantScore.push({
-          name: last2.questionnaire.schema.title,
-          score: last2.score,
-          date: last2.time,
+          name: sb.questionnaire.schema.title,
+          score: sb.score,
+          date: sb.time,
         });
       }
       break;
@@ -291,6 +296,17 @@ const getRelevantScore = (lastIntake, questionnaires) => {
     case 'Upper extremity (shoulder, elbow or wrist)':
       last = getLastQuestionnaire(questionnaires, 'QuickDASH');
       BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
+      sb = getLastQuestionnaire(
+        questionnaires,
+        'Modified MSK STarT Back Screening Tool'
+      );
+      if (sb) {
+        relevantScore.push({
+          name: sb.questionnaire.schema.title,
+          score: sb.score,
+          date: sb.time,
+        });
+      }
       if (BPI) {
         relevantScore.push({
           name: BPI.questionnaire.schema.title,
@@ -314,6 +330,17 @@ const getRelevantScore = (lastIntake, questionnaires) => {
         'Lower Extremity Functional Scale (LEFS)'
       );
       BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
+      sb = getLastQuestionnaire(
+        questionnaires,
+        'Modified MSK STarT Back Screening Tool'
+      );
+      if (sb) {
+        relevantScore.push({
+          name: sb.questionnaire.schema.title,
+          score: sb.score,
+          date: sb.time,
+        });
+      }
       if (BPI) {
         relevantScore.push({
           name: BPI.questionnaire.schema.title,
@@ -332,6 +359,17 @@ const getRelevantScore = (lastIntake, questionnaires) => {
     case 'Aucune de ces régions':
     case 'Not in the options':
       BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
+      sb = getLastQuestionnaire(
+        questionnaires,
+        'Modified MSK STarT Back Screening Tool'
+      );
+      if (sb) {
+        relevantScore.push({
+          name: sb.questionnaire.schema.title,
+          score: sb.score,
+          date: sb.time,
+        });
+      }
       if (BPI) {
         relevantScore.push({
           name: BPI.questionnaire.schema.title,

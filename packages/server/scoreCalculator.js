@@ -44,7 +44,7 @@ module.exports = {
           },
         ];
         break;
-
+      case 'Modified MSK STarT Back Screening Tool':
       case 'The Keele STarT Back Screening Tool':
         const total = Object.values(answers).reduce(
           (a, b) =>
