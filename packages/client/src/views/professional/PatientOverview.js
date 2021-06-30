@@ -9,9 +9,16 @@ import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { useFormik } from 'formik';
 
-import { TextField, FormControl } from '@material-ui/core';
+import {
+  TextField,
+  FormControl,
+  FormControlLabel,
+  Switch,
+} from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import DeleteIcon from '@material-ui/icons/Delete';
+import DatePicker from 'react-multi-date-picker';
+import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 
 import Spinner from '../../components/Spinner/Spinner';
 
@@ -46,6 +53,8 @@ const PatientOverview = ({
 
   const [displayList, setDisplayList] = useState([]);
   const [questionnaireList, setQuestionnaireList] = useState([]);
+  const [scheduled, setScheduled] = useState(false);
+  const [dates, setDates] = useState([]);
 
   const parseDisplayList = useCallback(({ data: list }) => {
     setQuestionnaireList(list);
@@ -137,6 +146,15 @@ const PatientOverview = ({
       </Button>
     );
   };
+
+  const toggleScheduled = (e) => {
+    setScheduled(e.target.checked);
+  };
+
+  function handleDateChange(dates) {
+    console.log(dates);
+    setDates(dates);
+  }
 
   return (
     <>
@@ -271,7 +289,37 @@ const PatientOverview = ({
                         {t('professional.invite.submit')}
                       </Button>
                     </GridItem>
+
+                    <GridItem xs={12}>
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            checked={scheduled}
+                            onChange={toggleScheduled}
+                            name='scheduled'
+                            color='primary'
+                          />
+                        }
+                        label={t('professional.patient.scheduled')}
+                      />
+                    </GridItem>
                   </GridContainer>
+                  {scheduled && (
+                    <GridContainer wrap='nowrap'>
+                      <GridItem>
+                        <p>Select the dates:</p>
+                      </GridItem>
+                      <GridItem xs={5}>
+                        <DatePicker
+                          style={{ margin: '14px 0px' }}
+                          value={dates}
+                          onChange={handleDateChange}
+                          multiple
+                          plugins={[<DatePanel />]}
+                        />
+                      </GridItem>
+                    </GridContainer>
+                  )}
                 </form>
               </CardBody>
             </Card>

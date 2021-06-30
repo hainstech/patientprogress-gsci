@@ -13170,6 +13170,11 @@ react-beautiful-dnd@^13.0.0:
     redux "^4.0.4"
     use-memo-one "^1.1.1"
 
+react-date-object@^1.3.10:
+  version "1.3.10"
+  resolved "https://registry.yarnpkg.com/react-date-object/-/react-date-object-1.3.10.tgz#8ac46b9fc5a74157b81078d128ebb26ae7be2c22"
+  integrity sha512-NFlcwqpA19v6rujrfueS3Ef4Tpg/Pq0C3aeY/tv1l3delRDCUJzNBTSJNcMiKuH7ajBos9d1dvvpwdiCkIbHEg==
+
 react-dayjs@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/react-dayjs/-/react-dayjs-0.3.2.tgz#136c0362031767a6a96d990646bc3219682e50cc"
@@ -13220,6 +13225,11 @@ react-dom@^17.0.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     scheduler "^0.20.2"
+
+react-element-popper@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/react-element-popper/-/react-element-popper-1.0.10.tgz#57ea9bb2302fc02d51baf6312e31b46a05d36846"
+  integrity sha512-K/IAYtsQJQKaUmKMYd0MGK/g95HpGk/K9tUbu+m+dcS2Icfb6THsVP0YCccOS2/Ng//h8CkturLbbapBhheC7Q==
 
 react-error-overlay@^6.0.9:
   version "6.0.9"
@@ -13309,6 +13319,14 @@ react-moment@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-moment/-/react-moment-1.1.1.tgz#5fe9fb257039590c804e2b3aedfc3ceb0a6ffb16"
   integrity sha512-WjwvxBSnmLMRcU33do0KixDB+9vP3e84eCse+rd+HNklAMNWyRgZTDEQlay/qK6lcXFPRuEIASJTpEt6pyK7Ww==
+
+react-multi-date-picker@^2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/react-multi-date-picker/-/react-multi-date-picker-2.10.0.tgz#145d7bca39700181f8127d225d390b801488a13e"
+  integrity sha512-IUsxIuKno7Qp0kbdZk7mf55TO9pUS8qeQ8mqSNoP1KF3WENdc1g3tdsgxfvKw2WXJn1N6RPGlLGrzKI5raQGMA==
+  dependencies:
+    react-date-object "^1.3.10"
+    react-element-popper "^1.0.10"
 
 react-popper@^1.3.6:
   version "1.3.11"
