@@ -281,9 +281,7 @@ router.delete(
       }
 
       patient.questionnairesToFill.splice(
-        patient.questionnairesToFill
-          .map((q) => q.questionnaire)
-          .indexOf(req.params.id),
+        patient.questionnairesToFill.map((q) => q._id).indexOf(req.params.id),
         1
       );
 

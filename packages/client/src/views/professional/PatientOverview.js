@@ -366,13 +366,13 @@ const PatientOverview = ({
                     <DataGrid
                       disableSelectionOnClick
                       rows={patient.questionnairesToFill.map(
-                        ({ questionnaire, date, sent }, i) => {
+                        ({ _id, questionnaire, date, sent }, i) => {
                           const title = questionnaireList.find(
                             (q) => q.id === questionnaire
                           ).title;
                           return {
                             id: `${i}-${questionnaire}`,
-                            questionnaire,
+                            questionnaire: _id,
                             sent,
                             title,
                             time: format(
