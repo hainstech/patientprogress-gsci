@@ -190,6 +190,10 @@ var patientSchema = new mongoose.Schema({
         type: Date,
         required: true,
       },
+      sent: {
+        type: Boolean,
+        required: true,
+      },
     },
   ],
 });
