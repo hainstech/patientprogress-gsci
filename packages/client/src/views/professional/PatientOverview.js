@@ -174,10 +174,10 @@ const PatientOverview = ({
 
   const toggleScheduled = (e) => {
     setScheduled(e.target.checked);
+    setDates([]);
   };
 
   function handleDateChange(dates) {
-    console.log(dates);
     setDates(dates);
   }
 
@@ -296,12 +296,13 @@ const PatientOverview = ({
                         options={displayList}
                         getOptionLabel={(option) => option.title}
                         getOptionSelected={(option) => {
-                          let found = false;
-                          displayList.forEach(
-                            (item) => (found = item.title === option.title)
-                          );
-                          return found;
+                          let val = false;
+                          questionnaires.forEach((q) => {
+                            if (q.title === option.title) val = true;
+                          });
+                          return val;
                         }}
+                        value={questionnaires}
                         renderInput={(params) => (
                           <TextField
                             {...params}

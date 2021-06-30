@@ -39,6 +39,9 @@ router.get('/me', patient, async (req, res) => {
     patient.user = undefined;
     patient.questionnaires = undefined;
     patient.reports = undefined;
+    patient.questionnairesToFill = patient.questionnairesToFill.filter(
+      (questionnaire) => questionnaire.sent
+    );
 
     res.json(patient);
   } catch (err) {

@@ -1,6 +1,7 @@
 const got = require('got');
 var CronJob = require('cron').CronJob;
 const Patient = require('./models/Patient');
+const Professional = require('./models/Professional');
 
 const TelegramAPIKey = '***REMOVED***';
 

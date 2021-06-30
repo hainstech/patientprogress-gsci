@@ -192,7 +192,6 @@ var patientSchema = new mongoose.Schema({
       },
       sent: {
         type: Boolean,
-        required: true,
       },
     },
   ],
