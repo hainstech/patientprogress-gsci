@@ -38,7 +38,7 @@ const QuestionnaireList = ({
         <Spinner />
       ) : (
         <GridContainer justify='center'>
-          <GridItem xs={12} md={6}>
+          <GridItem xs={12} md={8}>
             <Card>
               <CardHeader color='danger'>
                 <h4 className={classes.cardTitleWhite}>
