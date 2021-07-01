@@ -159,7 +159,9 @@ router.put(
 router.post('/:id/questionnaireToFill', professional, async (req, res) => {
   try {
     const currentUser = await User.findById(req.user.id);
-    const patient = await Patient.findById(req.params.id);
+    const patient = await Patient.findById(req.params.id).populate({
+      path: 'questionnaires.questionnaire',
+    });
     const patientUser = await User.findById(patient.user);
 
     if (!patient) {

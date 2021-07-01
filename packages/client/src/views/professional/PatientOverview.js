@@ -85,8 +85,6 @@ const PatientOverview = ({
   ]);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-
     // For each questionnaire
     // si il y a des dates => envoie aux dates
     // sinon envoie maintenant
