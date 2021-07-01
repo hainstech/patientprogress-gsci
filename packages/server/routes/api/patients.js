@@ -231,12 +231,14 @@ router.post('/:id/questionnaireToFill', professional, async (req, res) => {
 });
 
 // @route POST api/patients/:id/report
-// @desc Add a questionnaire to fill to a patient by ID
+// @desc Add a report to a patient by ID
 // @access professional
 router.post('/:id/report', professional, async (req, res) => {
   try {
     const currentUser = await User.findById(req.user.id);
-    const patient = await Patient.findById(req.params.id);
+    const patient = await Patient.findById(req.params.id).populate({
+      path: 'questionnaires.questionnaire',
+    });
 
     if (!patient) {
       return res.status(404).json({ msg: 'Patient not found' });
@@ -270,7 +272,9 @@ router.delete(
   async (req, res) => {
     try {
       const currentUser = await User.findById(req.user.id);
-      const patient = await Patient.findById(req.params.patient);
+      const patient = await Patient.findById(req.params.patient).populate({
+        path: 'questionnaires.questionnaire',
+      });
 
       if (!patient) {
         return res.status(404).json({ msg: 'Patient not found' });

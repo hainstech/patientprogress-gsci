@@ -27,6 +27,8 @@ module.exports = {
         ];
         break;
       case 'Brief Pain Inventory':
+        let BPIAnswers = Object.values(answers);
+
         scores = [
           {
             title: 'pain',
@@ -41,6 +43,25 @@ module.exports = {
               Object.values(answers)
                 .slice(4)
                 .reduce((a, b) => a + parseInt(b), 0) + '/70',
+          },
+          {
+            title: 'activityInterference',
+            value:
+              (
+                parseInt(BPIAnswers[4]) +
+                parseInt(BPIAnswers[6]) +
+                parseInt(BPIAnswers[7]) +
+                parseInt(BPIAnswers[9])
+              ).toString() + '/40',
+          },
+          {
+            title: 'affectiveInterference',
+            value:
+              (
+                parseInt(BPIAnswers[5]) +
+                parseInt(BPIAnswers[8]) +
+                parseInt(BPIAnswers[10])
+              ).toString() + '/30',
           },
         ];
         break;

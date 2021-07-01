@@ -177,7 +177,9 @@ const ReportPDF = ({ report, patient }) => {
                       ):,{' '}
                       {score.score.map(
                         ({ title, value }) =>
-                          `${t(`report.scores.${title}`)}: ${value}`
+                          `${t(
+                            `professional.patient.score.${title}`
+                          )}: ${value}`
                       )}
                     </Text>
                   </View>

@@ -110,11 +110,14 @@
         "total": "Pointage total",
         "pain": "Douleur",
         "interference": "Interférence",
+        "activityInterference": "Interférence d'activité",
+        "affectiveInterference": "Interférence affective",
         "sub": "Pointage partiel",
         "risk": "Risque",
         "work": "Travail",
         "sport": "Sport",
-        "disability/symptom": "Incapacité/Symptôme"
+        "disability/symptom": "Incapacité/Symptôme",
+        "globalImpressionOfChange": "Impression globale de changement"
       },
       "reports": "Rapports",
       "newReport": "Nouveau Rapport"
@@ -197,17 +200,6 @@
     "commorbidityRheumatoidArthritis": "Arthrite rhumatoïde",
     "redFlags": "Drapeaux rouges",
     "relevantScores": "Pointages utiles",
-    "scores": {
-      "pain": "Douleur",
-      "interference": "Interférence",
-      "total": "Total",
-      "sub": "Subtotal",
-      "risk": "Risque",
-      "disability/symptom": "Incapacité/Symptômes",
-      "work": "Travail",
-      "sport": "Sport",
-      "globalImpressionOfChange": "Impression globale de changement"
-    },
     "healthQuality": "Qualité de santé perçue",
     "qualityOfLife": "Qualité de vie perçue",
     "healthSatisfaction": "Satisfaction de la santé perçue",

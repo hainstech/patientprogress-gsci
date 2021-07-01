@@ -220,7 +220,8 @@ const Report = ({
                               </GridItem>
                               {score.score.map(({ title, value }, y) => (
                                 <GridItem key={y + i} xs={12}>
-                                  {t(`report.scores.${title}`)}: {value}
+                                  {t(`professional.patient.score.${title}`)}:{' '}
+                                  {value}
                                 </GridItem>
                               ))}
                             </GridContainer>
