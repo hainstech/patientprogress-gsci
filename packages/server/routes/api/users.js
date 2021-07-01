@@ -181,8 +181,6 @@ router.post(
   }
 );
 
-module.exports = router;
-
 // @route POST api/users/admin
 // @desc Register professional or admin
 // @access Admin
