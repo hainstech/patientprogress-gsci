@@ -208,6 +208,7 @@
     "gecQualityOfLife": "Attentes globales de changement (Qualité de vie)",
     "comments": "Commentaires",
     "diagnosis": "Diagnostique",
+    "additionalDiagnosis": "Diagnostiques supplémentaires",
     "nbTx": "Nombre de traitements",
     "frequency": "Fréquence des traitements",
     "intensive": "Intensifs",

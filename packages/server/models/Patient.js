@@ -164,6 +164,9 @@ var patientSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      additionalDiagnosis: {
+        type: String,
+      },
       numberOfTreatments: {
         type: String,
         required: true,

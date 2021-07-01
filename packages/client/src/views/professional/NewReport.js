@@ -473,6 +473,7 @@ const NewReport = ({
   const formik = useFormik({
     initialValues: {
       diagnosis: '',
+      additionalDiagnosis: '',
       comments: '',
       numberOfTreatments: '',
       frequency: null,
@@ -487,7 +488,6 @@ const NewReport = ({
         objectives,
         planOfManagement,
       });
-      await getCurrentProfile('patient');
       history.goBack();
     },
   });
@@ -706,7 +706,7 @@ const NewReport = ({
                   <form onSubmit={formik.handleSubmit}>
                     <GridItem xs={12}>
                       <GridContainer>
-                        <GridItem xs={12} sm={8}>
+                        <GridItem xs={12} sm={12}>
                           <FormControl
                             fullWidth
                             className={inputClasses.formControl}
@@ -733,6 +733,21 @@ const NewReport = ({
                               type='text'
                               id={'diagnosis'}
                               value={formik.values.diagnosis}
+                              onChange={formik.handleChange}
+                            />
+                          </FormControl>
+                        </GridItem>
+
+                        <GridItem xs={12} sm={4}>
+                          <FormControl
+                            fullWidth
+                            className={inputClasses.formControl}
+                          >
+                            <TextField
+                              label={t('report.additionalDiagnosis')}
+                              type='text'
+                              id={'additionalDiagnosis'}
+                              value={formik.values.additionalDiagnosis}
                               onChange={formik.handleChange}
                             />
                           </FormControl>

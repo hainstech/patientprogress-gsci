@@ -265,12 +265,20 @@ const Report = ({
                   <GridItem xs={12}>
                     <br />
                     <GridContainer>
-                      <GridItem xs={12}>
-                        {t('report.comments')}: {report.comments}
-                      </GridItem>
+                      {report.comments && (
+                        <GridItem xs={12}>
+                          {t('report.comments')}: {report.comments}
+                        </GridItem>
+                      )}
                       <GridItem xs={12}>
                         {t('report.diagnosis')}: {report.diagnosis}
                       </GridItem>
+                      {report.additionalDiagnosis && (
+                        <GridItem xs={12}>
+                          {t('report.additionalDiagnosis')}:{' '}
+                          {report.additionalDiagnosis}
+                        </GridItem>
+                      )}
                       <GridItem xs={12}>
                         {t('report.nbTx')}: {report.numberOfTreatments}
                       </GridItem>

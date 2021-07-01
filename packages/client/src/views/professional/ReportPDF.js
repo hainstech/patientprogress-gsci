@@ -162,7 +162,7 @@ const ReportPDF = ({ report, patient }) => {
             <Text style={styles.answer}>
               Relevant scores:{' '}
               {report.relevantScore.length === 0 && t('report.none')}
-              {report.relevantScore &&
+              {report.relevantScore.length !== 0 &&
                 report.relevantScore.map((score, i) => (
                   <View key={i} wrap={false} style={styles.answerRow}>
                     <Text style={styles.answer}>
@@ -217,15 +217,26 @@ const ReportPDF = ({ report, patient }) => {
           <View wrap={false} style={styles.subtitle}>
             <Text>Filled by the professional</Text>
           </View>
+
           <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>
-              {t('report.comments')}: {report.comments}
-            </Text>
+            {report.comments !== '' && (
+              <Text style={styles.answer}>
+                {t('report.comments')}: {report.comments}
+              </Text>
+            )}
           </View>
+
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
               {t('report.diagnosis')}: {report.diagnosis}
             </Text>
+            {report.additionalDiagnosis !== '' && (
+              <Text style={styles.answer}>
+                {t('report.additionalDiagnosis')}: {report.additionalDiagnosis}
+              </Text>
+            )}
+          </View>
+          <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
               {t('report.nbTx')}: {report.numberOfTreatments}
             </Text>
