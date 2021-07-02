@@ -164,6 +164,7 @@ router.post('/:id', patient, async (req, res) => {
         patient.questionnairesToFill.push({
           questionnaire: id,
           date: new Date(),
+          sent: true,
         });
       });
     }
