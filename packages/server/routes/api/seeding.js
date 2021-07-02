@@ -85,9 +85,57 @@ router.post('/:professional_id', admin, async (req, res) => {
 
 router.put('/:professional_id', admin, async (req, res) => {
   try {
+    const BPI = {
+      _id: '60dd3d78e893141600b7e846',
+      questionnaire: '609da83d6c1c1266606a69e7',
+
+      time: '2021-07-01T03:58:48.231Z',
+
+      answers: {
+        BPIPainWorst: Math.floor(Math.random() * 10) + 1,
+        BPIPainLeast: Math.floor(Math.random() * 10) + 1,
+        BPIPainAverage: Math.floor(Math.random() * 10) + 1,
+        BPIPainNow: Math.floor(Math.random() * 10) + 1,
+        BPIGeneralActivity: Math.floor(Math.random() * 10) + 1,
+        BPIMood: Math.floor(Math.random() * 10) + 1,
+        BPIWalking: Math.floor(Math.random() * 10) + 1,
+        BPIWork: Math.floor(Math.random() * 10) + 1,
+        BPIRelations: Math.floor(Math.random() * 10) + 1,
+        BPISleep: Math.floor(Math.random() * 10) + 1,
+        BPIEnjoyment: Math.floor(Math.random() * 10) + 1,
+      },
+      title: 'Brief Pain Inventory',
+      score: [
+        {
+          _id: '60dd3d78e893141600b7e847',
+
+          title: 'pain',
+          value: `${Math.floor(Math.random() * 40) + 1}/40`,
+        },
+        {
+          _id: '60dd3d78e893141600b7e848',
+
+          title: 'interference',
+          value: `${Math.floor(Math.random() * 70) + 1}/70`,
+        },
+        {
+          _id: '60dd3d78e893141600b7e849',
+
+          title: 'activityInterference',
+          value: `${Math.floor(Math.random() * 40) + 1}/40`,
+        },
+        {
+          _id: '60dd3d78e893141600b7e84a',
+
+          title: 'affectiveInterference',
+          value: `${Math.floor(Math.random() * 30) + 1}/30`,
+        },
+      ],
+    };
+
     const editPatient = async (id) => {
       let patient = await Patient.findById(id);
-      patient.gender = Math.random() < 0.5 ? 'Male' : 'Female';
+      patient.questionnaires.push(BPI);
       await patient.save();
     };
 
