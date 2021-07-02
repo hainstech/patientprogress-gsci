@@ -134,7 +134,8 @@
     "about": "About This Application",
     "login": "Sign In",
     "builder": "Builder",
-    "forgot": "Forgot Password"
+    "forgot": "Forgot Password",
+    "metrics": "Your Metrics"
   },
   "register": {
     "passwordError": "Passwords do not match",

@@ -134,7 +134,8 @@
     "about": "À propos",
     "login": "Connexion",
     "builder": "Constructeur",
-    "forgot": "Mot de passe oublié"
+    "forgot": "Mot de passe oublié",
+    "metrics": "Vos statistiques"
   },
   "register": {
     "passwordError": "Les mots de passe ne correspondent pas",

@@ -17,6 +17,10 @@ module.exports = {
                 !questionnaire.sent &&
                 new Date(questionnaire.date) < Date.now()
               ) {
+                patient.questionnairesToFill.find(
+                  (q) => q._id === questionnaire._id
+                ).sent = true;
+
                 // Send a email notification
                 const transporter = nodemailer.createTransport({
                   host: '***REMOVED***',
@@ -52,10 +56,6 @@ module.exports = {
                 };
 
                 transporter.sendMail(emailContent);
-
-                patient.questionnairesToFill.find(
-                  (q) => q._id === questionnaire._id
-                ).sent = true;
               }
             });
             await patient.save();

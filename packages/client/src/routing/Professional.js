@@ -8,12 +8,18 @@ import PatientOverview from '../views/professional/PatientOverview';
 import Questionnaire from '../views/professional/Questionnaire';
 import NewReport from '../views/professional/NewReport';
 import Report from '../views/professional/Report';
+import Metrics from '../views/professional/Metrics';
 
 import ProfessionalRoute from './ProfessionalRoute';
 
 const Professional = () => {
   return (
     <Switch>
+      <ProfessionalRoute
+        exact
+        path='/professional/metrics'
+        component={Metrics}
+      />
       <ProfessionalRoute
         exact
         path='/professional/patients'
