@@ -72,7 +72,7 @@ router.post('/:professional_id', admin, async (req, res) => {
       await professionalFound.save();
     };
 
-    for (let index = 0; index < 100; index++) {
+    for (let index = 0; index < 13; index++) {
       await createPatient();
     }
 
@@ -135,7 +135,58 @@ router.put('/:professional_id', admin, async (req, res) => {
 
     const editPatient = async (id) => {
       let patient = await Patient.findById(id);
-      patient.questionnaires.push(BPI);
+      patient.questionnaires = [BPI];
+      await patient.save();
+    };
+
+    let professionalFound = await Professional.findById(
+      req.params.professional_id
+    );
+
+    for (let index = 0; index < professionalFound.patients.length; index++) {
+      await editPatient(professionalFound.patients[index]);
+    }
+
+    res.send('Done');
+  } catch (err) {
+    res.status(500).send('Server error');
+    console.log(err.message);
+  }
+});
+
+router.put('/:professional_id/gender', admin, async (req, res) => {
+  try {
+    const editPatient = async (id) => {
+      let patient = await Patient.findById(id);
+      patient.gender =
+        Math.random() > 0.9
+          ? faker.name.gender()
+          : Math.random() > 0.5
+          ? 'Male'
+          : 'Female';
+      await patient.save();
+    };
+
+    let professionalFound = await Professional.findById(
+      req.params.professional_id
+    );
+
+    for (let index = 0; index < professionalFound.patients.length; index++) {
+      await editPatient(professionalFound.patients[index]);
+    }
+
+    res.send('Done');
+  } catch (err) {
+    res.status(500).send('Server error');
+    console.log(err.message);
+  }
+});
+
+router.put('/:professional_id/dob', admin, async (req, res) => {
+  try {
+    const editPatient = async (id) => {
+      let patient = await Patient.findById(id);
+      patient.dob = faker.date.between('1930-01-01', '2021-07-01');
       await patient.save();
     };
 

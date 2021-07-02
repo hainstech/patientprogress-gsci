@@ -9,6 +9,7 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import MarkunreadIcon from '@material-ui/icons/Markunread';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 // core components/views for Admin layout
 import QuestionnaireList from '../views/patient/QuestionnaireList';
 import Profile from '../views/patient/Profile';
@@ -60,6 +61,13 @@ export const patientRoutes = [
 
 // Professional Routing
 export const professionalLinks = [
+  {
+    path: '/metrics',
+    name: 'metrics',
+    icon: AssessmentIcon,
+    component: Search,
+    layout: '/professional',
+  },
   {
     path: '/patients',
     name: 'patients',

@@ -56,7 +56,7 @@ router.get('/all', professional, async (req, res) => {
   try {
     const currentProfessional = await Professional.findOne({
       user: req.user.id,
-    }).populate('patients');
+    }).populate('patients patients.questionnaires');
 
     // map or filter through
     res.json(currentProfessional.patients);
