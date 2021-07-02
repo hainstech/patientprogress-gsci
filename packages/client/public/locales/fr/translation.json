@@ -268,5 +268,12 @@
     "externalConsultation": "Consultation externe",
     "gecc": "Attentes globales de changement clinique",
     "none": "Aucun"
+  },
+  "metrics": {
+    "title": "Vos statistiques",
+    "description": "Diverses statistiques sur votre pratique et vos patients",
+    "ageTitle": "Nombre de patients selon catégorie d'âge (en années)",
+    "ageTableTitle": "Age (en années)",
+    "genderTitle": "Nombre de patients selon le sexe"
   }
 }

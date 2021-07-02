@@ -268,5 +268,12 @@
     "externalConsultation": "External Consultation",
     "gecc": "Global Expectation Of Clinical Change",
     "none": "None"
+  },
+  "metrics": {
+    "title": "Your metrics",
+    "description": "Various metrics about your practice & your patients",
+    "ageTitle": "Number of patients by age category (in years)",
+    "ageTableTitle": "Age (in years)",
+    "genderTitle": "Number of patients by gender"
   }
 }

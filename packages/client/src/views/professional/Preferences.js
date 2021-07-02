@@ -93,7 +93,7 @@ const Preferences = ({
       );
       profile.profile.yearDegree &&
         formik.setFieldValue('yearDegree', profile.profile.yearDegree);
-      profile.profile.country.label &&
+      profile.profile.country &&
         formik.setFieldValue('country', profile.profile.country);
       profile.profile.meanNbPatients &&
         formik.setFieldValue('meanNbPatients', profile.profile.meanNbPatients);
