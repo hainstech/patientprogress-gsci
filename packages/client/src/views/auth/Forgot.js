@@ -38,7 +38,7 @@ const Forgot = ({ sendForgotEmail, isAuthenticated, type }) => {
     },
     onSubmit: ({ email }) => {
       const recaptchaValue = recaptchaRef.current.getValue();
-      sendForgotEmail(email, recaptchaValue);
+      sendForgotEmail(email.toLowerCase(), recaptchaValue);
     },
   });
 

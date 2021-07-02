@@ -82,7 +82,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
           language,
           gender: gender === 'Other' ? genderOther : gender,
           dob,
-          email,
+          email: email.toLowerCase(),
           password,
           research,
           professional: match.params.id,

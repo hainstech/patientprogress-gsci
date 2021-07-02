@@ -39,7 +39,7 @@ const Login = ({ login, isAuthenticated, type }) => {
       password: '',
     },
     onSubmit: ({ email, password }) => {
-      login(email, password, recaptchaRef);
+      login(email.toLowerCase(), password, recaptchaRef);
     },
   });
 
