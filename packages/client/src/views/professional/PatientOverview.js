@@ -127,6 +127,8 @@ const PatientOverview = ({
     });
     if (toFill.length > 0) {
       sendQuestionnaires(patient._id, toFill);
+      setQuestionnaires([]);
+      setDates([]);
     }
   };
 
