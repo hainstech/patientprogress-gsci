@@ -143,7 +143,7 @@ const ReportPDF = ({ report, patient }) => {
           {report.comorbidities.map((comorbidity, i) => (
             <View key={i} wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>
-                {t('report.comorbidity')}: {comorbidity.name},{' '}
+                {t('report.comorbidity')}: {t(`report.${comorbidity.name}`)},{' '}
                 {t('report.activityLimitation')}:{' '}
                 {comorbidity.activityLimitation},{' '}
                 {t('report.isReveivingTreatment')}: {comorbidity.treatment}
