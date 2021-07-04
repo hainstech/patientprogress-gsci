@@ -8,8 +8,12 @@ const nodemailer = require('nodemailer');
 const { check, validationResult } = require('express-validator');
 const got = require('got');
 const slowDown = require('express-slow-down');
+const asyncRedis = require('async-redis');
 
 const User = require('../../models/User');
+
+//Redis
+const client = asyncRedis.createClient();
 
 // Slow down requests
 const speedLimiter = slowDown({
