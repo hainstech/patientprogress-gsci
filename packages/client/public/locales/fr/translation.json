@@ -156,6 +156,7 @@
     "genderOther": "Spécifiez votre genre"
   },
   "forgot": {
+    "link": "Mot de passe oublié?",
     "newPassword": "Entrez un nouveau mot de passe",
     "reset": "Entrez l'addresse courriel liée à votre compte",
     "directions": "Un lien vous sera envoyé via courriel"

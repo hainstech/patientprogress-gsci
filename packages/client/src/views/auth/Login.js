@@ -131,7 +131,7 @@ const Login = ({ login, isAuthenticated, type }) => {
               <Button color='success' type='submit'>
                 {t('guest.login.submit')}
               </Button>
-              <Link to='/forgot'>Forgot password?</Link>
+              <Link to='/forgot'>{t('forgot.link')}</Link>
             </CardFooter>
           </form>
         </Card>
