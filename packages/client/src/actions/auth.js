@@ -126,7 +126,7 @@ export const login =
           alertMsg = 'A verification code has been sent to you via email';
           color = 'success';
         }
-        history.push('/2fa');
+        history.push(`/2fa/${email}`);
         dispatch(setAlert(alertMsg, color, 5000));
       }
     } catch (err) {
