@@ -94,7 +94,7 @@ export const register =
 
 // Login User
 export const login =
-  (email, password, recaptchaRef, history) => async (dispatch) => {
+  (email, password, recaptchaRef, emailCode) => async (dispatch) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ export const login =
 
     const recaptchaValue = recaptchaRef.current.getValue();
 
-    const body = JSON.stringify({ email, password, recaptchaValue });
+    const body = JSON.stringify({ email, password, recaptchaValue, emailCode });
 
     try {
       const res = await axios.post(`${URI}/api/auth`, body, config);
@@ -115,19 +115,30 @@ export const login =
         });
 
         dispatch(loadUser());
+
+        return false;
       } else {
         let alertMsg;
         let color;
+
         if (res.data.status === 'alreadySent') {
           alertMsg =
             'A verification code has already been sent to you via email';
           color = 'danger';
-        } else {
+        }
+        if (res.data.status === 'emailSent') {
           alertMsg = 'A verification code has been sent to you via email';
           color = 'success';
         }
-        history.push(`/2fa/${email}`);
+
+        if (res.data.status === 'wrongCode') {
+          alertMsg = 'Wrong code';
+          color = 'danger';
+        }
+
+        recaptchaRef.current.reset();
         dispatch(setAlert(alertMsg, color, 5000));
+        return true;
       }
     } catch (err) {
       const errors = err.response.data.errors;

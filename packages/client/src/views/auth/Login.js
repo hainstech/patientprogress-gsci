@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
@@ -33,13 +33,23 @@ const Login = ({ login, isAuthenticated, type, history }) => {
 
   const { t } = useTranslation();
 
+  const [displayTwoFA, setDisplayTwoFA] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
+      emailCode: '',
     },
-    onSubmit: ({ email, password }) => {
-      login(email.toLowerCase(), password, recaptchaRef, history);
+    onSubmit: async ({ email, password, emailCode }) => {
+      emailCode = displayTwoFA ? emailCode : '';
+      const res = await login(
+        email.toLowerCase(),
+        password,
+        recaptchaRef,
+        emailCode
+      );
+      setDisplayTwoFA(res);
     },
   });
 
@@ -117,6 +127,33 @@ const Login = ({ login, isAuthenticated, type, history }) => {
                     />
                   </FormControl>
                 </GridItem>
+                {displayTwoFA && (
+                  <GridItem xs={12}>
+                    <FormControl fullWidth>
+                      <InputLabel
+                        className={inputClasses.labelRoot}
+                        htmlFor='emailCode'
+                        shrink
+                      >
+                        {t('guest.login.emailCode')}
+                      </InputLabel>
+
+                      <Input
+                        classes={{
+                          disabled: inputClasses.disabled,
+                          underline: classNames(
+                            inputClasses.underlineError,
+                            inputClasses.underline
+                          ),
+                        }}
+                        type='number'
+                        id={'emailCode'}
+                        value={formik.values.emailCode}
+                        onChange={formik.handleChange}
+                      />
+                    </FormControl>
+                  </GridItem>
+                )}
                 <GridItem xs={12}>
                   <Box mt={3}>
                     <ReCAPTCHA
@@ -151,4 +188,4 @@ const mapStateToProps = (state) => ({
   type: state.auth.type,
 });
 
-export default connect(mapStateToProps, { login })(withRouter(Login));
+export default connect(mapStateToProps, { login })(Login);

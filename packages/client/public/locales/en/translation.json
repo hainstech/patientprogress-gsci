@@ -22,7 +22,8 @@
       "title": "Sign into the application",
       "email": "Email",
       "password": "Password",
-      "submit": "Submit"
+      "submit": "Submit",
+      "emailCode": "Enter the verification code sent to your email"
     }
   },
   "patient": {

@@ -22,7 +22,8 @@
       "title": "Se connecter à l'application",
       "email": "Courriel",
       "password": "Mot de passe",
-      "submit": "connexion"
+      "submit": "connexion",
+      "emailCode": "Entrez le code de vérification envoyé par courriel"
     }
   },
   "patient": {

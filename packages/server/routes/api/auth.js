@@ -8,17 +8,12 @@ const nodemailer = require('nodemailer');
 const { check, validationResult } = require('express-validator');
 const got = require('got');
 const slowDown = require('express-slow-down');
-const asyncRedis = require('async-redis');
-
+const Redis = require('ioredis');
 const User = require('../../models/User');
 const Professional = require('../../models/Professional');
 
 //Redis
-const client = asyncRedis.createClient();
-
-client.on('error', function (err) {
-  console.log('Error ' + err);
-});
+const client = new Redis();
 
 // Slow down requests
 const speedLimiter = slowDown({
@@ -62,7 +57,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password, recaptchaValue } = req.body;
+    const { email, password, recaptchaValue, emailCode } = req.body;
 
     try {
       if (!recaptchaValue) {
@@ -98,63 +93,74 @@ router.post(
           .json({ errors: [{ msg: 'Invalid credentials' }] });
       }
 
-      // 2FA for professionals
+      // Two factor authentication
       if (user.type === 'professional') {
-        const trustedIps = await client.get(`trusted_ips_${user._id}`);
+        if (emailCode) {
+          const storedCode = await client.get(`email_code_${user._id}`);
+          // Si le code est mauvais on return
+          console.log(typeof storedCode, typeof emailCode);
+          if (storedCode !== emailCode.toString())
+            return res.status(200).json({ status: 'wrongCode' });
+          // Si le code est bon on ajoute l'ip a la liste
+          await client.sadd(`trusted_ips_${user._id}`, req.ip);
+          // et on supprime le code
+          await client.del(`email_code_${user._id}`);
+        } else {
+          // On regarde si l'ip est contenue dans les trusted_ips
+          const trustedIps = await client.smembers(`trusted_ips_${user._id}`);
+          if (!trustedIps?.includes(req.ip)) {
+            const storedCode = await client.get(`email_code_${user._id}`);
 
-        if (!trustedIps?.includes(req.ip)) {
-          const emailCode = await client.get(`email_code_${user._id}`);
+            if (storedCode) {
+              // 304 Not Modified - email with code already sent
+              return res.status(200).json({ status: 'alreadySent' });
+            }
 
-          if (emailCode) {
-            // 304 Not Modified - email with code already sent
-            return res.status(200).json({ status: 'alreadySent' });
+            const professional = await Professional.findOne({
+              user: user._id,
+            });
+
+            // Create and store code 6 digit code, expires in 30mins
+            const code = Math.floor(100000 + Math.random() * 900000);
+            await client.set(`email_code_${user._id}`, code, 'EX', 60 * 30);
+
+            // Send the code via email
+            const transporter = nodemailer.createTransport({
+              host: '***REMOVED***',
+              port: 465,
+              secure: true,
+              auth: {
+                user: 'dominic@hainstech.com',
+                pass: '***REMOVED***',
+              },
+            });
+
+            let message = '';
+            let subject = '';
+            switch (professional.language) {
+              case 'en':
+                message = `<p>Your verification code is: </p><h3>${code}</h3><p>If you are not the cause of this email, please reset your password and get in contact with the support team as soon as possible.</p><br><p>Thank you,</p><p>The PatientProgress Team</p>`;
+                subject = 'Verification Code';
+                break;
+              case 'fr':
+                message = `<p>Votre code de vérification est: </p><h3>${code}</h3><p>Si vous n'êtes pas la cause de ce courriel, veuillez réinitialiser votre mot de passe et contacter l'équipe d'assistance dès que possible.</p><br><p>Merci,</p><p>L'équipe PatientProgress</p>`;
+                subject = 'Code de Vérification';
+                break;
+
+              default:
+                break;
+            }
+
+            const emailContent = {
+              from: '"PatientProgress" <no-reply@hainstech.com>',
+              to: user.email,
+              subject: subject,
+              html: message,
+            };
+
+            transporter.sendMail(emailContent);
+            return res.status(200).json({ status: 'emailSent' });
           }
-
-          const professional = await Professional.findOne({
-            user: user._id,
-          });
-
-          // Create and store code & send email with code
-          // Random 6 digit code
-          const code = Math.floor(100000 + Math.random() * 900000);
-          await client.set(`email_code_${user._id}`, code);
-
-          // Send a email notification
-          const transporter = nodemailer.createTransport({
-            host: '***REMOVED***',
-            port: 465,
-            secure: true,
-            auth: {
-              user: 'dominic@hainstech.com',
-              pass: '***REMOVED***',
-            },
-          });
-
-          let message = '';
-          let subject = '';
-          switch (professional.language) {
-            case 'en':
-              message = `<p>Your verification code is: </p><h3>${code}</h3><p>If you are not the cause of this email, please reset your password and get in contact with the support team as soon as possible.</p><br><p>Thank you,</p><p>The PatientProgress Team</p>`;
-              subject = 'Verification Code';
-              break;
-            case 'fr':
-              message = `<p>Votre code de vérification est: </p><h3>${code}</h3><p>Si vous n'êtes pas la cause de ce courriel, veuillez réinitialiser votre mot de passe et contacter l'équipe d'assistance dès que possible.</p><br><p>Merci,</p><p>L'équipe PatientProgress</p>`;
-              subject = 'Code de Vérification';
-              break;
-
-            default:
-              break;
-          }
-
-          const emailContent = {
-            from: '"PatientProgress" <no-reply@hainstech.com>',
-            to: user.email,
-            subject: subject,
-            html: message,
-          };
-
-          transporter.sendMail(emailContent);
-          return res.status(200).json({ status: 'emailSent' });
         }
       }
 
