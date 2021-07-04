@@ -117,14 +117,17 @@ export const login =
         dispatch(loadUser());
       } else {
         let alertMsg;
+        let color;
         if (res.data.status === 'alreadySent') {
           alertMsg =
             'A verification code has already been sent to you via email';
+          color = 'danger';
         } else {
           alertMsg = 'A verification code has been sent to you via email';
+          color = 'success';
         }
         history.push('/2fa');
-        dispatch(setAlert(alertMsg, 'success', 5000));
+        dispatch(setAlert(alertMsg, color, 5000));
       }
     } catch (err) {
       const errors = err.response.data.errors;

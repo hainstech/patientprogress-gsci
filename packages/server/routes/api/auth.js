@@ -107,7 +107,7 @@ router.post(
 
           if (emailCode) {
             // 304 Not Modified - email with code already sent
-            return res.status(304).json({ status: 'alreadySent' });
+            return res.status(200).json({ status: 'alreadySent' });
           }
 
           const professional = await Professional.findOne({
@@ -154,7 +154,7 @@ router.post(
           };
 
           transporter.sendMail(emailContent);
-          return res.status(201).json({ status: 'emailSent' });
+          return res.status(200).json({ status: 'emailSent' });
         }
       }
 
