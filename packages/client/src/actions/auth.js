@@ -93,40 +93,53 @@ export const register =
   };
 
 // Login User
-export const login = (email, password, recaptchaRef) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+export const login =
+  (email, password, recaptchaRef, history) => async (dispatch) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
 
-  const recaptchaValue = recaptchaRef.current.getValue();
+    const recaptchaValue = recaptchaRef.current.getValue();
 
-  const body = JSON.stringify({ email, password, recaptchaValue });
+    const body = JSON.stringify({ email, password, recaptchaValue });
 
-  try {
-    const res = await axios.post(`${URI}/api/auth`, body, config);
+    try {
+      const res = await axios.post(`${URI}/api/auth`, body, config);
 
-    dispatch({
-      type: LOGIN_SUCCESS,
-      payload: res.data,
-    });
+      if (res.data.token) {
+        dispatch({
+          type: LOGIN_SUCCESS,
+          payload: res.data,
+        });
 
-    dispatch(loadUser());
-  } catch (err) {
-    const errors = err.response.data.errors;
+        dispatch(loadUser());
+      } else {
+        let alertMsg;
+        if (res.data.status === 'alreadySent') {
+          alertMsg =
+            'A verification code has already been sent to you via email';
+        } else {
+          alertMsg = 'A verification code has been sent to you via email';
+        }
+        history.push('/2fa');
+        dispatch(setAlert(alertMsg, 'success', 5000));
+      }
+    } catch (err) {
+      const errors = err.response.data.errors;
 
-    recaptchaRef.current.reset();
+      recaptchaRef.current.reset();
 
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+      }
+
+      dispatch({
+        type: LOGIN_FAIL,
+      });
     }
-
-    dispatch({
-      type: LOGIN_FAIL,
-    });
-  }
-};
+  };
 
 // Send Password reset email
 export const sendForgotEmail = (email, recaptchaValue) => async (dispatch) => {

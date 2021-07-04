@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
@@ -25,7 +25,7 @@ import inputStyles from '../../assets/jss/material-dashboard-react/components/cu
 const useStyles = makeStyles(styles);
 const useInputStyles = makeStyles(inputStyles);
 
-const Login = ({ login, isAuthenticated, type }) => {
+const Login = ({ login, isAuthenticated, type, history }) => {
   const classes = useStyles();
   const inputClasses = useInputStyles();
 
@@ -39,7 +39,7 @@ const Login = ({ login, isAuthenticated, type }) => {
       password: '',
     },
     onSubmit: ({ email, password }) => {
-      login(email.toLowerCase(), password, recaptchaRef);
+      login(email.toLowerCase(), password, recaptchaRef, history);
     },
   });
 
@@ -151,4 +151,4 @@ const mapStateToProps = (state) => ({
   type: state.auth.type,
 });
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { login })(withRouter(Login));

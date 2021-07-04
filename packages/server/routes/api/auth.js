@@ -98,6 +98,7 @@ router.post(
           .json({ errors: [{ msg: 'Invalid credentials' }] });
       }
 
+      // 2FA for professionals
       if (user.type === 'professional') {
         const trustedIps = await client.get(`trusted_ips_${user._id}`);
 
