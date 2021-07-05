@@ -14,7 +14,7 @@ const { startDeleter } = require('./trustedIpsDeleter');
 const app = express();
 
 if (process.env.NODE_ENV === 'production') {
-  app.set('trust proxy', 1);
+  app.set('trust proxy', true);
 }
 
 app.use(require('express-status-monitor')());
