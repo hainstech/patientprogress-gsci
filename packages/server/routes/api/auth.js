@@ -98,6 +98,7 @@ router.post(
         user.type === 'professional' &&
         process.env.NODE_ENV !== 'development'
       ) {
+        const ip = req.header('x-forwarded-for') || req.socket.remoteAddress;
         if (emailCode) {
           const storedCode = await client.get(`email_code_${user._id}`);
           // Si le code est mauvais on return
@@ -105,13 +106,13 @@ router.post(
           if (storedCode !== emailCode.toString())
             return res.status(200).json({ status: 'wrongCode' });
           // Si le code est bon on ajoute l'ip a la liste
-          await client.sadd(`trusted_ips_${user._id}`, req.ip);
+          await client.sadd(`trusted_ips_${user._id}`, ip);
           // et on supprime le code
           await client.del(`email_code_${user._id}`);
         } else {
           // On regarde si l'ip est contenue dans les trusted_ips
           const trustedIps = await client.smembers(`trusted_ips_${user._id}`);
-          if (!trustedIps?.includes(req.ip)) {
+          if (!trustedIps?.includes(ip)) {
             const storedCode = await client.get(`email_code_${user._id}`);
 
             if (storedCode) {
