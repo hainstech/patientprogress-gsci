@@ -94,7 +94,10 @@ router.post(
       }
 
       // Two factor authentication
-      if (user.type === 'professional') {
+      if (
+        user.type === 'professional' &&
+        process.env.NODE_ENV !== 'development'
+      ) {
         if (emailCode) {
           const storedCode = await client.get(`email_code_${user._id}`);
           // Si le code est mauvais on return

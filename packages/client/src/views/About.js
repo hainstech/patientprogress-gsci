@@ -22,6 +22,7 @@ const About = () => {
             <CardHeader color='danger'>
               <h4 className={classes.cardTitleWhite}>
                 {t('guest.about.title')}
+                {process.env.REACT_APP_BETA ? ' - BETA VERSION' : ''}
               </h4>
             </CardHeader>
             <CardBody>

@@ -38,7 +38,7 @@ app.use(xss());
 app.use(cors());
 
 // Dev logging middleware
-if (process.env.NODE_ENV === 'developement') {
+if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
