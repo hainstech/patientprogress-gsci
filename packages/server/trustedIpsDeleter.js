@@ -6,7 +6,7 @@ module.exports = {
   startDeleter: function () {
     try {
       var job = new CronJob(
-        '* * * * 01 *',
+        '* * * * 13 *',
         function () {
           var stream = redis.scanStream({
             match: 'trusted_ips_*',
