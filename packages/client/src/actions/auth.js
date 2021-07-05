@@ -12,8 +12,11 @@ import {
   CLEAR_PROFILE,
 } from './types';
 
+const prefix = process.env.REACT_APP_BETA ? 'beta.' : '';
 const URI =
-  process.env.NODE_ENV === 'production' ? 'https://api.patientprogress.ca' : '';
+  process.env.NODE_ENV === 'production'
+    ? `https://${prefix}api.patientprogress.ca`
+    : '';
 
 // Load User
 export const loadUser = () => async (dispatch) => {
@@ -93,40 +96,67 @@ export const register =
   };
 
 // Login User
-export const login = (email, password, recaptchaRef) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+export const login =
+  (email, password, recaptchaRef, emailCode) => async (dispatch) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
 
-  const recaptchaValue = recaptchaRef.current.getValue();
+    const recaptchaValue = recaptchaRef.current.getValue();
 
-  const body = JSON.stringify({ email, password, recaptchaValue });
+    const body = JSON.stringify({ email, password, recaptchaValue, emailCode });
 
-  try {
-    const res = await axios.post(`${URI}/api/auth`, body, config);
+    try {
+      const res = await axios.post(`${URI}/api/auth`, body, config);
 
-    dispatch({
-      type: LOGIN_SUCCESS,
-      payload: res.data,
-    });
+      if (res.data.token) {
+        dispatch({
+          type: LOGIN_SUCCESS,
+          payload: res.data,
+        });
 
-    dispatch(loadUser());
-  } catch (err) {
-    const errors = err.response.data.errors;
+        dispatch(loadUser());
 
-    recaptchaRef.current.reset();
+        return false;
+      } else {
+        let alertMsg;
+        let color;
 
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+        if (res.data.status === 'alreadySent') {
+          alertMsg =
+            'A verification code has already been sent to you via email';
+          color = 'danger';
+        }
+        if (res.data.status === 'emailSent') {
+          alertMsg = 'A verification code has been sent to you via email';
+          color = 'success';
+        }
+
+        if (res.data.status === 'wrongCode') {
+          alertMsg = 'Wrong code';
+          color = 'danger';
+        }
+
+        recaptchaRef.current.reset();
+        dispatch(setAlert(alertMsg, color, 5000));
+        return true;
+      }
+    } catch (err) {
+      const errors = err.response.data.errors;
+
+      recaptchaRef.current.reset();
+
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+      }
+
+      dispatch({
+        type: LOGIN_FAIL,
+      });
     }
-
-    dispatch({
-      type: LOGIN_FAIL,
-    });
-  }
-};
+  };
 
 // Send Password reset email
 export const sendForgotEmail = (email, recaptchaValue) => async (dispatch) => {

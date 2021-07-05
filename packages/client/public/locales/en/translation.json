@@ -22,7 +22,8 @@
       "title": "Sign into the application",
       "email": "Email",
       "password": "Password",
-      "submit": "Submit"
+      "submit": "Submit",
+      "emailCode": "Enter the verification code sent to your email"
     }
   },
   "patient": {
@@ -156,6 +157,7 @@
     "genderOther": "Specify your gender"
   },
   "forgot": {
+    "link": "Forgot password?",
     "newPassword": "Enter your new password",
     "reset": "Enter your email associated with your account",
     "directions": "A link will be sent to your email"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -25,7 +25,7 @@ import inputStyles from '../../assets/jss/material-dashboard-react/components/cu
 const useStyles = makeStyles(styles);
 const useInputStyles = makeStyles(inputStyles);
 
-const Login = ({ login, isAuthenticated, type }) => {
+const Login = ({ login, isAuthenticated, type, history }) => {
   const classes = useStyles();
   const inputClasses = useInputStyles();
 
@@ -33,13 +33,23 @@ const Login = ({ login, isAuthenticated, type }) => {
 
   const { t } = useTranslation();
 
+  const [displayTwoFA, setDisplayTwoFA] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
+      emailCode: '',
     },
-    onSubmit: ({ email, password }) => {
-      login(email.toLowerCase(), password, recaptchaRef);
+    onSubmit: async ({ email, password, emailCode }) => {
+      emailCode = displayTwoFA ? emailCode : '';
+      const res = await login(
+        email.toLowerCase(),
+        password,
+        recaptchaRef,
+        emailCode
+      );
+      setDisplayTwoFA(res);
     },
   });
 
@@ -117,6 +127,33 @@ const Login = ({ login, isAuthenticated, type }) => {
                     />
                   </FormControl>
                 </GridItem>
+                {displayTwoFA && (
+                  <GridItem xs={12}>
+                    <FormControl fullWidth>
+                      <InputLabel
+                        className={inputClasses.labelRoot}
+                        htmlFor='emailCode'
+                        shrink
+                      >
+                        {t('guest.login.emailCode')}
+                      </InputLabel>
+
+                      <Input
+                        classes={{
+                          disabled: inputClasses.disabled,
+                          underline: classNames(
+                            inputClasses.underlineError,
+                            inputClasses.underline
+                          ),
+                        }}
+                        type='number'
+                        id={'emailCode'}
+                        value={formik.values.emailCode}
+                        onChange={formik.handleChange}
+                      />
+                    </FormControl>
+                  </GridItem>
+                )}
                 <GridItem xs={12}>
                   <Box mt={3}>
                     <ReCAPTCHA
@@ -131,7 +168,7 @@ const Login = ({ login, isAuthenticated, type }) => {
               <Button color='success' type='submit'>
                 {t('guest.login.submit')}
               </Button>
-              <Link to='/forgot'>Forgot password?</Link>
+              <Link to='/forgot'>{t('forgot.link')}</Link>
             </CardFooter>
           </form>
         </Card>

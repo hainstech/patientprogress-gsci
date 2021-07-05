@@ -9,6 +9,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const { startBot } = require('./telegramBot');
 const { startSender } = require('./questionnaireSender');
+const { startDeleter } = require('./trustedIpsDeleter');
 
 const app = express();
 
@@ -37,7 +38,7 @@ app.use(xss());
 app.use(cors());
 
 // Dev logging middleware
-if (process.env.NODE_ENV === 'developement') {
+if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
@@ -69,4 +70,5 @@ startSender();
 
 if (process.env.NODE_ENV === 'production') {
   startBot();
+  startDeleter();
 }

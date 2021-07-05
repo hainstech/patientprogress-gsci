@@ -3,8 +3,11 @@ import { setAlert } from './alert';
 
 import { GET_PROFILE, PROFILE_ERROR } from './types';
 
+const prefix = process.env.REACT_APP_BETA ? 'beta.' : '';
 const URI =
-  process.env.NODE_ENV === 'production' ? 'https://api.patientprogress.ca' : '';
+  process.env.NODE_ENV === 'production'
+    ? `https://${prefix}api.patientprogress.ca`
+    : '';
 
 // Get current users profile
 export const getCurrentProfile = (type) => async (dispatch) => {

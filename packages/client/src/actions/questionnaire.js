@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 
+const prefix = process.env.REACT_APP_BETA ? 'beta.' : '';
 const URI =
-  process.env.NODE_ENV === 'production' ? 'https://api.patientprogress.ca' : '';
+  process.env.NODE_ENV === 'production'
+    ? `https://${prefix}api.patientprogress.ca`
+    : '';
 
 // Get questionnaire with the params id
 export const getQuestionnaire = (id) => async (dispatch) => {

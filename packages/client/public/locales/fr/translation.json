@@ -22,7 +22,8 @@
       "title": "Se connecter à l'application",
       "email": "Courriel",
       "password": "Mot de passe",
-      "submit": "connexion"
+      "submit": "connexion",
+      "emailCode": "Entrez le code de vérification envoyé par courriel"
     }
   },
   "patient": {
@@ -156,6 +157,7 @@
     "genderOther": "Spécifiez votre genre"
   },
   "forgot": {
+    "link": "Mot de passe oublié?",
     "newPassword": "Entrez un nouveau mot de passe",
     "reset": "Entrez l'addresse courriel liée à votre compte",
     "directions": "Un lien vous sera envoyé via courriel"
