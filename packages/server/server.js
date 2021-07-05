@@ -9,6 +9,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const { startBot } = require('./telegramBot');
 const { startSender } = require('./questionnaireSender');
+const { startDeleter } = require('./trustedIpsDeleter');
 
 const app = express();
 
@@ -69,4 +70,5 @@ startSender();
 
 if (process.env.NODE_ENV === 'production') {
   startBot();
+  startDeleter();
 }
