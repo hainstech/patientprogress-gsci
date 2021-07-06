@@ -107,7 +107,7 @@ const Login = ({ login, getCaptcha, isAuthenticated, type }) => {
                           inputClasses.underline
                         ),
                       }}
-                      type='text'
+                      type='email'
                       id={'email'}
                       value={formik.values.email}
                       onChange={formik.handleChange}

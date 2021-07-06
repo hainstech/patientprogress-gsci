@@ -130,7 +130,6 @@ router.post(
         if (emailCode) {
           const storedCode = await client.get(`email_code_${user._id}`);
           // Si le code est mauvais on return
-          console.log(typeof storedCode, typeof emailCode);
           if (storedCode !== emailCode.toString())
             return res.status(200).json({ status: 'wrongCode' });
           // Si le code est bon on ajoute l'ip a la liste
