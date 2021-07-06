@@ -104,7 +104,7 @@ export const login =
       },
     };
 
-    const recaptchaValue = recaptchaRef.current.getValue();
+    const recaptchaValue = recaptchaRef.current?.getValue();
 
     const body = JSON.stringify({ email, password, recaptchaValue, emailCode });
 
@@ -139,14 +139,17 @@ export const login =
           color = 'danger';
         }
 
-        recaptchaRef.current.reset();
+        recaptchaRef.current?.reset();
         dispatch(setAlert(alertMsg, color, 5000));
-        return true;
+        dispatch({
+          type: LOGIN_FAIL,
+        });
+        return { code: true };
       }
     } catch (err) {
       const errors = err.response.data.errors;
 
-      recaptchaRef.current.reset();
+      recaptchaRef.current?.reset();
 
       if (errors) {
         errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
@@ -157,6 +160,16 @@ export const login =
       });
     }
   };
+
+// Check if the captcha is required or not
+export const getCaptcha = () => async (dispatch) => {
+  try {
+    const res = await axios.get(`${URI}/api/auth/captcha`);
+    return res.data.captcha;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
 // Send Password reset email
 export const sendForgotEmail = (email, recaptchaValue) => async (dispatch) => {

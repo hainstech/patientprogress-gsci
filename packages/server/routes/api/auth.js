@@ -12,6 +12,8 @@ const Redis = require('ioredis');
 const User = require('../../models/User');
 const Professional = require('../../models/Professional');
 
+const MAX_FAILED_ATTEMPTS = 5;
+
 //Redis
 const client = new Redis();
 
@@ -39,6 +41,22 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+// @route GET api/auth/captcha
+// @desc Check if the captcha is required or not
+// @access Public
+router.get('/captcha', speedLimiter, async (req, res) => {
+  try {
+    const ip = req.header('x-forwarded-for') || req.socket.remoteAddress;
+    const failedAttempts = parseInt(await client.get(`failed_attempts_${ip}`));
+    return res.status(200).json({
+      captcha: failedAttempts > MAX_FAILED_ATTEMPTS - 1 ? true : false,
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 // @route POST api/auth
 // @desc Authenticate user & get token
 // @access Public
@@ -60,37 +78,48 @@ router.post(
     const { email, password, recaptchaValue, emailCode } = req.body;
 
     try {
-      if (!recaptchaValue) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'Please complete reCaptcha' }] });
-      }
-
-      const { body } = await got.post(
-        `https://www.google.com/recaptcha/api/siteverify?secret=${config.get(
-          'recaptchaSecret'
-        )}&response=${recaptchaValue}`,
-        { responseType: 'json' }
+      const ip = req.header('x-forwarded-for') || req.socket.remoteAddress;
+      const failedAttempts = parseInt(
+        await client.get(`failed_attempts_${ip}`)
       );
 
-      if (!body.success) {
-        return res.status(400).json({ errors: [{ msg: 'Invalid reCaptcha' }] });
+      if (failedAttempts > MAX_FAILED_ATTEMPTS) {
+        if (!recaptchaValue) {
+          return res
+            .status(400)
+            .json({ errors: [{ msg: 'Please complete reCaptcha' }] });
+        }
+
+        const { body } = await got.post(
+          `https://www.google.com/recaptcha/api/siteverify?secret=${config.get(
+            'recaptchaSecret'
+          )}&response=${recaptchaValue}`,
+          { responseType: 'json' }
+        );
+
+        if (!body.success) {
+          return res
+            .status(400)
+            .json({ errors: [{ msg: 'Invalid reCaptcha' }] });
+        }
       }
 
       let user = await User.findOne({ email });
-
-      if (!user) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'Invalid credentials' }] });
-      }
-
-      const isMatch = await bcrypt.compare(password, user.password);
+      const isMatch = user
+        ? await bcrypt.compare(password, user.password)
+        : false;
 
       if (!isMatch) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'Invalid credentials' }] });
+        await client.set(
+          `failed_attempts_${ip}`,
+          failedAttempts ? failedAttempts + 1 : 1,
+          'EX',
+          3600
+        );
+
+        return res.status(400).json({
+          errors: [{ msg: 'Invalid credentials' }],
+        });
       }
 
       // Two factor authentication
@@ -98,7 +127,6 @@ router.post(
         user.type === 'professional' &&
         process.env.NODE_ENV !== 'development'
       ) {
-        const ip = req.header('x-forwarded-for') || req.socket.remoteAddress;
         if (emailCode) {
           const storedCode = await client.get(`email_code_${user._id}`);
           // Si le code est mauvais on return
@@ -116,7 +144,6 @@ router.post(
             const storedCode = await client.get(`email_code_${user._id}`);
 
             if (storedCode) {
-              // 304 Not Modified - email with code already sent
               return res.status(200).json({ status: 'alreadySent' });
             }
 
@@ -185,7 +212,7 @@ router.post(
         }
       );
     } catch (err) {
-      console.error(err.message);
+      console.error(err);
       res.status(500).send('Server error');
     }
   }
