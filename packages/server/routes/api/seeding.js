@@ -18,8 +18,13 @@ router.post('/:professional_id', admin, async (req, res) => {
       const email = faker.internet.email().toLowerCase();
       const password = faker.internet.password();
       const name = faker.name.findName();
-      const dob = faker.date.past();
-      const gender = faker.name.gender();
+      const dob = faker.date.between('1930-01-01', '2021-07-01');
+      const gender =
+        Math.random() > 0.9
+          ? faker.name.gender()
+          : Math.random() > 0.5
+          ? 'Male'
+          : 'Female';
       const language = 'en';
       const research = true;
       const professional = req.params.professional_id;
@@ -72,7 +77,7 @@ router.post('/:professional_id', admin, async (req, res) => {
       await professionalFound.save();
     };
 
-    for (let index = 0; index < 13; index++) {
+    for (let index = 0; index < 50; index++) {
       await createPatient();
     }
 
