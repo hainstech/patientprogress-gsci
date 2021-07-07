@@ -33,9 +33,10 @@ import styles from '../../assets/jss/material-dashboard-react/views/dashboardSty
 const useStyles = makeStyles(styles);
 
 const getAllPatients = async () => {
+  const prefix = process.env.REACT_APP_BETA ? 'beta.' : '';
   const URI =
     process.env.NODE_ENV === 'production'
-      ? 'https://api.patientprogress.ca'
+      ? `https://${prefix}api.patientprogress.ca`
       : '';
   try {
     const res = await axios.get(`${URI}/api/patients/all`);
