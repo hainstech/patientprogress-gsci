@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Navbar from '../components/Navbars/Navbar';
 import Sidebar from '../components/Sidebar/Sidebar';
 import Footer from '../components/Footer/Footer';
+import Spinner from '../components/Spinner/Spinner';
 
 import styles from '../assets/jss/material-dashboard-react/layouts/adminStyle.js';
 
@@ -26,16 +27,19 @@ import Register from '../views/auth/Register';
 import Forgot from '../views/auth/Forgot';
 import NewPassword from '../views/auth/NewPassword';
 
-import Patient from './Patient';
-import Professional from './Professional';
-import Admin from './Admin';
-
+// import Patient from './Patient';
+// import Professional from './Professional';
+// import Admin from './Admin';
 import {
   patientLinks,
   professionalLinks,
   guestLinks,
   adminLinks,
 } from './routes';
+
+const Patient = lazy(() => import('./Patient'));
+const Professional = lazy(() => import('./Professional'));
+const Admin = lazy(() => import('./Admin'));
 
 const useStyles = makeStyles(styles);
 
@@ -110,20 +114,26 @@ const MainRouter = ({
         />
         <div className={classes.content}>
           <div className={classes.container}>
-            <Switch>
-              <Route exact path='/' component={About} />
-              <Route exact path='/login' component={Login} />
-              <Route exact path='/register/:id' component={Register} />
-              <Route exact path='/forgot' component={Forgot} />
-              <Route exact path='/forgot/:id/:token' component={NewPassword} />
-              {/* User-type routes */}
-              <PatientRoute path='/patient' component={Patient} />
-              <ProfessionalRoute
-                path='/professional'
-                component={Professional}
-              />
-              <AdminRoute path='/admin' component={Admin} />
-            </Switch>
+            <Suspense fallback={<Spinner />}>
+              <Switch>
+                <Route exact path='/' component={About} />
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/register/:id' component={Register} />
+                <Route exact path='/forgot' component={Forgot} />
+                <Route
+                  exact
+                  path='/forgot/:id/:token'
+                  component={NewPassword}
+                />
+                {/* User-type routes */}
+                <PatientRoute path='/patient' component={Patient} />
+                <ProfessionalRoute
+                  path='/professional'
+                  component={Professional}
+                />
+                <AdminRoute path='/admin' component={Admin} />
+              </Switch>
+            </Suspense>
           </div>
         </div>
         <Footer />
