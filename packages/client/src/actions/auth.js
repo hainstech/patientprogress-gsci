@@ -1,4 +1,5 @@
 import axios from 'axios';
+import i18n from '../i18n';
 import setAuthToken from '../utils/setAuthToken';
 import { setAlert } from './alert';
 import {
@@ -121,23 +122,8 @@ export const login =
 
         return false;
       } else {
-        let alertMsg;
-        let color;
-
-        if (res.data.status === 'alreadySent') {
-          alertMsg =
-            'A verification code has already been sent to you via email';
-          color = 'danger';
-        }
-        if (res.data.status === 'emailSent') {
-          alertMsg = 'A verification code has been sent to you via email';
-          color = 'success';
-        }
-
-        if (res.data.status === 'wrongCode') {
-          alertMsg = 'Wrong code';
-          color = 'danger';
-        }
+        let alertMsg = i18n.t(`alert.${res.data.status}`);
+        let color = res.data.status === 'emailSent' ? 'success' : 'danger';
 
         recaptchaRef.current?.reset();
         dispatch(setAlert(alertMsg, color, 5000));
@@ -183,13 +169,7 @@ export const sendForgotEmail = (email, recaptchaValue) => async (dispatch) => {
 
   try {
     await axios.post(`${URI}/api/auth/forgot`, body, config);
-
-    dispatch(
-      setAlert(
-        'A password-reset link has been sent to your email address',
-        'success'
-      )
-    );
+    dispatch(setAlert(i18n.t('alert.forgotSent'), 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -218,9 +198,7 @@ export const setNewPassword =
     try {
       await axios.post(`${URI}/api/auth/passwordreset`, body, config);
 
-      dispatch(
-        setAlert('Your password has been reset successfully', 'success')
-      );
+      dispatch(setAlert(i18n.t('alert.reset'), 'success'));
 
       history.push(`/login`);
     } catch (err) {

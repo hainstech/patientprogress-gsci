@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
+import i18n from '../i18n';
 
 const prefix = process.env.REACT_APP_BETA ? 'beta.' : '';
 const URI =
@@ -59,7 +60,7 @@ export const addQuestionnaire =
         config
       );
 
-      dispatch(setAlert('Questionnaire filled and sent', 'success'));
+      dispatch(setAlert(i18n.t('alert.questionnaireFilled'), 'success'));
 
       history.push('/patient/questionnaires');
     } catch (err) {

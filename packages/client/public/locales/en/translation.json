@@ -277,5 +277,15 @@
     "ageTitle": "Number of patients by age category (in years)",
     "ageTableTitle": "Age (in years)",
     "genderTitle": "Number of patients by gender"
+  },
+  "alert": {
+    "forgotSent": "A password-reset link has been sent to your email address",
+    "reset": "Your password has been reset successfully",
+    "alreadySent": "A verification code has already been sent to you via email",
+    "emailSent": "A verification code has been sent to you via email",
+    "wrongCode": "Wrong verification code",
+    "invitationSent": "Invitation sent to:",
+    "updatedSuccessfully": "Updated successfully",
+    "questionnaireFilled": "Questionnaire filled and sent successfully"
   }
 }

@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import i18n from '../i18n';
 import { setAlert } from './alert';
 import { GET_PATIENT, PATIENT_ERROR } from './types';
 
@@ -20,7 +21,7 @@ export const invitePatient = (email) => async (dispatch) => {
 
     await axios.post(`${URI}/api/professionals/invite`, { email }, config);
 
-    dispatch(setAlert(`Invitation sent to: ${email}`, 'success'));
+    dispatch(setAlert(`${i18n.t('alert.invitationSent')} ${email}`, 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
 
