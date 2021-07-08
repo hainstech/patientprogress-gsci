@@ -56,7 +56,8 @@
     "eject": "react-scripts eject",
     "netlify:deploy": "netlify deploy --dir=./build -p -m \"$(git log -1 --pretty=%B)\"",
     "ci:deploy": "npm run build && npm run netlify:deploy",
-    "analyze": "source-map-explorer 'build/static/js/*.js' --tsv"
+    "analyze": "source-map-explorer 'build/static/js/*.js' --tsv",
+    "deploy:beta": "netlify deploy --prod"
   },
   "eslintConfig": {
     "extends": [
