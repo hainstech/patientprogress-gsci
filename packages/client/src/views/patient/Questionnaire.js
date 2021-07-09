@@ -24,13 +24,9 @@ import {
 import Spinner from '../../components/Spinner/Spinner';
 
 const bodyMap = function (props) {
-  const handleChange = (event) => {
-    const value = event.target.value;
-    props.onChange(value);
-  };
-
   return (
     <>
+      <h1>test</h1>
       <ImageMapper
         src={URL}
         map={{
@@ -107,6 +103,9 @@ function Questionnaire({
 
   const widgets = {
     nativeSelect,
+  };
+
+  const fields = {
     bodyMap,
   };
 
@@ -121,6 +120,7 @@ function Questionnaire({
               <CardBody>
                 <Form
                   widgets={widgets}
+                  fields={fields}
                   schema={questionnaire.schema}
                   uiSchema={questionnaire.uischema}
                   formData={formData}
