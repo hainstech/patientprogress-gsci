@@ -35,6 +35,7 @@
     "react-google-recaptcha": "^2.1.0",
     "react-hook-form": "^7.6.0",
     "react-i18next": "^11.8.15",
+    "react-img-mapper": "^1.1.10",
     "react-jsonschema-form": "^1.8.1",
     "react-moment": "^1.1.1",
     "react-multi-date-picker": "^2.10.0",

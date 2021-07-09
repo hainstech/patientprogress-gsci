@@ -5,6 +5,10 @@ import { withRouter } from 'react-router-dom';
 import Form from '@rjsf/material-ui';
 import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import ImageMapper from 'react-img-mapper';
+
+import URL from '../../assets/img/bodyMap.jpg';
+import areasJSON from '../../assets/bodyMap.json';
 
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem.js';
@@ -18,6 +22,29 @@ import {
   addQuestionnaire,
 } from '../../actions/questionnaire';
 import Spinner from '../../components/Spinner/Spinner';
+
+const bodyMap = function (props) {
+  const handleChange = (event) => {
+    const value = event.target.value;
+    props.onChange(value);
+  };
+
+  return (
+    <>
+      <ImageMapper
+        src={URL}
+        map={{
+          name: 'body-map',
+          areas: areasJSON,
+        }}
+        responsive
+        stayHighlighted
+        stayMultiHighlighted
+        toggleHighlighted
+      />
+    </>
+  );
+};
 
 const nativeSelect = function (props) {
   const handleChange = (event) => {
@@ -80,6 +107,7 @@ function Questionnaire({
 
   const widgets = {
     nativeSelect,
+    bodyMap,
   };
 
   return (
