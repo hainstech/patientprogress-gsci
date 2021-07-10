@@ -117,7 +117,7 @@ const Metrics = () => {
       {!allPatients ? (
         <Spinner />
       ) : (
-        <GridContainer justify='center'>
+        <GridContainer justifyContent='center'>
           <Alert />
           <Card>
             <CardHeader color='danger'>

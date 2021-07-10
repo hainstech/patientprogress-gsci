@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Form from '@rjsf/material-ui';
-import InputLabel from '@material-ui/core/InputLabel';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import { InputLabel, NativeSelect } from '@material-ui/core';
 import ImageMapper from 'react-img-mapper';
 
 import URL from '../../assets/img/bodyMap.jpg';
@@ -23,10 +22,27 @@ import {
 } from '../../actions/questionnaire';
 import Spinner from '../../components/Spinner/Spinner';
 
-const bodyMap = function (props) {
+const BodyMap = (props) => {
+  // eslint-disable-next-line
+  const [regions, setRegions] = useState([]);
+
+  const handleClick = (id) => {
+    const newId = id.toString();
+    setRegions((regions) => {
+      let newArray;
+      if (!regions.includes(newId)) {
+        newArray = [...regions, newId];
+      } else {
+        newArray = regions.filter((region) => region !== newId);
+      }
+      props.onChange(newArray);
+      return newArray;
+    });
+  };
+
   return (
     <>
-      <h1>test</h1>
+      <strong>{props.schema.description}</strong>
       <ImageMapper
         src={URL}
         map={{
@@ -34,15 +50,18 @@ const bodyMap = function (props) {
           areas: areasJSON,
         }}
         responsive
+        parentWidth={400}
         stayHighlighted
         stayMultiHighlighted
         toggleHighlighted
+        onClick={(area) => handleClick(area.id)}
+        onLoad={() => {}}
       />
     </>
   );
 };
 
-const nativeSelect = function (props) {
+const NativeSelectWidget = function (props) {
   const handleChange = (event) => {
     const value = event.target.value;
     props.onChange(value);
@@ -102,11 +121,11 @@ function Questionnaire({
   const [formData, setFormData] = useState(null);
 
   const widgets = {
-    nativeSelect,
+    nativeSelect: NativeSelectWidget,
   };
 
   const fields = {
-    bodyMap,
+    bodyMap: BodyMap,
   };
 
   return (
@@ -114,7 +133,7 @@ function Questionnaire({
       {questionnaire === null ? (
         <Spinner />
       ) : (
-        <GridContainer justify='center'>
+        <GridContainer justifyContent='center'>
           <GridItem xs={12}>
             <Card>
               <CardBody>

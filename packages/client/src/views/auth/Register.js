@@ -105,7 +105,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
 
   return (
     <>
-      <GridContainer justify='center'>
+      <GridContainer justifyContent='center'>
         <GridItem xs={12} lg={6}>
           <Alert />
           <Card>

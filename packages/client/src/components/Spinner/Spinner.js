@@ -5,7 +5,7 @@ import GridItem from '../Grid/GridItem.js';
 
 const Spinner = () => {
   return (
-    <GridContainer justify='center' styles={{ marginTop: 100 }}>
+    <GridContainer justifyContent='center' styles={{ marginTop: 100 }}>
       <GridItem xs={1}>
         <svg
           aria-hidden='true'

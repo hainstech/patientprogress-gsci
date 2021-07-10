@@ -58,7 +58,7 @@ const Report = ({
       {patient === null || !report.date || loading ? (
         <Spinner />
       ) : (
-        <GridContainer justify='center'>
+        <GridContainer justifyContent='center'>
           <GridItem xs={12}>
             <Card>
               <CardHeader color='danger'>

@@ -503,7 +503,7 @@ const NewReport = ({
       ploading ? (
         <Spinner />
       ) : (
-        <GridContainer justify='center'>
+        <GridContainer justifyContent='center'>
           <Alert />
           <GridItem xs={12} lg={8}>
             <Card>
@@ -997,7 +997,7 @@ const NewReport = ({
                           <Button
                             onClick={() => history.goBack()}
                             color='danger'
-                            justify='center'
+                            justifyContent='center'
                           >
                             {t('professional.patient.back')}
                           </Button>
