@@ -25,6 +25,7 @@ import Spinner from '../../components/Spinner/Spinner';
 const BodyMap = (props) => {
   // eslint-disable-next-line
   const [regions, setRegions] = useState([]);
+  const [disabled, setDisabled] = useState(true);
 
   const handleClick = (id) => {
     const newId = id.toString();
@@ -38,6 +39,10 @@ const BodyMap = (props) => {
       props.onChange(newArray);
       return newArray;
     });
+  };
+
+  const handleLoaded = () => {
+    setDisabled(false);
   };
 
   return (
@@ -55,6 +60,8 @@ const BodyMap = (props) => {
         stayMultiHighlighted
         toggleHighlighted
         onClick={(area) => handleClick(area.id)}
+        onLoad={handleLoaded}
+        disabled={disabled}
       />
     </>
   );
