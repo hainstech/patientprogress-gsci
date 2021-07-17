@@ -106,20 +106,24 @@ function Questionnaire({
   history,
 }) {
   const [questionnaire, setQuestionnaire] = useState(null);
+  const [startTime, setStartTime] = useState(null);
 
   useEffect(() => {
     (async () => {
       const questionnaire = await getQuestionnaire(match.params.id);
       setQuestionnaire(questionnaire);
+      setStartTime(parseInt((new Date().getTime() / 1000).toFixed(0)));
     })();
   }, [getQuestionnaire, match.params.id]);
 
   const onSubmit = async (e) => {
+    const timeNow = parseInt((new Date().getTime() / 1000).toFixed(0));
     await addQuestionnaire(
       history,
       match.params.id,
       questionnaire.title,
-      formData
+      formData,
+      timeNow - startTime
     );
     await getCurrentProfile('patient');
   };

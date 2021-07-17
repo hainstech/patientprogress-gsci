@@ -79,7 +79,7 @@ router.get('/:id', auth, async (req, res) => {
 // @access patient
 router.post('/:id', patient, async (req, res) => {
   try {
-    const { title, data } = req.body;
+    const { title, data, time } = req.body;
 
     var completedQuestionnaire = {
       questionnaire: req.params.id,
@@ -87,6 +87,7 @@ router.post('/:id', patient, async (req, res) => {
       answers: data,
       title,
       score: scoreCalculator(title, data),
+      timeToComplete: time,
     };
 
     const patient = await Patient.findOne({ user: req.user.id });

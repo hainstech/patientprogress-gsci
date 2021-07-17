@@ -56,6 +56,9 @@ var patientSchema = new mongoose.Schema({
           value: { type: String, required: true },
         },
       ],
+      timeToComplete: {
+        type: Number,
+      },
     },
   ],
   reports: [

@@ -41,7 +41,7 @@ export const createQuestionnaire = (schema, uischema) => async (dispatch) => {
 };
 
 export const addQuestionnaire =
-  (history, id, title, data) => async (dispatch) => {
+  (history, id, title, data, time) => async (dispatch) => {
     try {
       const config = {
         hearders: {
@@ -50,8 +50,9 @@ export const addQuestionnaire =
       };
 
       const questionnaire = {
-        title: title,
-        data: data,
+        title,
+        data,
+        time,
       };
 
       await axios.post(
