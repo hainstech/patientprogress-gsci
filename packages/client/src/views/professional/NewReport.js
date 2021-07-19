@@ -662,7 +662,9 @@ const NewReport = ({
                               {score.score.map(({ title, value }, y) => (
                                 <GridItem key={y + i} xs={12}>
                                   {t(`professional.patient.score.${title}`)}:{' '}
-                                  {value}
+                                  {/\d/.test(value)
+                                    ? value
+                                    : t(`professional.patient.score.${value}`)}
                                 </GridItem>
                               ))}
                             </GridContainer>

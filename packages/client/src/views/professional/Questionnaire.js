@@ -193,7 +193,9 @@ const Questionnaire = ({
                         <strong>
                           {t(`professional.patient.score.${title}`)}:
                         </strong>{' '}
-                        {value}
+                        {/\d/.test(value)
+                          ? value
+                          : t(`professional.patient.score.${value}`)}
                       </p>
                     ))}
                   </>
