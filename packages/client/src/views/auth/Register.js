@@ -106,7 +106,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
   return (
     <>
       <GridContainer justifyContent='center'>
-        <GridItem xs={12} lg={6}>
+        <GridItem xs={12} lg={10} xl={8}>
           <Alert />
           <Card>
             <CardHeader color='danger'>
@@ -115,7 +115,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
             <form onSubmit={formik.handleSubmit}>
               <CardBody>
                 <GridContainer>
-                  <GridItem xs={12} xl={6}>
+                  <GridItem xs={12} lg={6}>
                     <FormControl fullWidth className={inputClasses.formControl}>
                       <InputLabel
                         className={inputClasses.labelRoot}
@@ -139,7 +139,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                       />
                     </FormControl>
                   </GridItem>
-                  <GridItem xs={12} xl={6}>
+                  <GridItem xs={12} lg={6}>
                     <FormControl fullWidth className={inputClasses.formControl}>
                       <InputLabel
                         className={inputClasses.labelRoot}
@@ -163,7 +163,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                       />
                     </FormControl>
                   </GridItem>
-                  <GridItem xs={12} xl={6}>
+                  <GridItem xs={12} lg={6}>
                     <FormControl fullWidth className={inputClasses.formControl}>
                       <InputLabel
                         className={inputClasses.labelRoot}
@@ -186,7 +186,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                       </NativeSelect>
                     </FormControl>
                   </GridItem>
-                  <GridItem xs={12} xl={6}>
+                  <GridItem xs={12} lg={6}>
                     <FormControl fullWidth className={inputClasses.formControl}>
                       <InputLabel
                         className={inputClasses.labelRoot}
@@ -238,7 +238,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                       </FormControl>
                     </GridItem>
                   )}
-                  <GridItem xs={12} xl={6}>
+                  <GridItem xs={12} lg={6}>
                     <Box className={inputClasses.formControl}>
                       <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
@@ -257,7 +257,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                       </MuiPickersUtilsProvider>
                     </Box>
                   </GridItem>
-                  <GridItem xs={12} xl={6}>
+                  <GridItem xs={12} lg={6}>
                     <FormControl fullWidth className={inputClasses.formControl}>
                       <InputLabel
                         className={inputClasses.labelRoot}
@@ -281,7 +281,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                       />
                     </FormControl>
                   </GridItem>
-                  <GridItem xs={12} xl={6}>
+                  <GridItem xs={12} lg={6}>
                     <FormControl fullWidth className={inputClasses.formControl}>
                       <InputLabel
                         className={inputClasses.labelRoot}
@@ -305,7 +305,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                       />
                     </FormControl>
                   </GridItem>
-                  <GridItem xs={12} xl={6}>
+                  <GridItem xs={12} lg={6}>
                     <FormControl fullWidth className={inputClasses.formControl}>
                       <InputLabel
                         className={inputClasses.labelRoot}
@@ -329,7 +329,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                       />
                     </FormControl>
                   </GridItem>
-                  <GridItem xs={12} xl={6}>
+                  <GridItem xs={12}>
                     <FormControlLabel
                       className={inputClasses.formControl}
                       control={
@@ -339,7 +339,26 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                           name='research'
                         />
                       }
-                      label={t('register.consent')}
+                      label={
+                        <p>
+                          {t('register.consent')}{' '}
+                          <a
+                            href='https://app.patientprogress.ca/privacy'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                          >
+                            Privacy Policy
+                          </a>{' '}
+                          &{' '}
+                          <a
+                            href='https://app.patientprogress.ca/terms'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                          >
+                            Terms and conditions
+                          </a>
+                        </p>
+                      }
                     />
                   </GridItem>
                 </GridContainer>
@@ -353,9 +372,11 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                 </GridItem>
               </CardBody>
               <CardFooter>
-                <Button color='danger' type='submit'>
-                  {t('register.submit')}
-                </Button>
+                <GridItem xs={12}>
+                  <Button color='danger' type='submit'>
+                    {t('register.submit')}
+                  </Button>
+                </GridItem>
               </CardFooter>
             </form>
           </Card>

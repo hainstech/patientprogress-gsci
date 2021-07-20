@@ -27,9 +27,9 @@ import Register from '../views/auth/Register';
 import Forgot from '../views/auth/Forgot';
 import NewPassword from '../views/auth/NewPassword';
 
-// import Patient from './Patient';
-// import Professional from './Professional';
-// import Admin from './Admin';
+import Privacy from '../views/misc/Privacy';
+import Terms from '../views/misc/Terms';
+
 import {
   patientLinks,
   professionalLinks,
@@ -120,6 +120,8 @@ const MainRouter = ({
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/register/:id' component={Register} />
                 <Route exact path='/forgot' component={Forgot} />
+                <Route exact path='/privacy' component={Privacy} />
+                <Route exact path='/terms' component={Terms} />
                 <Route
                   exact
                   path='/forgot/:id/:token'
