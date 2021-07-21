@@ -670,7 +670,10 @@ const QuestionnairePDF = ({ questionnaire, patient, answers }) => {
             <View wrap={false} style={styles.answersContainer}>
               {questionnaire.score.map(({ title, value }) => (
                 <Text key={title} style={styles.answer}>
-                  {t(`professional.patient.score.${title}`)}: {value}
+                  {t(`professional.patient.score.${title}`)}:{' '}
+                  {/\d/.test(value)
+                    ? value
+                    : t(`professional.patient.score.${value}`)}
                 </Text>
               ))}
             </View>

@@ -186,7 +186,7 @@ const PatientOverview = ({
       {patient === null || questionnaireList.length === 0 || loading ? (
         <Spinner />
       ) : (
-        <GridContainer justify='center'>
+        <GridContainer justifyContent='center'>
           <Alert />
           <GridItem xs={12} xl={6}>
             <Card>
@@ -196,7 +196,7 @@ const PatientOverview = ({
                 </h4>
               </CardHeader>
               <CardBody>
-                <GridContainer justify='center'>
+                <GridContainer justifyContent='center'>
                   <GridItem xs={12} xl={4}>
                     {t('professional.patient.name')}: {patient.name}
                   </GridItem>

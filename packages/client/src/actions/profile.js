@@ -1,10 +1,14 @@
 import axios from 'axios';
 import { setAlert } from './alert';
+import i18n from '../i18n';
 
 import { GET_PROFILE, PROFILE_ERROR } from './types';
 
+const prefix = process.env.REACT_APP_BETA ? 'beta.' : '';
 const URI =
-  process.env.NODE_ENV === 'production' ? 'https://api.patientprogress.ca' : '';
+  process.env.NODE_ENV === 'production'
+    ? `https://${prefix}api.patientprogress.ca`
+    : '';
 
 // Get current users profile
 export const getCurrentProfile = (type) => async (dispatch) => {
@@ -39,7 +43,7 @@ export const editProfile = (type, formData, history) => async (dispatch) => {
 
     await axios.put(`${URI}/api/${type}s`, formData, config);
 
-    dispatch(setAlert('Updated successfully', 'success'));
+    dispatch(setAlert(i18n.t('alert.updatedSuccessfully'), 'success'));
     switch (type) {
       case 'patient':
         history.push(`/patient/profile`);

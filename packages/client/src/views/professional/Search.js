@@ -75,7 +75,7 @@ const Search = ({ profile: { profile, loading }, getCurrentProfile }) => {
       {profile === null ? (
         <Spinner />
       ) : (
-        <GridContainer justify='center'>
+        <GridContainer justifyContent='center'>
           <GridItem xs={12} lg={6}>
             <Card>
               <CardHeader color='danger'>

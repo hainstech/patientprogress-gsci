@@ -79,7 +79,7 @@ const EditProfile = ({
       {profile === null ? (
         <Spinner />
       ) : (
-        <GridContainer justify='center'>
+        <GridContainer justifyContent='center'>
           <GridItem xs={12} lg={6}>
             <Alert />
             <Card>

@@ -1,8 +1,12 @@
 import axios from 'axios';
 import { setAlert } from './alert';
+import i18n from '../i18n';
 
+const prefix = process.env.REACT_APP_BETA ? 'beta.' : '';
 const URI =
-  process.env.NODE_ENV === 'production' ? 'https://api.patientprogress.ca' : '';
+  process.env.NODE_ENV === 'production'
+    ? `https://${prefix}api.patientprogress.ca`
+    : '';
 
 // Get questionnaire with the params id
 export const getQuestionnaire = (id) => async (dispatch) => {
@@ -37,7 +41,7 @@ export const createQuestionnaire = (schema, uischema) => async (dispatch) => {
 };
 
 export const addQuestionnaire =
-  (history, id, title, data) => async (dispatch) => {
+  (history, id, title, data, time) => async (dispatch) => {
     try {
       const config = {
         hearders: {
@@ -46,8 +50,9 @@ export const addQuestionnaire =
       };
 
       const questionnaire = {
-        title: title,
-        data: data,
+        title,
+        data,
+        time,
       };
 
       await axios.post(
@@ -56,7 +61,7 @@ export const addQuestionnaire =
         config
       );
 
-      dispatch(setAlert('Questionnaire filled and sent', 'success'));
+      dispatch(setAlert(i18n.t('alert.questionnaireFilled'), 'success'));
 
       history.push('/patient/questionnaires');
     } catch (err) {

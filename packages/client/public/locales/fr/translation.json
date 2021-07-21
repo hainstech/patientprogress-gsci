@@ -22,7 +22,8 @@
       "title": "Se connecter à l'application",
       "email": "Courriel",
       "password": "Mot de passe",
-      "submit": "connexion"
+      "submit": "connexion",
+      "emailCode": "Entrez le code de vérification envoyé par courriel"
     }
   },
   "patient": {
@@ -117,7 +118,24 @@
         "work": "Travail",
         "sport": "Sport",
         "disability/symptom": "Incapacité/Symptôme",
-        "globalImpressionOfChange": "Impression globale de changement"
+        "globalImpressionOfChange": "Impression globale de changement",
+        "worstPain": "Pire douleur",
+        "averagePain": "Douleur moyenne",
+        "interferenceInterpretation": "Interprétation des interférences",
+        "activityInterferenceInterpretation": "Interprétation des interférences d'activité",
+        "affectiveInterferenceInterpretation": "Interprétation des interférences affectives",
+        "interprétation": "Interprétation",
+        "noDisability": "Pas d'incapacité",
+        "mildDisability": "Incapacité légère",
+        "moderateDisability": "Incapacité modérée",
+        "severeDisability": "Incapacité sévère",
+        "completeDisability": "Complète Incapacité",
+        "lowInterference": "Faible interférence",
+        "moderateInterference": "Interférence modérée",
+        "severeInterference": "Interférence sévère",
+        "low": "Bas",
+        "medium": "Moyen",
+        "high": "Haut"
       },
       "reports": "Rapports",
       "newReport": "Nouveau Rapport"
@@ -148,7 +166,7 @@
     "email": "Courriel",
     "password": "Mot de passe",
     "passwordConfirmation": "Confirmez votre mot de passe",
-    "consent": "Je consent a cela",
+    "consent": "J'ai lu et accepté les",
     "submit": "Soumettre",
     "male": "Homme",
     "female": "Femme",
@@ -156,6 +174,7 @@
     "genderOther": "Spécifiez votre genre"
   },
   "forgot": {
+    "link": "Mot de passe oublié?",
     "newPassword": "Entrez un nouveau mot de passe",
     "reset": "Entrez l'addresse courriel liée à votre compte",
     "directions": "Un lien vous sera envoyé via courriel"
@@ -275,5 +294,15 @@
     "ageTitle": "Nombre de patients selon catégorie d'âge (en années)",
     "ageTableTitle": "Age (en années)",
     "genderTitle": "Nombre de patients selon le sexe"
+  },
+  "alert": {
+    "forgotSent": "Un lien de réinitialisation de mot de passe a été envoyé à votre adresse e-mail",
+    "reset": "Votre mot de passe a été réinitialisé avec succès",
+    "alreadySent": "Un code de vérification vous a déjà été envoyé par e-mail",
+    "emailSent": "Un code de vérification vous a été envoyé par e-mail",
+    "wrongCode": "Code de vérification incorrect",
+    "invitationSent": "Invitation envoyée à :",
+    "updatedSuccessfully": "Mise à jour réussie",
+    "questionnaireFilled": "Questionnaire rempli et envoyé avec succès"
   }
 }

@@ -1,5 +1,5 @@
 .spinner {
-  height: 30px;
+  height: 500px;
   width: 30px;
   animation: spinner 0.7s linear infinite;
   color: #f44336;

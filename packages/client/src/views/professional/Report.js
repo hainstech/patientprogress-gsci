@@ -58,7 +58,7 @@ const Report = ({
       {patient === null || !report.date || loading ? (
         <Spinner />
       ) : (
-        <GridContainer justify='center'>
+        <GridContainer justifyContent='center'>
           <GridItem xs={12}>
             <Card>
               <CardHeader color='danger'>
@@ -221,7 +221,9 @@ const Report = ({
                               {score.score.map(({ title, value }, y) => (
                                 <GridItem key={y + i} xs={12}>
                                   {t(`professional.patient.score.${title}`)}:{' '}
-                                  {value}
+                                  {/\d/.test(value)
+                                    ? value
+                                    : t(`professional.patient.score.${value}`)}
                                 </GridItem>
                               ))}
                             </GridContainer>

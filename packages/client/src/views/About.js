@@ -22,9 +22,20 @@ const About = () => {
             <CardHeader color='danger'>
               <h4 className={classes.cardTitleWhite}>
                 {t('guest.about.title')}
+                {process.env.REACT_APP_BETA && ' - BETA VERSION'}
               </h4>
             </CardHeader>
             <CardBody>
+              {process.env.REACT_APP_BETA && (
+                <div>
+                  <h5>Warning: This is the Beta version of PatientProgress</h5>
+                  <h5>
+                    <a href='https://app.patientprogress.ca'>Click here</a> to
+                    access the latest stable version.
+                  </h5>
+                  <br />
+                </div>
+              )}
               <p>{t('guest.about.p1')}</p>
               <p>
                 <b>{t('guest.about.features')}:</b>

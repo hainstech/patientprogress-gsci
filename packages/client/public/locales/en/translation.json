@@ -22,7 +22,8 @@
       "title": "Sign into the application",
       "email": "Email",
       "password": "Password",
-      "submit": "Submit"
+      "submit": "Submit",
+      "emailCode": "Enter the verification code sent to your email"
     }
   },
   "patient": {
@@ -117,7 +118,24 @@
         "work": "Work",
         "sport": "Sport",
         "disability/symptom": "Disability/Symptom",
-        "globalImpressionOfChange": "Global Impression of Change"
+        "globalImpressionOfChange": "Global Impression of Change",
+        "worstPain": "Worst Pain",
+        "averagePain": "Average Pain",
+        "interferenceInterpretation": "Interference Interpretation",
+        "activityInterferenceInterpretation": "Activity Interference Interpretation",
+        "affectiveInterferenceInterpretation": "Affective Interference Interpretation",
+        "interpretation": "Interpretation",
+        "noDisability": "No Disability",
+        "mildDisability": "Mild Disability",
+        "moderateDisability": "Moderate Disability",
+        "severeDisability": "Severe Disability",
+        "completeDisability": "Complete Disability",
+        "lowInterference": "Low Interference",
+        "moderateInterference": "Moderate Interference",
+        "severeInterference": "Severe Interference",
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
       },
       "reports": "Reports",
       "newReport": "New report"
@@ -148,7 +166,7 @@
     "email": "Email",
     "password": "Password",
     "passwordConfirmation": "Confirm your password",
-    "consent": "I consent to this",
+    "consent": "I have read and agree to the",
     "submit": "Submit",
     "male": "Male",
     "female": "Female",
@@ -156,6 +174,7 @@
     "genderOther": "Specify your gender"
   },
   "forgot": {
+    "link": "Forgot password?",
     "newPassword": "Enter your new password",
     "reset": "Enter your email associated with your account",
     "directions": "A link will be sent to your email"
@@ -275,5 +294,15 @@
     "ageTitle": "Number of patients by age category (in years)",
     "ageTableTitle": "Age (in years)",
     "genderTitle": "Number of patients by gender"
+  },
+  "alert": {
+    "forgotSent": "A password-reset link has been sent to your email address",
+    "reset": "Your password has been reset successfully",
+    "alreadySent": "A verification code has already been sent to you via email",
+    "emailSent": "A verification code has been sent to you via email",
+    "wrongCode": "Wrong verification code",
+    "invitationSent": "Invitation sent to:",
+    "updatedSuccessfully": "Updated successfully",
+    "questionnaireFilled": "Questionnaire filled and sent successfully"
   }
 }

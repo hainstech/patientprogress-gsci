@@ -13,7 +13,7 @@ module.exports = {
         async function () {
           const patientCount = await Patient.countDocuments();
           const professionalCount = await Professional.countDocuments();
-          const Message = `API running in ${process.env.NODE_ENV} ✅ \n${patientCount} patients 👦 \n${professionalCount} professionals 👨‍⚕️`;
+          const Message = `API running in ${process.env.NODE_ENV} (${process.env.INSTANCE}) ✅ \n${patientCount} patients 👦 \n${professionalCount} professionals 👨‍⚕️`;
           got.post(
             encodeURI(
               `https://api.telegram.org/bot${TelegramAPIKey}/sendMessage?***REMOVED***&text=${Message}`

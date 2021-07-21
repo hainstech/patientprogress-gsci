@@ -1,0 +1,869 @@
+[
+  {
+    "id": "1",
+    "title": "Left Anterior Head",
+    "shape": "poly",
+    "name": "Left Anterior Head (1)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      308, 101, 316, 101, 330, 105, 341, 113, 346, 122, 347, 134, 333, 137, 321,
+      137, 309, 138
+    ]
+  },
+  {
+    "id": "2",
+    "title": "Right Anterior Head",
+    "shape": "poly",
+    "name": "Right Anterior Head (2)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      308, 138, 288, 137, 268, 133, 269, 119, 276, 108, 289, 104, 307, 101
+    ]
+  },
+  {
+    "id": "3",
+    "title": "Left Face",
+    "shape": "poly",
+    "name": "Left Face (3)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      308, 138, 308, 198, 339, 191, 343, 173, 350, 163, 357, 151, 354, 142, 344,
+      148, 346, 134, 326, 137
+    ]
+  },
+  {
+    "id": "4",
+    "title": "Right Face",
+    "shape": "poly",
+    "name": "Right Face (4)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      308, 137, 307, 198, 278, 191, 273, 182, 272, 172, 257, 154, 259, 145, 267,
+      147, 269, 136, 286, 137
+    ]
+  },
+  {
+    "id": "5",
+    "title": "Left Anterior Neck",
+    "shape": "poly",
+    "name": "Left Anterior Neck (5)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [308, 199, 308, 233, 336, 221, 336, 190]
+  },
+  {
+    "id": "6",
+    "title": "Right Anterior Neck",
+    "shape": "poly",
+    "name": "Right Anterior Neck (6)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [308, 234, 277, 220, 280, 194, 307, 199]
+  },
+  {
+    "id": "7",
+    "title": "Left Anterior Shoulder",
+    "shape": "poly",
+    "name": "Left Anterior Shoulder (7)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      339, 219, 332, 224, 340, 242, 349, 253, 362, 270, 378, 284, 395, 295, 410,
+      304, 430, 313, 430, 298, 430, 282, 426, 270, 421, 258, 414, 249, 400, 242,
+      377, 235, 358, 227
+    ]
+  },
+  {
+    "id": "8",
+    "title": "Right Anterior Shoulder",
+    "shape": "poly",
+    "name": "Right Anterior Shoulder (8)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      276, 221, 283, 226, 278, 236, 270, 248, 254, 268, 237, 287, 222, 298, 188,
+      312, 186, 299, 187, 284, 191, 267, 199, 251, 220, 240, 237, 236, 258, 227
+    ]
+  },
+  {
+    "id": "9",
+    "title": "Left Anterior Upper arm",
+    "shape": "poly",
+    "name": "Left Anterior Upper arm (9)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      396, 300, 429, 314, 431, 343, 432, 373, 419, 371, 408, 370, 396, 378, 391,
+      364, 386, 347, 385, 333, 387, 315, 390, 307
+    ]
+  },
+  {
+    "id": "10",
+    "title": "Right Anterior Upper arm",
+    "shape": "poly",
+    "name": "Right Anterior Upper arm (10)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      223, 299, 187, 314, 187, 338, 184, 361, 185, 374, 199, 369, 214, 372, 221,
+      378, 227, 361, 229, 347, 233, 326, 230, 311
+    ]
+  },
+  {
+    "id": "11",
+    "title": "Left Anterior Elbow",
+    "shape": "poly",
+    "name": "Left Anterior Elbow (11)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      395, 378, 400, 392, 400, 399, 419, 402, 435, 400, 441, 396, 434, 386, 433,
+      376, 413, 369
+    ]
+  },
+  {
+    "id": "12",
+    "title": "Right Anterior Elbow",
+    "shape": "poly",
+    "name": "Right Anterior Elbow (12)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      222, 379, 218, 388, 220, 399, 200, 402, 188, 401, 178, 397, 184, 383, 185,
+      377, 195, 371, 207, 370, 216, 373
+    ]
+  },
+  {
+    "id": "13",
+    "title": "Left Anterior Lower arm",
+    "shape": "poly",
+    "name": "Left Anterior Lower arm (13)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      401, 400, 423, 405, 439, 398, 447, 421, 451, 448, 457, 466, 444, 466, 432,
+      468, 425, 474, 404, 437, 401, 418
+    ]
+  },
+  {
+    "id": "14",
+    "title": "Right Anterior Lower arm",
+    "shape": "poly",
+    "name": "Right Anterior Lower arm (14)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      218, 402, 217, 423, 210, 441, 193, 472, 179, 465, 162, 464, 167, 439, 171,
+      413, 175, 398, 196, 402
+    ]
+  },
+  {
+    "id": "15",
+    "title": "Left Anterior wrist",
+    "shape": "poly",
+    "name": "Left Anterior wrist (15)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      427, 472, 440, 499, 456, 502, 466, 490, 460, 478, 456, 466, 441, 464
+    ]
+  },
+  {
+    "id": "16",
+    "title": "Right Anterior wrist",
+    "shape": "poly",
+    "name": "Right Anterior wrist (16)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      163, 466, 152, 484, 153, 497, 165, 499, 177, 498, 192, 474, 180, 464
+    ]
+  },
+  {
+    "id": "17",
+    "title": "Left Anterior Hand",
+    "shape": "poly",
+    "name": "Left Anterior Hand (17)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      439, 499, 444, 532, 452, 554, 460, 566, 487, 564, 482, 508, 493, 517, 503,
+      517, 491, 502, 468, 484, 461, 500
+    ]
+  },
+  {
+    "id": "18",
+    "title": "Right Anterior Hand",
+    "shape": "poly",
+    "name": "Right Anterior Hand (18)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      149, 487, 156, 499, 176, 499, 176, 525, 165, 555, 156, 568, 140, 567, 127,
+      564, 133, 510, 121, 516, 113, 517, 125, 499, 137, 489
+    ]
+  },
+  {
+    "id": "19",
+    "title": "Left Chest",
+    "shape": "poly",
+    "name": "Left Chest (19)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      331, 225, 308, 235, 309, 360, 323, 365, 333, 377, 341, 386, 357, 389, 379,
+      392, 388, 350, 384, 325, 388, 306, 395, 298, 367, 278, 346, 252
+    ]
+  },
+  {
+    "id": "20",
+    "title": "Right Chest",
+    "shape": "poly",
+    "name": "Right Chest (20)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      286, 226, 308, 235, 308, 360, 295, 362, 287, 370, 279, 382, 265, 387, 249,
+      390, 236, 388, 234, 363, 230, 352, 234, 332, 230, 313, 222, 297, 252, 273,
+      271, 247
+    ]
+  },
+  {
+    "id": "21",
+    "title": "Left Abdomen",
+    "shape": "poly",
+    "name": "Left Abdomen (21)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      308, 360, 308, 473, 318, 474, 327, 484, 340, 494, 355, 500, 355, 480, 357,
+      465, 367, 455, 385, 447, 384, 418, 381, 392, 344, 388, 330, 371, 320, 361
+    ]
+  },
+  {
+    "id": "22",
+    "title": "Right Abdomen",
+    "shape": "poly",
+    "name": "Right Abdomen (22)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      308, 472, 307, 361, 295, 364, 287, 373, 279, 385, 263, 390, 238, 391, 233,
+      420, 231, 446, 255, 458, 262, 471, 263, 496, 279, 493, 289, 482, 295, 476
+    ]
+  },
+  {
+    "id": "23",
+    "title": "Left Groin",
+    "shape": "poly",
+    "name": "Left Groin (23)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      309, 473, 309, 528, 327, 523, 339, 512, 355, 503, 337, 492, 322, 478
+    ]
+  },
+  {
+    "id": "24",
+    "title": "Right Groin",
+    "shape": "poly",
+    "name": "Right Groin (24)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      262, 499, 274, 510, 284, 517, 294, 523, 307, 527, 308, 474, 296, 475, 285,
+      489, 273, 495
+    ]
+  },
+  {
+    "id": "25",
+    "title": "Left Anterior hip",
+    "shape": "poly",
+    "name": "Left Anterior hip (25)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      393, 530, 392, 507, 392, 490, 384, 449, 368, 453, 359, 465, 356, 476, 356,
+      497, 360, 508, 370, 518, 380, 525
+    ]
+  },
+  {
+    "id": "26",
+    "title": "Right Anterior hip",
+    "shape": "poly",
+    "name": "Right Anterior hip (26)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      233, 450, 227, 478, 224, 509, 224, 530, 241, 524, 251, 516, 262, 499, 263,
+      480, 258, 463, 248, 453
+    ]
+  },
+  {
+    "id": "27",
+    "title": "Left Anterior Thigh",
+    "shape": "poly",
+    "name": "Left Anterior Thigh (27)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      308, 529, 313, 564, 315, 598, 315, 627, 317, 662, 334, 655, 348, 651, 367,
+      658, 372, 641, 376, 623, 391, 560, 393, 534, 377, 525, 366, 516, 356, 503,
+      343, 508, 333, 519, 321, 524
+    ]
+  },
+  {
+    "id": "28",
+    "title": "Right Anterior Thigh",
+    "shape": "poly",
+    "name": "Right Anterior Thigh (28)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      264, 502, 254, 512, 244, 524, 225, 530, 226, 559, 229, 585, 238, 606, 243,
+      627, 248, 646, 249, 658, 261, 653, 277, 653, 300, 662, 303, 614, 303, 570,
+      307, 531, 293, 525, 278, 516
+    ]
+  },
+  {
+    "id": "29",
+    "title": "Left Anterior Knee",
+    "shape": "poly",
+    "name": "Left Anterior Knee (29)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      317, 664, 320, 685, 326, 709, 345, 713, 358, 712, 375, 703, 372, 684, 369,
+      659, 351, 651, 333, 652
+    ]
+  },
+  {
+    "id": "30",
+    "title": "Right Anterior Knee",
+    "shape": "poly",
+    "name": "Right Anterior Knee (30)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      301, 664, 297, 687, 292, 708, 273, 712, 261, 712, 242, 704, 245, 687, 246,
+      660, 260, 652, 278, 652, 291, 657
+    ]
+  },
+  {
+    "id": "31",
+    "title": "Left Anterior Lower leg",
+    "shape": "poly",
+    "name": "Left Anterior Lower leg (31)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      326, 709, 322, 735, 322, 766, 324, 804, 338, 804, 353, 806, 361, 811, 370,
+      777, 376, 752, 379, 727, 374, 705, 359, 714, 340, 713
+    ]
+  },
+  {
+    "id": "32",
+    "title": "Right Anterior Lower leg",
+    "shape": "poly",
+    "name": "Right Anterior Lower leg (32)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      292, 806, 277, 803, 267, 807, 257, 811, 251, 790, 240, 751, 240, 722, 242,
+      706, 263, 713, 280, 711, 289, 709, 295, 732, 294, 766
+    ]
+  },
+  {
+    "id": "33",
+    "title": "Left Anterior Ankle",
+    "shape": "poly",
+    "name": "Left Anterior Ankle (33)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      352, 848, 339, 848, 323, 846, 325, 833, 324, 806, 342, 802, 360, 811
+    ]
+  },
+  {
+    "id": "34",
+    "title": "Right Anterior Ankle",
+    "shape": "poly",
+    "name": "Right Anterior Ankle (34)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      290, 805, 293, 832, 295, 846, 282, 849, 265, 849, 261, 826, 255, 810, 272,
+      803
+    ]
+  },
+  {
+    "id": "35",
+    "title": "Left Anterior Foot",
+    "shape": "poly",
+    "name": "Left Anterior Foot (35)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      321, 846, 352, 849, 352, 864, 366, 885, 357, 890, 341, 893, 332, 893, 323,
+      893, 319, 885, 322, 875
+    ]
+  },
+  {
+    "id": "36",
+    "title": "Right Anterior Foot",
+    "shape": "poly",
+    "name": "Right Anterior Foot (36)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      265, 849, 295, 847, 296, 855, 292, 867, 297, 887, 294, 892, 281, 892, 251,
+      888, 257, 877, 262, 866
+    ]
+  },
+  {
+    "id": "37",
+    "title": "Left Posterior head",
+    "shape": "poly",
+    "name": "Left Posterior head (37)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      720, 98, 719, 134, 701, 134, 678, 128, 678, 119, 685, 104, 705, 96
+    ]
+  },
+  {
+    "id": "38",
+    "title": "Right Posterior head",
+    "shape": "poly",
+    "name": "Right Posterior head (38)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      720, 134, 744, 130, 758, 130, 758, 113, 747, 102, 732, 98, 718, 96
+    ]
+  },
+  {
+    "id": "39",
+    "title": "Left Occiput",
+    "shape": "poly",
+    "name": "Left Occiput (39)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      718, 134, 719, 198, 689, 198, 688, 189, 683, 182, 681, 170, 669, 151, 669,
+      141, 678, 142, 678, 127, 697, 134
+    ]
+  },
+  {
+    "id": "40",
+    "title": "Right Occiput",
+    "shape": "poly",
+    "name": "Right Occiput (40)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      746, 196, 717, 198, 718, 133, 757, 130, 756, 143, 763, 140, 766, 148, 754,
+      166, 751, 183
+    ]
+  },
+  {
+    "id": "41",
+    "title": "Left Posterior neck",
+    "shape": "poly",
+    "name": "Left Posterior neck (41)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [718, 232, 717, 198, 689, 198, 687, 212, 687, 218, 700, 225]
+  },
+  {
+    "id": "42",
+    "title": "Right Posterior neck",
+    "shape": "poly",
+    "name": "Right Posterior neck (42)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [746, 198, 716, 198, 720, 231, 740, 223, 749, 218]
+  },
+  {
+    "id": "43",
+    "title": "Left Posterior shoulder",
+    "shape": "poly",
+    "name": "Left Posterior shoulder (43)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      695, 224, 684, 217, 667, 225, 648, 233, 629, 237, 612, 246, 599, 268, 595,
+      287, 595, 311, 612, 312, 632, 313, 652, 300, 675, 274, 687, 250
+    ]
+  },
+  {
+    "id": "44",
+    "title": "Right Posterior shoulder",
+    "shape": "poly",
+    "name": "Right Posterior shoulder (44)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      751, 216, 740, 222, 754, 256, 774, 286, 796, 306, 807, 312, 828, 312, 840,
+      311, 842, 290, 836, 263, 819, 241, 792, 236
+    ]
+  },
+  {
+    "id": "45",
+    "title": "Left Posterior Upper arm",
+    "shape": "poly",
+    "name": "Left Posterior Upper arm (45)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      597, 310, 597, 329, 594, 346, 595, 375, 612, 370, 624, 372, 630, 377, 640,
+      358, 638, 333, 632, 315
+    ]
+  },
+  {
+    "id": "46",
+    "title": "Right Posterior Upper arm",
+    "shape": "poly",
+    "name": "Right Posterior Upper arm (46)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      801, 311, 796, 328, 798, 349, 806, 377, 821, 368, 842, 374, 844, 347, 839,
+      324, 843, 309, 823, 311
+    ]
+  },
+  {
+    "id": "47",
+    "title": "Left Posterior Elbow",
+    "shape": "poly",
+    "name": "Left Posterior Elbow (47)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      593, 375, 593, 384, 584, 395, 603, 402, 625, 401, 625, 388, 632, 378, 615,
+      370
+    ]
+  },
+  {
+    "id": "48",
+    "title": "Right Posterior Elbow",
+    "shape": "poly",
+    "name": "Right Posterior Elbow (48)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      805, 378, 809, 389, 811, 399, 827, 401, 853, 397, 844, 383, 843, 376, 831,
+      371, 817, 371
+    ]
+  },
+  {
+    "id": "49",
+    "title": "Left Posterior lower arm",
+    "shape": "poly",
+    "name": "Left Posterior lower arm (49)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      626, 402, 608, 403, 594, 403, 585, 398, 577, 414, 577, 433, 573, 447, 571,
+      466, 586, 468, 600, 473, 624, 431
+    ]
+  },
+  {
+    "id": "50",
+    "title": "Right Posterior lower arm",
+    "shape": "poly",
+    "name": "Right Posterior lower arm (50)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      810, 400, 811, 424, 819, 445, 834, 473, 849, 467, 866, 467, 862, 450, 858,
+      414, 853, 398, 839, 402, 825, 403
+    ]
+  },
+  {
+    "id": "51",
+    "title": "Left Posterior wrist",
+    "shape": "poly",
+    "name": "Left Posterior wrist (51)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [599, 475, 588, 501, 576, 502, 560, 487, 570, 466, 585, 467]
+  },
+  {
+    "id": "52",
+    "title": "Right Posterior wrist",
+    "shape": "poly",
+    "name": "Right Posterior wrist (52)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      837, 474, 851, 501, 862, 501, 875, 484, 867, 468, 853, 468, 844, 470
+    ]
+  },
+  {
+    "id": "53",
+    "title": "Left Posterior hand",
+    "shape": "poly",
+    "name": "Left Posterior hand (53)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      559, 487, 571, 501, 587, 503, 585, 528, 577, 545, 565, 567, 552, 571, 544,
+      571, 538, 567, 544, 511, 523, 519, 520, 512, 538, 498, 545, 492
+    ]
+  },
+  {
+    "id": "54",
+    "title": "Right Posterior hand",
+    "shape": "poly",
+    "name": "Right Posterior hand (54)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      850, 502, 851, 525, 860, 539, 863, 559, 871, 569, 886, 569, 900, 567, 895,
+      513, 910, 519, 917, 517, 904, 505, 893, 493, 878, 484, 869, 495, 860, 501
+    ]
+  },
+  {
+    "id": "55",
+    "title": "Left Upper back",
+    "shape": "poly",
+    "name": "Left Upper back (55)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      695, 224, 718, 232, 719, 317, 696, 321, 664, 317, 637, 311, 656, 295, 674,
+      275, 686, 251
+    ]
+  },
+  {
+    "id": "56",
+    "title": "Right Upper back",
+    "shape": "poly",
+    "name": "Right Upper back (56)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      718, 231, 720, 318, 753, 320, 799, 311, 773, 289, 757, 261, 741, 224
+    ]
+  },
+  {
+    "id": "57",
+    "title": "Left Mid back",
+    "shape": "poly",
+    "name": "Left Mid back (57)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      719, 319, 720, 416, 688, 414, 648, 407, 645, 380, 640, 346, 630, 313, 651,
+      314, 682, 320, 700, 320
+    ]
+  },
+  {
+    "id": "58",
+    "title": "Right Mid back",
+    "shape": "poly",
+    "name": "Right Mid back (58)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      720, 317, 717, 414, 756, 414, 791, 408, 794, 355, 797, 338, 797, 312, 778,
+      314, 755, 319, 739, 319
+    ]
+  },
+  {
+    "id": "59",
+    "title": "Left Lower back",
+    "shape": "poly",
+    "name": "Left Lower back (59)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      645, 407, 685, 413, 719, 417, 719, 466, 698, 464, 669, 456, 658, 445, 649,
+      440, 643, 440, 643, 429, 641, 421
+    ]
+  },
+  {
+    "id": "60",
+    "title": "Right Lower back",
+    "shape": "poly",
+    "name": "Right Lower back (60)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      720, 414, 718, 463, 737, 463, 769, 458, 777, 447, 793, 440, 794, 423, 792,
+      410, 754, 413, 738, 414
+    ]
+  },
+  {
+    "id": "61",
+    "title": "Left Buttock",
+    "shape": "poly",
+    "name": "Left Buttock (61)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      670, 458, 690, 461, 715, 466, 717, 541, 713, 549, 699, 552, 680, 554, 659,
+      552, 635, 539, 652, 530, 664, 520, 671, 505, 673, 485
+    ]
+  },
+  {
+    "id": "62",
+    "title": "Right Buttock",
+    "shape": "poly",
+    "name": "Right Buttock (62)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      719, 466, 719, 508, 722, 544, 733, 553, 751, 556, 763, 555, 777, 553, 803,
+      541, 785, 533, 771, 512, 764, 491, 763, 478, 768, 457, 746, 463
+    ]
+  },
+  {
+    "id": "63",
+    "title": "Left Posterior Hip",
+    "shape": "poly",
+    "name": "Left Posterior Hip (63)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      643, 442, 636, 491, 632, 540, 651, 531, 663, 517, 670, 501, 673, 481, 669,
+      461, 659, 445
+    ]
+  },
+  {
+    "id": "64",
+    "title": "Right Posterior Hip",
+    "shape": "poly",
+    "name": "Right Posterior Hip (64)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      804, 539, 804, 504, 799, 468, 795, 443, 778, 445, 768, 458, 764, 479, 767,
+      501, 774, 521, 787, 532
+    ]
+  },
+  {
+    "id": "65",
+    "title": "Left Posterior Thigh",
+    "shape": "poly",
+    "name": "Left Posterior Thigh (65)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      714, 551, 713, 596, 713, 631, 712, 664, 695, 659, 675, 657, 659, 661, 652,
+      632, 647, 613, 644, 597, 639, 574, 633, 541, 652, 549, 667, 554, 690, 552
+    ]
+  },
+  {
+    "id": "66",
+    "title": "Right Posterior Thigh",
+    "shape": "poly",
+    "name": "Right Posterior Thigh (66)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      723, 549, 727, 665, 747, 657, 763, 657, 777, 660, 782, 640, 791, 615, 796,
+      585, 803, 567, 803, 541, 781, 552, 752, 558
+    ]
+  },
+  {
+    "id": "67",
+    "title": "Left Posterior Knee",
+    "shape": "poly",
+    "name": "Left Posterior Knee (67)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      658, 662, 657, 676, 653, 694, 651, 705, 663, 716, 676, 717, 700, 713, 706,
+      697, 710, 678, 710, 664, 689, 656, 673, 656
+    ]
+  },
+  {
+    "id": "68",
+    "title": "Right Posterior Knee",
+    "shape": "poly",
+    "name": "Right Posterior Knee (68)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      737, 712, 756, 717, 772, 713, 784, 710, 781, 691, 780, 663, 761, 655, 747,
+      657, 736, 661, 728, 665, 728, 684, 733, 701
+    ]
+  },
+  {
+    "id": "69",
+    "title": "Left Posterior lower leg",
+    "shape": "poly",
+    "name": "Left Posterior lower leg (69)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      701, 714, 683, 718, 665, 715, 652, 706, 648, 729, 648, 746, 653, 771, 660,
+      796, 666, 817, 679, 812, 692, 810, 700, 812, 705, 782, 704, 746
+    ]
+  },
+  {
+    "id": "70",
+    "title": "Right Posterior lower leg",
+    "shape": "poly",
+    "name": "Right Posterior lower leg (70)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      737, 812, 752, 809, 771, 816, 781, 784, 788, 757, 789, 733, 786, 710, 774,
+      714, 754, 715, 736, 711, 733, 735, 731, 771, 735, 796
+    ]
+  },
+  {
+    "id": "71",
+    "title": "Left Posterior Ankle",
+    "shape": "poly",
+    "name": "Left Posterior Ankle (71)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      703, 843, 690, 845, 675, 844, 666, 817, 681, 810, 694, 810, 702, 812, 702,
+      826
+    ]
+  },
+  {
+    "id": "72",
+    "title": "Right Posterior Ankle",
+    "shape": "poly",
+    "name": "Right Posterior Ankle (72)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      736, 813, 735, 842, 762, 844, 767, 831, 772, 818, 758, 811, 747, 808
+    ]
+  },
+  {
+    "id": "73",
+    "title": "Left Posterior Foot",
+    "shape": "poly",
+    "name": "Left Posterior Foot (73)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      704, 844, 707, 857, 704, 870, 705, 886, 708, 893, 701, 901, 692, 900, 672,
+      899, 667, 896, 661, 897, 666, 887, 674, 872, 674, 843
+    ]
+  },
+  {
+    "id": "74",
+    "title": "Right Posterior Foot",
+    "shape": "poly",
+    "name": "Right Posterior Foot (74)",
+    "fillColor": "#ff00004d",
+    "strokeColor": "black",
+    "coords": [
+      734, 842, 747, 846, 761, 846, 762, 862, 768, 881, 778, 893, 767, 898, 745,
+      900, 738, 902, 730, 896, 734, 876, 730, 861, 730, 848
+    ]
+  }
+]

@@ -503,7 +503,7 @@ const NewReport = ({
       ploading ? (
         <Spinner />
       ) : (
-        <GridContainer justify='center'>
+        <GridContainer justifyContent='center'>
           <Alert />
           <GridItem xs={12} lg={8}>
             <Card>
@@ -662,7 +662,9 @@ const NewReport = ({
                               {score.score.map(({ title, value }, y) => (
                                 <GridItem key={y + i} xs={12}>
                                   {t(`professional.patient.score.${title}`)}:{' '}
-                                  {value}
+                                  {/\d/.test(value)
+                                    ? value
+                                    : t(`professional.patient.score.${value}`)}
                                 </GridItem>
                               ))}
                             </GridContainer>
@@ -997,7 +999,7 @@ const NewReport = ({
                           <Button
                             onClick={() => history.goBack()}
                             color='danger'
-                            justify='center'
+                            justifyContent='center'
                           >
                             {t('professional.patient.back')}
                           </Button>

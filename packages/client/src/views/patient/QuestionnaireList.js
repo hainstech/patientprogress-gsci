@@ -37,7 +37,7 @@ const QuestionnaireList = ({
       {profile === null ? (
         <Spinner />
       ) : (
-        <GridContainer justify='center'>
+        <GridContainer justifyContent='center'>
           <GridItem xs={12} md={8}>
             <Card>
               <CardHeader color='danger'>

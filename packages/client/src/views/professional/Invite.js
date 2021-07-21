@@ -39,7 +39,7 @@ function Invite({ invitePatient }) {
 
   return (
     <>
-      <GridContainer justify='center'>
+      <GridContainer justifyContent='center'>
         <GridItem xs={12} md={6}>
           <Alert />
           <Card>

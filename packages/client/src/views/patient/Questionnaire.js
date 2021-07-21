@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Form from '@rjsf/material-ui';
-import InputLabel from '@material-ui/core/InputLabel';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import { InputLabel, NativeSelect } from '@material-ui/core';
+import ImageMapper from 'react-img-mapper';
+
+import URL from '../../assets/img/bodyMap.jpg';
+import areasJSON from '../../assets/bodyMap.json';
 
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem.js';
@@ -19,7 +22,52 @@ import {
 } from '../../actions/questionnaire';
 import Spinner from '../../components/Spinner/Spinner';
 
-const nativeSelect = function (props) {
+const BodyMap = (props) => {
+  // eslint-disable-next-line
+  const [regions, setRegions] = useState([]);
+  const [disabled, setDisabled] = useState(true);
+
+  const handleClick = (id) => {
+    const newId = id.toString();
+    setRegions((regions) => {
+      let newArray;
+      if (!regions.includes(newId)) {
+        newArray = [...regions, newId];
+      } else {
+        newArray = regions.filter((region) => region !== newId);
+      }
+      props.onChange(newArray);
+      return newArray;
+    });
+  };
+
+  const handleLoaded = () => {
+    setDisabled(false);
+  };
+
+  return (
+    <>
+      <strong>{props.schema.description}</strong>
+      <ImageMapper
+        src={URL}
+        map={{
+          name: 'body-map',
+          areas: areasJSON,
+        }}
+        responsive
+        parentWidth={400}
+        stayHighlighted
+        stayMultiHighlighted
+        toggleHighlighted
+        onClick={(area) => handleClick(area.id)}
+        onLoad={handleLoaded}
+        disabled={disabled}
+      />
+    </>
+  );
+};
+
+const NativeSelectWidget = function (props) {
   const handleChange = (event) => {
     const value = event.target.value;
     props.onChange(value);
@@ -58,20 +106,24 @@ function Questionnaire({
   history,
 }) {
   const [questionnaire, setQuestionnaire] = useState(null);
+  const [startTime, setStartTime] = useState(null);
 
   useEffect(() => {
     (async () => {
       const questionnaire = await getQuestionnaire(match.params.id);
       setQuestionnaire(questionnaire);
+      setStartTime(parseInt((new Date().getTime() / 1000).toFixed(0)));
     })();
   }, [getQuestionnaire, match.params.id]);
 
   const onSubmit = async (e) => {
+    const timeNow = parseInt((new Date().getTime() / 1000).toFixed(0));
     await addQuestionnaire(
       history,
       match.params.id,
       questionnaire.title,
-      formData
+      formData,
+      timeNow - startTime
     );
     await getCurrentProfile('patient');
   };
@@ -79,7 +131,11 @@ function Questionnaire({
   const [formData, setFormData] = useState(null);
 
   const widgets = {
-    nativeSelect,
+    nativeSelect: NativeSelectWidget,
+  };
+
+  const fields = {
+    bodyMap: BodyMap,
   };
 
   return (
@@ -87,12 +143,13 @@ function Questionnaire({
       {questionnaire === null ? (
         <Spinner />
       ) : (
-        <GridContainer justify='center'>
+        <GridContainer justifyContent='center'>
           <GridItem xs={12}>
             <Card>
               <CardBody>
                 <Form
                   widgets={widgets}
+                  fields={fields}
                   schema={questionnaire.schema}
                   uiSchema={questionnaire.uischema}
                   formData={formData}

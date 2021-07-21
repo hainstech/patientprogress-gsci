@@ -9,11 +9,12 @@ const cors = require('cors');
 const morgan = require('morgan');
 const { startBot } = require('./telegramBot');
 const { startSender } = require('./questionnaireSender');
+const { startDeleter } = require('./trustedIpsDeleter');
 
 const app = express();
 
 if (process.env.NODE_ENV === 'production') {
-  app.set('trust proxy', 1);
+  app.set('trust proxy', true);
 }
 
 app.use(require('express-status-monitor')());
@@ -37,9 +38,9 @@ app.use(xss());
 app.use(cors());
 
 // Dev logging middleware
-if (process.env.NODE_ENV === 'developement') {
-  app.use(morgan('dev'));
-}
+// if (process.env.NODE_ENV === 'development') {
+//   app.use(morgan('dev'));
+// }
 
 // Prevent http param pollution
 app.use(hpp());
@@ -69,4 +70,5 @@ startSender();
 
 if (process.env.NODE_ENV === 'production') {
   startBot();
+  startDeleter();
 }

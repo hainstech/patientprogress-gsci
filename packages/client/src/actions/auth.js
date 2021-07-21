@@ -1,4 +1,5 @@
 import axios from 'axios';
+import i18n from '../i18n';
 import setAuthToken from '../utils/setAuthToken';
 import { setAlert } from './alert';
 import {
@@ -12,8 +13,11 @@ import {
   CLEAR_PROFILE,
 } from './types';
 
+const prefix = process.env.REACT_APP_BETA ? 'beta.' : '';
 const URI =
-  process.env.NODE_ENV === 'production' ? 'https://api.patientprogress.ca' : '';
+  process.env.NODE_ENV === 'production'
+    ? `https://${prefix}api.patientprogress.ca`
+    : '';
 
 // Load User
 export const loadUser = () => async (dispatch) => {
@@ -93,38 +97,63 @@ export const register =
   };
 
 // Login User
-export const login = (email, password, recaptchaRef) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
+export const login =
+  (email, password, recaptchaRef, emailCode) => async (dispatch) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const recaptchaValue = recaptchaRef.current?.getValue();
+
+    const body = JSON.stringify({ email, password, recaptchaValue, emailCode });
+
+    try {
+      const res = await axios.post(`${URI}/api/auth`, body, config);
+
+      if (res.data.token) {
+        dispatch({
+          type: LOGIN_SUCCESS,
+          payload: res.data,
+        });
+
+        dispatch(loadUser());
+
+        return false;
+      } else {
+        let alertMsg = i18n.t(`alert.${res.data.status}`);
+        let color = res.data.status === 'emailSent' ? 'success' : 'danger';
+
+        recaptchaRef.current?.reset();
+        dispatch(setAlert(alertMsg, color, 5000));
+        dispatch({
+          type: LOGIN_FAIL,
+        });
+        return { code: true };
+      }
+    } catch (err) {
+      const errors = err.response.data.errors;
+
+      recaptchaRef.current?.reset();
+
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+      }
+
+      dispatch({
+        type: LOGIN_FAIL,
+      });
+    }
   };
 
-  const recaptchaValue = recaptchaRef.current.getValue();
-
-  const body = JSON.stringify({ email, password, recaptchaValue });
-
+// Check if the captcha is required or not
+export const getCaptcha = () => async (dispatch) => {
   try {
-    const res = await axios.post(`${URI}/api/auth`, body, config);
-
-    dispatch({
-      type: LOGIN_SUCCESS,
-      payload: res.data,
-    });
-
-    dispatch(loadUser());
+    const res = await axios.get(`${URI}/api/auth/captcha`);
+    return res.data.captcha;
   } catch (err) {
-    const errors = err.response.data.errors;
-
-    recaptchaRef.current.reset();
-
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
-    }
-
-    dispatch({
-      type: LOGIN_FAIL,
-    });
+    console.log(err.message);
   }
 };
 
@@ -140,13 +169,7 @@ export const sendForgotEmail = (email, recaptchaValue) => async (dispatch) => {
 
   try {
     await axios.post(`${URI}/api/auth/forgot`, body, config);
-
-    dispatch(
-      setAlert(
-        'A password-reset link has been sent to your email address',
-        'success'
-      )
-    );
+    dispatch(setAlert(i18n.t('alert.forgotSent'), 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -175,9 +198,7 @@ export const setNewPassword =
     try {
       await axios.post(`${URI}/api/auth/passwordreset`, body, config);
 
-      dispatch(
-        setAlert('Your password has been reset successfully', 'success')
-      );
+      dispatch(setAlert(i18n.t('alert.reset'), 'success'));
 
       history.push(`/login`);
     } catch (err) {

@@ -4,3 +4,5 @@ tmp/
 temp/
 config.env
 .env
+# Local Netlify folder
+.netlify

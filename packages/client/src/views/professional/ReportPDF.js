@@ -162,30 +162,32 @@ const ReportPDF = ({ report, patient }) => {
             <Text style={styles.answer}>
               Relevant scores:{' '}
               {report.relevantScore.length === 0 && t('report.none')}
-              {report.relevantScore.length !== 0 &&
-                report.relevantScore.map((score, i) => (
-                  <View key={i} wrap={false} style={styles.answerRow}>
-                    <Text style={styles.answer}>
-                      {score.name} (
-                      {format(
-                        zonedTimeToUtc(
-                          parseISO(score.date),
-                          Intl.DateTimeFormat().resolvedOptions().timeZone
-                        ),
-                        'yyyy/MM/dd'
-                      )}
-                      ):,{' '}
-                      {score.score.map(
-                        ({ title, value }) =>
-                          `${t(
-                            `professional.patient.score.${title}`
-                          )}: ${value}`
-                      )}
-                    </Text>
-                  </View>
-                ))}
             </Text>
           </View>
+          {report.relevantScore.length !== 0 &&
+            report.relevantScore.map((score, i) => (
+              <View key={i} wrap={false} style={styles.answerRow}>
+                <Text style={styles.answer}>
+                  {score.name} (
+                  {format(
+                    zonedTimeToUtc(
+                      parseISO(score.date),
+                      Intl.DateTimeFormat().resolvedOptions().timeZone
+                    ),
+                    'yyyy/MM/dd'
+                  )}
+                  ):,{' '}
+                  {score.score.map(
+                    ({ title, value }) =>
+                      `${t(`professional.patient.score.${title}`)}: ${
+                        /\d/.test(value)
+                          ? value
+                          : t(`professional.patient.score.${value}`)
+                      }, `
+                  )}
+                </Text>
+              </View>
+            ))}
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
               {t('report.healthQuality')}: {report.health}

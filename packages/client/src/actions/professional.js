@@ -1,10 +1,14 @@
 import axios from 'axios';
 
+import i18n from '../i18n';
 import { setAlert } from './alert';
 import { GET_PATIENT, PATIENT_ERROR } from './types';
 
+const prefix = process.env.REACT_APP_BETA ? 'beta.' : '';
 const URI =
-  process.env.NODE_ENV === 'production' ? 'https://api.patientprogress.ca' : '';
+  process.env.NODE_ENV === 'production'
+    ? `https://${prefix}api.patientprogress.ca`
+    : '';
 
 // Send email to api so it can send the email
 export const invitePatient = (email) => async (dispatch) => {
@@ -17,7 +21,7 @@ export const invitePatient = (email) => async (dispatch) => {
 
     await axios.post(`${URI}/api/professionals/invite`, { email }, config);
 
-    dispatch(setAlert(`Invitation sent to: ${email}`, 'success'));
+    dispatch(setAlert(`${i18n.t('alert.invitationSent')} ${email}`, 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
 
