@@ -3,6 +3,72 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/hainsdominic/patientprogress/compare/v1.3.0...v1.4.0) (2021-07-21)
+
+
+### Bug Fixes
+
+* **all:** alert color and http codes ([1e74faa](https://github.com/hainsdominic/patientprogress/commit/1e74faaba420b1d533e7ee497983c35d63060e8b))
+* **all:** BPI subscores and other bug/trans fixes ([dffec2f](https://github.com/hainsdominic/patientprogress/commit/dffec2f6d124fe0e9b4863532b7b08f6f9f32033)), closes [#43](https://github.com/hainsdominic/patientprogress/issues/43)
+* **all:** login email is now type email ([93fd7ca](https://github.com/hainsdominic/patientprogress/commit/93fd7ca0455a247911b06c77b22393fa7391b88f))
+* **all:** questionnaire deleting by _id ([22c99e5](https://github.com/hainsdominic/patientprogress/commit/22c99e51ad8a4e681e8a1ba73cdbb731908ac762))
+* **api\:** trusted ips deleter ([9a02f28](https://github.com/hainsdominic/patientprogress/commit/9a02f28d124e96a103438218508488959ade08fb))
+* **api:** ip 2fa ([ff55519](https://github.com/hainsdominic/patientprogress/commit/ff555196fe570f271e94430453d46b5207b03e15))
+* **api:** professional register added properties ([532a31d](https://github.com/hainsdominic/patientprogress/commit/532a31de50464b1ca143b804397f8bb21ca22461))
+* **api:** send questionnaires after intake ([dadcb8f](https://github.com/hainsdominic/patientprogress/commit/dadcb8f319c1d3aada0f0c88b2fac8788b4f0771))
+* **client:** beta api call ([44cd1a6](https://github.com/hainsdominic/patientprogress/commit/44cd1a63a1ba1fbc364369c7e58b583e660cea5f))
+* **client:** bodyMap json removed import ([458bd51](https://github.com/hainsdominic/patientprogress/commit/458bd5146f3f07cbc3253f25dd6aa19b3c505de5))
+* **client:** captcha reset and initial questionnaire sending ([cad4a8b](https://github.com/hainsdominic/patientprogress/commit/cad4a8b53571af49687a24b8f67dd450348c1fc2))
+* **client:** center spinner ([24cd166](https://github.com/hainsdominic/patientprogress/commit/24cd1668c1b1799f3892177b41b8f9d7228d707a))
+* **client:** fixed image map of body ([e39fffb](https://github.com/hainsdominic/patientprogress/commit/e39fffb1864884a03c05c903543de00690e85300))
+* **client:** lowercased emails (stupid proof) ([df4b18f](https://github.com/hainsdominic/patientprogress/commit/df4b18fc39e468306718476d3afe6b592d9e4735))
+* **client:** re-added import for areas ([8d68fb9](https://github.com/hainsdominic/patientprogress/commit/8d68fb9c2ca866a37bc50e0a79df14e5d40fc945))
+* **client:** remove questionnaires after sending ([a510478](https://github.com/hainsdominic/patientprogress/commit/a5104786edf7baa1540f74146f8fedde8debd711))
+* **client:** reportPDF translation ([0af3a97](https://github.com/hainsdominic/patientprogress/commit/0af3a97abf78a329d8162113a6ab8cd15824ec62))
+* **client:** speed limiter ([ebd313f](https://github.com/hainsdominic/patientprogress/commit/ebd313f40ca8caf2239bcbd63e2349d3ac675666)), closes [#54](https://github.com/hainsdominic/patientprogress/issues/54)
+
+
+### Features
+
+* **all:** calculate score of modified startback ([722d9a8](https://github.com/hainsdominic/patientprogress/commit/722d9a897c9606a73ba71b910cc8aaaa1e42973a))
+* **all:** questionnaire score calculator update ([f96fd79](https://github.com/hainsdominic/patientprogress/commit/f96fd79698a28c40210d47be45324b92fb7989bd)), closes [#56](https://github.com/hainsdominic/patientprogress/issues/56)
+* **all:** remove mandatory login captcha, ([f8ea09b](https://github.com/hainsdominic/patientprogress/commit/f8ea09b5975c77d15b722fc00b6e04f93b2ced39))
+* **all:** token exp and logout ([905aa28](https://github.com/hainsdominic/patientprogress/commit/905aa281addc531a9e6051c78f5b7553e1afcb41))
+* **api:** auto-delete saved trusted IPs on 1st of the month ([5ad51b6](https://github.com/hainsdominic/patientprogress/commit/5ad51b6ebec208912c253f16a1b3003b5e3f8d08))
+* **client:** 2fa rerouting after login ([6f2bc39](https://github.com/hainsdominic/patientprogress/commit/6f2bc39770fe0e5aa22ab33e0f08e7160704ade7))
+* **client:** added email in 2fa route ([ac1531d](https://github.com/hainsdominic/patientprogress/commit/ac1531dcd3fbf1149ea7507c16e3f6734cf59845))
+* **client:** addition diagnosis report ([796fb3b](https://github.com/hainsdominic/patientprogress/commit/796fb3b0285a66ecdf6f2cea21c1a38f1771f981))
+* **client:** base of metrics ([e8e6d1c](https://github.com/hainsdominic/patientprogress/commit/e8e6d1cc625804cd42a5a4a0d288620f82cb2f96))
+* **client:** basic email confirmation for new ip (2fa) ([a9e1557](https://github.com/hainsdominic/patientprogress/commit/a9e155769b72e40b6f705b0484a8451e4652d4cd))
+* **client:** basic metrics ([c3a302e](https://github.com/hainsdominic/patientprogress/commit/c3a302e0e3b5d7dc6dcb6edfe1e61c40daae1b9c))
+* **client:** handle 2fa post-login ([d594603](https://github.com/hainsdominic/patientprogress/commit/d594603c54e0018a04e37d9528597d52632b1de1))
+* **client:** initial widget ([5b6f483](https://github.com/hainsdominic/patientprogress/commit/5b6f4838352e84bb8a92e9b1dd0c5bc799399730))
+* **client:** populate questionnaires when returning patient obj ([501b3ea](https://github.com/hainsdominic/patientprogress/commit/501b3ea4c1b8003358591fe936227aa7f514ed7d))
+* **client:** privacy and terms ([fbcd468](https://github.com/hainsdominic/patientprogress/commit/fbcd4689fe2e42a3bd10612df728bf1c10babeaf))
+* **client:** questionnaireMap field, yarn.lock update, + ([bb4655a](https://github.com/hainsdominic/patientprogress/commit/bb4655a701008c44c56005d2568b7b3138bc4517))
+* **client:** time to complete questionnaires ([c6df76d](https://github.com/hainsdominic/patientprogress/commit/c6df76d268290b0e6bf01869a6b745e772820251))
+* **client:** translated alerts ([5340b5f](https://github.com/hainsdominic/patientprogress/commit/5340b5f2aa3845fc49ef1cac12c245e0e1724816)), closes [#14](https://github.com/hainsdominic/patientprogress/issues/14)
+* **client:** translation ([bfafdd5](https://github.com/hainsdominic/patientprogress/commit/bfafdd553ae2cfb8627133fd55f2106d65b9d9ef))
+* **client:** translation for forgot ([68967b8](https://github.com/hainsdominic/patientprogress/commit/68967b8f1cf0f13948b7a53689c1698cabce8fa5))
+* **client:** updated the body map ([0cb114e](https://github.com/hainsdominic/patientprogress/commit/0cb114e329fec3ca06c48406b613721d84b14d49))
+* **client:** warning beta message ([5282d8c](https://github.com/hainsdominic/patientprogress/commit/5282d8c2b46e827959ac9627ac110eab5111df56))
+
+
+### Performance Improvements
+
+* **all:** gitignore ([c012a64](https://github.com/hainsdominic/patientprogress/commit/c012a64bb65c74d04c5be0380aef0553bf67e38e))
+* **api:** changed ip purge date to 13th for the meme ([3a56ba6](https://github.com/hainsdominic/patientprogress/commit/3a56ba6451a7f4c4e9ec4935ce439846224dc624))
+* **api:** cron deleter time ([66736f1](https://github.com/hainsdominic/patientprogress/commit/66736f18b08009a8fb3a64f69ec7853f8be575ff))
+* **api:** seeding ([7d62a71](https://github.com/hainsdominic/patientprogress/commit/7d62a7154fafdc1c39ab9144e0ce4ea5ac332fc4))
+* **api:** seeding ([e2de332](https://github.com/hainsdominic/patientprogress/commit/e2de33238dffa44ce80feac1b06d8e110fa493d0))
+* **client:** added source-map-explorer script ([6f2245f](https://github.com/hainsdominic/patientprogress/commit/6f2245f4774fb297351d40ead0dd0fb2e4641c6f))
+* **client:** code-splitting for routes types ([571c50a](https://github.com/hainsdominic/patientprogress/commit/571c50a64423663f6f7144e98e67703416796585))
+* **seeding:** updated scripts ([b1b7255](https://github.com/hainsdominic/patientprogress/commit/b1b7255bdab4def2fd466954ba155a61d8faa854))
+
+
+
+
+
 # [1.3.0](https://github.com/hainsdominic/patientprogress/compare/v1.2.2...v1.3.0) (2021-06-30)
 
 
