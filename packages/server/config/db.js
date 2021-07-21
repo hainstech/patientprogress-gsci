@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const config = require('config');
 const colors = require('colors');
 
-const db =
-  process.env.NODE_ENV === 'production' && process.env.INSTANCE !== 'beta'
-    ? config.get('mongoURI_prod')
-    : config.get('mongoURI_dev');
+const useProdDB =
+  process.env.NODE_ENV === 'production' && process.env.INSTANCE !== 'beta';
+
+const db = useProdDB ? config.get('mongoURI_prod') : config.get('mongoURI_dev');
 
 const connectDB = async () => {
   try {
@@ -16,7 +16,10 @@ const connectDB = async () => {
       useFindAndModify: false,
     });
 
-    console.log('MongoDB Connected'.cyan.bold);
+    console.log(
+      `MongoDB Connected to ${useProdDB ? 'Production' : 'Development'}`.cyan
+        .bold
+    );
   } catch (err) {
     console.log(err.message);
     process.exit(1);
