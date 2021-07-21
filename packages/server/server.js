@@ -19,11 +19,11 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(require('express-status-monitor')());
 
-// Connect database
-connectDB();
-
 // Load env variables
 dotenv.config({ path: './config/config.env' });
+
+// Connect database
+connectDB();
 
 // Sanitize data
 app.use(mongoSanitize());

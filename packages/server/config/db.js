@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 const config = require('config');
-const db = config.get('mongoURI');
 const colors = require('colors');
+
+const db =
+  process.env.NODE_ENV === 'production' && process.env.INSTANCE !== 'beta'
+    ? config.get('mongoURI_prod')
+    : config.get('mongoURI_dev');
 
 const connectDB = async () => {
   try {

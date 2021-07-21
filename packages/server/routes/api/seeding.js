@@ -210,4 +210,24 @@ router.put('/:professional_id/dob', admin, async (req, res) => {
   }
 });
 
+router.delete('/patients', admin, async (req, res) => {
+  try {
+    const patients = await Patient.find({
+      professional: '60ddfcaa836d609d45d25783',
+    });
+
+    patients.forEach((patient) => {
+      (async () => {
+        await Patient.deleteOne({ _id: patient._id });
+        await User.deleteOne({ _id: patient.user });
+      })();
+    });
+
+    res.send('Done');
+  } catch (err) {
+    res.status(500).send('Server error');
+    console.log(err.message);
+  }
+});
+
 module.exports = router;
