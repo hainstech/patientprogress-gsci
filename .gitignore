@@ -2,8 +2,7 @@ node_modules
 build/
 tmp/
 temp/
-config.env
-.env
-.log
+*.env
+*.log
 # Local Netlify folder
 .netlify
