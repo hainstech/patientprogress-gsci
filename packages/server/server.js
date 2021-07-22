@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cors = require('cors');
+const logger = require('./logger');
 const morgan = require('morgan');
 const { startBot } = require('./telegramBot');
 const { startSender } = require('./questionnaireSender');
@@ -13,14 +14,16 @@ const { startDeleter } = require('./trustedIpsDeleter');
 
 const app = express();
 
+// Load env variables
+dotenv.config({ path: './config/config.env' });
+
 if (process.env.NODE_ENV === 'production') {
   app.set('trust proxy', true);
 }
 
-app.use(require('express-status-monitor')());
+const morganFormat = process.env.NODE_ENV !== 'production' ? 'dev' : 'combined';
 
-// Load env variables
-dotenv.config({ path: './config/config.env' });
+app.use(require('express-status-monitor')());
 
 // Connect database
 connectDB();
@@ -37,13 +40,27 @@ app.use(xss());
 // Enable CORS
 app.use(cors());
 
-// Dev logging middleware
-// if (process.env.NODE_ENV === 'development') {
-//   app.use(morgan('dev'));
-// }
-
 // Prevent http param pollution
 app.use(hpp());
+
+// Logging
+app.use(
+  morgan(morganFormat, {
+    skip: function (req, res) {
+      return res.statusCode < 400;
+    },
+    stream: process.stderr,
+  })
+);
+
+app.use(
+  morgan(morganFormat, {
+    skip: function (req, res) {
+      return res.statusCode >= 400;
+    },
+    stream: process.stdout,
+  })
+);
 
 // Init Middleware
 app.use(express.json({ extended: false }));
@@ -58,13 +75,27 @@ app.use('/api/professionals', require('./routes/api/professionals'));
 app.use('/api/questionnaires', require('./routes/api/questionnaires'));
 app.use('/api/seeding', require('./routes/api/seeding'));
 
+// All errors are sent back as JSON
+app.use((err, req, res, next) => {
+  // Fallback to default node handler
+  if (res.headersSent) {
+    next(err);
+    return;
+  }
+
+  logger.error(err.message, { url: req.originalUrl });
+
+  res.status(500);
+  res.json({ error: err.message });
+});
+
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () =>
-  console.log(
-    `Server running in ${process.env.NODE_ENV} on port ${PORT}`.green.bold
-  )
-);
+app.listen(PORT, () => {
+  logger.info(
+    `PatientProgress API listening in ${process.env.NODE_ENV} on port ${PORT}`
+  );
+});
 
 startSender();
 
