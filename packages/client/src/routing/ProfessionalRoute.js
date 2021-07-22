@@ -11,14 +11,6 @@ const ProfessionalRoute = ({
   loadUser,
   ...rest
 }) => {
-  const url = window.location.pathname.split('/').pop();
-
-  React.useEffect(() => {
-    (async () => {
-      await loadUser();
-    })();
-  }, [url, loadUser]);
-
   return (
     <Route
       {...rest}
