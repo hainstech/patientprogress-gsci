@@ -1,6 +1,7 @@
 var CronJob = require('cron').CronJob;
 var Redis = require('ioredis');
 var redis = new Redis();
+const logger = require('./logger');
 
 module.exports = {
   startDeleter: function () {
@@ -22,7 +23,7 @@ module.exports = {
             }
           });
           stream.on('end', function () {
-            console.log('Flushed all trusted IPs');
+            logger.info('Flushed all trusted IPs');
           });
         },
         null,
