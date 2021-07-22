@@ -4,5 +4,6 @@ tmp/
 temp/
 config.env
 .env
+.log
 # Local Netlify folder
 .netlify

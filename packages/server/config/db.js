@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const config = require('config');
 const colors = require('colors');
 const dotenv = require('dotenv');
+const logger = require('../logger');
+
 dotenv.config({ path: './config/config.env' });
 
 const useProdDB =
@@ -17,10 +19,10 @@ const connectDB = async () => {
       useCreateIndex: true,
       useFindAndModify: false,
     });
-
-    console.log(
-      `MongoDB Connected to ${useProdDB ? 'Production' : 'Development'}`.cyan
-        .bold
+    logger.info(
+      `MongoDB Connected to ${
+        useProdDB ? 'Production' : 'Development'
+      } Database`
     );
   } catch (err) {
     console.log(err.message);
