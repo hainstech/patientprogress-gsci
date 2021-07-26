@@ -37,8 +37,16 @@ app.use(helmet());
 // Prevent XSS attacks
 app.use(xss());
 
+let corsOptions;
+if (process.env.NODE_ENV === 'production') {
+  corsOptions = {
+    origin: `https://${process.env.INSTANCE}.patientprogress.ca`,
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  };
+}
+
 // Enable CORS
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Prevent http param pollution
 app.use(hpp());
