@@ -1,13 +1,15 @@
 const express = require('express');
-const connectDB = require('./config/db');
 const dotenv = require('dotenv');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cors = require('cors');
-const logger = require('./logger');
 const morgan = require('morgan');
+const rateLimit = require('express-rate-limit');
+
+const connectDB = require('./config/db');
+const logger = require('./logger');
 const { startBot } = require('./telegramBot');
 const { startSender } = require('./questionnaireSender');
 const { startDeleter } = require('./trustedIpsDeleter');
@@ -23,10 +25,16 @@ if (process.env.NODE_ENV === 'production') {
 
 const morganFormat = process.env.NODE_ENV !== 'production' ? 'dev' : 'combined';
 
-app.use(require('express-status-monitor')());
-
 // Connect database
 connectDB();
+
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+});
+
+//  apply to all requests
+app.use(limiter);
 
 // Sanitize data
 app.use(mongoSanitize());
