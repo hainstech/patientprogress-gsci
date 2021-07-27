@@ -18,6 +18,7 @@
     "cron": "^1.8.2",
     "express": "^4.17.1",
     "express-mongo-sanitize": "^2.0.2",
+    "express-nobots": "^1.0.5",
     "express-rate-limit": "^5.2.6",
     "express-slow-down": "^1.4.0",
     "express-validator": "^6.10.0",

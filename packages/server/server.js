@@ -7,6 +7,7 @@ const hpp = require('hpp');
 const cors = require('cors');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
+var noBots = require('express-nobots');
 
 const connectDB = require('./config/db');
 const logger = require('./logger');
@@ -28,12 +29,16 @@ const morganFormat = process.env.NODE_ENV !== 'production' ? 'dev' : 'combined';
 // Connect database
 connectDB();
 
+// Forbid bots and crawlers
+app.use(noBots());
+
+// Rate-limit the API
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000, // 10 minutes
   max: 100, // limit each IP to 100 requests per windowMs
 });
 
-//  apply to all requests
+// Apply to all requests
 app.use(limiter);
 
 // Sanitize data
