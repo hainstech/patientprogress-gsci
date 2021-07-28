@@ -35,15 +35,15 @@ router.post(
       check('email', 'Please include a valid email').isEmail(),
       check(
         'password',
-        'Please enter a password with 6 or more characters'
-      ).isLength({ min: 6 }),
+        'Please enter a password with 8 or more characters'
+      ).isLength({ min: 8 }),
       check('name', 'Name is required').not().isEmpty(),
       check('dob', 'Enter a valid date following the YYYY-MM-DD format')
         .isISO8601()
         .toDate(),
       check('gender', 'Gender is required').not().isEmpty(),
       check('language', 'Language is required').not().isEmpty(),
-      check('research', 'research is required').isBoolean(),
+      check('research', 'Consent is required').isBoolean(),
       check('professional', 'Professionals id is required').not().isEmpty(),
     ],
   ],

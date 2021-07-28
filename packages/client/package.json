@@ -24,6 +24,7 @@
     "dayjs": "^1.10.5",
     "flat": "^5.0.2",
     "formik": "^2.2.8",
+    "hibp": "^11.0.0",
     "i18next": "^20.2.4",
     "i18next-browser-languagedetector": "^6.1.1",
     "i18next-http-backend": "^1.2.4",
