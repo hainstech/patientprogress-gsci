@@ -84,7 +84,7 @@ export const register =
     } catch (err) {
       const errors = err.response.data.errors;
 
-      recaptchaRef.current.reset();
+      recaptchaRef.current?.reset();
 
       if (errors) {
         errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));

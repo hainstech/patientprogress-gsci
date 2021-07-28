@@ -16,6 +16,7 @@ import {
 import classNames from 'classnames';
 import { useFormik } from 'formik';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { pwnedPassword } from 'hibp';
 
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem.js';
@@ -52,8 +53,16 @@ const NewPassword = ({
       password: '',
       password2: '',
     },
-    onSubmit: ({ password, password2 }) => {
-      if (
+    onSubmit: async ({ password, password2 }) => {
+      let pwned = await pwnedPassword(password);
+      if (pwned) {
+        setAlert(
+          `${t('register.invalidPassword')}: ${t('register.pwnedPassword')}`,
+          'danger',
+          5000
+        );
+        recaptchaRef.current.reset();
+      } else if (
         !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
           password
         )

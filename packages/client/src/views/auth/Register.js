@@ -25,6 +25,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { pwnedPassword } from 'hibp';
 
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem.js';
@@ -74,7 +75,16 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
       password2,
       research,
     }) => {
-      if (
+      // Checks if the password has been exposed in a data breach
+      let pwned = await pwnedPassword(password);
+      if (pwned) {
+        setAlert(
+          `${t('register.invalidPassword')}: ${t('register.pwnedPassword')}`,
+          'danger',
+          5000
+        );
+        recaptchaRef.current.reset();
+      } else if (
         !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
           password
         )
