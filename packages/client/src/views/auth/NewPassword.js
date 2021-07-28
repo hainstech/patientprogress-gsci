@@ -6,7 +6,13 @@ import PropTypes from 'prop-types';
 import { setNewPassword } from '../../actions/auth';
 import { setAlert } from '../../actions/alert';
 import { useTranslation } from 'react-i18next';
-import { FormControl, InputLabel, Input, Box } from '@material-ui/core';
+import {
+  FormControl,
+  InputLabel,
+  Input,
+  Box,
+  FormHelperText,
+} from '@material-ui/core';
 import classNames from 'classnames';
 import { useFormik } from 'formik';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -47,8 +53,21 @@ const NewPassword = ({
       password2: '',
     },
     onSubmit: ({ password, password2 }) => {
-      if (password !== password2) {
+      if (
+        !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+          password
+        )
+      ) {
+        setAlert(
+          `${t('register.invalidPassword')}: ${t(
+            'register.passwordRequirements'
+          )}`,
+          'danger'
+        );
+        recaptchaRef.current.reset();
+      } else if (password !== password2) {
         setAlert(t('register.passwordError'), 'danger');
+        recaptchaRef.current.reset();
       } else {
         const recaptchaValue = recaptchaRef.current.getValue();
         setNewPassword(
@@ -112,6 +131,9 @@ const NewPassword = ({
                       value={formik.values.password}
                       onChange={formik.handleChange}
                     />
+                    <FormHelperText>
+                      {t('register.passwordRequirements')}
+                    </FormHelperText>
                   </FormControl>
                 </GridItem>
                 <GridItem xs={12}>

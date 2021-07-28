@@ -15,6 +15,7 @@ import {
   Box,
   Switch,
   FormControlLabel,
+  FormHelperText,
 } from '@material-ui/core';
 import classNames from 'classnames';
 import { useFormik } from 'formik';
@@ -61,7 +62,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
       password2: '',
       research: false,
     },
-    onSubmit: ({
+    onSubmit: async ({
       firstName,
       lastName,
       language,
@@ -73,7 +74,19 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
       password2,
       research,
     }) => {
-      if (password !== password2) {
+      if (
+        !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+          password
+        )
+      ) {
+        setAlert(
+          `${t('register.invalidPassword')}: ${t(
+            'register.passwordRequirements'
+          )}`,
+          'danger'
+        );
+        recaptchaRef.current.reset();
+      } else if (password !== password2) {
         setAlert(t('register.passwordError'), 'danger');
         recaptchaRef.current.reset();
       } else {
@@ -303,6 +316,9 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                         value={formik.values.password}
                         onChange={formik.handleChange}
                       />
+                      <FormHelperText>
+                        {t('register.passwordRequirements')}
+                      </FormHelperText>
                     </FormControl>
                   </GridItem>
                   <GridItem xs={12} lg={6}>
