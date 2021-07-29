@@ -642,7 +642,7 @@ const NewReport = ({
                     <br />
                     <GridContainer>
                       <GridItem xs={12}>
-                        {t('report.relevantScores')}:{' '}
+                        <strong>{t('report.relevantScores')}: </strong>
                         {intake.relevantScore.length === 0 && 'None'}
                         {intake.relevantScore &&
                           intake.relevantScore.map((score, i) => (
