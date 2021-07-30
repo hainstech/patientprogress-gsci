@@ -311,7 +311,8 @@
     "secondaryComplaintInitialDiagnosis": "Diagnostic lié au(x) autre(s) motif(s) de consultation",
     "scoreImprovement": "Amélioration",
     "reEvaluationReport": "Rapport de ré-évaluation",
-    "report": "Rapport"
+    "report": "Rapport",
+    "filledProfessional": "Rempli par le professionnel"
   },
   "metrics": {
     "title": "Vos statistiques",

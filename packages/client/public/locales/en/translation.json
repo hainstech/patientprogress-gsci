@@ -311,7 +311,8 @@
     "secondaryComplaintInitialDiagnosis": "Secondary complaint diagnosis",
     "scoreImprovement": "Improvement",
     "reEvaluationReport": "Re-Evaluation Report",
-    "report": "Report"
+    "report": "Report",
+    "filledProfessional": "Filled by the professional"
   },
   "metrics": {
     "title": "Your metrics",

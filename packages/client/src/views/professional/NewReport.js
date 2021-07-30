@@ -632,7 +632,7 @@ const NewReport = ({
                         {t('report.redFlags')}:{' '}
                         {intake.redFlags.toString()
                           ? intake.redFlags.join(', ')
-                          : 'None'}
+                          : t('report.none')}
                       </GridItem>
                     </GridContainer>
                   </GridItem>
@@ -641,7 +641,7 @@ const NewReport = ({
                     <GridContainer>
                       <GridItem xs={12}>
                         <strong>{t('report.relevantScores')}: </strong>
-                        {intake.relevantScore.length === 0 && 'None'}
+                        {intake.relevantScore.length === 0 && t('report.none')}
                         {intake.relevantScore &&
                           intake.relevantScore.map((score, i) => (
                             <GridContainer key={i}>

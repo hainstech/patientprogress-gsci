@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 });
 
 // Create Document Component
-const ReportPDF = ({ report, patient }) => {
+const ReEvaluationReportPDF = ({ report, patient }) => {
   const { t } = useTranslation();
   return (
     <Document>
@@ -58,7 +58,9 @@ const ReportPDF = ({ report, patient }) => {
           <Text>{t('pdf.generated')}</Text>
         </View>
         <View style={styles.title}>
-          <Text style={styles.titleSection}>{t('report.report')}</Text>
+          <Text style={styles.titleSection}>
+            {t('report.reEvaluationReport')}
+          </Text>
           <Text style={styles.titleSection}>
             {patient.name} -{' '}
             {format(zonedTimeToUtc(parseISO(report.date)), 'yyyy/MM/dd')}
@@ -85,26 +87,20 @@ const ReportPDF = ({ report, patient }) => {
               {format(zonedTimeToUtc(parseISO(report.date)), 'yyyy/MM/dd')}
             </Text>
             <Text style={styles.answer}>
+              {t('report.initialReportDate')}:{' '}
+              {format(
+                zonedTimeToUtc(parseISO(report.initialReportDate)),
+                'yyyy/MM/dd'
+              )}
+            </Text>
+          </View>
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
               {t('report.professional')}: {report.professionalName}
             </Text>
+
             <Text style={styles.answer}>
               {t('report.profession')}: {report.professionalProfession}
-            </Text>
-          </View>
-          <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>
-              {t('report.civilStatus')}: {report.civilStatus}
-            </Text>
-            <Text style={styles.answer}>
-              {t('report.nbChildrens')}: {report.nbChildrens}
-            </Text>
-          </View>
-          <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>
-              {t('report.occupation')}: {report.occupation}
-            </Text>
-            <Text style={styles.answer}>
-              {t('report.employmentStatus')}: {report.employmentStatus}
             </Text>
           </View>
           <View wrap={false} style={styles.answerRow}>
@@ -117,26 +113,28 @@ const ReportPDF = ({ report, patient }) => {
           </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              {t('report.onsetType')}: {report.chiefComplaintAppear}
-            </Text>
-            <Text style={styles.answer}>
-              {t('report.evolution')}: {report.chiefComplaintEvolving}
+              {t('report.initialGlobalExpectationOfClinicalChange')}:{' '}
+              {report.initialGlobalExpectationOfClinicalChange}
             </Text>
           </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              {t('report.injuryMechanism')}:{' '}
-              {report.chiefComplaintAppearDescription}
+              {t('report.chiefComplaintInitialDiagnosis')}:{' '}
+              {report.chiefComplaintInitialDiagnosis}
             </Text>
           </View>
-          {/* here */}
           <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>
-              {t('report.recurrence')}: {report.chiefComplaintRecurrence}
-            </Text>
             {report.otherComplaints !== '' && (
               <Text style={styles.answer}>
                 {t('report.secondaryComplaints')}: {report.otherComplaints}
+              </Text>
+            )}
+          </View>
+          <View wrap={false} style={styles.answerRow}>
+            {report.secondaryComplaintInitialDiagnosis !== '' && (
+              <Text style={styles.answer}>
+                {t('report.secondaryComplaintInitialDiagnosis')}:{' '}
+                {report.secondaryComplaintInitialDiagnosis}
               </Text>
             )}
           </View>
@@ -177,45 +175,54 @@ const ReportPDF = ({ report, patient }) => {
                     'yyyy/MM/dd'
                   )}
                   ):,{' '}
-                  {score.score.map(
-                    ({ title, value }) =>
-                      `${t(`professional.patient.score.${title}`)}: ${
-                        /\d/.test(value)
-                          ? value
-                          : t(`professional.patient.score.${value}`)
-                      }, `
-                  )}
+                  {score.score.map(({ title, value, improvement }) => {
+                    console.log(improvement);
+                    return `${t(`professional.patient.score.${title}`)}: ${
+                      /\d/.test(value)
+                        ? value
+                        : t(`professional.patient.score.${value}`)
+                    } ${
+                      improvement !== undefined
+                        ? `(${Math.round(improvement)})%`
+                        : ``
+                    }, `;
+                  })}
                 </Text>
               </View>
             ))}
+          <View wrap={false} style={styles.subtitle}>
+            <Text>{t('report.improvement')}</Text>
+          </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              {t('report.healthQuality')}: {report.health}
+              {t('report.improvementPain')}: {report.improvementPain}
+              /10
             </Text>
             <Text style={styles.answer}>
-              {t('report.qualityOfLife')}: {report.qualityOfLife}
+              {t('report.improvementFunction')}: {report.improvementFunction}/10
             </Text>
           </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              {t('report.healthSatisfaction')}: {report.healthSatisfaction}
+              {t('report.improvementQualityOfLife')}:{' '}
+              {report.improvementQualityOfLife}/10
             </Text>
+          </View>
+
+          <View wrap={false} style={styles.subtitle}>
+            <Text>{t('report.satisfaction')}</Text>
           </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              {t('report.gecPain')}: {report.globalExpectationOfChange.pain}/10
+              {t('report.treatmentsSatisfaction')}:{' '}
+              {report.treatmentsSatisfaction}/10
             </Text>
             <Text style={styles.answer}>
-              {t('report.gecFunction')}:{' '}
-              {report.globalExpectationOfChange.function}/10
+              {t('report.chiropractorSatisfaction')}:{' '}
+              {report.chiropractorSatisfaction}/10
             </Text>
           </View>
-          <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>
-              {t('report.gecQualityOfLife')}:{' '}
-              {report.globalExpectationOfChange.qualityOfLife}/10
-            </Text>
-          </View>
+
           <View wrap={false} style={styles.subtitle}>
             <Text>{t('report.filledProfessional')}</Text>
           </View>
@@ -240,8 +247,17 @@ const ReportPDF = ({ report, patient }) => {
           </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              {t('report.nbTx')}: {report.numberOfTreatments}
+              {t('report.numberOfTreatmentsProvided')}:{' '}
+              {report.numberOfTreatmentsProvided}
             </Text>
+          </View>
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.numberOfAdditionalTreatments')}:{' '}
+              {report.numberOfAdditionalTreatments}
+            </Text>
+          </View>
+          <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
               {t('report.frequency')}: {report.frequency}
             </Text>
@@ -279,10 +295,14 @@ const ReportPDF = ({ report, patient }) => {
               </Text>
             </View>
           )}
-
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              {t('report.gecc')}: {report.globalExpectationOfClinicalChange}
+              {t('report.gicc')}: {report.globalImpressionOfClinicalChange}/10
+            </Text>
+          </View>
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.gecc')}: {report.globalExpectationOfClinicalChange}/10
             </Text>
           </View>
         </View>
@@ -291,4 +311,4 @@ const ReportPDF = ({ report, patient }) => {
   );
 };
 
-export default ReportPDF;
+export default ReEvaluationReportPDF;

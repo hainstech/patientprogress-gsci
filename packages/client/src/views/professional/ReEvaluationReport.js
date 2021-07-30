@@ -7,7 +7,7 @@ import { zonedTimeToUtc } from 'date-fns-tz';
 import { withRouter } from 'react-router-dom';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 
-import ReportPDF from './ReportPDF';
+import ReEvaluationReportPDF from './ReEvaluationReportPDF';
 
 import Spinner from '../../components/Spinner/Spinner';
 
@@ -189,7 +189,7 @@ const ReEvaluationReport = ({
                         {t('report.redFlags')}:{' '}
                         {report.redFlags.toString()
                           ? report.redFlags.join(', ')
-                          : 'None'}
+                          : t('report.none')}
                       </GridItem>
                     </GridContainer>
                   </GridItem>
@@ -198,7 +198,7 @@ const ReEvaluationReport = ({
                     <GridContainer>
                       <GridItem xs={12}>
                         <strong>{t('report.relevantScores')}: </strong>
-                        {report.relevantScore.length === 0 && <p>None</p>}
+                        {report.relevantScore.length === 0 && t('report.none')}
                         {report.relevantScore &&
                           report.relevantScore.map((score, i) => (
                             <GridContainer
@@ -350,14 +350,16 @@ const ReEvaluationReport = ({
                 <Button onClick={() => history.goBack()} color='danger'>
                   {t('professional.patient.back')}
                 </Button>
-                {/* <PDFDownloadLink
-                  document={<ReportPDF report={report} patient={patient} />}
+                <PDFDownloadLink
+                  document={
+                    <ReEvaluationReportPDF report={report} patient={patient} />
+                  }
                   fileName={`report-${patient.name}.pdf`}
                 >
                   <Button color='info'>
                     {t('professional.patient.export')}
                   </Button>
-                </PDFDownloadLink> */}
+                </PDFDownloadLink>
               </CardFooter>
             </Card>
           </GridItem>
