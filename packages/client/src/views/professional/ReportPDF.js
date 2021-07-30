@@ -152,7 +152,7 @@ const ReportPDF = ({ report, patient }) => {
           ))}
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              Red flags:{' '}
+              {t('report.redFlags')}:{' '}
               {report.redFlags.toString()
                 ? report.redFlags.join(', ')
                 : t('report.none')}
