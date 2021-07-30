@@ -222,15 +222,18 @@ var patientSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      otherComplaints: {
+        type: String,
+      },
+      initialGlobalExpectationOfClinicalChange: {
+        type: String,
+        required: true,
+      },
       chiefComplaintInitialDiagnosis: {
         type: String,
         required: true,
       },
-      initialReportGlobalExpectationOfClinicalChange: {
-        type: String,
-        required: true,
-      },
-      secondaryComplaintDiagnosis: {
+      secondaryComplaintInitialDiagnosis: {
         type: String,
       },
       comorbidities: [
@@ -245,9 +248,14 @@ var patientSchema = new mongoose.Schema({
       relevantScore: [
         {
           name: { type: String },
-          score: [{ title: { type: String }, value: { type: String } }],
+          score: [
+            {
+              title: { type: String },
+              value: { type: String },
+              improvement: { type: Number },
+            },
+          ],
           date: { type: Date },
-          improvement: { type: Number },
         },
       ],
       // Follow up

@@ -284,7 +284,7 @@ router.post('/:id/reevaluationreport', professional, async (req, res) => {
       return res.status(403).json({ msg: 'Permission denied' });
     }
 
-    patient.reEvaluationReports.push(req.body.reEvaluationReport);
+    patient.reEvaluationReports.push(req.body.report);
 
     await patient.save();
 

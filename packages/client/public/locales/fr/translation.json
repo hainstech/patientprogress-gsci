@@ -138,7 +138,8 @@
         "high": "Haut"
       },
       "reports": "Rapports",
-      "newReport": "Nouveau Rapport"
+      "newReport": "Nouveau Rapport",
+      "newReEvaluationReport": "Nouveau Rapport de Ré-évaluation"
     }
   },
   "sidebar": {
@@ -190,6 +191,7 @@
   },
   "report": {
     "newReport": "Nouveau rapport",
+    "newReEvaluationReport": "Nouveau Rapport de Ré-évaluation",
     "age": "Âge",
     "name": "Nom du patient",
     "date": "Date",
@@ -289,7 +291,22 @@
     "other": "Autres (séparés par des virgules)",
     "externalConsultation": "Consultation externe",
     "gecc": "Attentes globales de changement clinique",
-    "none": "Aucun"
+    "none": "Aucun",
+    "improvement": "Amélioration rapportée par le patient",
+    "improvementPain": "Douleur",
+    "improvementFunction": "Fonction",
+    "improvementQualityOfLife": "Qualité de Vie",
+    "satisfaction": "Satisfaction",
+    "treatmentsSatisfaction": "Satisfaction des traitements",
+    "chiropractorSatisfaction": "Satisfaction du chiropraticien",
+    "numberOfTreatmentsProvided": "Nombre de traitements fournis pour le motif principal",
+    "numberOfAdditionalTreatments": "Nombre de traitements supplémentaires recommandé",
+    "gicc": "Impression globales de changement clinique",
+    "initialReportDate": "Date du rapport initial",
+    "initialGlobalExpectationOfClinicalChange": "Attentes globales de changement clinique du rapport initial",
+    "chiefComplaintInitialDiagnosis": "Diagnostic lié au motif principal de consultation",
+    "secondaryComplaintInitialDiagnosis": "Diagnostic lié au(x) autre(s) motif(s) de consultation",
+    "scoreImprovement": "Amélioration"
   },
   "metrics": {
     "title": "Vos statistiques",

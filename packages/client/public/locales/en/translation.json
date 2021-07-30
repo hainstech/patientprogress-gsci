@@ -138,7 +138,8 @@
         "high": "High"
       },
       "reports": "Reports",
-      "newReport": "New report"
+      "newReport": "New report",
+      "newReEvaluationReport": "New Re-Evaluation Report"
     }
   },
   "sidebar": {
@@ -190,6 +191,7 @@
   },
   "report": {
     "newReport": "New report",
+    "newReEvaluationReport": "New Re-Evaluation Report",
     "age": "Age",
     "name": "Patient's Name",
     "date": "Date",
@@ -289,7 +291,22 @@
     "other": "Other (separate by comma)",
     "externalConsultation": "External Consultation",
     "gecc": "Global Expectation Of Clinical Change",
-    "none": "None"
+    "none": "None",
+    "improvement": "Improvement reported by patient",
+    "improvementPain": "Pain",
+    "improvementFunction": "Function",
+    "improvementQualityOfLife": "Quality of Life",
+    "satisfaction": "Satisfaction",
+    "treatmentsSatisfaction": "Treatments satisfaction",
+    "chiropractorSatisfaction": "Chiropractor’s satisfaction",
+    "numberOfTreatmentsProvided": "Number of treatment provided for chief complaint",
+    "numberOfAdditionalTreatments": "Number of additional treatment recommended",
+    "gicc": "Global Impression of Clinical Change",
+    "initialReportDate": "Initial report date",
+    "initialGlobalExpectationOfClinicalChange": "Initial report’s Global Expectation of Clinical change",
+    "chiefComplaintInitialDiagnosis": "Chief complaint initial diagnosis",
+    "secondaryComplaintInitialDiagnosis": "Secondary complaint diagnosis",
+    "scoreImprovement": "Improvement"
   },
   "metrics": {
     "title": "Your metrics",
