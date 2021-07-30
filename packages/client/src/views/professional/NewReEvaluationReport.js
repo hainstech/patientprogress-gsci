@@ -264,7 +264,7 @@ const NewReEvaluationReport = ({
       ) : (
         <GridContainer justifyContent='center'>
           <Alert />
-          <GridItem xs={12} lg={11}>
+          <GridItem xs={12}>
             <Card>
               <CardHeader color='danger'>
                 <h4 className={classes.cardTitleWhite}>

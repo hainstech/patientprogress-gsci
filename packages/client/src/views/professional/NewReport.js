@@ -505,7 +505,7 @@ const NewReport = ({
       ) : (
         <GridContainer justifyContent='center'>
           <Alert />
-          <GridItem xs={12} lg={8}>
+          <GridItem xs={12}>
             <Card>
               <CardHeader color='danger'>
                 <h4 className={classes.cardTitleWhite}>
@@ -600,8 +600,6 @@ const NewReport = ({
                     <br />
                     <GridContainer>
                       <GridItem xs={12}>
-                        {intake.comorbidities.length === 0 &&
-                          'No commorbidities'}
                         {intake.comorbidities.length > 0 &&
                           intake.comorbidities.map((comorbidity, i) => (
                             <GridContainer key={`${i}-${comorbidity.name}1`}>

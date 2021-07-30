@@ -147,7 +147,11 @@ const PatientOverview = ({
   const renderReportViewButton = (params) => {
     return (
       <Link
-        to={`/professional/patients/${match.params.id}/reports/${params.row.id}`}
+        to={
+          params.row.type === t('professional.patient.initial')
+            ? `/professional/patients/${match.params.id}/reports/${params.row.id}`
+            : `/professional/patients/${match.params.id}/reevaluationreports/${params.row.id}`
+        }
       >
         <Button color='success'>{t('professional.patient.view')}</Button>
       </Link>

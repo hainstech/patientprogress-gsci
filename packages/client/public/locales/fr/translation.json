@@ -309,7 +309,9 @@
     "initialGlobalExpectationOfClinicalChange": "Attentes globales de changement clinique du rapport initial",
     "chiefComplaintInitialDiagnosis": "Diagnostic lié au motif principal de consultation",
     "secondaryComplaintInitialDiagnosis": "Diagnostic lié au(x) autre(s) motif(s) de consultation",
-    "scoreImprovement": "Amélioration"
+    "scoreImprovement": "Amélioration",
+    "reEvaluationReport": "Rapport de ré-évaluation",
+    "report": "Rapport"
   },
   "metrics": {
     "title": "Vos statistiques",

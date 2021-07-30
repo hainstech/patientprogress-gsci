@@ -10,6 +10,7 @@ import NewReport from '../views/professional/NewReport';
 import Report from '../views/professional/Report';
 import Metrics from '../views/professional/Metrics';
 import NewReEvaluationReport from '../views/professional/NewReEvaluationReport';
+import ReEvaluationReport from '../views/professional/ReEvaluationReport';
 
 import ProfessionalRoute from './ProfessionalRoute';
 
@@ -56,6 +57,11 @@ const Professional = () => {
         exact
         path='/professional/patients/:id/reevaluationreport'
         component={NewReEvaluationReport}
+      />
+      <ProfessionalRoute
+        exact
+        path='/professional/patients/:id/reevaluationreports/:report_id'
+        component={ReEvaluationReport}
       />
     </Switch>
   );

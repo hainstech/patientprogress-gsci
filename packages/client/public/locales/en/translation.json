@@ -309,7 +309,9 @@
     "initialGlobalExpectationOfClinicalChange": "Initial report’s Global Expectation of Clinical change",
     "chiefComplaintInitialDiagnosis": "Chief complaint initial diagnosis",
     "secondaryComplaintInitialDiagnosis": "Secondary complaint diagnosis",
-    "scoreImprovement": "Improvement"
+    "scoreImprovement": "Improvement",
+    "reEvaluationReport": "Re-Evaluation Report",
+    "report": "Report"
   },
   "metrics": {
     "title": "Your metrics",

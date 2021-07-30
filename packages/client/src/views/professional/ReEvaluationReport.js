@@ -25,7 +25,7 @@ import { getPatient } from '../../actions/professional';
 
 const useStyles = makeStyles(styles);
 
-const Report = ({
+const ReEvaluationReport = ({
   professional: { patient, loading },
   match,
   getPatient,
@@ -41,14 +41,16 @@ const Report = ({
     if (!patient || patient._id !== match.params.id) {
       getPatient(match.params.id).then((patient) => {
         setReport(
-          patient.reports.find(
+          patient.reEvaluationReports.find(
             (report) => report._id === match.params.report_id
           )
         );
       });
     } else {
       setReport(
-        patient.reports.find((report) => report._id === match.params.report_id)
+        patient.reEvaluationReports.find(
+          (report) => report._id === match.params.report_id
+        )
       );
     }
   }, [getPatient, match.params.id, match.params.report_id, patient]);
@@ -63,7 +65,9 @@ const Report = ({
             <Card>
               <CardHeader color='danger'>
                 <h4 className={classes.cardTitleWhite}>
-                  {`${t('report.report')} - ${patient.name} - ${format(
+                  {`${t('report.reEvaluationReport')} - ${
+                    patient.name
+                  } - ${format(
                     zonedTimeToUtc(parseISO(report.date)),
                     'yyyy/MM/dd'
                   )}`}
@@ -98,6 +102,13 @@ const Report = ({
                         )}
                       </GridItem>
                       <GridItem xs={12}>
+                        {t('report.initialReportDate')}:{' '}
+                        {format(
+                          zonedTimeToUtc(parseISO(report.initialReportDate)),
+                          'yyyy/MM/dd'
+                        )}
+                      </GridItem>
+                      <GridItem xs={12}>
                         {t('report.professional')}: {report.professionalName}
                       </GridItem>
                       <GridItem xs={12}>
@@ -107,24 +118,7 @@ const Report = ({
                       </GridItem>
                     </GridContainer>
                   </GridItem>
-                  <GridItem xs={12}>
-                    <br />
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        {t('report.civilStatus')}: {report.civilStatus}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.nbChildrens')}: {report.nbChildrens}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.occupation')}: {report.occupation}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.employmentStatus')}:{' '}
-                        {report.employmentStatus}
-                      </GridItem>
-                    </GridContainer>
-                  </GridItem>
+
                   <GridItem xs={12}>
                     <br />
                     <GridContainer>
@@ -135,18 +129,12 @@ const Report = ({
                         {t('report.onsetDate')}: {report.chiefComplaintStart}
                       </GridItem>
                       <GridItem xs={12}>
-                        {t('report.onsetType')}: {report.chiefComplaintAppear}
+                        {t('report.initialGlobalExpectationOfClinicalChange')}:{' '}
+                        {report.initialGlobalExpectationOfClinicalChange}
                       </GridItem>
                       <GridItem xs={12}>
-                        {t('report.injuryMechanism')}:{' '}
-                        {report.chiefComplaintAppearDescription}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.evolution')}: {report.chiefComplaintEvolving}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.recurrence')}:{' '}
-                        {report.chiefComplaintRecurrence}
+                        {t('report.chiefComplaintInitialDiagnosis')}:{' '}
+                        {report.chiefComplaintInitialDiagnosis}
                       </GridItem>
 
                       {report.otherComplaints && (
@@ -155,12 +143,20 @@ const Report = ({
                           {report.otherComplaints}
                         </GridItem>
                       )}
+                      {report.secondaryComplaintInitialDiagnosis && (
+                        <GridItem xs={12}>
+                          {t('report.secondaryComplaintInitialDiagnosis')}:{' '}
+                          {report.secondaryComplaintInitialDiagnosis}
+                        </GridItem>
+                      )}
                     </GridContainer>
                   </GridItem>
                   <GridItem xs={12}>
                     <br />
                     <GridContainer>
                       <GridItem xs={12}>
+                        {report.comorbidities.length === 0 &&
+                          'No commorbidities'}
                         {report.comorbidities.length > 0 &&
                           report.comorbidities.map((comorbidity, i) => (
                             <GridContainer key={`${i}-${comorbidity.name}1`}>
@@ -193,7 +189,7 @@ const Report = ({
                         {t('report.redFlags')}:{' '}
                         {report.redFlags.toString()
                           ? report.redFlags.join(', ')
-                          : t('report.none')}
+                          : 'None'}
                       </GridItem>
                     </GridContainer>
                   </GridItem>
@@ -202,10 +198,13 @@ const Report = ({
                     <GridContainer>
                       <GridItem xs={12}>
                         <strong>{t('report.relevantScores')}: </strong>
-                        {report.relevantScore.length === 0 && t('report.none')}
+                        {report.relevantScore.length === 0 && <p>None</p>}
                         {report.relevantScore &&
                           report.relevantScore.map((score, i) => (
-                            <GridContainer key={i}>
+                            <GridContainer
+                              key={i}
+                              style={{ paddingBottom: 20 }}
+                            >
                               <GridItem key={`${i}-${score.name}`} xs={12}>
                                 {score.name} (
                                 {format(
@@ -218,52 +217,65 @@ const Report = ({
                                 )}
                                 ):
                               </GridItem>
-                              {score.score.map(({ title, value }, y) => (
-                                <GridItem key={y + i} xs={12}>
-                                  {t(`professional.patient.score.${title}`)}:{' '}
-                                  {/\d/.test(value)
-                                    ? value
-                                    : t(`professional.patient.score.${value}`)}
-                                </GridItem>
-                              ))}
+                              {score.score.map(
+                                ({ title, value, improvement }, y) => (
+                                  <React.Fragment key={y + i}>
+                                    <GridItem xs={12}>
+                                      {t(`professional.patient.score.${title}`)}
+                                      :{' '}
+                                      {/\d/.test(value)
+                                        ? value
+                                        : t(
+                                            `professional.patient.score.${value.toLowerCase()}`
+                                          )}
+                                    </GridItem>
+                                    {improvement && (
+                                      <GridItem xs={12}>
+                                        {t('report.improvement')}:{' '}
+                                        {Math.round(improvement)}%
+                                      </GridItem>
+                                    )}
+                                  </React.Fragment>
+                                )
+                              )}
                             </GridContainer>
                           ))}
                       </GridItem>
                     </GridContainer>
                   </GridItem>
                   <GridItem xs={12}>
-                    <br />
+                    <strong>{t('report.improvement')}</strong>
                     <GridContainer>
                       <GridItem xs={12}>
-                        {t('report.healthQuality')}: {report.health}
+                        {t('report.improvementPain')}: {report.improvementPain}
+                        /10
                       </GridItem>
                       <GridItem xs={12}>
-                        {t('report.qualityOfLife')}: {report.qualityOfLife}
+                        {t('report.improvementFunction')}:{' '}
+                        {report.improvementFunction}/10
                       </GridItem>
                       <GridItem xs={12}>
-                        {t('report.healthSatisfaction')}:{' '}
-                        {report.healthSatisfaction}
+                        {t('report.improvementQualityOfLife')}:{' '}
+                        {report.improvementQualityOfLife}/10
                       </GridItem>
                     </GridContainer>
                   </GridItem>
 
                   <GridItem xs={12}>
                     <br />
+                    <strong>{t('report.satisfaction')}</strong>
                     <GridContainer>
                       <GridItem xs={12}>
-                        {t('report.gecPain')}:{' '}
-                        {report.globalExpectationOfChange.pain}/10
+                        {t('report.treatmentsSatisfaction')}:{' '}
+                        {report.treatmentsSatisfaction}/10
                       </GridItem>
                       <GridItem xs={12}>
-                        {t('report.gecFunction')}:{' '}
-                        {report.globalExpectationOfChange.function}/10
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.gecQualityOfLife')}:{' '}
-                        {report.globalExpectationOfChange.qualityOfLife}/10
+                        {t('report.chiropractorSatisfaction')}:{' '}
+                        {report.chiropractorSatisfaction}/10
                       </GridItem>
                     </GridContainer>
                   </GridItem>
+
                   <GridItem xs={12}>
                     <br />
                     <GridContainer>
@@ -282,7 +294,12 @@ const Report = ({
                         </GridItem>
                       )}
                       <GridItem xs={12}>
-                        {t('report.nbTx')}: {report.numberOfTreatments}
+                        {t('report.numberOfTreatmentsProvided')}:{' '}
+                        {report.numberOfTreatmentsProvided}
+                      </GridItem>
+                      <GridItem xs={12}>
+                        {t('report.numberOfAdditionalTreatments')}:{' '}
+                        {report.numberOfAdditionalTreatments}
                       </GridItem>
                       <GridItem xs={12}>
                         {t('report.frequency')}: {report.frequency}
@@ -317,6 +334,11 @@ const Report = ({
                       )}
                       <GridItem xs={12}>
                         <br />
+                        {t('report.gicc')}:{' '}
+                        {report.globalImpressionOfClinicalChange}/10
+                      </GridItem>
+                      <GridItem xs={12}>
+                        <br />
                         {t('report.gecc')}:{' '}
                         {report.globalExpectationOfClinicalChange}/10
                       </GridItem>
@@ -328,14 +350,14 @@ const Report = ({
                 <Button onClick={() => history.goBack()} color='danger'>
                   {t('professional.patient.back')}
                 </Button>
-                <PDFDownloadLink
+                {/* <PDFDownloadLink
                   document={<ReportPDF report={report} patient={patient} />}
                   fileName={`report-${patient.name}.pdf`}
                 >
                   <Button color='info'>
                     {t('professional.patient.export')}
                   </Button>
-                </PDFDownloadLink>
+                </PDFDownloadLink> */}
               </CardFooter>
             </Card>
           </GridItem>
@@ -345,7 +367,7 @@ const Report = ({
   );
 };
 
-Report.propTypes = {
+ReEvaluationReport.propTypes = {
   getPatient: PropTypes.func.isRequired,
   professional: PropTypes.object.isRequired,
 };
@@ -356,4 +378,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getPatient,
-})(withRouter(Report));
+})(withRouter(ReEvaluationReport));
