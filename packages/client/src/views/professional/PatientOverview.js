@@ -267,8 +267,28 @@ const PatientOverview = ({
                               ),
                               'yyyy/MM/dd'
                             ),
+                            date,
+                            type: t('professional.patient.initial'),
                           };
                         })
+                        .concat(
+                          patient.reEvaluationReports.map(({ date, _id }) => {
+                            return {
+                              id: _id,
+                              time: format(
+                                zonedTimeToUtc(
+                                  parseISO(date),
+                                  Intl.DateTimeFormat().resolvedOptions()
+                                    .timeZone
+                                ),
+                                'yyyy/MM/dd'
+                              ),
+                              date,
+                              type: t('professional.patient.reEvaluation'),
+                            };
+                          })
+                        )
+                        .sort((a, b) => Date(a.date) - Date(b.date))
                         .reverse()}
                       columns={[
                         {
@@ -280,8 +300,13 @@ const PatientOverview = ({
                           renderCell: renderReportViewButton,
                         },
                         {
+                          field: 'type',
+                          headerName: t('professional.patient.type'),
+                          width: 110,
+                        },
+                        {
                           field: 'time',
-                          headerName: `${t('professional.patient.date')}`,
+                          headerName: t('professional.patient.date'),
                           width: 110,
                         },
                       ]}

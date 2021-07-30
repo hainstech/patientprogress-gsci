@@ -139,7 +139,10 @@
       },
       "reports": "Rapports",
       "newReport": "Nouveau Rapport",
-      "newReEvaluationReport": "Nouveau Rapport de Ré-évaluation"
+      "newReEvaluationReport": "Nouveau Rapport de Ré-évaluation",
+      "type": "Type",
+      "initial": "Initial",
+      "reEvaluation": "Ré-évaluation"
     }
   },
   "sidebar": {
