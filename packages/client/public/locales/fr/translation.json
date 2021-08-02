@@ -312,7 +312,8 @@
     "scoreImprovement": "Amélioration",
     "reEvaluationReport": "Rapport de ré-évaluation",
     "report": "Rapport",
-    "filledProfessional": "Rempli par le professionnel"
+    "filledProfessional": "Rempli par le professionnel",
+    "comorbidities": "Comorbidités"
   },
   "metrics": {
     "title": "Vos statistiques",

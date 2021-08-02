@@ -515,93 +515,131 @@ const NewReport = ({
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={6}>
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        {t('report.name')}: {patient.name}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('professional.patient.gender')}:{' '}
-                        {patient.gender === 'Male' ||
-                        patient.gender === 'Female'
-                          ? t(`professional.patient.${patient.gender}`)
-                          : patient.gender}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.age')}: {intake.age}
-                      </GridItem>
-                    </GridContainer>
+                    <Card>
+                      <CardHeader color='danger'>
+                        <p className={classes.cardTitleWhite}>Patient data</p>
+                      </CardHeader>
+                      <CardBody>
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.name')}: {patient.name}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('professional.patient.gender')}:{' '}
+                            {patient.gender === 'Male' ||
+                            patient.gender === 'Female'
+                              ? t(`professional.patient.${patient.gender}`)
+                              : patient.gender}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.age')}: {intake.age}
+                          </GridItem>
+                        </GridContainer>
+                      </CardBody>
+                    </Card>
                   </GridItem>
                   <GridItem xs={12} sm={6}>
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        {t('report.date')}: {format(intake.date, 'yyyy/MM/dd')}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.professional')}: {intake.professionalName}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {/* #TODO Translate the profession */}
-                        {t('report.profession')}:{' '}
-                        {intake.professionalProfession}
-                      </GridItem>
-                    </GridContainer>
+                    <Card>
+                      <CardHeader color='danger'>
+                        <p className={classes.cardTitleWhite}>
+                          About this report
+                        </p>
+                      </CardHeader>
+                      <CardBody>
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.date')}:{' '}
+                            {format(intake.date, 'yyyy/MM/dd')}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.professional')}:{' '}
+                            {intake.professionalName}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {/* #TODO Translate the profession */}
+                            {t('report.profession')}:{' '}
+                            {intake.professionalProfession}
+                          </GridItem>
+                        </GridContainer>
+                      </CardBody>
+                    </Card>
                   </GridItem>
-                  <GridItem xs={12}>
-                    <br />
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        {t('report.civilStatus')}: {intake.civilStatus}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.nbChildrens')}: {intake.nbChildrens}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.occupation')}: {intake.occupation}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.employmentStatus')}:{' '}
-                        {intake.employmentStatus}
-                      </GridItem>
-                    </GridContainer>
+                  <GridItem xs={12} sm={6}>
+                    <Card>
+                      <CardHeader color='danger'>
+                        <p className={classes.cardTitleWhite}>Demographics</p>
+                      </CardHeader>
+                      <CardBody>
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.civilStatus')}: {intake.civilStatus}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.nbChildrens')}: {intake.nbChildrens}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.occupation')}: {intake.occupation}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.employmentStatus')}:{' '}
+                            {intake.employmentStatus}
+                          </GridItem>
+                        </GridContainer>
+                      </CardBody>
+                    </Card>
                   </GridItem>
-                  <GridItem xs={12}>
-                    <br />
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        {t('report.chiefComplaint')}: {intake.chiefComplaint}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.onsetDate')}: {intake.chiefComplaintStart}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.onsetType')}: {intake.chiefComplaintAppear}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.injuryMechanism')}:{' '}
-                        {intake.chiefComplaintAppearDescription}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.evolution')}: {intake.chiefComplaintEvolving}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.recurrence')}:{' '}
-                        {intake.chiefComplaintRecurrence}
-                      </GridItem>
+                  <GridItem xs={12} sm={6}>
+                    <Card>
+                      <CardHeader color='danger'>
+                        <p className={classes.cardTitleWhite}>Complaint</p>
+                      </CardHeader>
+                      <CardBody>
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.chiefComplaint')}:{' '}
+                            {intake.chiefComplaint}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.onsetDate')}:{' '}
+                            {intake.chiefComplaintStart}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.onsetType')}:{' '}
+                            {intake.chiefComplaintAppear}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.injuryMechanism')}:{' '}
+                            {intake.chiefComplaintAppearDescription}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.evolution')}:{' '}
+                            {intake.chiefComplaintEvolving}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.recurrence')}:{' '}
+                            {intake.chiefComplaintRecurrence}
+                          </GridItem>
 
-                      {intake.otherComplaints && (
-                        <GridItem xs={12}>
-                          {t('report.secondaryComplaints')}:{' '}
-                          {intake.otherComplaints}
-                        </GridItem>
-                      )}
-                    </GridContainer>
+                          {intake.otherComplaints && (
+                            <GridItem xs={12}>
+                              {t('report.secondaryComplaints')}:{' '}
+                              {intake.otherComplaints}
+                            </GridItem>
+                          )}
+                        </GridContainer>
+                      </CardBody>
+                    </Card>
                   </GridItem>
-                  <GridItem xs={12}>
-                    <br />
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        {intake.comorbidities.length > 0 &&
-                          intake.comorbidities.map((comorbidity, i) => (
+                  {intake.comorbidities.length > 0 && (
+                    <GridItem xs={12}>
+                      <Card>
+                        <CardHeader color='danger'>
+                          <p className={classes.cardTitleWhite}>
+                            {t('report.comorbidities')}
+                          </p>
+                        </CardHeader>
+                        <CardBody>
+                          {intake.comorbidities.map((comorbidity, i) => (
                             <GridContainer key={`${i}-${comorbidity.name}1`}>
                               <GridItem
                                 key={`${i}-${comorbidity.name}`}
@@ -626,21 +664,34 @@ const NewReport = ({
                               </GridItem>
                             </GridContainer>
                           ))}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        <br />
-                        {t('report.redFlags')}:{' '}
+                        </CardBody>
+                      </Card>
+                    </GridItem>
+                  )}
+
+                  <GridItem xs={12}>
+                    <Card>
+                      <CardHeader color='danger'>
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.redFlags')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
                         {intake.redFlags.toString()
                           ? intake.redFlags.join(', ')
                           : t('report.none')}
-                      </GridItem>
-                    </GridContainer>
+                      </CardBody>
+                    </Card>
                   </GridItem>
+
                   <GridItem xs={12}>
-                    <br />
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        <strong>{t('report.relevantScores')}: </strong>
+                    <Card>
+                      <CardHeader color='danger'>
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.relevantScores')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
                         {intake.relevantScore.length === 0 && t('report.none')}
                         {intake.relevantScore &&
                           intake.relevantScore.map((score, i) => (
@@ -667,42 +718,38 @@ const NewReport = ({
                               ))}
                             </GridContainer>
                           ))}
-                      </GridItem>
-                    </GridContainer>
-                  </GridItem>
-                  <GridItem xs={12}>
-                    <br />
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        {t('report.healthQuality')}: {intake.health}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.qualityOfLife')}: {intake.qualityOfLife}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.healthSatisfaction')}:{' '}
-                        {intake.healthSatisfaction}
-                      </GridItem>
-                    </GridContainer>
+                        <br />
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.healthQuality')}: {intake.health}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.qualityOfLife')}: {intake.qualityOfLife}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.healthSatisfaction')}:{' '}
+                            {intake.healthSatisfaction}
+                          </GridItem>
+                        </GridContainer>
+                        <br />
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.gecPain')}:{' '}
+                            {intake.globalExpectationOfChange.pain}/10
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.gecFunction')}:{' '}
+                            {intake.globalExpectationOfChange.function}/10
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.gecQualityOfLife')}:{' '}
+                            {intake.globalExpectationOfChange.qualityOfLife}/10
+                          </GridItem>
+                        </GridContainer>
+                      </CardBody>
+                    </Card>
                   </GridItem>
 
-                  <GridItem xs={12}>
-                    <br />
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        {t('report.gecPain')}:{' '}
-                        {intake.globalExpectationOfChange.pain}/10
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.gecFunction')}:{' '}
-                        {intake.globalExpectationOfChange.function}/10
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.gecQualityOfLife')}:{' '}
-                        {intake.globalExpectationOfChange.qualityOfLife}/10
-                      </GridItem>
-                    </GridContainer>
-                  </GridItem>
                   <form onSubmit={formik.handleSubmit}>
                     <GridItem xs={12}>
                       <GridContainer>

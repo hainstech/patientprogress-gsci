@@ -312,7 +312,8 @@
     "scoreImprovement": "Improvement",
     "reEvaluationReport": "Re-Evaluation Report",
     "report": "Report",
-    "filledProfessional": "Filled by the professional"
+    "filledProfessional": "Filled by the professional",
+    "comorbidities": "Comorbidities"
   },
   "metrics": {
     "title": "Your metrics",
