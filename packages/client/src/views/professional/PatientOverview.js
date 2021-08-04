@@ -292,7 +292,7 @@ const PatientOverview = ({
                             };
                           })
                         )
-                        .sort((a, b) => Date(a.date) - Date(b.date))
+                        .sort((a, b) => new Date(b.date) - new Date(a.date))
                         .reverse()}
                       columns={[
                         {
