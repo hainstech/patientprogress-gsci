@@ -292,8 +292,7 @@ const PatientOverview = ({
                             };
                           })
                         )
-                        .sort((a, b) => new Date(b.date) - new Date(a.date))
-                        .reverse()}
+                        .sort((a, b) => new Date(b.date) - new Date(a.date))}
                       columns={[
                         {
                           field: 'id',
