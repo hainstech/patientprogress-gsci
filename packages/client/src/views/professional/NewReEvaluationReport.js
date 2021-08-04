@@ -274,82 +274,112 @@ const NewReEvaluationReport = ({
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={6}>
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        {t('report.name')}: {patient.name}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('professional.patient.gender')}:{' '}
-                        {patient.gender === 'Male' ||
-                        patient.gender === 'Female'
-                          ? t(`professional.patient.${patient.gender}`)
-                          : patient.gender}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.age')}: {intake.age}
-                      </GridItem>
-                    </GridContainer>
+                    <Card>
+                      <CardHeader color='danger'>
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.patientData')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.name')}: {patient.name}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('professional.patient.gender')}:{' '}
+                            {patient.gender === 'Male' ||
+                            patient.gender === 'Female'
+                              ? t(`professional.patient.${patient.gender}`)
+                              : patient.gender}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.age')}: {intake.age}
+                          </GridItem>
+                        </GridContainer>
+                      </CardBody>
+                    </Card>
                   </GridItem>
                   <GridItem xs={12} sm={6}>
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        {t('report.date')}: {format(intake.date, 'yyyy/MM/dd')}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.initialReportDate')}:{' '}
-                        {format(intake.initialReportDate, 'yyyy/MM/dd')}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.professional')}: {intake.professionalName}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {/* #TODO Translate the profession */}
-                        {t('report.profession')}:{' '}
-                        {intake.professionalProfession}
-                      </GridItem>
-                    </GridContainer>
+                    <Card>
+                      <CardHeader color='danger'>
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.about')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.date')}:{' '}
+                            {format(intake.date, 'yyyy/MM/dd')}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.professional')}:{' '}
+                            {intake.professionalName}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {/* #TODO Translate the profession */}
+                            {t('report.profession')}:{' '}
+                            {intake.professionalProfession}
+                          </GridItem>
+                        </GridContainer>
+                      </CardBody>
+                    </Card>
                   </GridItem>
 
                   <GridItem xs={12}>
-                    <br />
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        {t('report.chiefComplaint')}: {intake.chiefComplaint}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.onsetDate')}: {intake.chiefComplaintStart}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.initialGlobalExpectationOfClinicalChange')}:{' '}
-                        {intake.initialGlobalExpectationOfClinicalChange}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.chiefComplaintInitialDiagnosis')}:{' '}
-                        {intake.chiefComplaintInitialDiagnosis}
-                      </GridItem>
+                    <Card>
+                      <CardHeader color='danger'>
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.complaint')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.chiefComplaint')}:{' '}
+                            {intake.chiefComplaint}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.onsetDate')}:{' '}
+                            {intake.chiefComplaintStart}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t(
+                              'report.initialGlobalExpectationOfClinicalChange'
+                            )}
+                            : {intake.initialGlobalExpectationOfClinicalChange}
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.chiefComplaintInitialDiagnosis')}:{' '}
+                            {intake.chiefComplaintInitialDiagnosis}
+                          </GridItem>
 
-                      {intake.otherComplaints && (
-                        <GridItem xs={12}>
-                          {t('report.secondaryComplaints')}:{' '}
-                          {intake.otherComplaints}
-                        </GridItem>
-                      )}
-                      {intake.secondaryComplaintInitialDiagnosis && (
-                        <GridItem xs={12}>
-                          {t('report.secondaryComplaintInitialDiagnosis')}:{' '}
-                          {intake.secondaryComplaintInitialDiagnosis}
-                        </GridItem>
-                      )}
-                    </GridContainer>
+                          {intake.otherComplaints && (
+                            <GridItem xs={12}>
+                              {t('report.secondaryComplaints')}:{' '}
+                              {intake.otherComplaints}
+                            </GridItem>
+                          )}
+                          {intake.secondaryComplaintInitialDiagnosis && (
+                            <GridItem xs={12}>
+                              {t('report.secondaryComplaintInitialDiagnosis')}:{' '}
+                              {intake.secondaryComplaintInitialDiagnosis}
+                            </GridItem>
+                          )}
+                        </GridContainer>
+                      </CardBody>
+                    </Card>
                   </GridItem>
-                  <GridItem xs={12}>
-                    <br />
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        {intake.comorbidities.length === 0 &&
-                          'No commorbidities'}
-                        {intake.comorbidities.length > 0 &&
-                          intake.comorbidities.map((comorbidity, i) => (
+                  {intake.comorbidities.length > 0 && (
+                    <GridItem xs={12}>
+                      <Card>
+                        <CardHeader color='danger'>
+                          <p className={classes.cardTitleWhite}>
+                            {t('report.comorbidities')}
+                          </p>
+                        </CardHeader>
+                        <CardBody>
+                          {intake.comorbidities.map((comorbidity, i) => (
                             <GridContainer key={`${i}-${comorbidity.name}1`}>
                               <GridItem
                                 key={`${i}-${comorbidity.name}`}
@@ -374,21 +404,34 @@ const NewReEvaluationReport = ({
                               </GridItem>
                             </GridContainer>
                           ))}
-                      </GridItem>
-                      <GridItem xs={12}>
-                        <br />
-                        {t('report.redFlags')}:{' '}
+                        </CardBody>
+                      </Card>
+                    </GridItem>
+                  )}
+
+                  <GridItem xs={12}>
+                    <Card>
+                      <CardHeader color='danger'>
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.redFlags')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
                         {intake.redFlags.toString()
                           ? intake.redFlags.join(', ')
                           : t('report.none')}
-                      </GridItem>
-                    </GridContainer>
+                      </CardBody>
+                    </Card>
                   </GridItem>
+
                   <GridItem xs={12}>
-                    <br />
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        <strong>{t('report.relevantScores')}: </strong>
+                    <Card>
+                      <CardHeader color='danger'>
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.relevantScores')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
                         {intake.relevantScore.length === 0 && t('report.none')}
                         {intake.relevantScore &&
                           intake.relevantScore.map((score, i) => (
@@ -431,395 +474,492 @@ const NewReEvaluationReport = ({
                               )}
                             </GridContainer>
                           ))}
-                      </GridItem>
-                    </GridContainer>
-                  </GridItem>
-                  <GridItem xs={12}>
-                    <strong>{t('report.improvement')}</strong>
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        {t('report.improvementPain')}: {intake.improvementPain}
-                        /10
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.improvementFunction')}:{' '}
-                        {intake.improvementFunction}/10
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.improvementQualityOfLife')}:{' '}
-                        {intake.improvementQualityOfLife}/10
-                      </GridItem>
-                    </GridContainer>
+                      </CardBody>
+                    </Card>
                   </GridItem>
 
                   <GridItem xs={12}>
-                    <br />
-                    <strong>{t('report.satisfaction')}</strong>
-                    <GridContainer>
-                      <GridItem xs={12}>
-                        {t('report.treatmentsSatisfaction')}:{' '}
-                        {intake.treatmentsSatisfaction}/10
-                      </GridItem>
-                      <GridItem xs={12}>
-                        {t('report.chiropractorSatisfaction')}:{' '}
-                        {intake.chiropractorSatisfaction}/10
-                      </GridItem>
-                    </GridContainer>
+                    <Card>
+                      <CardHeader color='danger'>
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.improvement')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.improvementPain')}:{' '}
+                            {intake.improvementPain}
+                            /10
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.improvementFunction')}:{' '}
+                            {intake.improvementFunction}/10
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.improvementQualityOfLife')}:{' '}
+                            {intake.improvementQualityOfLife}/10
+                          </GridItem>
+                        </GridContainer>
+                      </CardBody>
+                    </Card>
                   </GridItem>
 
-                  <form onSubmit={formik.handleSubmit}>
-                    <GridItem xs={12}>
+                  <GridItem xs={12}>
+                    <Card>
+                      <CardHeader color='danger'>
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.satisfaction')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.treatmentsSatisfaction')}:{' '}
+                            {intake.treatmentsSatisfaction}/10
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.chiropractorSatisfaction')}:{' '}
+                            {intake.chiropractorSatisfaction}/10
+                          </GridItem>
+                        </GridContainer>
+                      </CardBody>
+                    </Card>
+                  </GridItem>
+
+                  <GridItem xs={12}>
+                    <form onSubmit={formik.handleSubmit}>
                       <GridContainer>
-                        <GridItem xs={12} sm={12}>
-                          <FormControl
-                            fullWidth
-                            className={inputClasses.formControl}
-                          >
-                            <TextField
-                              label={t('report.comments')}
-                              type='text'
-                              id={'comments'}
-                              value={formik.values.comments}
-                              onChange={formik.handleChange}
-                            />
-                          </FormControl>
-                        </GridItem>
-                      </GridContainer>
-                      <GridContainer>
-                        <GridItem xs={12} sm={6}>
-                          <FormControl
-                            fullWidth
-                            className={inputClasses.formControl}
-                          >
-                            <TextField
-                              required
-                              label={t('report.diagnosis')}
-                              type='text'
-                              id={'diagnosis'}
-                              value={formik.values.diagnosis}
-                              onChange={formik.handleChange}
-                            />
-                          </FormControl>
-                        </GridItem>
-
-                        <GridItem xs={12} sm={6}>
-                          <FormControl
-                            fullWidth
-                            className={inputClasses.formControl}
-                          >
-                            <TextField
-                              label={t('report.additionalDiagnosis')}
-                              type='text'
-                              id={'additionalDiagnosis'}
-                              value={formik.values.additionalDiagnosis}
-                              onChange={formik.handleChange}
-                            />
-                          </FormControl>
-                        </GridItem>
-
-                        <GridItem xs={12} sm={6}>
-                          <FormControl
-                            fullWidth
-                            className={inputClasses.formControl}
-                          >
-                            <TextField
-                              required
-                              label={t('report.numberOfTreatmentsProvided')}
-                              type='number'
-                              id={'numberOfTreatmentsProvided'}
-                              value={formik.values.numberOfTreatmentsProvided}
-                              onChange={formik.handleChange}
-                            />
-                          </FormControl>
-                        </GridItem>
-
-                        <GridItem xs={12} sm={6}>
-                          <FormControl
-                            fullWidth
-                            className={inputClasses.formControl}
-                          >
-                            <TextField
-                              required
-                              label={t('report.numberOfAdditionalTreatments')}
-                              type='number'
-                              id={'numberOfAdditionalTreatments'}
-                              value={formik.values.numberOfAdditionalTreatments}
-                              onChange={formik.handleChange}
-                            />
-                          </FormControl>
-                        </GridItem>
-
                         <GridItem xs={12}>
-                          <FormControl
-                            fullWidth
-                            className={inputClasses.formControl}
-                            component='fieldset'
-                          >
-                            <FormLabel component='legend'>
-                              {t('report.frequency')}
-                            </FormLabel>
-
-                            <RadioGroup
-                              aria-label='frequency'
-                              name='frequency'
-                              value={formik.values.frequency}
-                              onChange={formik.handleChange}
-                            >
-                              <FormControlLabel
-                                value='intensive'
-                                control={<Radio required />}
-                                label={t('report.intensive')}
-                              />
-                              <FormControlLabel
-                                value='periodic'
-                                control={<Radio />}
-                                label={t('report.periodic')}
-                              />
-                              <FormControlLabel
-                                value='prn'
-                                control={<Radio />}
-                                label={t('report.prn')}
-                              />
-                            </RadioGroup>
-                          </FormControl>
-                        </GridItem>
-                        <GridItem xs={12}>
-                          <FormControl
-                            fullWidth
-                            className={inputClasses.formControl}
-                            component='fieldset'
-                          >
-                            <FormLabel component='legend'>
-                              {t('report.objectives')}
-                            </FormLabel>
-                            <FormGroup>
+                          <Card>
+                            <CardHeader color='danger'>
+                              <p className={classes.cardTitleWhite}>
+                                {t('report.diagnosisTitle')}
+                              </p>
+                            </CardHeader>
+                            <CardBody>
                               <GridContainer>
-                                <GridItem xs={12} lg={6}>
-                                  <FormControlLabel
-                                    checked={objectives.includes(
-                                      'painRelieving'
-                                    )}
-                                    onChange={handleObjectivesChange}
-                                    name='painRelieving'
-                                    control={<Checkbox name='painRelieving' />}
-                                    label={t('report.painRelieving')}
-                                  />
-                                </GridItem>
-                                <GridItem xs={12} lg={6}>
-                                  <FormControlLabel
-                                    checked={objectives.includes(
-                                      'improveFunction'
-                                    )}
-                                    onChange={handleObjectivesChange}
-                                    name='improveFunction'
-                                    control={
-                                      <Checkbox name='improveFunction' />
-                                    }
-                                    label={t('report.improveFunction')}
-                                  />
-                                </GridItem>
-                                <GridItem xs={12} lg={6}>
-                                  <FormControlLabel
-                                    checked={objectives.includes(
-                                      'readaptation'
-                                    )}
-                                    onChange={handleObjectivesChange}
-                                    name='readaptation'
-                                    control={<Checkbox name='readaptation' />}
-                                    label={t('report.readaptation')}
-                                  />
-                                </GridItem>
-                                <GridItem xs={12} lg={6}>
-                                  <FormControlLabel
-                                    checked={objectives.includes('maintenance')}
-                                    onChange={handleObjectivesChange}
-                                    name='maintenance'
-                                    control={<Checkbox name='maintenance' />}
-                                    label={t('report.maintenance')}
-                                  />
-                                </GridItem>
-                                <GridItem xs={12} lg={6}>
-                                  <FormControlLabel
-                                    checked={objectives.includes('prevention')}
-                                    onChange={handleObjectivesChange}
-                                    name='prevention'
-                                    control={<Checkbox name='prevention' />}
-                                    label={t('report.prevention')}
-                                  />
-                                </GridItem>
-                                <GridItem xs={12} lg={6}>
-                                  <FormControlLabel
-                                    checked={objectives.includes(
-                                      'therapeuticTrial'
-                                    )}
-                                    onChange={handleObjectivesChange}
-                                    name='therapeuticTrial'
-                                    control={
-                                      <Checkbox name='therapeuticTrial' />
-                                    }
-                                    label={t('report.therapeuticTrial')}
-                                  />
+                                <GridItem xs={12}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                  >
+                                    <TextField
+                                      label={t('report.comments')}
+                                      type='text'
+                                      id={'comments'}
+                                      value={formik.values.comments}
+                                      onChange={formik.handleChange}
+                                    />
+                                  </FormControl>
                                 </GridItem>
                               </GridContainer>
-                            </FormGroup>
-                          </FormControl>
+                              <GridContainer>
+                                <GridItem xs={12} sm={6}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                  >
+                                    <TextField
+                                      required
+                                      label={t('report.diagnosis')}
+                                      type='text'
+                                      id={'diagnosis'}
+                                      value={formik.values.diagnosis}
+                                      onChange={formik.handleChange}
+                                    />
+                                  </FormControl>
+                                </GridItem>
+
+                                <GridItem xs={12} sm={6}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                  >
+                                    <TextField
+                                      label={t('report.additionalDiagnosis')}
+                                      type='text'
+                                      id={'additionalDiagnosis'}
+                                      value={formik.values.additionalDiagnosis}
+                                      onChange={formik.handleChange}
+                                    />
+                                  </FormControl>
+                                </GridItem>
+                              </GridContainer>
+                            </CardBody>
+                          </Card>
                         </GridItem>
                         <GridItem xs={12}>
-                          <FormControl
-                            fullWidth
-                            className={inputClasses.formControl}
-                            component='fieldset'
-                          >
-                            <FormLabel component='legend'>
-                              {t('report.planOfManagement')}
-                            </FormLabel>
-                            <FormGroup>
+                          <Card>
+                            <CardHeader color='danger'>
+                              <p className={classes.cardTitleWhite}>
+                                {t('report.relevantScores')}
+                              </p>
+                            </CardHeader>
+                            <CardBody>
                               <GridContainer>
-                                {profile.profile.manipulativeTechniques.map(
-                                  (technique, i) => (
-                                    <GridItem key={i} xs={12} lg={6}>
+                                <GridItem xs={12} sm={6}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                  >
+                                    <TextField
+                                      required
+                                      label={t(
+                                        'report.numberOfTreatmentsProvided'
+                                      )}
+                                      type='number'
+                                      id={'numberOfTreatmentsProvided'}
+                                      value={
+                                        formik.values.numberOfTreatmentsProvided
+                                      }
+                                      onChange={formik.handleChange}
+                                    />
+                                  </FormControl>
+                                </GridItem>
+
+                                <GridItem xs={12} sm={6}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                  >
+                                    <TextField
+                                      required
+                                      label={t(
+                                        'report.numberOfAdditionalTreatments'
+                                      )}
+                                      type='number'
+                                      id={'numberOfAdditionalTreatments'}
+                                      value={
+                                        formik.values
+                                          .numberOfAdditionalTreatments
+                                      }
+                                      onChange={formik.handleChange}
+                                    />
+                                  </FormControl>
+                                </GridItem>
+
+                                <GridItem xs={12}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                    component='fieldset'
+                                  >
+                                    <FormLabel component='legend'>
+                                      {t('report.frequency')}
+                                    </FormLabel>
+
+                                    <RadioGroup
+                                      aria-label='frequency'
+                                      name='frequency'
+                                      value={formik.values.frequency}
+                                      onChange={formik.handleChange}
+                                    >
                                       <FormControlLabel
-                                        checked={planOfManagement.includes(
-                                          technique
-                                        )}
-                                        onChange={handlePlanOfManagementChange}
-                                        name={technique}
-                                        control={<Checkbox name={technique} />}
-                                        label={t(
-                                          `report.techniques.${technique}`
-                                        )}
+                                        value='intensive'
+                                        control={<Radio required />}
+                                        label={t('report.intensive')}
                                       />
-                                    </GridItem>
-                                  )
-                                )}
-                                {profile.profile.nonAdjustiveTechniques.map(
-                                  (technique, i) => (
-                                    <GridItem key={i} xs={12} lg={6}>
                                       <FormControlLabel
-                                        checked={planOfManagement.includes(
-                                          technique
-                                        )}
-                                        onChange={handlePlanOfManagementChange}
-                                        name={technique}
-                                        control={<Checkbox name={technique} />}
-                                        label={t(
-                                          `report.techniques.${technique}`
-                                        )}
+                                        value='periodic'
+                                        control={<Radio />}
+                                        label={t('report.periodic')}
                                       />
-                                    </GridItem>
-                                  )
-                                )}
+                                      <FormControlLabel
+                                        value='prn'
+                                        control={<Radio />}
+                                        label={t('report.prn')}
+                                      />
+                                    </RadioGroup>
+                                  </FormControl>
+                                </GridItem>
+                                <GridItem xs={12}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                    component='fieldset'
+                                  >
+                                    <FormLabel component='legend'>
+                                      {t('report.objectives')}
+                                    </FormLabel>
+                                    <FormGroup>
+                                      <GridContainer>
+                                        <GridItem xs={12} lg={6}>
+                                          <FormControlLabel
+                                            checked={objectives.includes(
+                                              'painRelieving'
+                                            )}
+                                            onChange={handleObjectivesChange}
+                                            name='painRelieving'
+                                            control={
+                                              <Checkbox name='painRelieving' />
+                                            }
+                                            label={t('report.painRelieving')}
+                                          />
+                                        </GridItem>
+                                        <GridItem xs={12} lg={6}>
+                                          <FormControlLabel
+                                            checked={objectives.includes(
+                                              'improveFunction'
+                                            )}
+                                            onChange={handleObjectivesChange}
+                                            name='improveFunction'
+                                            control={
+                                              <Checkbox name='improveFunction' />
+                                            }
+                                            label={t('report.improveFunction')}
+                                          />
+                                        </GridItem>
+                                        <GridItem xs={12} lg={6}>
+                                          <FormControlLabel
+                                            checked={objectives.includes(
+                                              'readaptation'
+                                            )}
+                                            onChange={handleObjectivesChange}
+                                            name='readaptation'
+                                            control={
+                                              <Checkbox name='readaptation' />
+                                            }
+                                            label={t('report.readaptation')}
+                                          />
+                                        </GridItem>
+                                        <GridItem xs={12} lg={6}>
+                                          <FormControlLabel
+                                            checked={objectives.includes(
+                                              'maintenance'
+                                            )}
+                                            onChange={handleObjectivesChange}
+                                            name='maintenance'
+                                            control={
+                                              <Checkbox name='maintenance' />
+                                            }
+                                            label={t('report.maintenance')}
+                                          />
+                                        </GridItem>
+                                        <GridItem xs={12} lg={6}>
+                                          <FormControlLabel
+                                            checked={objectives.includes(
+                                              'prevention'
+                                            )}
+                                            onChange={handleObjectivesChange}
+                                            name='prevention'
+                                            control={
+                                              <Checkbox name='prevention' />
+                                            }
+                                            label={t('report.prevention')}
+                                          />
+                                        </GridItem>
+                                        <GridItem xs={12} lg={6}>
+                                          <FormControlLabel
+                                            checked={objectives.includes(
+                                              'therapeuticTrial'
+                                            )}
+                                            onChange={handleObjectivesChange}
+                                            name='therapeuticTrial'
+                                            control={
+                                              <Checkbox name='therapeuticTrial' />
+                                            }
+                                            label={t('report.therapeuticTrial')}
+                                          />
+                                        </GridItem>
+                                      </GridContainer>
+                                    </FormGroup>
+                                  </FormControl>
+                                </GridItem>
+                                <GridItem xs={12}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                    component='fieldset'
+                                  >
+                                    <FormLabel component='legend'>
+                                      {t('report.planOfManagement')}
+                                    </FormLabel>
+                                    <FormGroup>
+                                      <GridContainer>
+                                        {profile.profile.manipulativeTechniques.map(
+                                          (technique, i) => (
+                                            <GridItem key={i} xs={12} lg={6}>
+                                              <FormControlLabel
+                                                checked={planOfManagement.includes(
+                                                  technique
+                                                )}
+                                                onChange={
+                                                  handlePlanOfManagementChange
+                                                }
+                                                name={technique}
+                                                control={
+                                                  <Checkbox name={technique} />
+                                                }
+                                                label={t(
+                                                  `report.techniques.${technique}`
+                                                )}
+                                              />
+                                            </GridItem>
+                                          )
+                                        )}
+                                        {profile.profile.nonAdjustiveTechniques.map(
+                                          (technique, i) => (
+                                            <GridItem key={i} xs={12} lg={6}>
+                                              <FormControlLabel
+                                                checked={planOfManagement.includes(
+                                                  technique
+                                                )}
+                                                onChange={
+                                                  handlePlanOfManagementChange
+                                                }
+                                                name={technique}
+                                                control={
+                                                  <Checkbox name={technique} />
+                                                }
+                                                label={t(
+                                                  `report.techniques.${technique}`
+                                                )}
+                                              />
+                                            </GridItem>
+                                          )
+                                        )}
+                                      </GridContainer>
+                                    </FormGroup>
+                                  </FormControl>
+                                </GridItem>
+                                <GridItem xs={12} sm={6}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                  >
+                                    <TextField
+                                      label={t('report.other')}
+                                      type='text'
+                                      id={'planOfManagementOther'}
+                                      value={
+                                        formik.values.planOfManagementOther
+                                      }
+                                      onChange={formik.handleChange}
+                                    />
+                                  </FormControl>
+                                </GridItem>
+                                <GridItem xs={12} sm={6}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                  >
+                                    <TextField
+                                      label={t('report.externalConsultation')}
+                                      type='text'
+                                      id={
+                                        'planOfManagementExternalConsultation'
+                                      }
+                                      value={
+                                        formik.values
+                                          .planOfManagementExternalConsultation
+                                      }
+                                      onChange={formik.handleChange}
+                                    />
+                                  </FormControl>
+                                </GridItem>
                               </GridContainer>
-                            </FormGroup>
-                          </FormControl>
-                        </GridItem>
-                        <GridItem xs={12} sm={6}>
-                          <FormControl
-                            fullWidth
-                            className={inputClasses.formControl}
-                          >
-                            <TextField
-                              label={t('report.other')}
-                              type='text'
-                              id={'planOfManagementOther'}
-                              value={formik.values.planOfManagementOther}
-                              onChange={formik.handleChange}
-                            />
-                          </FormControl>
-                        </GridItem>
-                        <GridItem xs={12} sm={6}>
-                          <FormControl
-                            fullWidth
-                            className={inputClasses.formControl}
-                          >
-                            <TextField
-                              label={t('report.externalConsultation')}
-                              type='text'
-                              id={'planOfManagementExternalConsultation'}
-                              value={
-                                formik.values
-                                  .planOfManagementExternalConsultation
-                              }
-                              onChange={formik.handleChange}
-                            />
-                          </FormControl>
+                            </CardBody>
+                          </Card>
                         </GridItem>
 
-                        <GridItem xs={12} sm={6}>
-                          <FormControl
-                            fullWidth
-                            className={inputClasses.formControl}
-                          >
-                            <Typography id='discrete-slider' gutterBottom>
-                              {t('report.gicc')}
-                            </Typography>
-                            <Slider
-                              onChange={(element, value) =>
-                                formik.setFieldValue(
-                                  'globalImpressionOfClinicalChange',
-                                  value
-                                )
-                              }
-                              defaultValue={0}
-                              value={
-                                formik.values.globalImpressionOfClinicalChange
-                              }
-                              aria-labelledby='discrete-slider'
-                              valueLabelDisplay='auto'
-                              step={1}
-                              min={0}
-                              max={10}
-                            />
-                          </FormControl>
-                        </GridItem>
-                        <GridItem xs={12} sm={6}>
-                          <FormControl
-                            fullWidth
-                            className={inputClasses.formControl}
-                          >
-                            <Typography id='discrete-slider' gutterBottom>
-                              {t('report.gecc')}
-                            </Typography>
-                            <Slider
-                              required
-                              onChange={(element, value) =>
-                                formik.setFieldValue(
-                                  'globalExpectationOfClinicalChange',
-                                  value
-                                )
-                              }
-                              defaultValue={0}
-                              value={
-                                formik.values.globalExpectationOfClinicalChange
-                              }
-                              aria-labelledby='discrete-slider'
-                              valueLabelDisplay='auto'
-                              step={1}
-                              min={0}
-                              max={10}
-                            />
-                          </FormControl>
-                        </GridItem>
-                      </GridContainer>
-                      <GridContainer>
                         <GridItem xs={12}>
-                          <Button
-                            onClick={() => history.goBack()}
-                            color='danger'
-                          >
-                            {t('professional.patient.back')}
-                          </Button>
-                          <Button
-                            color='success'
-                            type='submit'
-                            style={{ marginLeft: 15 }}
-                          >
-                            {t('professional.invite.submit')}
-                          </Button>
+                          <Card>
+                            <CardHeader color='danger'>
+                              <p className={classes.cardTitleWhite}>
+                                {t('report.relevantScores')}
+                              </p>
+                            </CardHeader>
+                            <CardBody>
+                              <GridContainer>
+                                <GridItem xs={12} sm={6}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                  >
+                                    <Typography
+                                      id='discrete-slider'
+                                      gutterBottom
+                                    >
+                                      {t('report.gicc')}
+                                    </Typography>
+                                    <Slider
+                                      onChange={(element, value) =>
+                                        formik.setFieldValue(
+                                          'globalImpressionOfClinicalChange',
+                                          value
+                                        )
+                                      }
+                                      defaultValue={0}
+                                      value={
+                                        formik.values
+                                          .globalImpressionOfClinicalChange
+                                      }
+                                      aria-labelledby='discrete-slider'
+                                      valueLabelDisplay='auto'
+                                      step={1}
+                                      min={0}
+                                      max={10}
+                                    />
+                                  </FormControl>
+                                </GridItem>
+                                <GridItem xs={12} sm={6}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                  >
+                                    <Typography
+                                      id='discrete-slider'
+                                      gutterBottom
+                                    >
+                                      {t('report.gecc')}
+                                    </Typography>
+                                    <Slider
+                                      required
+                                      onChange={(element, value) =>
+                                        formik.setFieldValue(
+                                          'globalExpectationOfClinicalChange',
+                                          value
+                                        )
+                                      }
+                                      defaultValue={0}
+                                      value={
+                                        formik.values
+                                          .globalExpectationOfClinicalChange
+                                      }
+                                      aria-labelledby='discrete-slider'
+                                      valueLabelDisplay='auto'
+                                      step={1}
+                                      min={0}
+                                      max={10}
+                                    />
+                                  </FormControl>
+                                </GridItem>
+                              </GridContainer>
+                            </CardBody>
+                          </Card>
+
+                          <GridContainer>
+                            <GridItem xs={12}>
+                              <Button
+                                onClick={() => history.goBack()}
+                                color='danger'
+                              >
+                                {t('professional.patient.back')}
+                              </Button>
+                              <Button
+                                color='success'
+                                type='submit'
+                                style={{ marginLeft: 15 }}
+                              >
+                                {t('professional.invite.submit')}
+                              </Button>
+                            </GridItem>
+                          </GridContainer>
                         </GridItem>
                       </GridContainer>
-                    </GridItem>
-                  </form>
+                    </form>
+                  </GridItem>
                 </GridContainer>
               </CardBody>
             </Card>

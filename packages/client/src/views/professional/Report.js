@@ -155,7 +155,9 @@ const Report = ({
                   <GridItem xs={12} sm={6}>
                     <Card>
                       <CardHeader color='danger'>
-                        <p className={classes.cardTitleWhite}>Complaint</p>
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.complaint')}
+                        </p>
                       </CardHeader>
                       <CardBody>
                         <GridContainer>

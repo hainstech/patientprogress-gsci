@@ -318,7 +318,8 @@
     "prognosis": "Prognostic",
     "patientData": "Données patient",
     "about": "À propos de ce rapport",
-    "demographics": "Données démographiques"
+    "demographics": "Données démographiques",
+    "complaint": "Problème"
   },
   "metrics": {
     "title": "Vos statistiques",
