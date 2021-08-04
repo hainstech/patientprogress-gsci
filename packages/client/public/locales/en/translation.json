@@ -313,7 +313,9 @@
     "reEvaluationReport": "Re-Evaluation Report",
     "report": "Report",
     "filledProfessional": "Filled by the professional",
-    "comorbidities": "Comorbidities"
+    "comorbidities": "Comorbidities",
+    "diagnosisTitle": "Diagnosis",
+    "prognosis": "Prognosis"
   },
   "metrics": {
     "title": "Your metrics",

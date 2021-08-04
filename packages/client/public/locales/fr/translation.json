@@ -249,7 +249,7 @@
     "maintenance": "Maintenance",
     "prevention": "Prévention",
     "therapeuticTrial": "Essai thérapeutique",
-    "planOfManagement": "Plan de gestion",
+    "planOfManagement": "Plan de soins",
     "techniques": {
       "diversified": "Diversified",
       "extremityManipulating": "Extremity Manipulating / Adjusting",
@@ -313,7 +313,9 @@
     "reEvaluationReport": "Rapport de ré-évaluation",
     "report": "Rapport",
     "filledProfessional": "Rempli par le professionnel",
-    "comorbidities": "Comorbidités"
+    "comorbidities": "Comorbidités",
+    "diagnosisTitle": "Diagnostic",
+    "prognosis": "Prognostic"
   },
   "metrics": {
     "title": "Vos statistiques",
