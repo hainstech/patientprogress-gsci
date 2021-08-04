@@ -517,7 +517,9 @@ const NewReport = ({
                   <GridItem xs={12} sm={6}>
                     <Card>
                       <CardHeader color='danger'>
-                        <p className={classes.cardTitleWhite}>Patient data</p>
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.patientData')}
+                        </p>
                       </CardHeader>
                       <CardBody>
                         <GridContainer>
@@ -542,7 +544,7 @@ const NewReport = ({
                     <Card>
                       <CardHeader color='danger'>
                         <p className={classes.cardTitleWhite}>
-                          About this report
+                          {t('report.about')}
                         </p>
                       </CardHeader>
                       <CardBody>
@@ -567,7 +569,9 @@ const NewReport = ({
                   <GridItem xs={12} sm={6}>
                     <Card>
                       <CardHeader color='danger'>
-                        <p className={classes.cardTitleWhite}>Demographics</p>
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.demographics')}
+                        </p>
                       </CardHeader>
                       <CardBody>
                         <GridContainer>
@@ -752,7 +756,6 @@ const NewReport = ({
                   <GridItem xs={12}>
                     <form onSubmit={formik.handleSubmit}>
                       <GridContainer>
-                        {' '}
                         <GridItem xs={12}>
                           <Card>
                             <CardHeader color='danger'>
@@ -778,7 +781,7 @@ const NewReport = ({
                                 </GridItem>
                               </GridContainer>
                               <GridContainer>
-                                <GridItem xs={12} sm={4}>
+                                <GridItem xs={12} sm={6}>
                                   <FormControl
                                     fullWidth
                                     className={inputClasses.formControl}
@@ -794,7 +797,7 @@ const NewReport = ({
                                   </FormControl>
                                 </GridItem>
 
-                                <GridItem xs={12} sm={4}>
+                                <GridItem xs={12} sm={6}>
                                   <FormControl
                                     fullWidth
                                     className={inputClasses.formControl}
@@ -804,22 +807,6 @@ const NewReport = ({
                                       type='text'
                                       id={'additionalDiagnosis'}
                                       value={formik.values.additionalDiagnosis}
-                                      onChange={formik.handleChange}
-                                    />
-                                  </FormControl>
-                                </GridItem>
-
-                                <GridItem xs={12} sm={4}>
-                                  <FormControl
-                                    fullWidth
-                                    className={inputClasses.formControl}
-                                  >
-                                    <TextField
-                                      required
-                                      label={t('report.nbTx')}
-                                      type='number'
-                                      id={'numberOfTreatments'}
-                                      value={formik.values.numberOfTreatments}
                                       onChange={formik.handleChange}
                                     />
                                   </FormControl>
@@ -837,6 +824,21 @@ const NewReport = ({
                             </CardHeader>
                             <CardBody>
                               <GridContainer>
+                                <GridItem xs={12} sm={4}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                  >
+                                    <TextField
+                                      required
+                                      label={t('report.nbTx')}
+                                      type='number'
+                                      id={'numberOfTreatments'}
+                                      value={formik.values.numberOfTreatments}
+                                      onChange={formik.handleChange}
+                                    />
+                                  </FormControl>
+                                </GridItem>
                                 <GridItem xs={12}>
                                   <FormControl
                                     fullWidth

@@ -315,7 +315,10 @@
     "filledProfessional": "Filled by the professional",
     "comorbidities": "Comorbidities",
     "diagnosisTitle": "Diagnosis",
-    "prognosis": "Prognosis"
+    "prognosis": "Prognosis",
+    "patientData": "Patient Data",
+    "about": "About this report",
+    "demographics": "Demographics"
   },
   "metrics": {
     "title": "Your metrics",
