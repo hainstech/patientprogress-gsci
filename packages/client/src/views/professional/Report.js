@@ -406,7 +406,6 @@ const Report = ({
                       <CardBody>
                         <GridContainer>
                           <GridItem xs={12}>
-                            <br />
                             {t('report.gecc')}:{' '}
                             {report.globalExpectationOfClinicalChange}/10
                           </GridItem>

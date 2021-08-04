@@ -593,7 +593,7 @@ const NewReEvaluationReport = ({
                           <Card>
                             <CardHeader color='danger'>
                               <p className={classes.cardTitleWhite}>
-                                {t('report.relevantScores')}
+                                {t('report.planOfManagement')}
                               </p>
                             </CardHeader>
                             <CardBody>
@@ -867,7 +867,7 @@ const NewReEvaluationReport = ({
                           <Card>
                             <CardHeader color='danger'>
                               <p className={classes.cardTitleWhite}>
-                                {t('report.relevantScores')}
+                                {t('report.prognosis')}
                               </p>
                             </CardHeader>
                             <CardBody>
