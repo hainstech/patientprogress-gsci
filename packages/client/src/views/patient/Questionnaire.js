@@ -51,7 +51,7 @@ const BodyMap = (props) => {
       <ImageMapper
         src={URL}
         map={{
-          name: 'body-map',
+          name: `${props.schema.description}`,
           areas: areasJSON,
         }}
         responsive
