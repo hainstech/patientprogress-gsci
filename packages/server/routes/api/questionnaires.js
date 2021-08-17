@@ -175,24 +175,30 @@ router.post('/:id', patient, async (req, res) => {
         '74',
       ];
 
-      console.log(data.allPainAreas.some((item) => lowerBack.includes(item)));
+      console.log(
+        data.relatedPainAreas.some((item) => lowerBack.includes(item))
+      );
 
-      if (data.allPainAreas.some((item) => lowerBack.includes(item))) {
+      if (data.relatedPainAreas.some((item) => lowerBack.includes(item))) {
         questionnairesToSend.push(
           getQuestionnaireId('Oswestry Disability Index'),
           getQuestionnaireId('The Keele STarT Back Screening Tool')
         );
-      } else if (data.allPainAreas.some((item) => neck.includes(item))) {
+      } else if (data.relatedPainAreas.some((item) => neck.includes(item))) {
         questionnairesToSend.push(
           getQuestionnaireId('Neck Disability Index'),
           getQuestionnaireId('Modified MSK STarT Back Screening Tool')
         );
-      } else if (data.allPainAreas.some((item) => upperLimb.includes(item))) {
+      } else if (
+        data.relatedPainAreas.some((item) => upperLimb.includes(item))
+      ) {
         questionnairesToSend.push(
           getQuestionnaireId('QuickDASH'),
           getQuestionnaireId('Modified MSK STarT Back Screening Tool')
         );
-      } else if (data.allPainAreas.some((item) => lowerLimb.includes(item))) {
+      } else if (
+        data.relatedPainAreas.some((item) => lowerLimb.includes(item))
+      ) {
         questionnairesToSend.push(
           getQuestionnaireId('Lower Extremity Functional Scale (LEFS)'),
           getQuestionnaireId('Modified MSK STarT Back Screening Tool')
