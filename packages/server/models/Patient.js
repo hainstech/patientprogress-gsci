@@ -63,6 +63,10 @@ var patientSchema = new mongoose.Schema({
   ],
   reports: [
     {
+      dob: {
+        type: Date,
+        required: true,
+      },
       age: {
         type: String,
         required: true,
@@ -111,10 +115,8 @@ var patientSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      chiefComplaintRegion: {
-        type: String,
-        required: true,
-      },
+      allPainAreas: [{ type: String }],
+      relatedPainAreas: [{ type: String }],
       chiefComplaintStart: {
         type: String,
         required: true,
@@ -163,6 +165,11 @@ var patientSchema = new mongoose.Schema({
         function: { type: String, required: true },
         qualityOfLife: { type: String, required: true },
       },
+      investigationResults: { type: String },
+      additionalInvestigation: { type: String, required: true },
+      additionalInvestigationSpecify: { type: String },
+      neckOrLowerBackCondition: { type: String, required: true },
+      spinalDiagnosticClassification: { type: String },
       diagnosis: {
         type: String,
         required: true,
@@ -170,6 +177,7 @@ var patientSchema = new mongoose.Schema({
       additionalDiagnosis: {
         type: String,
       },
+      differentialDiagnosis: { type: String },
       numberOfTreatments: {
         type: String,
         required: true,
@@ -178,12 +186,21 @@ var patientSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      frequencySpecify: { type: String },
       objectives: [String],
       planOfManagement: [String],
       planOfManagementOther: [String],
-      planOfManagementExternalConsultation: { type: String },
+      currentEmploymentStatus: { type: String, required: true },
+      continueActivities: { type: String, required: true },
+      continueActivitiesSpecify: { type: String },
+      functionalLimitation: { type: String, required: true },
+      functionalLimitationSpecify: { type: String },
+      reference: { type: String, required: true },
+      referenceList: [String],
+      referenceListOther: { type: String },
+      referenceListReason: { type: String },
       globalExpectationOfClinicalChange: { type: String, required: true },
-      comments: { type: String },
+      geccSpecify: { type: String },
     },
   ],
   reEvaluationReports: [
