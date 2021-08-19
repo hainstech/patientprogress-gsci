@@ -175,10 +175,6 @@ router.post('/:id', patient, async (req, res) => {
         '74',
       ];
 
-      console.log(
-        data.relatedPainAreas.some((item) => lowerBack.includes(item))
-      );
-
       if (data.relatedPainAreas.some((item) => lowerBack.includes(item))) {
         questionnairesToSend.push(
           getQuestionnaireId('Oswestry Disability Index'),

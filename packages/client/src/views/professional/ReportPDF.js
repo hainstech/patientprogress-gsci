@@ -4,6 +4,8 @@ import { format, parseISO } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 import { useTranslation } from 'react-i18next';
 
+import areasJSON from '../../assets/bodyMap.json';
+
 const styles = StyleSheet.create({
   credits: {
     fontSize: 10,
@@ -76,6 +78,16 @@ const ReportPDF = ({ report, patient }) => {
                 : patient.gender}
             </Text>
             <Text style={styles.answer}>
+              {t('report.dob')}:{' '}
+              {format(
+                zonedTimeToUtc(
+                  parseISO(report.dob),
+                  Intl.DateTimeFormat().resolvedOptions().timeZone
+                ),
+                'yyyy/MM/dd'
+              )}
+            </Text>
+            <Text style={styles.answer}>
               {t('report.age')}: {report.age}
             </Text>
           </View>
@@ -140,6 +152,28 @@ const ReportPDF = ({ report, patient }) => {
               </Text>
             )}
           </View>
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.relatedPainAreas')}:{' '}
+              {report.relatedPainAreas.toString()
+                ? areasJSON
+                    .filter(({ id }) => report.relatedPainAreas.includes(id))
+                    .map(({ title }) => title)
+                    .join(', ')
+                : t('report.none')}
+            </Text>
+          </View>
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.allPainAreas')}:{' '}
+              {report.allPainAreas.toString()
+                ? areasJSON
+                    .filter(({ id }) => report.allPainAreas.includes(id))
+                    .map(({ title }) => title)
+                    .join(', ')
+                : t('report.none')}
+            </Text>
+          </View>
           {report.comorbidities.map((comorbidity, i) => (
             <View key={i} wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>
@@ -158,6 +192,27 @@ const ReportPDF = ({ report, patient }) => {
                 : t('report.none')}
             </Text>
           </View>
+
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.investigationResults')}: {report.investigationResults}
+            </Text>
+          </View>
+
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.additionalInvestigation')}:{' '}
+              {report.additionalInvestigation}
+            </Text>
+          </View>
+          {report.additionalInvestigationSpecify !== '' && (
+            <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.answer}>
+                {t('report.specify')}: {report.additionalInvestigationSpecify}
+              </Text>
+            </View>
+          )}
+
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
               {t('report.relevantScores')}:{' '}
@@ -221,9 +276,17 @@ const ReportPDF = ({ report, patient }) => {
           </View>
 
           <View wrap={false} style={styles.answerRow}>
-            {report.comments !== '' && (
+            <Text style={styles.answer}>
+              {t('report.neckOrLowerBackCondition')}:{' '}
+              {report.neckOrLowerBackCondition}
+            </Text>
+          </View>
+
+          <View wrap={false} style={styles.answerRow}>
+            {report.spinalDiagnosticClassification !== '' && (
               <Text style={styles.answer}>
-                {t('report.comments')}: {report.comments}
+                {t('report.spinalDiagnosticClassification.title')}:{' '}
+                {report.spinalDiagnosticClassification}
               </Text>
             )}
           </View>
@@ -232,26 +295,45 @@ const ReportPDF = ({ report, patient }) => {
             <Text style={styles.answer}>
               {t('report.diagnosis')}: {report.diagnosis}
             </Text>
+          </View>
+
+          <View wrap={false} style={styles.answerRow}>
             {report.additionalDiagnosis !== '' && (
               <Text style={styles.answer}>
                 {t('report.additionalDiagnosis')}: {report.additionalDiagnosis}
               </Text>
             )}
           </View>
+
+          <View wrap={false} style={styles.answerRow}>
+            {report.differentialDiagnosis !== '' && (
+              <Text style={styles.answer}>
+                {t('report.differentialDiagnosis')}:{' '}
+                {report.differentialDiagnosis}
+              </Text>
+            )}
+          </View>
+
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
               {t('report.nbTx')}: {report.numberOfTreatments}
             </Text>
             <Text style={styles.answer}>
-              {t('report.frequency')}: {report.frequency}
+              {t('report.frequency')}: {t(`report.${report.frequency}`)}
             </Text>
           </View>
+          {report.frequencySpecify !== '' && (
+            <Text style={styles.answer}>
+              {t('report.specify')}: {report.frequencySpecify}
+            </Text>
+          )}
+
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              {t('report.objectives')}:{' '}
+              {t('report.objectives.title')}:{' '}
               {report.objectives.toString()
                 ? report.objectives
-                    .map((item) => t(`report.${item}`))
+                    .map((item) => t(`report.objectives.${item}`))
                     .join(', ')
                 : t('report.none')}
             </Text>
@@ -271,11 +353,60 @@ const ReportPDF = ({ report, patient }) => {
             </Text>
           </View>
 
-          {report.planOfManagementExternalConsultation !== '' && (
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.currentEmploymentStatus')}:{' '}
+              {report.currentEmploymentStatus}
+            </Text>
+          </View>
+
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.continueActivities')}: {report.continueActivities}
+            </Text>
+          </View>
+
+          {report.continueActivitiesSpecify !== '' && (
             <View wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>
-                {t('report.externalConsultation')}:{' '}
-                {report.planOfManagementExternalConsultation}
+                {t('report.specify')}: {report.continueActivitiesSpecify}
+              </Text>
+            </View>
+          )}
+
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.functionalLimitation')}: {report.functionalLimitation}
+            </Text>
+          </View>
+
+          {report.functionalLimitationSpecify !== '' && (
+            <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.answer}>
+                {t('report.specify')}: {report.functionalLimitationSpecify}
+              </Text>
+            </View>
+          )}
+
+          {report.referenceList.length !== 0 && (
+            <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.answer}>
+                {t('report.reference.to')}:{' '}
+                {report.referenceList.toString() &&
+                  report.referenceList
+                    .map((item) => t(`report.reference.${item}`))
+                    .join(', ') +
+                    (report.referenceListOther
+                      ? ', ' + report.referenceListOther
+                      : '')}
+              </Text>
+            </View>
+          )}
+
+          {report.referenceListReason !== '' && (
+            <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.answer}>
+                {t('report.reference.reason')}: {report.referenceListReason}
               </Text>
             </View>
           )}
@@ -283,6 +414,11 @@ const ReportPDF = ({ report, patient }) => {
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
               {t('report.gecc')}: {report.globalExpectationOfClinicalChange}
+            </Text>
+          </View>
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.specify')}: {report.geccSpecify}
             </Text>
           </View>
         </View>

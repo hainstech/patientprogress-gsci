@@ -232,159 +232,203 @@ const getRedFlags = (lastIntake) => {
 
 const getRelevantScore = (lastIntake, questionnaires) => {
   let relevantScore = [];
-  let last;
-  let sb;
-  let BPI;
-  switch (lastIntake.chiefComplaintRegion) {
-    case 'Cou':
-    case 'Neck pain':
-      last = getLastQuestionnaire(questionnaires, 'Neck Disability Index');
-      BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
-      sb = getLastQuestionnaire(
-        questionnaires,
-        'Modified MSK STarT Back Screening Tool'
-      );
-      if (sb) {
-        relevantScore.push({
-          name: sb.questionnaire.schema.title,
-          score: sb.score,
-          date: sb.time,
-        });
-      }
-      if (BPI) {
-        relevantScore.push({
-          name: BPI.questionnaire.schema.title,
-          score: BPI.score,
-          date: BPI.time,
-        });
-      }
-      if (last) {
-        relevantScore.push({
-          name: last.questionnaire.schema.title,
-          score: last.score,
-          date: last.time,
-        });
-      }
-      break;
-    case 'Bas du dos':
-    case 'Low back pain':
-      last = getLastQuestionnaire(questionnaires, 'Oswestry Disability Index');
-      sb = getLastQuestionnaire(
-        questionnaires,
-        'The Keele STarT Back Screening Tool'
-      );
-      BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
-      if (BPI) {
-        relevantScore.push({
-          name: BPI.questionnaire.schema.title,
-          score: BPI.score,
-          date: BPI.time,
-        });
-      }
-      if (last) {
-        relevantScore.push({
-          name: last.questionnaire.schema.title,
-          score: last.score,
-          date: last.time,
-        });
-      }
-      if (sb) {
-        relevantScore.push({
-          name: sb.questionnaire.schema.title,
-          score: sb.score,
-          date: sb.time,
-        });
-      }
-      break;
-    case 'Membre supérieur (épaule, coude ou poignet)':
-    case 'Upper extremity (shoulder, elbow or wrist)':
-      last = getLastQuestionnaire(questionnaires, 'QuickDASH');
-      BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
-      sb = getLastQuestionnaire(
-        questionnaires,
-        'Modified MSK STarT Back Screening Tool'
-      );
-      if (sb) {
-        relevantScore.push({
-          name: sb.questionnaire.schema.title,
-          score: sb.score,
-          date: sb.time,
-        });
-      }
-      if (BPI) {
-        relevantScore.push({
-          name: BPI.questionnaire.schema.title,
-          score: BPI.score,
-          date: BPI.time,
-        });
-      }
-      if (last) {
-        relevantScore.push({
-          name: last.questionnaire.schema.title,
-          score: last.score,
-          date: last.time,
-        });
-      }
-      break;
+  const lowerBack = ['57', '58', '59', '60', '61', '62', '63', '64'];
+  const neck = ['5', '6', '39', '40', '41', '42', '43', '44', '55', '56'];
+  const upperLimb = [
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '45',
+    '46',
+    '47',
+    '48',
+    '49',
+    '50',
+    '51',
+    '52',
+    '53',
+    '54',
+  ];
+  const lowerLimb = [
+    '23',
+    '24',
+    '25',
+    '26',
+    '27',
+    '28',
+    '29',
+    '30',
+    '31',
+    '32',
+    '33',
+    '34',
+    '35',
+    '36',
+    '65',
+    '66',
+    '67',
+    '68',
+    '69',
+    '70',
+    '71',
+    '72',
+    '73',
+    '74',
+  ];
 
-    case 'Membre inférieur (hanche,genou ou cheville)':
-    case 'Lower extremity (hip, knee or ankle)':
-      last = getLastQuestionnaire(
-        questionnaires,
-        'Lower Extremity Functional Scale (LEFS)'
-      );
-      BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
-      sb = getLastQuestionnaire(
-        questionnaires,
-        'Modified MSK STarT Back Screening Tool'
-      );
-      if (sb) {
-        relevantScore.push({
-          name: sb.questionnaire.schema.title,
-          score: sb.score,
-          date: sb.time,
-        });
-      }
-      if (BPI) {
-        relevantScore.push({
-          name: BPI.questionnaire.schema.title,
-          score: BPI.score,
-          date: BPI.time,
-        });
-      }
-      if (last) {
-        relevantScore.push({
-          name: last.questionnaire.schema.title,
-          score: last.score,
-          date: last.time,
-        });
-      }
-      break;
-    case 'Aucune de ces régions':
-    case 'Not in the options':
-      BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
-      sb = getLastQuestionnaire(
-        questionnaires,
-        'Modified MSK STarT Back Screening Tool'
-      );
-      if (sb) {
-        relevantScore.push({
-          name: sb.questionnaire.schema.title,
-          score: sb.score,
-          date: sb.time,
-        });
-      }
-      if (BPI) {
-        relevantScore.push({
-          name: BPI.questionnaire.schema.title,
-          score: BPI.score,
-          date: BPI.time,
-        });
-      }
-      break;
-    default:
-      break;
+  if (lastIntake.relatedPainAreas.some((item) => lowerBack.includes(item))) {
+    const ODI = getLastQuestionnaire(
+      questionnaires,
+      'Oswestry Disability Index'
+    );
+    const sb = getLastQuestionnaire(
+      questionnaires,
+      'The Keele STarT Back Screening Tool'
+    );
+    const BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
+    if (BPI) {
+      relevantScore.push({
+        name: BPI.questionnaire.schema.title,
+        score: BPI.score,
+        date: BPI.time,
+      });
+    }
+    if (ODI) {
+      relevantScore.push({
+        name: ODI.questionnaire.schema.title,
+        score: ODI.score,
+        date: ODI.time,
+      });
+    }
+    if (sb) {
+      relevantScore.push({
+        name: sb.questionnaire.schema.title,
+        score: sb.score,
+        date: sb.time,
+      });
+    }
+  } else if (lastIntake.relatedPainAreas.some((item) => neck.includes(item))) {
+    const NDI = getLastQuestionnaire(questionnaires, 'Neck Disability Index');
+    const BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
+    const sb = getLastQuestionnaire(
+      questionnaires,
+      'Modified MSK STarT Back Screening Tool'
+    );
+    if (sb) {
+      relevantScore.push({
+        name: sb.questionnaire.schema.title,
+        score: sb.score,
+        date: sb.time,
+      });
+    }
+    if (BPI) {
+      relevantScore.push({
+        name: BPI.questionnaire.schema.title,
+        score: BPI.score,
+        date: BPI.time,
+      });
+    }
+    if (NDI) {
+      relevantScore.push({
+        name: NDI.questionnaire.schema.title,
+        score: NDI.score,
+        date: NDI.time,
+      });
+    }
+  } else if (
+    lastIntake.relatedPainAreas.some((item) => upperLimb.includes(item))
+  ) {
+    const dash = getLastQuestionnaire(questionnaires, 'QuickDASH');
+    const BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
+    const sb = getLastQuestionnaire(
+      questionnaires,
+      'Modified MSK STarT Back Screening Tool'
+    );
+    if (sb) {
+      relevantScore.push({
+        name: sb.questionnaire.schema.title,
+        score: sb.score,
+        date: sb.time,
+      });
+    }
+    if (BPI) {
+      relevantScore.push({
+        name: BPI.questionnaire.schema.title,
+        score: BPI.score,
+        date: BPI.time,
+      });
+    }
+    if (dash) {
+      relevantScore.push({
+        name: dash.questionnaire.schema.title,
+        score: dash.score,
+        date: dash.time,
+      });
+    }
+  } else if (
+    lastIntake.relatedPainAreas.some((item) => lowerLimb.includes(item))
+  ) {
+    const LEFS = getLastQuestionnaire(
+      questionnaires,
+      'Lower Extremity Functional Scale (LEFS)'
+    );
+    const BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
+    const sb = getLastQuestionnaire(
+      questionnaires,
+      'Modified MSK STarT Back Screening Tool'
+    );
+    if (sb) {
+      relevantScore.push({
+        name: sb.questionnaire.schema.title,
+        score: sb.score,
+        date: sb.time,
+      });
+    }
+    if (BPI) {
+      relevantScore.push({
+        name: BPI.questionnaire.schema.title,
+        score: BPI.score,
+        date: BPI.time,
+      });
+    }
+    if (LEFS) {
+      relevantScore.push({
+        name: LEFS.questionnaire.schema.title,
+        score: LEFS.score,
+        date: LEFS.time,
+      });
+    }
+  } else {
+    const BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
+    const sb = getLastQuestionnaire(
+      questionnaires,
+      'Modified MSK STarT Back Screening Tool'
+    );
+    if (sb) {
+      relevantScore.push({
+        name: sb.questionnaire.schema.title,
+        score: sb.score,
+        date: sb.time,
+      });
+    }
+    if (BPI) {
+      relevantScore.push({
+        name: BPI.questionnaire.schema.title,
+        score: BPI.score,
+        date: BPI.time,
+      });
+    }
   }
+
   return relevantScore;
 };
 
@@ -829,7 +873,6 @@ const NewReport = ({
                         </p>
                       </CardHeader>
                       <CardBody>
-                        {intake.relevantScore.length === 0 && t('report.none')}
                         {intake.relevantScore &&
                           intake.relevantScore.map((score, i) => (
                             <GridContainer key={i}>
@@ -1358,6 +1401,7 @@ const NewReport = ({
                                       label={t(
                                         'report.currentEmploymentStatus'
                                       )}
+                                      required
                                       type='text'
                                       id={'currentEmploymentStatus'}
                                       value={
