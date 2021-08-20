@@ -416,11 +416,13 @@ const ReportPDF = ({ report, patient }) => {
               {t('report.gecc')}: {report.globalExpectationOfClinicalChange}
             </Text>
           </View>
-          <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>
-              {t('report.specify')}: {report.geccSpecify}
-            </Text>
-          </View>
+          {report.geccSpecify !== '' && (
+            <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.answer}>
+                {t('report.specify')}: {report.geccSpecify}
+              </Text>
+            </View>
+          )}
         </View>
       </Page>
     </Document>

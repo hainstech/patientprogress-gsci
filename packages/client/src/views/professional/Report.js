@@ -569,9 +569,11 @@ const Report = ({
                             {t('report.gecc')}:{' '}
                             {report.globalExpectationOfClinicalChange}/10
                           </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.specify')}: {report.geccSpecify}
-                          </GridItem>
+                          {report.geccSpecify && (
+                            <GridItem xs={12}>
+                              {t('report.specify')}: {report.geccSpecify}
+                            </GridItem>
+                          )}
                         </GridContainer>
                       </CardBody>
                     </Card>
