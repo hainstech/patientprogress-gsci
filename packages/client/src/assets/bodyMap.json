@@ -4,7 +4,6 @@
     "title": "Left Anterior Head",
     "shape": "poly",
     "name": "Left Anterior Head (1)",
-    "preFillColor": "#ff00004d",
     "fillColor": "black",
     "strokeColor": "black",
     "coords": [
