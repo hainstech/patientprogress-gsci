@@ -361,7 +361,8 @@
       "psychology": "Psychologie",
       "other": "Autre",
       "reason": "Motif pour la demande de consultation"
-    }
+    },
+    "maximalMedicalImprovement": "Consolidation"
   },
   "metrics": {
     "title": "Vos statistiques",

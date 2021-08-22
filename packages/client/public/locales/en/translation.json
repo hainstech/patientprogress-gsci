@@ -249,7 +249,6 @@
       "maintenanceCare": "Maintenance care",
       "primaryPrevention": "Primary prevention & Wellness"
     },
-
     "planOfManagement": "Plan of Management",
     "techniques": {
       "diversified": "Diversified",
@@ -362,7 +361,8 @@
       "psychology": "Psychology",
       "other": "Other",
       "reason": "Reason for consultation request"
-    }
+    },
+    "maximalMedicalImprovement": "Maximal Medical Improvement (MMI)"
   },
   "metrics": {
     "title": "Your metrics",

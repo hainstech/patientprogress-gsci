@@ -453,7 +453,6 @@ const NewReport = ({
   ] = useState(false);
   const [displayReferences, setDisplayReferences] = useState(false);
   const [referenceList, setReferenceList] = useState([]);
-  // const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
     // Callback hell... sorry

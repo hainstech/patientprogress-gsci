@@ -205,6 +205,10 @@ var patientSchema = new mongoose.Schema({
   ],
   reEvaluationReports: [
     {
+      dob: {
+        type: Date,
+        required: true,
+      },
       age: {
         type: String,
         required: true,
@@ -235,6 +239,8 @@ var patientSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      allPainAreas: [{ type: String }],
+      relatedPainAreas: [{ type: String }],
       chiefComplaintStart: {
         type: String,
         required: true,
@@ -289,6 +295,11 @@ var patientSchema = new mongoose.Schema({
       additionalDiagnosis: {
         type: String,
       },
+      differentialDiagnosis: { type: String },
+      initialGlobalExpectationOfClinicalChange: {
+        type: String,
+        required: true,
+      },
       numberOfTreatmentsProvided: {
         type: String,
         required: true,
@@ -301,13 +312,25 @@ var patientSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+
+      frequencySpecify: { type: String },
       objectives: [String],
       planOfManagement: [String],
       planOfManagementOther: [String],
-      planOfManagementExternalConsultation: { type: String },
-      globalExpectationOfClinicalChange: { type: String, required: true },
+      currentEmploymentStatus: { type: String, required: true },
+      continueActivities: { type: String, required: true },
+      continueActivitiesSpecify: { type: String },
+      functionalLimitation: { type: String, required: true },
+      functionalLimitationSpecify: { type: String },
+      reference: { type: String, required: true },
+      referenceList: [String],
+      referenceListOther: { type: String },
+      referenceListReason: { type: String },
       globalImpressionOfClinicalChange: { type: String, required: true },
-      comments: { type: String },
+      globalExpectationOfClinicalChange: { type: String, required: true },
+      geccSpecify: { type: String },
+      maximalMedicalImprovement: { type: String, required: true },
+      maximalMedicalImprovementSpecify: { type: String },
     },
   ],
   questionnairesToFill: [
