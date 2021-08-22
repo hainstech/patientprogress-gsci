@@ -374,6 +374,10 @@ const NewReEvaluationReport = ({
                             {format(intake.date, 'yyyy/MM/dd')}
                           </GridItem>
                           <GridItem xs={12}>
+                            {t('report.initialReportDate')}:{' '}
+                            {format(intake.initialReportDate, 'yyyy/MM/dd')}
+                          </GridItem>
+                          <GridItem xs={12}>
                             {t('report.professional')}:{' '}
                             {intake.professionalName}
                           </GridItem>

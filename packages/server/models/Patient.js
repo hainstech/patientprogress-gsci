@@ -288,6 +288,12 @@ var patientSchema = new mongoose.Schema({
       treatmentsSatisfaction: {},
       chiropractorSatisfaction: {},
       // Report
+      investigationResults: { type: String },
+      additionalInvestigation: { type: String, required: true },
+      additionalInvestigationSpecify: { type: String },
+      neckOrLowerBackCondition: { type: String, required: true },
+      spinalDiagnosticClassification: { type: String },
+
       diagnosis: {
         type: String,
         required: true,

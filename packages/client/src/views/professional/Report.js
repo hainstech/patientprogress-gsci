@@ -324,6 +324,7 @@ const Report = ({
                       </CardBody>
                     </Card>
                   </GridItem>
+
                   <GridItem xs={12}>
                     <Card>
                       <CardHeader color='danger'>
@@ -353,6 +354,7 @@ const Report = ({
                       </CardBody>
                     </Card>
                   </GridItem>
+
                   <GridItem xs={12}>
                     <Card>
                       <CardHeader color='danger'>
