@@ -189,8 +189,27 @@ const Preferences = ({
         'language',
         !profile.language ? '' : profile.language
       );
+      profile.profile.yearOfBirth &&
+        formik.setFieldValue('yearOfBirth', profile.profile.yearOfBirth);
       profile.profile.yearDegree &&
         formik.setFieldValue('yearDegree', profile.profile.yearDegree);
+      profile.profile.college &&
+        formik.setFieldValue('college', profile.profile.college);
+      profile.profile.otherDegreeSpecify &&
+        formik.setFieldValue(
+          'otherDegreeSpecify',
+          profile.profile.otherDegreeSpecify
+        );
+      profile.profile.averagePatientsVisits &&
+        formik.setFieldValue(
+          'averagePatientsVisits',
+          profile.profile.averagePatientsVisits
+        );
+      profile.profile.averageNewPatients &&
+        formik.setFieldValue(
+          'averageNewPatients',
+          profile.profile.averageNewPatients
+        );
       profile.profile.country &&
         formik.setFieldValue('country', profile.profile.country);
       profile.profile.meanNbPatients &&
@@ -199,6 +218,11 @@ const Preferences = ({
         formik.setFieldValue(
           'practiceDescription',
           profile.profile.practiceDescription
+        );
+      profile.profile.radiologyService &&
+        formik.setFieldValue(
+          'radiologyService',
+          profile.profile.radiologyService
         );
       setOtherDegree(
         !profile.profile.otherDegree ? [] : profile.profile.otherDegree

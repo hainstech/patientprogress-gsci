@@ -201,7 +201,6 @@ router.post(
       check('description', 'Description is required').not().isEmpty(),
       check('language', 'Language is required').not().isEmpty(),
       check('gender', 'Gender is required').not().isEmpty(),
-      check('yearOfBirth', 'Year of birth is required').not().isEmpty(),
       check('phone', 'Please enter a valid phone number').isMobilePhone(),
     ],
   ],
@@ -221,7 +220,6 @@ router.post(
       description,
       language,
       phone,
-      yearOfBirth,
       gender,
     } = req.body;
 
@@ -259,7 +257,6 @@ router.post(
           language,
           phone,
           user: user.id,
-          yearOfBirth,
           gender,
         });
 

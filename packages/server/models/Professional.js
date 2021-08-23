@@ -29,10 +29,6 @@ const ProfessionalSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  yearOfBirth: {
-    type: String,
-    required: true,
-  },
   gender: {
     type: String,
     required: true,

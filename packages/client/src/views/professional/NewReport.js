@@ -1326,28 +1326,7 @@ const NewReport = ({
                                     </FormLabel>
                                     <FormGroup>
                                       <GridContainer>
-                                        {profile.profile.manipulativeTechniques.map(
-                                          (technique, i) => (
-                                            <GridItem key={i} xs={12} lg={6}>
-                                              <FormControlLabel
-                                                checked={planOfManagement.includes(
-                                                  technique
-                                                )}
-                                                onChange={
-                                                  handlePlanOfManagementChange
-                                                }
-                                                name={technique}
-                                                control={
-                                                  <Checkbox name={technique} />
-                                                }
-                                                label={t(
-                                                  `report.techniques.${technique}`
-                                                )}
-                                              />
-                                            </GridItem>
-                                          )
-                                        )}
-                                        {profile.profile.nonAdjustiveTechniques.map(
+                                        {profile.profile.techniques?.map(
                                           (technique, i) => (
                                             <GridItem key={i} xs={12} lg={6}>
                                               <FormControlLabel
