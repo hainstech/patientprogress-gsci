@@ -243,18 +243,23 @@ const PatientOverview = ({
                 ) : (
                   'No initial intake filled yet'
                 )}
-                {patient.reports.length > 0 && (
-                  <Link
-                    to={`/professional/patients/${match.params.id}/reevaluationreport`}
-                  >
-                    <Button
-                      color='success'
-                      style={{ marginBottom: 15, marginLeft: 10 }}
+                {patient.reports.length > 0 &&
+                  patient.questionnaires.some(
+                    (questionnaire) =>
+                      questionnaire.title === 'Follow-up questionnaire'
+                  ) && (
+                    <Link
+                      to={`/professional/patients/${match.params.id}/reevaluationreport`}
+                      disabled
                     >
-                      {t('professional.patient.newReEvaluationReport')}
-                    </Button>
-                  </Link>
-                )}
+                      <Button
+                        color='success'
+                        style={{ marginBottom: 15, marginLeft: 10 }}
+                      >
+                        {t('professional.patient.newReEvaluationReport')}
+                      </Button>
+                    </Link>
+                  )}
 
                 {patient.reports.length > 0 && (
                   <div style={{ height: 400, width: '100%' }}>
