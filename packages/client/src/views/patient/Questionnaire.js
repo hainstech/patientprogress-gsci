@@ -67,6 +67,10 @@ const BodyMap = (props) => {
   );
 };
 
+const Title = function (props) {
+  return <h4>{props.schema.title}</h4>;
+};
+
 const NativeSelectWidget = function (props) {
   const handleChange = (event) => {
     const value = event.target.value;
@@ -132,6 +136,7 @@ function Questionnaire({
 
   const widgets = {
     nativeSelect: NativeSelectWidget,
+    title: Title,
   };
 
   const fields = {
