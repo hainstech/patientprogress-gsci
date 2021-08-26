@@ -281,6 +281,7 @@ const NewReEvaluationReport = ({
       globalExpectationOfClinicalChange: 0,
       maximalMedicalImprovement: '',
       maximalMedicalImprovementSpecify: '',
+      globalExpectationOfClinicalChangeSpecify: '',
     },
     enableReinitialize: true,
     onSubmit: async (data) => {
@@ -887,6 +888,98 @@ const NewReEvaluationReport = ({
                                       id={'differentialDiagnosis'}
                                       value={
                                         formik.values.differentialDiagnosis
+                                      }
+                                      onChange={formik.handleChange}
+                                    />
+                                  </FormControl>
+                                </GridItem>
+                              </GridContainer>
+                            </CardBody>
+                          </Card>
+                        </GridItem>
+                        <GridItem xs={12}>
+                          <Card>
+                            <CardHeader color='danger'>
+                              <p className={classes.cardTitleWhite}>
+                                {t('report.evolution')}
+                              </p>
+                            </CardHeader>
+                            <CardBody>
+                              <GridContainer>
+                                <GridItem xs={12} sm={6}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                  >
+                                    <Typography
+                                      id='discrete-slider'
+                                      gutterBottom
+                                    >
+                                      {t('report.gicc')}
+                                    </Typography>
+                                    <Slider
+                                      onChange={(element, value) =>
+                                        formik.setFieldValue(
+                                          'globalImpressionOfClinicalChange',
+                                          value
+                                        )
+                                      }
+                                      defaultValue={0}
+                                      value={
+                                        formik.values
+                                          .globalImpressionOfClinicalChange
+                                      }
+                                      aria-labelledby='discrete-slider'
+                                      valueLabelDisplay='auto'
+                                      step={1}
+                                      min={0}
+                                      max={10}
+                                    />
+                                  </FormControl>
+                                </GridItem>
+                                <GridItem xs={12}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                    component='fieldset'
+                                  >
+                                    <FormLabel component='legend'>
+                                      {t('report.maximalMedicalImprovement')}
+                                    </FormLabel>
+
+                                    <RadioGroup
+                                      aria-label='maximalMedicalImprovement'
+                                      name='maximalMedicalImprovement'
+                                      value={
+                                        formik.values.maximalMedicalImprovement
+                                      }
+                                      onChange={formik.handleChange}
+                                    >
+                                      <FormControlLabel
+                                        value={t('report.no')}
+                                        control={<Radio required />}
+                                        label={t('report.no')}
+                                      />
+                                      <FormControlLabel
+                                        value={t('report.yes')}
+                                        control={<Radio />}
+                                        label={t('report.yes')}
+                                      />
+                                    </RadioGroup>
+                                  </FormControl>
+                                </GridItem>
+                                <GridItem xs={12}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                  >
+                                    <TextField
+                                      label={t('report.specify')}
+                                      type='text'
+                                      id={'maximalMedicalImprovementSpecify'}
+                                      value={
+                                        formik.values
+                                          .maximalMedicalImprovementSpecify
                                       }
                                       onChange={formik.handleChange}
                                     />
@@ -1537,37 +1630,6 @@ const NewReEvaluationReport = ({
                                       id='discrete-slider'
                                       gutterBottom
                                     >
-                                      {t('report.gicc')}
-                                    </Typography>
-                                    <Slider
-                                      onChange={(element, value) =>
-                                        formik.setFieldValue(
-                                          'globalImpressionOfClinicalChange',
-                                          value
-                                        )
-                                      }
-                                      defaultValue={0}
-                                      value={
-                                        formik.values
-                                          .globalImpressionOfClinicalChange
-                                      }
-                                      aria-labelledby='discrete-slider'
-                                      valueLabelDisplay='auto'
-                                      step={1}
-                                      min={0}
-                                      max={10}
-                                    />
-                                  </FormControl>
-                                </GridItem>
-                                <GridItem xs={12} sm={6}>
-                                  <FormControl
-                                    fullWidth
-                                    className={inputClasses.formControl}
-                                  >
-                                    <Typography
-                                      id='discrete-slider'
-                                      gutterBottom
-                                    >
                                       {t('report.gecc')}
                                     </Typography>
                                     <Slider
@@ -1595,45 +1657,16 @@ const NewReEvaluationReport = ({
                                   <FormControl
                                     fullWidth
                                     className={inputClasses.formControl}
-                                    component='fieldset'
-                                  >
-                                    <FormLabel component='legend'>
-                                      {t('report.maximalMedicalImprovement')}
-                                    </FormLabel>
-
-                                    <RadioGroup
-                                      aria-label='maximalMedicalImprovement'
-                                      name='maximalMedicalImprovement'
-                                      value={
-                                        formik.values.maximalMedicalImprovement
-                                      }
-                                      onChange={formik.handleChange}
-                                    >
-                                      <FormControlLabel
-                                        value={t('report.no')}
-                                        control={<Radio required />}
-                                        label={t('report.no')}
-                                      />
-                                      <FormControlLabel
-                                        value={t('report.yes')}
-                                        control={<Radio />}
-                                        label={t('report.yes')}
-                                      />
-                                    </RadioGroup>
-                                  </FormControl>
-                                </GridItem>
-                                <GridItem xs={12}>
-                                  <FormControl
-                                    fullWidth
-                                    className={inputClasses.formControl}
                                   >
                                     <TextField
                                       label={t('report.specify')}
                                       type='text'
-                                      id={'maximalMedicalImprovementSpecify'}
+                                      id={
+                                        'globalExpectationOfClinicalChangeSpecify'
+                                      }
                                       value={
                                         formik.values
-                                          .maximalMedicalImprovementSpecify
+                                          .globalExpectationOfClinicalChangeSpecify
                                       }
                                       onChange={formik.handleChange}
                                     />

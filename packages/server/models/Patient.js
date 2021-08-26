@@ -334,9 +334,9 @@ var patientSchema = new mongoose.Schema({
       referenceListReason: { type: String },
       globalImpressionOfClinicalChange: { type: String, required: true },
       globalExpectationOfClinicalChange: { type: String, required: true },
-      geccSpecify: { type: String },
       maximalMedicalImprovement: { type: String, required: true },
       maximalMedicalImprovementSpecify: { type: String },
+      globalExpectationOfClinicalChangeSpecify: { type: String },
     },
   ],
   questionnairesToFill: [

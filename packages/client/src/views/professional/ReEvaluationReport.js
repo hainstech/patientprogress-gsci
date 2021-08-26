@@ -491,6 +491,34 @@ const ReEvaluationReport = ({
                     <Card>
                       <CardHeader color='danger'>
                         <p className={classes.cardTitleWhite}>
+                          {t('report.evolution')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.gicc')}:{' '}
+                            {report.globalImpressionOfClinicalChange}/10
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.maximalMedicalImprovement')}:{' '}
+                            {report.maximalMedicalImprovement}
+                          </GridItem>
+                          {report.maximalMedicalImprovementSpecify && (
+                            <GridItem xs={12}>
+                              {t('report.specify')}:{' '}
+                              {report.maximalMedicalImprovementSpecify}
+                            </GridItem>
+                          )}
+                        </GridContainer>
+                      </CardBody>
+                    </Card>
+                  </GridItem>
+
+                  <GridItem xs={12}>
+                    <Card>
+                      <CardHeader color='danger'>
+                        <p className={classes.cardTitleWhite}>
                           {t('report.currentEpisode')}
                         </p>
                       </CardHeader>
@@ -597,21 +625,15 @@ const ReEvaluationReport = ({
                       <CardBody>
                         <GridContainer>
                           <GridItem xs={12}>
-                            {t('report.gicc')}:{' '}
-                            {report.globalImpressionOfClinicalChange}/10
-                          </GridItem>
-                          <GridItem xs={12}>
                             {t('report.gecc')}:{' '}
                             {report.globalExpectationOfClinicalChange}/10
                           </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.maximalMedicalImprovement')}:{' '}
-                            {report.maximalMedicalImprovement}
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.specify')}:{' '}
-                            {report.maximalMedicalImprovementSpecify}
-                          </GridItem>
+                          {report.globalExpectationOfClinicalChangeSpecify && (
+                            <GridItem xs={12}>
+                              {t('report.specify')}:{' '}
+                              {report.globalExpectationOfClinicalChangeSpecify}
+                            </GridItem>
+                          )}
                         </GridContainer>
                       </CardBody>
                     </Card>

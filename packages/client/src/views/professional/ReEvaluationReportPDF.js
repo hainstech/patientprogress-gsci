@@ -344,6 +344,26 @@ const ReEvaluationReportPDF = ({ report, patient }) => {
 
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
+              {t('report.gicc')}: {report.globalImpressionOfClinicalChange}/10
+            </Text>
+          </View>
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.maximalMedicalImprovement')}:{' '}
+              {report.maximalMedicalImprovement}
+            </Text>
+          </View>
+
+          {report.maximalMedicalImprovementSpecify !== '' && (
+            <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.answer}>
+                {t('report.specify')}: {report.maximalMedicalImprovementSpecify}
+              </Text>
+            </View>
+          )}
+
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
               {t('report.objectives.title')}:{' '}
               {report.objectives.toString()
                 ? report.objectives
@@ -427,29 +447,18 @@ const ReEvaluationReportPDF = ({ report, patient }) => {
 
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              {t('report.gicc')}: {report.globalImpressionOfClinicalChange}/10
-            </Text>
-          </View>
-          <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>
               {t('report.gecc')}: {report.globalExpectationOfClinicalChange}/10
             </Text>
           </View>
-
-          <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>
-              {t('report.maximalMedicalImprovement')}:{' '}
-              {report.maximalMedicalImprovement}
-            </Text>
-          </View>
-
-          {report.maximalMedicalImprovementSpecify !== '' && (
-            <View wrap={false} style={styles.answerRow}>
-              <Text style={styles.answer}>
-                {t('report.specify')}: {report.maximalMedicalImprovementSpecify}
-              </Text>
-            </View>
-          )}
+          {report.globalExpectationOfClinicalChangeSpecify !== '' ||
+            (report.globalExpectationOfClinicalChangeSpecify !== undefined && (
+              <View wrap={false} style={styles.answerRow}>
+                <Text style={styles.answer}>
+                  {t('report.specify')}:{' '}
+                  {typeof report.globalExpectationOfClinicalChangeSpecify}
+                </Text>
+              </View>
+            ))}
         </View>
       </Page>
     </Document>

@@ -68,7 +68,11 @@ const BodyMap = (props) => {
 };
 
 const Title = function (props) {
-  return <h4>{props.schema.title}</h4>;
+  return (
+    <h4>
+      <strong>{props.schema.title}</strong>{' '}
+    </h4>
+  );
 };
 
 const NativeSelectWidget = function (props) {
