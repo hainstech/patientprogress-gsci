@@ -297,21 +297,21 @@ const getRelevantScore = (lastIntake, questionnaires) => {
     const BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
     if (BPI) {
       relevantScore.push({
-        name: BPI.questionnaire.schema.title,
+        name: BPI.questionnaire.title,
         score: BPI.score,
         date: BPI.time,
       });
     }
     if (ODI) {
       relevantScore.push({
-        name: ODI.questionnaire.schema.title,
+        name: ODI.questionnaire.title,
         score: ODI.score,
         date: ODI.time,
       });
     }
     if (sb) {
       relevantScore.push({
-        name: sb.questionnaire.schema.title,
+        name: sb.questionnaire.title,
         score: sb.score,
         date: sb.time,
       });
@@ -325,21 +325,21 @@ const getRelevantScore = (lastIntake, questionnaires) => {
     );
     if (sb) {
       relevantScore.push({
-        name: sb.questionnaire.schema.title,
+        name: sb.questionnaire.title,
         score: sb.score,
         date: sb.time,
       });
     }
     if (BPI) {
       relevantScore.push({
-        name: BPI.questionnaire.schema.title,
+        name: BPI.questionnaire.title,
         score: BPI.score,
         date: BPI.time,
       });
     }
     if (NDI) {
       relevantScore.push({
-        name: NDI.questionnaire.schema.title,
+        name: NDI.questionnaire.title,
         score: NDI.score,
         date: NDI.time,
       });
@@ -355,21 +355,21 @@ const getRelevantScore = (lastIntake, questionnaires) => {
     );
     if (sb) {
       relevantScore.push({
-        name: sb.questionnaire.schema.title,
+        name: sb.questionnaire.title,
         score: sb.score,
         date: sb.time,
       });
     }
     if (BPI) {
       relevantScore.push({
-        name: BPI.questionnaire.schema.title,
+        name: BPI.questionnaire.title,
         score: BPI.score,
         date: BPI.time,
       });
     }
     if (dash) {
       relevantScore.push({
-        name: dash.questionnaire.schema.title,
+        name: dash.questionnaire.title,
         score: dash.score,
         date: dash.time,
       });
@@ -388,21 +388,21 @@ const getRelevantScore = (lastIntake, questionnaires) => {
     );
     if (sb) {
       relevantScore.push({
-        name: sb.questionnaire.schema.title,
+        name: sb.questionnaire.title,
         score: sb.score,
         date: sb.time,
       });
     }
     if (BPI) {
       relevantScore.push({
-        name: BPI.questionnaire.schema.title,
+        name: BPI.questionnaire.title,
         score: BPI.score,
         date: BPI.time,
       });
     }
     if (LEFS) {
       relevantScore.push({
-        name: LEFS.questionnaire.schema.title,
+        name: LEFS.questionnaire.title,
         score: LEFS.score,
         date: LEFS.time,
       });
@@ -415,14 +415,14 @@ const getRelevantScore = (lastIntake, questionnaires) => {
     );
     if (sb) {
       relevantScore.push({
-        name: sb.questionnaire.schema.title,
+        name: sb.questionnaire.title,
         score: sb.score,
         date: sb.time,
       });
     }
     if (BPI) {
       relevantScore.push({
-        name: BPI.questionnaire.schema.title,
+        name: BPI.questionnaire.title,
         score: BPI.score,
         date: BPI.time,
       });
@@ -588,7 +588,7 @@ const NewReport = ({
   };
 
   const handleReference = (value) => {
-    if (value === 'No' || value === 'No') {
+    if (value === 'No' || value === 'Non') {
       setDisplayReferences(false);
     } else {
       setDisplayReferences(true);

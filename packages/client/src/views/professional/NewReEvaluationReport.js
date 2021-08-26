@@ -229,7 +229,7 @@ const NewReEvaluationReport = ({
   };
 
   const handleReference = (value) => {
-    if (value === 'No' || value === 'No') {
+    if (value === 'No' || value === 'Non') {
       setDisplayReferences(false);
     } else {
       setDisplayReferences(true);
