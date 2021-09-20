@@ -932,7 +932,7 @@ const NewReEvaluationReport = ({
                                       aria-labelledby='discrete-slider'
                                       valueLabelDisplay='auto'
                                       step={1}
-                                      min={0}
+                                      min={-10}
                                       max={10}
                                     />
                                   </FormControl>
@@ -1648,7 +1648,7 @@ const NewReEvaluationReport = ({
                                       aria-labelledby='discrete-slider'
                                       valueLabelDisplay='auto'
                                       step={1}
-                                      min={0}
+                                      min={-10}
                                       max={10}
                                     />
                                   </FormControl>

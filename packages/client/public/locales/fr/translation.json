@@ -340,7 +340,7 @@
       "functionalNeurology": "Functional Neurology"
     },
     "other": "Autres (séparés par des virgules)",
-    "gecc": "Attente Globale de changement clinique (-10= très détérioré, 0= stable et +10= très amélioré)",
+    "gecc": "Attente Globale de changement clinique (-10: très détérioré, 0: stable et +10: très amélioré)",
     "none": "Aucun",
     "improvement": "Amélioration rapportée par le patient",
     "improvementPain": "Douleur",
@@ -351,7 +351,7 @@
     "chiropractorSatisfaction": "Satisfaction du chiropraticien",
     "numberOfTreatmentsProvided": "Nombre de traitements fournis pour le motif principal",
     "numberOfAdditionalTreatments": "Nombre de traitements supplémentaires recommandé",
-    "gicc": "Impression globales de changement clinique",
+    "gicc": "Impression globale de changement clinique (-10: très détérioré, 0: stable et +10: très amélioré)",
     "initialReportDate": "Date du rapport initial",
     "initialGlobalExpectationOfClinicalChange": "Attentes globales de changement clinique du rapport initial",
     "chiefComplaintInitialDiagnosis": "Diagnostic lié au motif principal de consultation",
