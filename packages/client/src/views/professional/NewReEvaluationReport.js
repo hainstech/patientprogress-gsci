@@ -79,7 +79,7 @@ const parseImprovement = (oldScore, newScore) => {
   oldScore = fractionStrToDecimal(oldScore);
   newScore = fractionStrToDecimal(newScore);
 
-  return ((newScore - oldScore) / oldScore) * 100;
+  return ((newScore - oldScore) / oldScore) * 100 * -1;
 };
 
 const parseImprovements = (relevantScore, questionnaires) => {
