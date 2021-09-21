@@ -450,15 +450,14 @@ const ReEvaluationReportPDF = ({ report, patient }) => {
               {t('report.gecc')}: {report.globalExpectationOfClinicalChange}/10
             </Text>
           </View>
-          {report.globalExpectationOfClinicalChangeSpecify !== '' ||
-            (report.globalExpectationOfClinicalChangeSpecify !== undefined && (
-              <View wrap={false} style={styles.answerRow}>
-                <Text style={styles.answer}>
-                  {t('report.specify')}:{' '}
-                  {report.globalExpectationOfClinicalChangeSpecify}
-                </Text>
-              </View>
-            ))}
+          {report.globalExpectationOfClinicalChangeSpecify !== '' && (
+            <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.answer}>
+                {t('report.specify')}:{' '}
+                {report.globalExpectationOfClinicalChangeSpecify}
+              </Text>
+            </View>
+          )}
         </View>
       </Page>
     </Document>
