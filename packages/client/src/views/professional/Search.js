@@ -56,9 +56,9 @@ const Search = ({ profile: { profile, loading }, getCurrentProfile }) => {
             .map(({ name, dob, _id }) => {
               return [
                 name,
-                <DayJS format='YYYY/MM/DD'>{dob}</DayJS>,
+                <DayJS format="YYYY/MM/DD">{dob}</DayJS>,
                 <Link to={`/professional/patients/${_id}`}>
-                  <Button color='success'>
+                  <Button color="success">
                     {t('professional.search.open')}
                   </Button>
                 </Link>,
@@ -75,10 +75,10 @@ const Search = ({ profile: { profile, loading }, getCurrentProfile }) => {
       {profile === null ? (
         <Spinner />
       ) : (
-        <GridContainer justifyContent='center'>
+        <GridContainer justifyContent="center">
           <GridItem xs={12} lg={6}>
             <Card>
-              <CardHeader color='danger'>
+              <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
                   {t('professional.search.title')}
                 </h4>
@@ -101,11 +101,11 @@ const Search = ({ profile: { profile, loading }, getCurrentProfile }) => {
                       }}
                     />
                     <Button
-                      color='white'
-                      aria-label='edit'
+                      color="white"
+                      aria-label="edit"
                       justIcon
                       round
-                      type='submit'
+                      type="submit"
                     >
                       <SearchIcon />
                     </Button>
@@ -116,7 +116,7 @@ const Search = ({ profile: { profile, loading }, getCurrentProfile }) => {
                 {queried &&
                   (results.length > 0 ? (
                     <Table
-                      tableHeaderColor='danger'
+                      tableHeaderColor="danger"
                       tableHead={[
                         t('professional.search.name'),
                         t('professional.search.dob'),

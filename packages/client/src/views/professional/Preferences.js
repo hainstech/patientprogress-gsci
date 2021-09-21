@@ -155,7 +155,7 @@ const TechniqueItem = ({ id, techniques, handleTechniquesChange, t }) => (
 
 const SectionTitle = ({ title, t }) => (
   <GridItem xs={12} style={{ marginTop: 15 }}>
-    <FormLabel component='legend'>
+    <FormLabel component="legend">
       {t(`report.techniques.categories.${title}`)}
     </FormLabel>
   </GridItem>
@@ -287,11 +287,11 @@ const Preferences = ({
       {profile === null ? (
         <Spinner />
       ) : (
-        <GridContainer justifyContent='center'>
+        <GridContainer justifyContent="center">
           <GridItem xs={12} lg={8}>
             <Alert />
             <Card>
-              <CardHeader color='danger'>
+              <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
                   {t('professional.preferences.title')}
                 </h4>
@@ -310,7 +310,7 @@ const Preferences = ({
                       >
                         <TextField
                           label={t('professional.preferences.name')}
-                          type='text'
+                          type="text"
                           id={'name'}
                           value={formik.values.name}
                           onChange={formik.handleChange}
@@ -324,7 +324,7 @@ const Preferences = ({
                       >
                         <TextField
                           label={t('professional.preferences.clinic')}
-                          type='text'
+                          type="text"
                           id={'clinic'}
                           value={formik.values.clinic}
                           onChange={formik.handleChange}
@@ -338,7 +338,7 @@ const Preferences = ({
                       >
                         <TextField
                           label={t('professional.preferences.phone')}
-                          type='text'
+                          type="text"
                           id={'phone'}
                           value={formik.values.phone}
                           onChange={formik.handleChange}
@@ -352,7 +352,7 @@ const Preferences = ({
                       >
                         <TextField
                           label={t('professional.preferences.yourDescription')}
-                          type='text'
+                          type="text"
                           id={'description'}
                           value={formik.values.description}
                           onChange={formik.handleChange}
@@ -366,7 +366,7 @@ const Preferences = ({
                       >
                         <InputLabel
                           className={inputClasses.labelRoot}
-                          htmlFor='language'
+                          htmlFor="language"
                         >
                           {t('professional.preferences.language')}
                         </InputLabel>
@@ -379,9 +379,9 @@ const Preferences = ({
                             id: 'language',
                           }}
                         >
-                          <option value='' defaultValue disabled></option>
-                          <option value='en'>English</option>
-                          <option value='fr'>Français</option>
+                          <option value="" defaultValue disabled></option>
+                          <option value="en">English</option>
+                          <option value="fr">Français</option>
                         </NativeSelect>
                       </FormControl>
                     </GridItem>
@@ -392,7 +392,7 @@ const Preferences = ({
                       >
                         <TextField
                           label={t('professional.preferences.yearOfBirth')}
-                          type='text'
+                          type="text"
                           id={'yearOfBirth'}
                           value={formik.values.yearOfBirth}
                           onChange={formik.handleChange}
@@ -409,7 +409,7 @@ const Preferences = ({
                       >
                         <TextField
                           label={t('professional.preferences.yearDegree')}
-                          type='text'
+                          type="text"
                           id={'yearDegree'}
                           value={formik.values.yearDegree}
                           onChange={formik.handleChange}
@@ -422,7 +422,7 @@ const Preferences = ({
                         className={inputClasses.formControl}
                       >
                         <Autocomplete
-                          id='country-select'
+                          id="country-select"
                           options={countries}
                           classes={{
                             option: countryInputStyles.option,
@@ -469,7 +469,7 @@ const Preferences = ({
                       >
                         <TextField
                           label={t('professional.preferences.college')}
-                          type='text'
+                          type="text"
                           id={'college'}
                           value={formik.values.college}
                           onChange={formik.handleChange}
@@ -480,31 +480,31 @@ const Preferences = ({
                       <FormControl
                         fullWidth
                         className={inputClasses.formControl}
-                        component='fieldset'
+                        component="fieldset"
                       >
-                        <FormLabel component='legend'>
+                        <FormLabel component="legend">
                           {t('professional.preferences.otherDegree')}
                         </FormLabel>
                         <FormGroup>
                           <FormControlLabel
                             checked={otherDegree.includes('BSc degree')}
                             onChange={handleDegreeChange}
-                            name='BSc degree'
-                            control={<Checkbox name='BSc degree' />}
+                            name="BSc degree"
+                            control={<Checkbox name="BSc degree" />}
                             label={t('professional.preferences.bsc')}
                           />
                           <FormControlLabel
                             checked={otherDegree.includes('MSc degree')}
                             onChange={handleDegreeChange}
-                            name='MSc degree'
-                            control={<Checkbox name='MSc degree' />}
+                            name="MSc degree"
+                            control={<Checkbox name="MSc degree" />}
                             label={t('professional.preferences.msc')}
                           />
                           <FormControlLabel
                             checked={otherDegree.includes('PhD degree')}
                             onChange={handleDegreeChange}
-                            name='PhD degree'
-                            control={<Checkbox name='PhD degree' />}
+                            name="PhD degree"
+                            control={<Checkbox name="PhD degree" />}
                             label={t('professional.preferences.phd')}
                           />
                           <FormControlLabel
@@ -512,9 +512,9 @@ const Preferences = ({
                               'Chiropractic specialty degree'
                             )}
                             onChange={handleDegreeChange}
-                            name='Chiropractic specialty degree'
+                            name="Chiropractic specialty degree"
                             control={
-                              <Checkbox name='Chiropractic specialty degree' />
+                              <Checkbox name="Chiropractic specialty degree" />
                             }
                             label={t(
                               'professional.preferences.chiropracticSpecialtyDegree'
@@ -525,9 +525,9 @@ const Preferences = ({
                               'Post graduate diploma / micro-program'
                             )}
                             onChange={handleDegreeChange}
-                            name='Post graduate diploma / micro-program'
+                            name="Post graduate diploma / micro-program"
                             control={
-                              <Checkbox name='Post graduate diploma / micro-program' />
+                              <Checkbox name="Post graduate diploma / micro-program" />
                             }
                             label={t(
                               'professional.preferences.postGraduateDiploma'
@@ -543,7 +543,7 @@ const Preferences = ({
                       >
                         <TextField
                           label={t('report.specify')}
-                          type='text'
+                          type="text"
                           id={'otherDegreeSpecify'}
                           value={formik.values.otherDegreeSpecify}
                           onChange={formik.handleChange}
@@ -559,7 +559,7 @@ const Preferences = ({
                           label={t(
                             'professional.preferences.averagePatientsVisits'
                           )}
-                          type='number'
+                          type="number"
                           id={'averagePatientsVisits'}
                           value={formik.values.averagePatientsVisits}
                           onChange={formik.handleChange}
@@ -575,7 +575,7 @@ const Preferences = ({
                           label={t(
                             'professional.preferences.averageNewPatients'
                           )}
-                          type='number'
+                          type="number"
                           id={'averageNewPatients'}
                           value={formik.values.averageNewPatients}
                           onChange={formik.handleChange}
@@ -586,30 +586,30 @@ const Preferences = ({
                       <FormControl
                         fullWidth
                         className={inputClasses.formControl}
-                        component='fieldset'
+                        component="fieldset"
                       >
-                        <FormLabel component='legend'>
+                        <FormLabel component="legend">
                           {t('professional.preferences.describe')}
                         </FormLabel>
 
                         <RadioGroup
-                          aria-label='practice description'
-                          name='practiceDescription'
+                          aria-label="practice description"
+                          name="practiceDescription"
                           value={formik.values.practiceDescription}
                           onChange={formik.handleChange}
                         >
                           <FormControlLabel
-                            value='Solo practitioner'
+                            value="Solo practitioner"
                             control={<Radio />}
                             label={t('professional.preferences.solo')}
                           />
                           <FormControlLabel
-                            value='Other chiropractor(s) at practice'
+                            value="Other chiropractor(s) at practice"
                             control={<Radio />}
                             label={t('professional.preferences.otherChiros')}
                           />
                           <FormControlLabel
-                            value='Other non-chiropractic healthcare practitioner available at same location'
+                            value="Other non-chiropractic healthcare practitioner available at same location"
                             control={<Radio />}
                             label={t(
                               'professional.preferences.otherNonChiropractic'
@@ -622,15 +622,15 @@ const Preferences = ({
                       <FormControl
                         fullWidth
                         className={inputClasses.formControl}
-                        component='fieldset'
+                        component="fieldset"
                       >
-                        <FormLabel component='legend'>
+                        <FormLabel component="legend">
                           {t('professional.preferences.radiologyService')}
                         </FormLabel>
 
                         <RadioGroup
-                          aria-label='radiologyService'
-                          name='radiologyService'
+                          aria-label="radiologyService"
+                          name="radiologyService"
                           value={formik.values.radiologyService}
                           onChange={formik.handleChange}
                         >
@@ -653,9 +653,9 @@ const Preferences = ({
                       <FormControl
                         fullWidth
                         className={inputClasses.formControl}
-                        component='fieldset'
+                        component="fieldset"
                       >
-                        <FormLabel component='legend'>
+                        <FormLabel component="legend">
                           {t('report.techniques.title')}
                         </FormLabel>
                         <FormGroup>
@@ -706,7 +706,7 @@ const Preferences = ({
                   </GridContainer>
                 </CardBody>
                 <CardFooter>
-                  <Button color='success' type='submit'>
+                  <Button color="success" type="submit">
                     {t('professional.preferences.submit')}
                   </Button>
                 </CardFooter>

@@ -12,22 +12,22 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
   const { t, i18n } = useTranslation();
 
   const professionalLinks = (
-    <ul className='nav'>
+    <ul className="nav">
       <li
         className={`nav-item ${
           splitLocation[2] === 'patients' ? 'active' : ''
         }`}
       >
-        <Link className='nav-link' to={`/${type}/patients`}>
-          <i className='material-icons'>group</i>
+        <Link className="nav-link" to={`/${type}/patients`}>
+          <i className="material-icons">group</i>
           <p>{t('sidebar.professional.patients')}</p>
         </Link>
       </li>
       <li
         className={`nav-item ${splitLocation[2] === 'invite' ? 'active' : ''}`}
       >
-        <Link className='nav-link' to={`/${type}/invite`}>
-          <i className='material-icons'>group_add</i>
+        <Link className="nav-link" to={`/${type}/invite`}>
+          <i className="material-icons">group_add</i>
           <p>{t('sidebar.professional.invite')}</p>
         </Link>
       </li>
@@ -36,14 +36,14 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
           splitLocation[2] === 'preferences' ? 'active' : ''
         }`}
       >
-        <Link className='nav-link' to={`/${type}/preferences`}>
-          <i className='material-icons'>settings</i>
+        <Link className="nav-link" to={`/${type}/preferences`}>
+          <i className="material-icons">settings</i>
           <p>{t('sidebar.professional.preferences')}</p>
         </Link>
       </li>
-      <li className='nav-item'>
-        <a className='nav-link' onClick={logout} href='/'>
-          <i className='material-icons'>logout</i>
+      <li className="nav-item">
+        <a className="nav-link" onClick={logout} href="/">
+          <i className="material-icons">logout</i>
           <p>{t('sidebar.professional.logout')}</p>
         </a>
       </li>
@@ -51,22 +51,22 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
   );
 
   const patientLinks = (
-    <ul className='nav'>
+    <ul className="nav">
       <li
         className={`nav-item ${
           splitLocation[2] === 'questionnaires' ? 'active' : ''
         }`}
       >
-        <Link className='nav-link' to={`/${type}/questionnaires`}>
-          <i className='material-icons'>quiz</i>
+        <Link className="nav-link" to={`/${type}/questionnaires`}>
+          <i className="material-icons">quiz</i>
           <p>{t('sidebar.patient.questionnaires')}</p>
         </Link>
       </li>
       <li
         className={`nav-item ${splitLocation[2] === 'profile' ? 'active' : ''}`}
       >
-        <Link className='nav-link' to={`/${type}/profile`}>
-          <i className='material-icons'>person</i>
+        <Link className="nav-link" to={`/${type}/profile`}>
+          <i className="material-icons">person</i>
           <p>{t('sidebar.patient.profile')}</p>
         </Link>
       </li>
@@ -75,14 +75,14 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
           splitLocation[2] === 'professional' ? 'active' : ''
         }`}
       >
-        <Link className='nav-link' to={`/${type}/professional`}>
-          <i className='material-icons'>local_hospital</i>
+        <Link className="nav-link" to={`/${type}/professional`}>
+          <i className="material-icons">local_hospital</i>
           <p>{t('sidebar.patient.professional')}</p>
         </Link>
       </li>
-      <li className='nav-item'>
-        <Link className='nav-link' onClick={logout} to='/'>
-          <i className='material-icons'>logout</i>
+      <li className="nav-item">
+        <Link className="nav-link" onClick={logout} to="/">
+          <i className="material-icons">logout</i>
           <p>{t('sidebar.patient.logout')}</p>
         </Link>
       </li>
@@ -90,20 +90,20 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
   );
 
   const adminLinks = (
-    <ul className='nav'>
+    <ul className="nav">
       <li
         className={`nav-item ${
           splitLocation[2] === 'questionnaire-builder' ? 'active' : ''
         }`}
       >
-        <Link className='nav-link' to={`/admin/questionnaire-builder`}>
-          <i className='material-icons'>quiz</i>
+        <Link className="nav-link" to={`/admin/questionnaire-builder`}>
+          <i className="material-icons">quiz</i>
           <p>Questionnaire Builder</p>
         </Link>
       </li>
-      <li className='nav-item'>
-        <Link className='nav-link' onClick={logout} to='/'>
-          <i className='material-icons'>logout</i>
+      <li className="nav-item">
+        <Link className="nav-link" onClick={logout} to="/">
+          <i className="material-icons">logout</i>
           <p>Logout</p>
         </Link>
       </li>
@@ -119,24 +119,24 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
   };
 
   const guestLinks = (
-    <ul className='nav'>
+    <ul className="nav">
       <li className={`nav-item ${pathname === '/' ? 'active' : ''}`}>
-        <Link className='nav-link' to='/'>
-          <i className='material-icons'>info</i>
+        <Link className="nav-link" to="/">
+          <i className="material-icons">info</i>
           <p>{t('sidebar.guest.about')}</p>
         </Link>
       </li>
       <li
         className={`nav-item ${splitLocation[1] === 'login' ? 'active' : ''}`}
       >
-        <Link className='nav-link' to='/login'>
-          <i className='material-icons'>login</i>
+        <Link className="nav-link" to="/login">
+          <i className="material-icons">login</i>
           <p>{t('sidebar.guest.login')}</p>
         </Link>
       </li>
-      <li className='nav-item'>
-        <Link className='nav-link' onClick={() => toggleLanguage()} to='#'>
-          <i className='material-icons'>language</i>
+      <li className="nav-item">
+        <Link className="nav-link" onClick={() => toggleLanguage()} to="#">
+          <i className="material-icons">language</i>
           <p>{getOtherLang()}</p>
         </Link>
       </li>
@@ -144,22 +144,22 @@ const Sidebar = ({ auth: { isAuthenticated, loading, type }, logout }) => {
   );
   return (
     <div
-      className='sidebar'
-      data-color='danger'
-      data-background-color='white'
-      data-image='/img/sidebar.jpg'
+      className="sidebar"
+      data-color="danger"
+      data-background-color="white"
+      data-image="/img/sidebar.jpg"
     >
-      <div className='logo' style={{ textAlign: 'center' }}>
-        <Link to='/' className='sidebar-link'>
+      <div className="logo" style={{ textAlign: 'center' }}>
+        <Link to="/" className="sidebar-link">
           <img
-            src='/img/PatientProgressLogoSingle_v2.svg'
-            id='navLogo'
-            alt='PatientProgress logo'
+            src="/img/PatientProgressLogoSingle_v2.svg"
+            id="navLogo"
+            alt="PatientProgress logo"
           />
         </Link>
       </div>
 
-      <div className='sidebar-wrapper'>
+      <div className="sidebar-wrapper">
         {!loading && (
           <Fragment>
             {isAuthenticated

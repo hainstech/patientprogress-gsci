@@ -105,11 +105,11 @@ const NewPassword = ({
   }
 
   return (
-    <GridContainer justifyContent='center'>
+    <GridContainer justifyContent="center">
       <GridItem xs={12} md={6}>
         <Alert />
         <Card>
-          <CardHeader color='danger'>
+          <CardHeader color="danger">
             <h4 className={classes.cardTitleWhite}>
               {t('forgot.newPassword')}
             </h4>
@@ -121,7 +121,7 @@ const NewPassword = ({
                   <FormControl fullWidth>
                     <InputLabel
                       className={inputClasses.labelRoot}
-                      htmlFor='password'
+                      htmlFor="password"
                     >
                       {t('register.password')}
                     </InputLabel>
@@ -134,8 +134,8 @@ const NewPassword = ({
                           inputClasses.underline
                         ),
                       }}
-                      autoComplete='new-password'
-                      type='password'
+                      autoComplete="new-password"
+                      type="password"
                       id={'password'}
                       value={formik.values.password}
                       onChange={formik.handleChange}
@@ -149,7 +149,7 @@ const NewPassword = ({
                   <FormControl fullWidth>
                     <InputLabel
                       className={inputClasses.labelRoot}
-                      htmlFor='password2'
+                      htmlFor="password2"
                     >
                       {t('register.passwordConfirmation')}
                     </InputLabel>
@@ -162,8 +162,8 @@ const NewPassword = ({
                           inputClasses.underline
                         ),
                       }}
-                      autoComplete='new-password'
-                      type='password'
+                      autoComplete="new-password"
+                      type="password"
                       id={'password2'}
                       value={formik.values.password2}
                       onChange={formik.handleChange}
@@ -175,14 +175,14 @@ const NewPassword = ({
                   <Box mt={3}>
                     <ReCAPTCHA
                       ref={recaptchaRef}
-                      sitekey='6LcFZ0EbAAAAAO3o623ERVuLe5mb17Oj_UT9LNG4'
+                      sitekey="6LcFZ0EbAAAAAO3o623ERVuLe5mb17Oj_UT9LNG4"
                     />
                   </Box>
                 </GridItem>
               </GridContainer>
             </CardBody>
             <CardFooter>
-              <Button color='success' type='submit'>
+              <Button color="success" type="submit">
                 {t('register.submit')}
               </Button>
             </CardFooter>

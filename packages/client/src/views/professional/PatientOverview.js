@@ -139,7 +139,7 @@ const PatientOverview = ({
       <Link
         to={`/professional/patients/${match.params.id}/questionnaires/${params.row.id}`}
       >
-        <Button color='success'>{t('professional.patient.view')}</Button>
+        <Button color="success">{t('professional.patient.view')}</Button>
       </Link>
     );
   };
@@ -153,7 +153,7 @@ const PatientOverview = ({
             : `/professional/patients/${match.params.id}/reevaluationreports/${params.row.id}`
         }
       >
-        <Button color='success'>{t('professional.patient.view')}</Button>
+        <Button color="success">{t('professional.patient.view')}</Button>
       </Link>
     );
   };
@@ -161,7 +161,7 @@ const PatientOverview = ({
   const renderDeleteButton = (params) => {
     return (
       <Button
-        color='danger'
+        color="danger"
         justIcon
         onClick={() => {
           removeQuestionnaire(match.params.id, params.row.questionnaire);
@@ -190,17 +190,17 @@ const PatientOverview = ({
       {patient === null || questionnaireList.length === 0 || loading ? (
         <Spinner />
       ) : (
-        <GridContainer justifyContent='center'>
+        <GridContainer justifyContent="center">
           <Alert />
           <GridItem xs={12} xl={6}>
             <Card>
-              <CardHeader color='danger'>
+              <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
                   {t('professional.patient.detailsTitle')}
                 </h4>
               </CardHeader>
               <CardBody>
-                <GridContainer justifyContent='center'>
+                <GridContainer justifyContent="center">
                   <GridItem xs={12} xl={4}>
                     {t('professional.patient.name')}: {patient.name}
                   </GridItem>
@@ -226,7 +226,7 @@ const PatientOverview = ({
               </CardBody>
             </Card>
             <Card>
-              <CardHeader color='danger'>
+              <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
                   {t('professional.patient.reports')}
                 </h4>
@@ -236,7 +236,7 @@ const PatientOverview = ({
                   ({ title }) => title === 'Initial Intake Form'
                 ).length > 0 ? (
                   <Link to={`/professional/patients/${match.params.id}/report`}>
-                    <Button color='success' style={{ marginBottom: 15 }}>
+                    <Button color="success" style={{ marginBottom: 15 }}>
                       {t('professional.patient.newReport')}
                     </Button>
                   </Link>
@@ -253,7 +253,7 @@ const PatientOverview = ({
                       disabled
                     >
                       <Button
-                        color='success'
+                        color="success"
                         style={{ marginBottom: 15, marginLeft: 10 }}
                       >
                         {t('professional.patient.newReEvaluationReport')}
@@ -325,7 +325,7 @@ const PatientOverview = ({
               </CardBody>
             </Card>
             <Card>
-              <CardHeader color='danger'>
+              <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
                   {t('professional.patient.sendQuestionnaire')}
                 </h4>
@@ -336,8 +336,8 @@ const PatientOverview = ({
                     <FormControl fullWidth>
                       <Autocomplete
                         multiple
-                        id='questionnaireToSend'
-                        name='questionnaire'
+                        id="questionnaireToSend"
+                        name="questionnaire"
                         options={displayList}
                         getOptionLabel={(option) => option.title}
                         getOptionSelected={(option) => {
@@ -360,7 +360,7 @@ const PatientOverview = ({
                   </GridItem>
 
                   <GridItem xs={12} sm={3}>
-                    <Button color='success' onClick={handleSubmit}>
+                    <Button color="success" onClick={handleSubmit}>
                       {t('professional.invite.submit')}
                     </Button>
                   </GridItem>
@@ -371,8 +371,8 @@ const PatientOverview = ({
                         <Switch
                           checked={scheduled}
                           onChange={toggleScheduled}
-                          name='scheduled'
-                          color='primary'
+                          name="scheduled"
+                          color="primary"
                         />
                       }
                       label={t('professional.patient.scheduled')}
@@ -380,7 +380,7 @@ const PatientOverview = ({
                   </GridItem>
                 </GridContainer>
                 {scheduled && (
-                  <GridContainer wrap='nowrap'>
+                  <GridContainer wrap="nowrap">
                     <GridItem>
                       <p>{t('professional.patient.selectDates')}:</p>
                     </GridItem>
@@ -400,7 +400,7 @@ const PatientOverview = ({
           </GridItem>
           <GridItem xs={12} xl={6}>
             <Card>
-              <CardHeader color='danger'>
+              <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
                   {t('professional.patient.pendingQuestionnaires')}
                 </h4>
@@ -471,7 +471,7 @@ const PatientOverview = ({
               </CardBody>
             </Card>
             <Card>
-              <CardHeader color='danger'>
+              <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
                   {t('professional.patient.filledQuestionnaires')}
                 </h4>

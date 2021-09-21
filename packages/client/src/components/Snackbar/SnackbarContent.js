@@ -23,9 +23,9 @@ export default function SnackbarContent(props) {
     action = [
       <IconButton
         className={classes.iconButton}
-        key='close'
-        aria-label='Close'
-        color='inherit'
+        key="close"
+        aria-label="Close"
+        color="inherit"
       >
         <Close className={classes.close} />
       </IconButton>,

@@ -94,7 +94,7 @@ const NativeSelectWidget = function (props) {
           id: props.label,
         }}
       >
-        {!props.default && <option aria-label='None' value='' />}
+        {!props.default && <option aria-label="None" value="" />}
 
         {props.options.enumOptions.map(({ label, value }) => (
           <option key={`${label}`} value={value}>
@@ -152,7 +152,7 @@ function Questionnaire({
       {questionnaire === null ? (
         <Spinner />
       ) : (
-        <GridContainer justifyContent='center'>
+        <GridContainer justifyContent="center">
           <GridItem xs={12}>
             <Card>
               <CardBody>

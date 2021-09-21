@@ -61,10 +61,10 @@ const Report = ({
       {patient === null || !report.date || loading ? (
         <Spinner />
       ) : (
-        <GridContainer justifyContent='center'>
+        <GridContainer justifyContent="center">
           <GridItem xs={12}>
             <Card>
-              <CardHeader color='danger'>
+              <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
                   {`${t('report.report')} - ${patient.name} - ${format(
                     zonedTimeToUtc(parseISO(report.date)),
@@ -76,7 +76,7 @@ const Report = ({
                 <GridContainer>
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.patientData')}
                         </p>
@@ -112,7 +112,7 @@ const Report = ({
                   </GridItem>
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.about')}
                         </p>
@@ -141,7 +141,7 @@ const Report = ({
                   </GridItem>
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.demographics')}
                         </p>
@@ -167,7 +167,7 @@ const Report = ({
                   </GridItem>
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.complaint')}
                         </p>
@@ -211,7 +211,7 @@ const Report = ({
                   </GridItem>
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.relatedPainAreas')}
                         </p>
@@ -243,7 +243,7 @@ const Report = ({
                   </GridItem>
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.allPainAreas')}
                         </p>
@@ -274,7 +274,7 @@ const Report = ({
                   {report.comorbidities.length > 0 && (
                     <GridItem xs={12}>
                       <Card>
-                        <CardHeader color='danger'>
+                        <CardHeader color="danger">
                           <p className={classes.cardTitleWhite}>
                             {t('report.comorbidities')}
                           </p>
@@ -312,7 +312,7 @@ const Report = ({
 
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.redFlags')}
                         </p>
@@ -327,7 +327,7 @@ const Report = ({
 
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.findings')}
                         </p>
@@ -357,7 +357,7 @@ const Report = ({
 
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.relevantScores')}
                         </p>
@@ -421,7 +421,7 @@ const Report = ({
                   </GridItem>
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.diagnosisTitle')}
                         </p>
@@ -460,7 +460,7 @@ const Report = ({
                   </GridItem>
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.currentEpisode')}
                         </p>
@@ -560,7 +560,7 @@ const Report = ({
                   </GridItem>
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.prognosis')}
                         </p>
@@ -583,14 +583,14 @@ const Report = ({
                 </GridContainer>
               </CardBody>
               <CardFooter>
-                <Button onClick={() => history.goBack()} color='danger'>
+                <Button onClick={() => history.goBack()} color="danger">
                   {t('professional.patient.back')}
                 </Button>
                 <PDFDownloadLink
                   document={<ReportPDF report={report} patient={patient} />}
                   fileName={`report-${patient.name}.pdf`}
                 >
-                  <Button color='info'>
+                  <Button color="info">
                     {t('professional.patient.export')}
                   </Button>
                 </PDFDownloadLink>

@@ -20,7 +20,7 @@ const PatientRoute = ({
         ) : isAuthenticated && type === 'patient' ? (
           <Component {...props} />
         ) : (
-          <Redirect to='/login' />
+          <Redirect to="/login" />
         )
       }
     />

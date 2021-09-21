@@ -40,7 +40,7 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route path='/' component={MainRouter} />
+          <Route path="/" component={MainRouter} />
         </Switch>
       </Router>
     </Provider>

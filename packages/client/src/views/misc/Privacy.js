@@ -421,9 +421,9 @@ function Privacy() {
         <li>
           By email:{' '}
           <a
-            href='/cdn-cgi/l/email-protection'
-            class='__cf_email__'
-            data-cfemail='92e2e0fbe4f3f1ebd2faf3fbfce1e6f7f1fabcf1fdff'
+            href="/cdn-cgi/l/email-protection"
+            class="__cf_email__"
+            data-cfemail="92e2e0fbe4f3f1ebd2faf3fbfce1e6f7f1fabcf1fdff"
           >
             [email&#160;protected]
           </a>

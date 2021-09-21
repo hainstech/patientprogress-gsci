@@ -79,11 +79,11 @@ const EditProfile = ({
       {profile === null ? (
         <Spinner />
       ) : (
-        <GridContainer justifyContent='center'>
+        <GridContainer justifyContent="center">
           <GridItem xs={12} lg={6}>
             <Alert />
             <Card>
-              <CardHeader color='danger'>
+              <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
                   {t('patient.profile.title')}
                 </h4>
@@ -101,7 +101,7 @@ const EditProfile = ({
                       >
                         <InputLabel
                           className={inputClasses.labelRoot}
-                          htmlFor='name'
+                          htmlFor="name"
                         >
                           {t('patient.profile.name')}
                         </InputLabel>
@@ -114,7 +114,7 @@ const EditProfile = ({
                               inputClasses.underline
                             ),
                           }}
-                          type='text'
+                          type="text"
                           id={'name'}
                           value={formik.values.name}
                           onChange={formik.handleChange}
@@ -128,7 +128,7 @@ const EditProfile = ({
                       >
                         <InputLabel
                           className={inputClasses.labelRoot}
-                          htmlFor='language'
+                          htmlFor="language"
                         >
                           {t('patient.profile.language')}
                         </InputLabel>
@@ -141,9 +141,9 @@ const EditProfile = ({
                             id: 'language',
                           }}
                         >
-                          <option value='' defaultValue disabled></option>
-                          <option value='en'>English</option>
-                          <option value='fr'>Français</option>
+                          <option value="" defaultValue disabled></option>
+                          <option value="en">English</option>
+                          <option value="fr">Français</option>
                         </NativeSelect>
                       </FormControl>
                     </GridItem>
@@ -151,9 +151,9 @@ const EditProfile = ({
                       <Box className={inputClasses.formControl}>
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                           <KeyboardDatePicker
-                            format='yyyy-MM-dd'
-                            id='dob'
-                            variant='inline'
+                            format="yyyy-MM-dd"
+                            id="dob"
+                            variant="inline"
                             label={t('patient.profile.dob')}
                             value={formik.values.dob}
                             onChange={(value) => {
@@ -169,7 +169,7 @@ const EditProfile = ({
                   </GridContainer>
                 </CardBody>
                 <CardFooter>
-                  <Button color='success' type='submit'>
+                  <Button color="success" type="submit">
                     {t('patient.profile.submit')}
                   </Button>
                 </CardFooter>

@@ -55,7 +55,7 @@ const ReportPDF = ({ report, patient }) => {
   const { t } = useTranslation();
   return (
     <Document>
-      <Page size='A4'>
+      <Page size="A4">
         <View style={styles.credits}>
           <Text>{t('pdf.generated')}</Text>
         </View>

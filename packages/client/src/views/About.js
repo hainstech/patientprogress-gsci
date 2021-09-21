@@ -19,7 +19,7 @@ const About = () => {
       <GridContainer>
         <GridItem xs={12}>
           <Card>
-            <CardHeader color='danger'>
+            <CardHeader color="danger">
               <h4 className={classes.cardTitleWhite}>
                 {t('guest.about.title')}
                 {process.env.REACT_APP_BETA && ' - BETA VERSION'}
@@ -30,7 +30,7 @@ const About = () => {
                 <div>
                   <h5>Warning: This is the Beta version of PatientProgress</h5>
                   <h5>
-                    <a href='https://app.patientprogress.ca'>Click here</a> to
+                    <a href="https://app.patientprogress.ca">Click here</a> to
                     access the latest stable version.
                   </h5>
                   <br />

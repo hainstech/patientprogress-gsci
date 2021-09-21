@@ -608,7 +608,7 @@ const NewReport = ({
           <Alert />
           <GridItem xs={12}>
             <Card>
-              <CardHeader color='danger'>
+              <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
                   {t('report.newReport')}
                 </h4>
@@ -617,7 +617,7 @@ const NewReport = ({
                 <GridContainer>
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.patientData')}
                         </p>
@@ -653,7 +653,7 @@ const NewReport = ({
                   </GridItem>
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.about')}
                         </p>
@@ -679,7 +679,7 @@ const NewReport = ({
                   </GridItem>
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.demographics')}
                         </p>
@@ -705,7 +705,7 @@ const NewReport = ({
                   </GridItem>
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.complaint')}
                         </p>
@@ -749,7 +749,7 @@ const NewReport = ({
                   </GridItem>
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.relatedPainAreas')}
                         </p>
@@ -781,7 +781,7 @@ const NewReport = ({
                   </GridItem>
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.allPainAreas')}
                         </p>
@@ -813,7 +813,7 @@ const NewReport = ({
                   {intake.comorbidities.length > 0 && (
                     <GridItem xs={12}>
                       <Card>
-                        <CardHeader color='danger'>
+                        <CardHeader color="danger">
                           <p className={classes.cardTitleWhite}>
                             {t('report.comorbidities')}
                           </p>
@@ -851,7 +851,7 @@ const NewReport = ({
 
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.redFlags')}
                         </p>
@@ -866,7 +866,7 @@ const NewReport = ({
 
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.relevantScores')}
                         </p>
@@ -934,7 +934,7 @@ const NewReport = ({
                       <GridContainer>
                         <GridItem xs={12}>
                           <Card>
-                            <CardHeader color='danger'>
+                            <CardHeader color="danger">
                               <p className={classes.cardTitleWhite}>
                                 {t('report.findings')}
                               </p>
@@ -948,7 +948,7 @@ const NewReport = ({
                                   >
                                     <TextField
                                       label={t('report.investigationResults')}
-                                      type='text'
+                                      type="text"
                                       id={'investigationResults'}
                                       value={formik.values.investigationResults}
                                       onChange={formik.handleChange}
@@ -961,15 +961,15 @@ const NewReport = ({
                                   <FormControl
                                     fullWidth
                                     className={inputClasses.formControl}
-                                    component='fieldset'
+                                    component="fieldset"
                                   >
-                                    <FormLabel component='legend'>
+                                    <FormLabel component="legend">
                                       {t('report.additionalInvestigation')}
                                     </FormLabel>
 
                                     <RadioGroup
-                                      aria-label='additionalInvestigation'
-                                      name='additionalInvestigation'
+                                      aria-label="additionalInvestigation"
+                                      name="additionalInvestigation"
                                       value={
                                         formik.values.additionalInvestigation
                                       }
@@ -995,7 +995,7 @@ const NewReport = ({
                                   >
                                     <TextField
                                       label={t('report.specify')}
-                                      type='text'
+                                      type="text"
                                       id={'additionalInvestigationSpecify'}
                                       value={
                                         formik.values
@@ -1011,7 +1011,7 @@ const NewReport = ({
                         </GridItem>
                         <GridItem xs={12}>
                           <Card>
-                            <CardHeader color='danger'>
+                            <CardHeader color="danger">
                               <p className={classes.cardTitleWhite}>
                                 {t('report.diagnosisTitle')}
                               </p>
@@ -1022,15 +1022,15 @@ const NewReport = ({
                                   <FormControl
                                     fullWidth
                                     className={inputClasses.formControl}
-                                    component='fieldset'
+                                    component="fieldset"
                                   >
-                                    <FormLabel component='legend'>
+                                    <FormLabel component="legend">
                                       {t('report.neckOrLowerBackCondition')}
                                     </FormLabel>
 
                                     <RadioGroup
-                                      aria-label='neckOrLowerBackCondition'
-                                      name='neckOrLowerBackCondition'
+                                      aria-label="neckOrLowerBackCondition"
+                                      name="neckOrLowerBackCondition"
                                       value={
                                         formik.values.neckOrLowerBackCondition
                                       }
@@ -1059,17 +1059,17 @@ const NewReport = ({
                                     <FormControl
                                       fullWidth
                                       className={inputClasses.formControl}
-                                      component='fieldset'
+                                      component="fieldset"
                                     >
-                                      <FormLabel component='legend'>
+                                      <FormLabel component="legend">
                                         {t(
                                           'report.spinalDiagnosticClassification.title'
                                         )}
                                       </FormLabel>
 
                                       <RadioGroup
-                                        aria-label='spinalDiagnosticClassification'
-                                        name='spinalDiagnosticClassification'
+                                        aria-label="spinalDiagnosticClassification"
+                                        name="spinalDiagnosticClassification"
                                         value={
                                           formik.values
                                             .spinalDiagnosticClassification
@@ -1126,7 +1126,7 @@ const NewReport = ({
                                     <TextField
                                       required
                                       label={t('report.diagnosis')}
-                                      type='text'
+                                      type="text"
                                       id={'diagnosis'}
                                       value={formik.values.diagnosis}
                                       onChange={formik.handleChange}
@@ -1141,7 +1141,7 @@ const NewReport = ({
                                   >
                                     <TextField
                                       label={t('report.additionalDiagnosis')}
-                                      type='text'
+                                      type="text"
                                       id={'additionalDiagnosis'}
                                       value={formik.values.additionalDiagnosis}
                                       onChange={formik.handleChange}
@@ -1155,7 +1155,7 @@ const NewReport = ({
                                   >
                                     <TextField
                                       label={t('report.differentialDiagnosis')}
-                                      type='text'
+                                      type="text"
                                       id={'differentialDiagnosis'}
                                       value={
                                         formik.values.differentialDiagnosis
@@ -1170,7 +1170,7 @@ const NewReport = ({
                         </GridItem>
                         <GridItem xs={12}>
                           <Card>
-                            <CardHeader color='danger'>
+                            <CardHeader color="danger">
                               <p className={classes.cardTitleWhite}>
                                 {t('report.currentEpisode')}
                               </p>
@@ -1185,7 +1185,7 @@ const NewReport = ({
                                     <TextField
                                       required
                                       label={t('report.nbTx')}
-                                      type='number'
+                                      type="number"
                                       id={'numberOfTreatments'}
                                       value={formik.values.numberOfTreatments}
                                       onChange={formik.handleChange}
@@ -1196,30 +1196,30 @@ const NewReport = ({
                                   <FormControl
                                     fullWidth
                                     className={inputClasses.formControl}
-                                    component='fieldset'
+                                    component="fieldset"
                                   >
-                                    <FormLabel component='legend'>
+                                    <FormLabel component="legend">
                                       {t('report.frequency')}
                                     </FormLabel>
 
                                     <RadioGroup
-                                      aria-label='frequency'
-                                      name='frequency'
+                                      aria-label="frequency"
+                                      name="frequency"
                                       value={formik.values.frequency}
                                       onChange={formik.handleChange}
                                     >
                                       <FormControlLabel
-                                        value='intensive'
+                                        value="intensive"
                                         control={<Radio required />}
                                         label={t('report.intensive')}
                                       />
                                       <FormControlLabel
-                                        value='periodic'
+                                        value="periodic"
                                         control={<Radio />}
                                         label={t('report.periodic')}
                                       />
                                       <FormControlLabel
-                                        value='prn'
+                                        value="prn"
                                         control={<Radio />}
                                         label={t('report.prn')}
                                       />
@@ -1233,7 +1233,7 @@ const NewReport = ({
                                   >
                                     <TextField
                                       label={t('report.specify')}
-                                      type='text'
+                                      type="text"
                                       id={'frequencySpecify'}
                                       value={formik.values.frequencySpecify}
                                       onChange={formik.handleChange}
@@ -1244,9 +1244,9 @@ const NewReport = ({
                                   <FormControl
                                     fullWidth
                                     className={inputClasses.formControl}
-                                    component='fieldset'
+                                    component="fieldset"
                                   >
-                                    <FormLabel component='legend'>
+                                    <FormLabel component="legend">
                                       {t('report.objectives.title')}
                                     </FormLabel>
                                     <FormGroup>
@@ -1257,9 +1257,9 @@ const NewReport = ({
                                               'curativeCare'
                                             )}
                                             onChange={handleObjectivesChange}
-                                            name='curativeCare'
+                                            name="curativeCare"
                                             control={
-                                              <Checkbox name='curativeCare' />
+                                              <Checkbox name="curativeCare" />
                                             }
                                             label={t(
                                               'report.objectives.curativeCare'
@@ -1272,9 +1272,9 @@ const NewReport = ({
                                               'rehabilitativeCare'
                                             )}
                                             onChange={handleObjectivesChange}
-                                            name='rehabilitativeCare'
+                                            name="rehabilitativeCare"
                                             control={
-                                              <Checkbox name='rehabilitativeCare' />
+                                              <Checkbox name="rehabilitativeCare" />
                                             }
                                             label={t(
                                               'report.objectives.rehabilitativeCare'
@@ -1287,9 +1287,9 @@ const NewReport = ({
                                               'maintenanceCare'
                                             )}
                                             onChange={handleObjectivesChange}
-                                            name='maintenanceCare'
+                                            name="maintenanceCare"
                                             control={
-                                              <Checkbox name='maintenanceCare' />
+                                              <Checkbox name="maintenanceCare" />
                                             }
                                             label={t(
                                               'report.objectives.maintenanceCare'
@@ -1302,9 +1302,9 @@ const NewReport = ({
                                               'primaryPrevention'
                                             )}
                                             onChange={handleObjectivesChange}
-                                            name='primaryPrevention'
+                                            name="primaryPrevention"
                                             control={
-                                              <Checkbox name='primaryPrevention' />
+                                              <Checkbox name="primaryPrevention" />
                                             }
                                             label={t(
                                               'report.objectives.primaryPrevention'
@@ -1319,9 +1319,9 @@ const NewReport = ({
                                   <FormControl
                                     fullWidth
                                     className={inputClasses.formControl}
-                                    component='fieldset'
+                                    component="fieldset"
                                   >
-                                    <FormLabel component='legend'>
+                                    <FormLabel component="legend">
                                       {t('report.planOfManagement')}
                                     </FormLabel>
                                     <FormGroup>
@@ -1358,7 +1358,7 @@ const NewReport = ({
                                   >
                                     <TextField
                                       label={t('report.other')}
-                                      type='text'
+                                      type="text"
                                       id={'planOfManagementOther'}
                                       value={
                                         formik.values.planOfManagementOther
@@ -1380,7 +1380,7 @@ const NewReport = ({
                                         'report.currentEmploymentStatus'
                                       )}
                                       required
-                                      type='text'
+                                      type="text"
                                       id={'currentEmploymentStatus'}
                                       value={
                                         formik.values.currentEmploymentStatus
@@ -1393,15 +1393,15 @@ const NewReport = ({
                                   <FormControl
                                     fullWidth
                                     className={inputClasses.formControl}
-                                    component='fieldset'
+                                    component="fieldset"
                                   >
-                                    <FormLabel component='legend'>
+                                    <FormLabel component="legend">
                                       {t('report.continueActivities')}
                                     </FormLabel>
 
                                     <RadioGroup
-                                      aria-label='continueActivities'
-                                      name='continueActivities'
+                                      aria-label="continueActivities"
+                                      name="continueActivities"
                                       value={formik.values.continueActivities}
                                       onChange={formik.handleChange}
                                     >
@@ -1425,7 +1425,7 @@ const NewReport = ({
                                   >
                                     <TextField
                                       label={t('report.specify')}
-                                      type='text'
+                                      type="text"
                                       id={'continueActivitiesSpecify'}
                                       value={
                                         formik.values.continueActivitiesSpecify
@@ -1438,15 +1438,15 @@ const NewReport = ({
                                   <FormControl
                                     fullWidth
                                     className={inputClasses.formControl}
-                                    component='fieldset'
+                                    component="fieldset"
                                   >
-                                    <FormLabel component='legend'>
+                                    <FormLabel component="legend">
                                       {t('report.functionalLimitation')}
                                     </FormLabel>
 
                                     <RadioGroup
-                                      aria-label='functionalLimitation'
-                                      name='functionalLimitation'
+                                      aria-label="functionalLimitation"
+                                      name="functionalLimitation"
                                       value={formik.values.functionalLimitation}
                                       onChange={formik.handleChange}
                                     >
@@ -1470,7 +1470,7 @@ const NewReport = ({
                                   >
                                     <TextField
                                       label={t('report.specify')}
-                                      type='text'
+                                      type="text"
                                       id={'functionalLimitationSpecify'}
                                       value={
                                         formik.values
@@ -1484,15 +1484,15 @@ const NewReport = ({
                                   <FormControl
                                     fullWidth
                                     className={inputClasses.formControl}
-                                    component='fieldset'
+                                    component="fieldset"
                                   >
-                                    <FormLabel component='legend'>
+                                    <FormLabel component="legend">
                                       {t('report.reference.title')}
                                     </FormLabel>
 
                                     <RadioGroup
-                                      aria-label='reference'
-                                      name='reference'
+                                      aria-label="reference"
+                                      name="reference"
                                       value={formik.values.reference}
                                       onChange={(e) => {
                                         handleReference(e.target.value);
@@ -1528,9 +1528,9 @@ const NewReport = ({
                                       <FormControl
                                         fullWidth
                                         className={inputClasses.formControl}
-                                        component='fieldset'
+                                        component="fieldset"
                                       >
-                                        <FormLabel component='legend'>
+                                        <FormLabel component="legend">
                                           {t('report.reference.to')}
                                         </FormLabel>
                                         <FormGroup>
@@ -1543,9 +1543,9 @@ const NewReport = ({
                                                 onChange={
                                                   handleReferenceListChange
                                                 }
-                                                name='acupuncture'
+                                                name="acupuncture"
                                                 control={
-                                                  <Checkbox name='acupuncture' />
+                                                  <Checkbox name="acupuncture" />
                                                 }
                                                 label={t(
                                                   'report.reference.acupuncture'
@@ -1560,9 +1560,9 @@ const NewReport = ({
                                                 onChange={
                                                   handleReferenceListChange
                                                 }
-                                                name='chiropractic'
+                                                name="chiropractic"
                                                 control={
-                                                  <Checkbox name='chiropractic' />
+                                                  <Checkbox name="chiropractic" />
                                                 }
                                                 label={t(
                                                   'report.reference.chiropractic'
@@ -1577,9 +1577,9 @@ const NewReport = ({
                                                 onChange={
                                                   handleReferenceListChange
                                                 }
-                                                name='exerciseTherapy'
+                                                name="exerciseTherapy"
                                                 control={
-                                                  <Checkbox name='exerciseTherapy' />
+                                                  <Checkbox name="exerciseTherapy" />
                                                 }
                                                 label={t(
                                                   'report.reference.exerciseTherapy'
@@ -1594,9 +1594,9 @@ const NewReport = ({
                                                 onChange={
                                                   handleReferenceListChange
                                                 }
-                                                name='emergencyRoom'
+                                                name="emergencyRoom"
                                                 control={
-                                                  <Checkbox name='emergencyRoom' />
+                                                  <Checkbox name="emergencyRoom" />
                                                 }
                                                 label={t(
                                                   'report.reference.emergencyRoom'
@@ -1611,9 +1611,9 @@ const NewReport = ({
                                                 onChange={
                                                   handleReferenceListChange
                                                 }
-                                                name='medecine'
+                                                name="medecine"
                                                 control={
-                                                  <Checkbox name='medecine' />
+                                                  <Checkbox name="medecine" />
                                                 }
                                                 label={t(
                                                   'report.reference.medecine'
@@ -1628,9 +1628,9 @@ const NewReport = ({
                                                 onChange={
                                                   handleReferenceListChange
                                                 }
-                                                name='nutrition'
+                                                name="nutrition"
                                                 control={
-                                                  <Checkbox name='nutrition' />
+                                                  <Checkbox name="nutrition" />
                                                 }
                                                 label={t(
                                                   'report.reference.nutrition'
@@ -1645,9 +1645,9 @@ const NewReport = ({
                                                 onChange={
                                                   handleReferenceListChange
                                                 }
-                                                name='occupationalTherapy'
+                                                name="occupationalTherapy"
                                                 control={
-                                                  <Checkbox name='occupationalTherapy' />
+                                                  <Checkbox name="occupationalTherapy" />
                                                 }
                                                 label={t(
                                                   'report.reference.occupationalTherapy'
@@ -1662,9 +1662,9 @@ const NewReport = ({
                                                 onChange={
                                                   handleReferenceListChange
                                                 }
-                                                name='pharmacy'
+                                                name="pharmacy"
                                                 control={
-                                                  <Checkbox name='pharmacy' />
+                                                  <Checkbox name="pharmacy" />
                                                 }
                                                 label={t(
                                                   'report.reference.pharmacy'
@@ -1679,9 +1679,9 @@ const NewReport = ({
                                                 onChange={
                                                   handleReferenceListChange
                                                 }
-                                                name='physicalTherapy'
+                                                name="physicalTherapy"
                                                 control={
-                                                  <Checkbox name='physicalTherapy' />
+                                                  <Checkbox name="physicalTherapy" />
                                                 }
                                                 label={t(
                                                   'report.reference.physicalTherapy'
@@ -1696,9 +1696,9 @@ const NewReport = ({
                                                 onChange={
                                                   handleReferenceListChange
                                                 }
-                                                name='podiatry'
+                                                name="podiatry"
                                                 control={
-                                                  <Checkbox name='podiatry' />
+                                                  <Checkbox name="podiatry" />
                                                 }
                                                 label={t(
                                                   'report.reference.podiatry'
@@ -1713,9 +1713,9 @@ const NewReport = ({
                                                 onChange={
                                                   handleReferenceListChange
                                                 }
-                                                name='psychology'
+                                                name="psychology"
                                                 control={
-                                                  <Checkbox name='psychology' />
+                                                  <Checkbox name="psychology" />
                                                 }
                                                 label={t(
                                                   'report.reference.psychology'
@@ -1733,7 +1733,7 @@ const NewReport = ({
                                       >
                                         <TextField
                                           label={t('report.reference.other')}
-                                          type='text'
+                                          type="text"
                                           id={'referenceListOther'}
                                           value={
                                             formik.values.referenceListOther
@@ -1749,7 +1749,7 @@ const NewReport = ({
                                       >
                                         <TextField
                                           label={t('report.reference.reason')}
-                                          type='text'
+                                          type="text"
                                           id={'referenceListReason'}
                                           value={
                                             formik.values.referenceListReason
@@ -1766,7 +1766,7 @@ const NewReport = ({
                         </GridItem>
                         <GridItem xs={12}>
                           <Card>
-                            <CardHeader color='danger'>
+                            <CardHeader color="danger">
                               <p className={classes.cardTitleWhite}>
                                 {t('report.prognosis')}
                               </p>
@@ -1779,7 +1779,7 @@ const NewReport = ({
                                     className={inputClasses.formControl}
                                   >
                                     <Typography
-                                      id='discrete-slider'
+                                      id="discrete-slider"
                                       gutterBottom
                                     >
                                       {t('report.gecc')}
@@ -1796,8 +1796,8 @@ const NewReport = ({
                                         formik.values
                                           .globalExpectationOfClinicalChange
                                       }
-                                      aria-labelledby='discrete-slider'
-                                      valueLabelDisplay='auto'
+                                      aria-labelledby="discrete-slider"
+                                      valueLabelDisplay="auto"
                                       step={1}
                                       min={-10}
                                       max={10}
@@ -1811,7 +1811,7 @@ const NewReport = ({
                                   >
                                     <TextField
                                       label={t('report.specify')}
-                                      type='text'
+                                      type="text"
                                       id={'geccSpecify'}
                                       value={formik.values.geccSpecify}
                                       onChange={formik.handleChange}
@@ -1827,13 +1827,13 @@ const NewReport = ({
                             <GridItem xs={12}>
                               <Button
                                 onClick={() => history.goBack()}
-                                color='danger'
+                                color="danger"
                               >
                                 {t('professional.patient.back')}
                               </Button>
                               <Button
-                                color='success'
-                                type='submit'
+                                color="success"
+                                type="submit"
                                 style={{ marginLeft: 15 }}
                               >
                                 {t('professional.invite.submit')}

@@ -40,8 +40,8 @@ export default function CustomTabs(props) {
             indicator: classes.displayNone,
             scrollButtons: classes.displayNone,
           }}
-          variant='scrollable'
-          scrollButtons='auto'
+          variant="scrollable"
+          scrollButtons="auto"
         >
           {tabs.map((prop, key) => {
             var icon = {};

@@ -1,1 +1,1 @@
-export * from "./useRouteName";
+export * from './useRouteName';

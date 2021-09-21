@@ -11,7 +11,7 @@ const Alert = ({ alerts }) =>
   alerts.map((alert) => (
     <Snackbar
       key={alert.id}
-      place='br'
+      place="br"
       color={alert.alertType}
       icon={AddAlert}
       message={alert.msg}

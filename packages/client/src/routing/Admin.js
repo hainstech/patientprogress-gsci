@@ -10,7 +10,7 @@ const Admin = () => {
     <Switch>
       <AdminRoute
         exact
-        path='/admin/questionnaire-builder'
+        path="/admin/questionnaire-builder"
         component={QuestionnaireBuilder}
       />
     </Switch>

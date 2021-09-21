@@ -116,24 +116,24 @@ const MainRouter = ({
           <div className={classes.container}>
             <Suspense fallback={<Spinner />}>
               <Switch>
-                <Route exact path='/' component={About} />
-                <Route exact path='/login' component={Login} />
-                <Route exact path='/register/:id' component={Register} />
-                <Route exact path='/forgot' component={Forgot} />
-                <Route exact path='/privacy' component={Privacy} />
-                <Route exact path='/terms' component={Terms} />
+                <Route exact path="/" component={About} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register/:id" component={Register} />
+                <Route exact path="/forgot" component={Forgot} />
+                <Route exact path="/privacy" component={Privacy} />
+                <Route exact path="/terms" component={Terms} />
                 <Route
                   exact
-                  path='/forgot/:id/:token'
+                  path="/forgot/:id/:token"
                   component={NewPassword}
                 />
                 {/* User-type routes */}
-                <PatientRoute path='/patient' component={Patient} />
+                <PatientRoute path="/patient" component={Patient} />
                 <ProfessionalRoute
-                  path='/professional'
+                  path="/professional"
                   component={Professional}
                 />
-                <AdminRoute path='/admin' component={Admin} />
+                <AdminRoute path="/admin" component={Admin} />
               </Switch>
             </Suspense>
           </div>

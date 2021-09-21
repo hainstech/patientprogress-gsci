@@ -62,10 +62,10 @@ const ReEvaluationReport = ({
       {patient === null || !report.date || loading ? (
         <Spinner />
       ) : (
-        <GridContainer justifyContent='center'>
+        <GridContainer justifyContent="center">
           <GridItem xs={12}>
             <Card>
-              <CardHeader color='danger'>
+              <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
                   {`${t('report.reEvaluationReport')} - ${
                     patient.name
@@ -79,7 +79,7 @@ const ReEvaluationReport = ({
                 <GridContainer>
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.patientData')}
                         </p>
@@ -115,7 +115,7 @@ const ReEvaluationReport = ({
                   </GridItem>
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.about')}
                         </p>
@@ -154,7 +154,7 @@ const ReEvaluationReport = ({
 
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.complaint')}
                         </p>
@@ -199,7 +199,7 @@ const ReEvaluationReport = ({
 
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.relatedPainAreas')}
                         </p>
@@ -231,7 +231,7 @@ const ReEvaluationReport = ({
                   </GridItem>
                   <GridItem xs={12} sm={6}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.allPainAreas')}
                         </p>
@@ -263,7 +263,7 @@ const ReEvaluationReport = ({
                   {report.comorbidities.length > 0 && (
                     <GridItem xs={12}>
                       <Card>
-                        <CardHeader color='danger'>
+                        <CardHeader color="danger">
                           <p className={classes.cardTitleWhite}>
                             {t('report.comorbidities')}
                           </p>
@@ -301,7 +301,7 @@ const ReEvaluationReport = ({
 
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.redFlags')}
                         </p>
@@ -316,7 +316,7 @@ const ReEvaluationReport = ({
 
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.relevantScores')}
                         </p>
@@ -370,7 +370,7 @@ const ReEvaluationReport = ({
 
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.improvement')}
                         </p>
@@ -397,7 +397,7 @@ const ReEvaluationReport = ({
 
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.satisfaction')}
                         </p>
@@ -419,7 +419,7 @@ const ReEvaluationReport = ({
 
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.findings')}
                         </p>
@@ -449,7 +449,7 @@ const ReEvaluationReport = ({
 
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.diagnosisTitle')}
                         </p>
@@ -489,7 +489,7 @@ const ReEvaluationReport = ({
 
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.evolution')}
                         </p>
@@ -517,7 +517,7 @@ const ReEvaluationReport = ({
 
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.currentEpisode')}
                         </p>
@@ -617,7 +617,7 @@ const ReEvaluationReport = ({
                   </GridItem>
                   <GridItem xs={12}>
                     <Card>
-                      <CardHeader color='danger'>
+                      <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
                           {t('report.prognosis')}
                         </p>
@@ -641,7 +641,7 @@ const ReEvaluationReport = ({
                 </GridContainer>
               </CardBody>
               <CardFooter>
-                <Button onClick={() => history.goBack()} color='danger'>
+                <Button onClick={() => history.goBack()} color="danger">
                   {t('professional.patient.back')}
                 </Button>
                 <PDFDownloadLink
@@ -650,7 +650,7 @@ const ReEvaluationReport = ({
                   }
                   fileName={`report-${patient.name}.pdf`}
                 >
-                  <Button color='info'>
+                  <Button color="info">
                     {t('professional.patient.export')}
                   </Button>
                 </PDFDownloadLink>

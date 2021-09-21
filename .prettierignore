@@ -1,0 +1,6 @@
+# Artifacs
+build
+
+# Docs
+*.json
+*.md

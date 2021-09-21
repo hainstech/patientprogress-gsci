@@ -20,7 +20,7 @@ const Questionnaires = ({ getCurrentProfile, profile: { profile } }) => {
       {profile === null ? (
         <Spinner />
       ) : (
-        <GridContainer justifyContent='center'>
+        <GridContainer justifyContent="center">
           <GridItem xs={12} md={10}>
             <Card profile>
               <CardBody profile>
@@ -28,7 +28,7 @@ const Questionnaires = ({ getCurrentProfile, profile: { profile } }) => {
                 <h3>{profile.professional.name}</h3>
                 <p>{profile.professional.description}</p>
                 <Button
-                  color='danger'
+                  color="danger"
                   round
                   justIcon
                   href={`tel:${profile.professional.phone}`}

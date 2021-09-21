@@ -37,10 +37,10 @@ const QuestionnaireList = ({
       {profile === null ? (
         <Spinner />
       ) : (
-        <GridContainer justifyContent='center'>
+        <GridContainer justifyContent="center">
           <GridItem xs={12} md={8}>
             <Card>
-              <CardHeader color='danger'>
+              <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
                   {t('patient.questionnaireList.title')}
                 </h4>
@@ -48,12 +48,12 @@ const QuestionnaireList = ({
                   {t('patient.questionnaireList.description')}
                 </p>
               </CardHeader>
-              <CardBody align='center'>
+              <CardBody align="center">
                 {profile.questionnairesToFill.length > 0 ? (
                   profile.questionnairesToFill.map(({ questionnaire, _id }) => (
                     <p key={_id}>
                       <Button
-                        color='success'
+                        color="success"
                         onClick={() => goToQuestionnaire(questionnaire._id)}
                       >
                         {questionnaire.schema.title}

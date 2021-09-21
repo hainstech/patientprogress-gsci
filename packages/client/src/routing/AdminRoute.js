@@ -20,7 +20,7 @@ const AdminRoute = ({
         ) : isAuthenticated && type === 'admin' ? (
           <Component {...props} />
         ) : (
-          <Redirect to='/login' />
+          <Redirect to="/login" />
         )
       }
     />

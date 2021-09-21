@@ -13,18 +13,18 @@ const Patient = () => {
     <Switch>
       <PatientRoute
         exact
-        path='/patient/questionnaires'
+        path="/patient/questionnaires"
         component={QuestionnaireList}
       />
       <PatientRoute
         exact
-        path='/patient/questionnaires/:id'
+        path="/patient/questionnaires/:id"
         component={Questionnaire}
       />
-      <PatientRoute exact path='/patient/profile' component={Profile} />
+      <PatientRoute exact path="/patient/profile" component={Profile} />
       <PatientRoute
         exact
-        path='/patient/professional'
+        path="/patient/professional"
         component={MyProfessional}
       />
     </Switch>
