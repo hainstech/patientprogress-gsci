@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
 const morganFormat = process.env.NODE_ENV !== 'production' ? 'dev' : 'combined';
 
 // Connect database
-connectDB();
+if (!process.env.TEST_MODE) connectDB();
 
 // Forbid bots and crawlers
 app.use(noBots());
@@ -65,23 +65,26 @@ app.use(cors(corsOptions));
 app.use(hpp());
 
 // Logging
-app.use(
-  morgan(morganFormat, {
-    skip: function (req, res) {
-      return res.statusCode < 400;
-    },
-    stream: process.stderr,
-  })
-);
 
-app.use(
-  morgan(morganFormat, {
-    skip: function (req, res) {
-      return res.statusCode >= 400;
-    },
-    stream: process.stdout,
-  })
-);
+if (!process.env.TEST_MODE) {
+  app.use(
+    morgan(morganFormat, {
+      skip: function (req, res) {
+        return res.statusCode < 400;
+      },
+      stream: process.stderr,
+    })
+  );
+
+  app.use(
+    morgan(morganFormat, {
+      skip: function (req, res) {
+        return res.statusCode >= 400;
+      },
+      stream: process.stdout,
+    })
+  );
+}
 
 // Init Middleware
 app.use(express.json({ extended: false }));
@@ -113,9 +116,11 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  logger.info(
-    `PatientProgress API listening in ${process.env.NODE_ENV} on port ${PORT}`
-  );
+  if (!process.env.TEST_MODE) {
+    logger.info(
+      `PatientProgress API listening in ${process.env.NODE_ENV} on port ${PORT}`
+    );
+  }
 });
 
 startSender();
@@ -124,3 +129,5 @@ if (process.env.NODE_ENV === 'production') {
   startBot();
   startDeleter();
 }
+
+module.exports = app;
