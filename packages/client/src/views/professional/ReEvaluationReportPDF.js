@@ -455,7 +455,7 @@ const ReEvaluationReportPDF = ({ report, patient }) => {
               <View wrap={false} style={styles.answerRow}>
                 <Text style={styles.answer}>
                   {t('report.specify')}:{' '}
-                  {typeof report.globalExpectationOfClinicalChangeSpecify}
+                  {report.globalExpectationOfClinicalChangeSpecify}
                 </Text>
               </View>
             ))}
