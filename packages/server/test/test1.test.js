@@ -6,7 +6,7 @@ const chaiHttp = require('chai-http');
 const server = require('../server');
 chai.use(chaiHttp);
 
-it('Server startup', function (done) {
+it('Server startup', (done) => {
   chai
     .request(server)
     .get('/')

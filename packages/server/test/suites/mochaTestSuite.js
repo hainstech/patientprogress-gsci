@@ -8,7 +8,9 @@ const app = require('../../api/app.js');
 const should = chai.should();
 chai.use(chaiHttp);
 
-module.exports = (testDescription, testsCallBack) => {
+//hackernoon.com/mochachai-writing-a-reusable-test-suite-for-an-expressjsmongoose-api-qd1734vc
+
+https: module.exports = (testDescription, testsCallBack) => {
   describe(testDescription, () => {
     // Bonus utility
     const signUpThenLogIn = (credentials, testCallBack) => {
@@ -63,8 +65,7 @@ module.exports = (testDescription, testsCallBack) => {
     before(async () => {
       let mongoServer = new MongoMemoryServer();
       const mongoUri = mongoServer.getUri();
-      process.env.MONGODB_URL = mongoUri;
-      await connectDB();
+      await connectDB(mongoUri);
     });
 
     beforeEach(async () => {

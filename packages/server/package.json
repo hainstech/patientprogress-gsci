@@ -7,7 +7,7 @@
     "start": "node server",
     "server": "nodemon server",
     "dev": "npm run server",
-    "test": "mocha 'test/*.test.js' --exit"
+    "ci:test": "mocha 'test/*.test.js' --exit"
   },
   "author": "Dominic Hains",
   "license": "ISC",
