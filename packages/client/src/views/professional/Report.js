@@ -365,7 +365,10 @@ const Report = ({
                       <CardBody>
                         {report.relevantScore &&
                           report.relevantScore.map((score, i) => (
-                            <GridContainer key={i}>
+                            <GridContainer
+                              key={i}
+                              style={{ paddingBottom: 20 }}
+                            >
                               <GridItem key={`${i}-${score.name}`} xs={12}>
                                 {score.name} (
                                 {format(
@@ -388,7 +391,7 @@ const Report = ({
                               ))}
                             </GridContainer>
                           ))}
-                        <br />
+
                         <GridContainer>
                           <GridItem xs={12}>
                             {t('report.healthQuality')}: {report.health}
