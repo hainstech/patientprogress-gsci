@@ -16,7 +16,6 @@ function formatParams(info) {
   }`;
 }
 
-// https://github.com/winstonjs/winston/issues/1135
 const developmentFormat = format.combine(
   format.colorize(),
   format.timestamp(),
