@@ -122,43 +122,87 @@ router.post('/:id', patient, async (req, res) => {
         }
       };
 
-      switch (data.chiefComplaintRegion) {
-        case 'Cou':
-        case 'Neck pain':
-          questionnairesToSend.push(
-            getQuestionnaireId('Neck Disability Index'),
-            getQuestionnaireId('Modified MSK STarT Back Screening Tool')
-          );
-          break;
-        case 'Bas du dos':
-        case 'Low back pain':
-          questionnairesToSend.push(
-            getQuestionnaireId('Oswestry Disability Index'),
-            getQuestionnaireId('The Keele STarT Back Screening Tool')
-          );
-          break;
-        case 'Membre supérieur (épaule, coude ou poignet)':
-        case 'Upper extremity (shoulder, elbow or wrist)':
-          questionnairesToSend.push(
-            getQuestionnaireId('QuickDASH'),
-            getQuestionnaireId('Modified MSK STarT Back Screening Tool')
-          );
-          break;
-        case 'Membre inférieur (hanche,genou ou cheville)':
-        case 'Lower extremity (hip, knee or ankle)':
-          questionnairesToSend.push(
-            getQuestionnaireId('Lower Extremity Functional Scale (LEFS)'),
-            getQuestionnaireId('Modified MSK STarT Back Screening Tool')
-          );
-          break;
-        case 'Aucune de ces régions':
-        case 'Not in the options':
-          questionnairesToSend.push(
-            getQuestionnaireId('Modified MSK STarT Back Screening Tool')
-          );
-          break;
-        default:
-          break;
+      const lowerBack = ['57', '58', '59', '60', '61', '62', '63', '64'];
+      const neck = ['5', '6', '39', '40', '41', '42', '43', '44', '55', '56'];
+      const upperLimb = [
+        '7',
+        '8',
+        '9',
+        '10',
+        '11',
+        '12',
+        '13',
+        '14',
+        '15',
+        '16',
+        '17',
+        '18',
+        '45',
+        '46',
+        '47',
+        '48',
+        '49',
+        '50',
+        '51',
+        '52',
+        '53',
+        '54',
+      ];
+      const lowerLimb = [
+        '23',
+        '24',
+        '25',
+        '26',
+        '27',
+        '28',
+        '29',
+        '30',
+        '31',
+        '32',
+        '33',
+        '34',
+        '35',
+        '36',
+        '65',
+        '66',
+        '67',
+        '68',
+        '69',
+        '70',
+        '71',
+        '72',
+        '73',
+        '74',
+      ];
+
+      if (data.relatedPainAreas.some((item) => lowerBack.includes(item))) {
+        questionnairesToSend.push(
+          getQuestionnaireId('Oswestry Disability Index'),
+          getQuestionnaireId('The Keele STarT Back Screening Tool')
+        );
+      } else if (data.relatedPainAreas.some((item) => neck.includes(item))) {
+        questionnairesToSend.push(
+          getQuestionnaireId('Neck Disability Index'),
+          getQuestionnaireId('Modified MSK STarT Back Screening Tool')
+        );
+      } else if (
+        data.relatedPainAreas.some((item) => upperLimb.includes(item))
+      ) {
+        questionnairesToSend.push(
+          getQuestionnaireId('QuickDASH'),
+          getQuestionnaireId('Modified MSK STarT Back Screening Tool')
+        );
+      } else if (
+        data.relatedPainAreas.some((item) => lowerLimb.includes(item))
+      ) {
+        questionnairesToSend.push(
+          getQuestionnaireId('Lower Extremity Functional Scale (LEFS)'),
+          getQuestionnaireId('Modified MSK STarT Back Screening Tool')
+        );
+      } else {
+        questionnairesToSend.push(
+          getQuestionnaireId('Modified MSK STarT Back Screening Tool')
+        );
       }
 
       questionnairesToSend.forEach((id) => {

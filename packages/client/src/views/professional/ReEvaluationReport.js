@@ -7,12 +7,11 @@ import { zonedTimeToUtc } from 'date-fns-tz';
 import { withRouter } from 'react-router-dom';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 
-import ReportPDF from './ReportPDF';
+import ReEvaluationReportPDF from './ReEvaluationReportPDF';
+
+import areasJSON from '../../assets/bodyMap.json';
 
 import Spinner from '../../components/Spinner/Spinner';
-
-// import URL from '../../assets/img/bodyMap.jpg';
-import areasJSON from '../../assets/bodyMap.json';
 
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem.js';
@@ -28,7 +27,7 @@ import { getPatient } from '../../actions/professional';
 
 const useStyles = makeStyles(styles);
 
-const Report = ({
+const ReEvaluationReport = ({
   professional: { patient, loading },
   match,
   getPatient,
@@ -44,14 +43,16 @@ const Report = ({
     if (!patient || patient._id !== match.params.id) {
       getPatient(match.params.id).then((patient) => {
         setReport(
-          patient.reports.find(
+          patient.reEvaluationReports.find(
             (report) => report._id === match.params.report_id
           )
         );
       });
     } else {
       setReport(
-        patient.reports.find((report) => report._id === match.params.report_id)
+        patient.reEvaluationReports.find(
+          (report) => report._id === match.params.report_id
+        )
       );
     }
   }, [getPatient, match.params.id, match.params.report_id, patient]);
@@ -66,7 +67,9 @@ const Report = ({
             <Card>
               <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
-                  {`${t('report.report')} - ${patient.name} - ${format(
+                  {`${t('report.reEvaluationReport')} - ${
+                    patient.name
+                  } - ${format(
                     zonedTimeToUtc(parseISO(report.date)),
                     'yyyy/MM/dd'
                   )}`}
@@ -127,6 +130,15 @@ const Report = ({
                             )}
                           </GridItem>
                           <GridItem xs={12}>
+                            {t('report.initialReportDate')}:{' '}
+                            {format(
+                              zonedTimeToUtc(
+                                parseISO(report.initialReportDate)
+                              ),
+                              'yyyy/MM/dd'
+                            )}
+                          </GridItem>
+                          <GridItem xs={12}>
                             {t('report.professional')}:{' '}
                             {report.professionalName}
                           </GridItem>
@@ -139,33 +151,8 @@ const Report = ({
                       </CardBody>
                     </Card>
                   </GridItem>
-                  <GridItem xs={12} sm={6}>
-                    <Card>
-                      <CardHeader color="danger">
-                        <p className={classes.cardTitleWhite}>
-                          {t('report.demographics')}
-                        </p>
-                      </CardHeader>
-                      <CardBody>
-                        <GridContainer>
-                          <GridItem xs={12}>
-                            {t('report.civilStatus')}: {report.civilStatus}
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.nbChildrens')}: {report.nbChildrens}
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.occupation')}: {report.occupation}
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.employmentStatus')}:{' '}
-                            {report.employmentStatus}
-                          </GridItem>
-                        </GridContainer>
-                      </CardBody>
-                    </Card>
-                  </GridItem>
-                  <GridItem xs={12} sm={6}>
+
+                  <GridItem xs={12}>
                     <Card>
                       <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
@@ -183,20 +170,14 @@ const Report = ({
                             {report.chiefComplaintStart}
                           </GridItem>
                           <GridItem xs={12}>
-                            {t('report.onsetType')}:{' '}
-                            {report.chiefComplaintAppear}
+                            {t(
+                              'report.initialGlobalExpectationOfClinicalChange'
+                            )}
+                            : {report.initialGlobalExpectationOfClinicalChange}
                           </GridItem>
                           <GridItem xs={12}>
-                            {t('report.injuryMechanism')}:{' '}
-                            {report.chiefComplaintAppearDescription}
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.evolution')}:{' '}
-                            {report.chiefComplaintEvolving}
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.recurrence')}:{' '}
-                            {report.chiefComplaintRecurrence}
+                            {t('report.chiefComplaintInitialDiagnosis')}:{' '}
+                            {report.chiefComplaintInitialDiagnosis}
                           </GridItem>
 
                           {report.otherComplaints && (
@@ -205,10 +186,17 @@ const Report = ({
                               {report.otherComplaints}
                             </GridItem>
                           )}
+                          {report.secondaryComplaintInitialDiagnosis && (
+                            <GridItem xs={12}>
+                              {t('report.secondaryComplaintInitialDiagnosis')}:{' '}
+                              {report.secondaryComplaintInitialDiagnosis}
+                            </GridItem>
+                          )}
                         </GridContainer>
                       </CardBody>
                     </Card>
                   </GridItem>
+
                   <GridItem xs={12} sm={6}>
                     <Card>
                       <CardHeader color="danger">
@@ -271,6 +259,7 @@ const Report = ({
                       </CardBody>
                     </Card>
                   </GridItem>
+
                   {report.comorbidities.length > 0 && (
                     <GridItem xs={12}>
                       <Card>
@@ -329,6 +318,109 @@ const Report = ({
                     <Card>
                       <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
+                          {t('report.relevantScores')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
+                        {report.relevantScore.length === 0 && t('report.none')}
+                        {report.relevantScore &&
+                          report.relevantScore.map((score, i) => (
+                            <GridContainer
+                              key={i}
+                              style={{ paddingBottom: 20 }}
+                            >
+                              <GridItem key={`${i}-${score.name}`} xs={12}>
+                                {score.name} (
+                                {format(
+                                  zonedTimeToUtc(
+                                    parseISO(score.date),
+                                    Intl.DateTimeFormat().resolvedOptions()
+                                      .timeZone
+                                  ),
+                                  'yyyy/MM/dd'
+                                )}
+                                ):
+                              </GridItem>
+                              {score.score.map(
+                                ({ title, value, improvement }, y) => (
+                                  <React.Fragment key={y + i}>
+                                    <GridItem xs={12}>
+                                      {t(`professional.patient.score.${title}`)}
+                                      :{' '}
+                                      {/\d/.test(value)
+                                        ? value
+                                        : t(
+                                            `professional.patient.score.${value}`
+                                          )}
+                                    </GridItem>
+                                    {improvement ? (
+                                      <GridItem xs={12}>
+                                        {t('report.improvement')}:{' '}
+                                        {Math.round(improvement)}%
+                                      </GridItem>
+                                    ) : null}
+                                  </React.Fragment>
+                                )
+                              )}
+                            </GridContainer>
+                          ))}
+                      </CardBody>
+                    </Card>
+                  </GridItem>
+
+                  <GridItem xs={12}>
+                    <Card>
+                      <CardHeader color="danger">
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.improvement')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.improvementPain')}:{' '}
+                            {report.improvementPain}
+                            /10
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.improvementFunction')}:{' '}
+                            {report.improvementFunction}/10
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.improvementQualityOfLife')}:{' '}
+                            {report.improvementQualityOfLife}/10
+                          </GridItem>
+                        </GridContainer>
+                      </CardBody>
+                    </Card>
+                  </GridItem>
+
+                  <GridItem xs={12}>
+                    <Card>
+                      <CardHeader color="danger">
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.satisfaction')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.treatmentsSatisfaction')}:{' '}
+                            {report.treatmentsSatisfaction}/10
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.chiropractorSatisfaction')}:{' '}
+                            {report.chiropractorSatisfaction}/10
+                          </GridItem>
+                        </GridContainer>
+                      </CardBody>
+                    </Card>
+                  </GridItem>
+
+                  <GridItem xs={12}>
+                    <Card>
+                      <CardHeader color="danger">
+                        <p className={classes.cardTitleWhite}>
                           {t('report.findings')}
                         </p>
                       </CardHeader>
@@ -355,73 +447,6 @@ const Report = ({
                     </Card>
                   </GridItem>
 
-                  <GridItem xs={12}>
-                    <Card>
-                      <CardHeader color="danger">
-                        <p className={classes.cardTitleWhite}>
-                          {t('report.relevantScores')}
-                        </p>
-                      </CardHeader>
-                      <CardBody>
-                        {report.relevantScore &&
-                          report.relevantScore.map((score, i) => (
-                            <GridContainer
-                              key={i}
-                              style={{ paddingBottom: 20 }}
-                            >
-                              <GridItem key={`${i}-${score.name}`} xs={12}>
-                                {score.name} (
-                                {format(
-                                  zonedTimeToUtc(
-                                    parseISO(score.date),
-                                    Intl.DateTimeFormat().resolvedOptions()
-                                      .timeZone
-                                  ),
-                                  'yyyy/MM/dd'
-                                )}
-                                ):
-                              </GridItem>
-                              {score.score.map(({ title, value }, y) => (
-                                <GridItem key={y + i} xs={12}>
-                                  {t(`professional.patient.score.${title}`)}:{' '}
-                                  {/\d/.test(value)
-                                    ? value
-                                    : t(`professional.patient.score.${value}`)}
-                                </GridItem>
-                              ))}
-                            </GridContainer>
-                          ))}
-
-                        <GridContainer>
-                          <GridItem xs={12}>
-                            {t('report.healthQuality')}: {report.health}
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.qualityOfLife')}: {report.qualityOfLife}
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.healthSatisfaction')}:{' '}
-                            {report.healthSatisfaction}
-                          </GridItem>
-                        </GridContainer>
-                        <br />
-                        <GridContainer>
-                          <GridItem xs={12}>
-                            {t('report.gecPain')}:{' '}
-                            {report.globalExpectationOfChange.pain}/10
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.gecFunction')}:{' '}
-                            {report.globalExpectationOfChange.function}/10
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.gecQualityOfLife')}:{' '}
-                            {report.globalExpectationOfChange.qualityOfLife}/10
-                          </GridItem>
-                        </GridContainer>
-                      </CardBody>
-                    </Card>
-                  </GridItem>
                   <GridItem xs={12}>
                     <Card>
                       <CardHeader color="danger">
@@ -461,6 +486,35 @@ const Report = ({
                       </CardBody>
                     </Card>
                   </GridItem>
+
+                  <GridItem xs={12}>
+                    <Card>
+                      <CardHeader color="danger">
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.evolution')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.gicc')}:{' '}
+                            {report.globalImpressionOfClinicalChange}/10
+                          </GridItem>
+                          <GridItem xs={12}>
+                            {t('report.maximalMedicalImprovement')}:{' '}
+                            {report.maximalMedicalImprovement}
+                          </GridItem>
+                          {report.maximalMedicalImprovementSpecify && (
+                            <GridItem xs={12}>
+                              {t('report.specify')}:{' '}
+                              {report.maximalMedicalImprovementSpecify}
+                            </GridItem>
+                          )}
+                        </GridContainer>
+                      </CardBody>
+                    </Card>
+                  </GridItem>
+
                   <GridItem xs={12}>
                     <Card>
                       <CardHeader color="danger">
@@ -574,9 +628,10 @@ const Report = ({
                             {t('report.gecc')}:{' '}
                             {report.globalExpectationOfClinicalChange}/10
                           </GridItem>
-                          {report.geccSpecify && (
+                          {report.globalExpectationOfClinicalChangeSpecify && (
                             <GridItem xs={12}>
-                              {t('report.specify')}: {report.geccSpecify}
+                              {t('report.specify')}:{' '}
+                              {report.globalExpectationOfClinicalChangeSpecify}
                             </GridItem>
                           )}
                         </GridContainer>
@@ -590,7 +645,9 @@ const Report = ({
                   {t('professional.patient.back')}
                 </Button>
                 <PDFDownloadLink
-                  document={<ReportPDF report={report} patient={patient} />}
+                  document={
+                    <ReEvaluationReportPDF report={report} patient={patient} />
+                  }
                   fileName={`report-${patient.name}.pdf`}
                 >
                   <Button color="info">
@@ -606,7 +663,7 @@ const Report = ({
   );
 };
 
-Report.propTypes = {
+ReEvaluationReport.propTypes = {
   getPatient: PropTypes.func.isRequired,
   professional: PropTypes.object.isRequired,
 };
@@ -617,4 +674,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getPatient,
-})(withRouter(Report));
+})(withRouter(ReEvaluationReport));

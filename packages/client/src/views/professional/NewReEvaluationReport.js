@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { format, parseISO } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
-// import ImageMapper from 'react-img-mapper';
 
 import {
   FormControl,
@@ -22,6 +21,8 @@ import {
 
 import { useFormik } from 'formik';
 
+import areasJSON from '../../assets/bodyMap.json';
+
 import Spinner from '../../components/Spinner/Spinner';
 
 import GridContainer from '../../components/Grid/GridContainer';
@@ -32,11 +33,8 @@ import CardBody from '../../components/Card/CardBody.js';
 import Button from '../../components/CustomButtons/Button.js';
 import Alert from '../layout/Alert';
 
-import { getPatient, sendReport } from '../../actions/professional';
+import { getPatient, sendReEvaluationReport } from '../../actions/professional';
 import { getCurrentProfile } from '../../actions/profile';
-
-// import URL from '../../assets/img/bodyMap.jpg';
-import areasJSON from '../../assets/bodyMap.json';
 
 import { makeStyles } from '@material-ui/core/styles';
 import styles from '../../assets/jss/material-dashboard-react/views/dashboardStyle';
@@ -57,458 +55,186 @@ const getLastQuestionnaire = (questionnaires, questionnaireTitle) => {
     : null;
 };
 
-const getCommorbidities = (lastIntake) => {
-  let comorbidities = [];
-  Object.entries(lastIntake).forEach(([key, value]) => {
-    switch (key) {
-      case 'commorbidityHeart':
-        if (
-          lastIntake[key]['heartDisease'] === 'Oui' ||
-          lastIntake[key]['heartDisease'] === 'Yes'
-        ) {
-          comorbidities.push({
-            name: key,
-            treatment: lastIntake[key].treatment,
-            activityLimitation: lastIntake[key].activityLimitation,
-          });
+const getLastInitialReport = (reports) => {
+  return reports[reports.length - 1];
+};
+
+const getLastReport = (initialReports, reEvaluationReports) => {
+  const lastInitialReport = initialReports[initialReports.length - 1];
+  const lastReEvaluationReport =
+    reEvaluationReports[reEvaluationReports.length - 1];
+
+  if (!lastReEvaluationReport) return lastInitialReport;
+
+  const lastInitialReportDate = new Date(lastInitialReport.date);
+  const lastReEvaluationReportDate = new Date(lastReEvaluationReport.date);
+  return lastInitialReportDate > lastReEvaluationReportDate
+    ? lastInitialReport
+    : lastReEvaluationReport;
+};
+
+const fractionStrToDecimal = (str) => str.split('/').reduce((p, c) => p / c);
+
+const parseImprovement = (oldScore, newScore) => {
+  oldScore = fractionStrToDecimal(oldScore);
+  newScore = fractionStrToDecimal(newScore);
+
+  return ((newScore - oldScore) / oldScore) * 100 * -1;
+};
+
+const parseImprovements = (relevantScore, questionnaires) => {
+  // For every questionnaire
+  // Get the most recent one
+  // For every score
+  // Check if the value string contains a letter
+  // If it doesn't, convert to decimal and calculate improvement
+  // Return the whole score object
+
+  return relevantScore.map((questionnaireScore) => {
+    let questionnaire = getLastQuestionnaire(
+      questionnaires,
+      questionnaireScore.name
+    );
+
+    return {
+      name: questionnaire.title,
+      date: questionnaire.time,
+      score: questionnaireScore.score.map((score) => {
+        if (!/^[a-zA-Z]+$/.test(score.value)) {
+          let newScore = questionnaire.score.find(
+            (e) => e.title === score.title
+          );
+          return {
+            ...newScore,
+            improvement: parseImprovement(score.value, newScore.value),
+          };
         }
-        break;
-      case 'commorbidityBloodPressure':
-        if (
-          lastIntake[key]['highBloodPressure'] === 'Oui' ||
-          lastIntake[key]['highBloodPressure'] === 'Yes'
-        ) {
-          comorbidities.push({
-            name: key,
-            treatment: lastIntake[key].treatment,
-            activityLimitation: lastIntake[key].activityLimitation,
-          });
-        }
-        break;
-      case 'commorbidityLungDisease':
-        if (
-          lastIntake[key]['lungDisease'] === 'Oui' ||
-          lastIntake[key]['lungDisease'] === 'Yes'
-        ) {
-          comorbidities.push({
-            name: key,
-            treatment: lastIntake[key].treatment,
-            activityLimitation: lastIntake[key].activityLimitation,
-          });
-        }
-        break;
-      case 'commorbidityDiabetes':
-        if (
-          lastIntake[key]['diabetes'] === 'Oui' ||
-          lastIntake[key]['diabetes'] === 'Yes'
-        ) {
-          comorbidities.push({
-            name: key,
-            treatment: lastIntake[key].treatment,
-            activityLimitation: lastIntake[key].activityLimitation,
-          });
-        }
-        break;
-      case 'commorbidityUlcer':
-        if (
-          lastIntake[key]['ulcerStomachDisease'] === 'Oui' ||
-          lastIntake[key]['ulcerStomachDisease'] === 'Yes'
-        ) {
-          comorbidities.push({
-            name: key,
-            treatment: lastIntake[key].treatment,
-            activityLimitation: lastIntake[key].activityLimitation,
-          });
-        }
-        break;
-      case 'commorbidityKidney':
-        if (
-          lastIntake[key]['kidneyDisease'] === 'Oui' ||
-          lastIntake[key]['kidneyDisease'] === 'Yes'
-        ) {
-          comorbidities.push({
-            name: key,
-            treatment: lastIntake[key].treatment,
-            activityLimitation: lastIntake[key].activityLimitation,
-          });
-        }
-        break;
-      case 'commorbidityLiver':
-        if (
-          lastIntake[key]['liverDisease'] === 'Oui' ||
-          lastIntake[key]['liverDisease'] === 'Yes'
-        ) {
-          comorbidities.push({
-            name: key,
-            treatment: lastIntake[key].treatment,
-            activityLimitation: lastIntake[key].activityLimitation,
-          });
-        }
-        break;
-      case 'commorbidityAnemia':
-        if (
-          lastIntake[key]['anemia'] === 'Oui' ||
-          lastIntake[key]['anemia'] === 'Yes'
-        ) {
-          comorbidities.push({
-            name: key,
-            treatment: lastIntake[key].treatment,
-            activityLimitation: lastIntake[key].activityLimitation,
-          });
-        }
-        break;
-      case 'commorbidityCancer':
-        if (
-          lastIntake[key]['cancer'] === 'Oui' ||
-          lastIntake[key]['cancer'] === 'Yes'
-        ) {
-          comorbidities.push({
-            name: key,
-            treatment: lastIntake[key].treatment,
-            activityLimitation: lastIntake[key].activityLimitation,
-          });
-        }
-        break;
-      case 'commorbidityDepression':
-        if (
-          lastIntake[key]['depression'] === 'Oui' ||
-          lastIntake[key]['depression'] === 'Yes'
-        ) {
-          comorbidities.push({
-            name: key,
-            treatment: lastIntake[key].treatment,
-            activityLimitation: lastIntake[key].activityLimitation,
-          });
-        }
-        break;
-      case 'commorbidityOsteoarthritis':
-        if (
-          lastIntake[key]['osteoarthritis'] === 'Oui' ||
-          lastIntake[key]['osteoarthritis'] === 'Yes'
-        ) {
-          comorbidities.push({
-            name: key,
-            treatment: lastIntake[key].treatment,
-            activityLimitation: lastIntake[key].activityLimitation,
-          });
-        }
-        break;
-      case 'commorbidityRheumatoidArthritis':
-        if (
-          lastIntake[key]['rheumatoidArthritis'] === 'Oui' ||
-          lastIntake[key]['rheumatoidArthritis'] === 'Yes'
-        ) {
-          comorbidities.push({
-            name: key,
-            treatment: lastIntake[key].treatment,
-            activityLimitation: lastIntake[key].activityLimitation,
-          });
-        }
-        break;
-      default:
-        break;
-    }
+        return score;
+      }),
+    };
   });
-  return comorbidities;
 };
 
-const getRedFlags = (lastIntake) => {
-  let redFlags = [];
-  if (lastIntake.RFS_Fall === 'Oui' || lastIntake.RFS_Fall === 'Yes') {
-    redFlags = [...redFlags, 'RFS_Fall'];
-  }
-  if (lastIntake.RFS_diagnosis && lastIntake.RFS_diagnosis.length > 0) {
-    redFlags = [...redFlags, ...lastIntake.RFS_diagnosis];
-  }
-  if (lastIntake.RFS_suffered && lastIntake.RFS_suffered.length > 0) {
-    redFlags = [...redFlags, ...lastIntake.RFS_suffered];
-  }
-  if (lastIntake.RFS_symptoms && lastIntake.RFS_symptoms.length > 0) {
-    redFlags = [...redFlags, ...lastIntake.RFS_symptoms];
-  }
-
-  return redFlags;
-};
-
-const getRelevantScore = (lastIntake, questionnaires) => {
-  let relevantScore = [];
-  const lowerBack = ['57', '58', '59', '60', '61', '62', '63', '64'];
-  const neck = ['5', '6', '39', '40', '41', '42', '43', '44', '55', '56'];
-  const upperLimb = [
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '45',
-    '46',
-    '47',
-    '48',
-    '49',
-    '50',
-    '51',
-    '52',
-    '53',
-    '54',
-  ];
-  const lowerLimb = [
-    '23',
-    '24',
-    '25',
-    '26',
-    '27',
-    '28',
-    '29',
-    '30',
-    '31',
-    '32',
-    '33',
-    '34',
-    '35',
-    '36',
-    '65',
-    '66',
-    '67',
-    '68',
-    '69',
-    '70',
-    '71',
-    '72',
-    '73',
-    '74',
-  ];
-
-  if (lastIntake.relatedPainAreas.some((item) => lowerBack.includes(item))) {
-    const ODI = getLastQuestionnaire(
-      questionnaires,
-      'Oswestry Disability Index'
-    );
-    const sb = getLastQuestionnaire(
-      questionnaires,
-      'The Keele STarT Back Screening Tool'
-    );
-    const BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
-    if (BPI) {
-      relevantScore.push({
-        name: BPI.questionnaire.title,
-        score: BPI.score,
-        date: BPI.time,
-      });
-    }
-    if (ODI) {
-      relevantScore.push({
-        name: ODI.questionnaire.title,
-        score: ODI.score,
-        date: ODI.time,
-      });
-    }
-    if (sb) {
-      relevantScore.push({
-        name: sb.questionnaire.title,
-        score: sb.score,
-        date: sb.time,
-      });
-    }
-  } else if (lastIntake.relatedPainAreas.some((item) => neck.includes(item))) {
-    const NDI = getLastQuestionnaire(questionnaires, 'Neck Disability Index');
-    const BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
-    const sb = getLastQuestionnaire(
-      questionnaires,
-      'Modified MSK STarT Back Screening Tool'
-    );
-    if (sb) {
-      relevantScore.push({
-        name: sb.questionnaire.title,
-        score: sb.score,
-        date: sb.time,
-      });
-    }
-    if (BPI) {
-      relevantScore.push({
-        name: BPI.questionnaire.title,
-        score: BPI.score,
-        date: BPI.time,
-      });
-    }
-    if (NDI) {
-      relevantScore.push({
-        name: NDI.questionnaire.title,
-        score: NDI.score,
-        date: NDI.time,
-      });
-    }
-  } else if (
-    lastIntake.relatedPainAreas.some((item) => upperLimb.includes(item))
-  ) {
-    const dash = getLastQuestionnaire(questionnaires, 'QuickDASH');
-    const BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
-    const sb = getLastQuestionnaire(
-      questionnaires,
-      'Modified MSK STarT Back Screening Tool'
-    );
-    if (sb) {
-      relevantScore.push({
-        name: sb.questionnaire.title,
-        score: sb.score,
-        date: sb.time,
-      });
-    }
-    if (BPI) {
-      relevantScore.push({
-        name: BPI.questionnaire.title,
-        score: BPI.score,
-        date: BPI.time,
-      });
-    }
-    if (dash) {
-      relevantScore.push({
-        name: dash.questionnaire.title,
-        score: dash.score,
-        date: dash.time,
-      });
-    }
-  } else if (
-    lastIntake.relatedPainAreas.some((item) => lowerLimb.includes(item))
-  ) {
-    const LEFS = getLastQuestionnaire(
-      questionnaires,
-      'Lower Extremity Functional Scale (LEFS)'
-    );
-    const BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
-    const sb = getLastQuestionnaire(
-      questionnaires,
-      'Modified MSK STarT Back Screening Tool'
-    );
-    if (sb) {
-      relevantScore.push({
-        name: sb.questionnaire.title,
-        score: sb.score,
-        date: sb.time,
-      });
-    }
-    if (BPI) {
-      relevantScore.push({
-        name: BPI.questionnaire.title,
-        score: BPI.score,
-        date: BPI.time,
-      });
-    }
-    if (LEFS) {
-      relevantScore.push({
-        name: LEFS.questionnaire.title,
-        score: LEFS.score,
-        date: LEFS.time,
-      });
-    }
-  } else {
-    const BPI = getLastQuestionnaire(questionnaires, 'Brief Pain Inventory');
-    const sb = getLastQuestionnaire(
-      questionnaires,
-      'Modified MSK STarT Back Screening Tool'
-    );
-    if (sb) {
-      relevantScore.push({
-        name: sb.questionnaire.title,
-        score: sb.score,
-        date: sb.time,
-      });
-    }
-    if (BPI) {
-      relevantScore.push({
-        name: BPI.questionnaire.title,
-        score: BPI.score,
-        date: BPI.time,
-      });
-    }
-  }
-
-  return relevantScore;
-};
-
-const NewReport = ({
+const NewReEvaluationReport = ({
   professional: { patient, loading },
   profile: { profile, loading: ploading },
   getCurrentProfile,
   match,
   getPatient,
-  sendReport,
+  sendReEvaluationReport,
   history,
 }) => {
   const classes = useStyles();
   const inputClasses = useInputStyles();
 
-  const [intake, setIntake] = useState({});
-  const [objectives, setObjectives] = useState([]);
-  const [planOfManagement, setPlanOfManagement] = useState([]);
   const [
     displaySpinalDiagnosticClassification,
     setDisplaySpinalDiagnosticClassification,
   ] = useState(false);
+
   const [displayReferences, setDisplayReferences] = useState(false);
   const [referenceList, setReferenceList] = useState([]);
+
+  const [intake, setIntake] = useState({});
+  const [objectives, setObjectives] = useState([]);
+  const [planOfManagement, setPlanOfManagement] = useState([]);
+
+  const [oldReportInput, setOldReportInput] = useState({
+    diagnosis: '',
+    additionalDiagnosis: '',
+    differentialDiagnosis: '',
+    frequency: '',
+    planOfManagementOther: '',
+  });
 
   useEffect(() => {
     // Callback hell... sorry
     getCurrentProfile('professional').then((professional) =>
       getPatient(match.params.id).then((patient) => {
+        const lastReport = getLastReport(
+          patient.reports,
+          patient.reEvaluationReports
+        );
+
+        setOldReportInput({
+          diagnosis: lastReport.diagnosis,
+          additionalDiagnosis: lastReport.additionalDiagnosis,
+          differentialDiagnosis: lastReport.differentialDiagnosis,
+          frequency: lastReport.frequency,
+          planOfManagementOther: lastReport.planOfManagementOther?.join(', '),
+        });
+
+        setObjectives(lastReport.objectives);
+        setPlanOfManagement(lastReport.planOfManagement);
+
         const lastIntake = getLastQuestionnaire(
           patient.questionnaires,
           'Initial Intake Form'
         );
+
+        const lastInitialReport = getLastInitialReport(patient.reports);
+
+        const lastFollowUp = getLastQuestionnaire(
+          patient.questionnaires,
+          'Follow-up questionnaire'
+        );
+
+        // Data processed to be displayed and save. Not necessarily from the intake questionnaire.
         setIntake({
           dob: patient.dob,
           age: getAge(patient.dob),
           intakeUsed: lastIntake._id,
           date: new Date(),
+          initialReportDate: new Date(lastInitialReport.date),
           professionalName: professional.name,
           professionalProfession: professional.profession,
-          // Social demographics
-          civilStatus: lastIntake.answers.civilStatus,
-          nbChildrens: lastIntake.answers.nbChildrens,
-          // Work demographics
-          occupation: lastIntake.answers.occupation,
-          employmentStatus:
-            lastIntake.answers.employmentStatusSelection.employmentStatus,
-          physicalActivityVitalSign:
-            lastIntake.answers.PAVSExercise *
-            lastIntake.answers.PAVSExerciseMinutes,
           // Chief complaint
           chiefComplaint: lastIntake.answers.chiefComplaint,
-          chiefComplaintRegion: lastIntake.answers.chiefComplaintRegion,
           chiefComplaintStart: lastIntake.answers.chiefComplaintStart,
-          chiefComplaintAppear: lastIntake.answers.chiefComplaintAppear,
-          chiefComplaintAppearDescription:
-            lastIntake.answers.chiefComplaintAppearDescription,
-          chiefComplaintEvolving: lastIntake.answers.chiefComplaintEvolving,
-          chiefComplaintRecurrence: lastIntake.answers.chiefComplaintRecurrence,
           otherComplaints: lastIntake.answers.otherComplaints || '',
           // Body maps
-          allPainAreas: lastIntake.answers.allPainAreas,
-          relatedPainAreas: lastIntake.answers.relatedPainAreas,
-          comorbidities: getCommorbidities(lastIntake.answers),
-          redFlags: getRedFlags(lastIntake.answers),
+          allPainAreas: lastFollowUp.answers.allPainAreas,
+          relatedPainAreas: lastFollowUp.answers.relatedPainAreas,
+          comorbidities: lastInitialReport.comorbidities,
+          redFlags: lastInitialReport.redFlags,
           // Facultative scores
-          relevantScore: getRelevantScore(
-            lastIntake.answers,
+          relevantScore: parseImprovements(
+            lastInitialReport.relevantScore,
             patient.questionnaires
           ),
-          // Quality of Life
-          health: lastIntake.answers.health,
-          qualityOfLife: lastIntake.answers.qualityOfLife,
-          healthSatisfaction: lastIntake.answers.healthSatisfaction,
-          globalExpectationOfChange:
-            lastIntake.answers.globalExpectationOfChange,
+          // Follow-up
+          improvementPain: lastFollowUp.answers.pain,
+          improvementFunction: lastFollowUp.answers.function,
+          improvementQualityOfLife: lastFollowUp.answers.qualityOfLife,
+          treatmentsSatisfaction: lastFollowUp.answers.treatmentsSatisfaction,
+          chiropractorSatisfaction:
+            lastFollowUp.answers.chiropractorSatisfaction,
+
+          initialGlobalExpectationOfClinicalChange:
+            lastInitialReport.globalExpectationOfClinicalChange,
+          chiefComplaintInitialDiagnosis: lastInitialReport.diagnosis,
+          secondaryComplaintInitialDiagnosis:
+            lastInitialReport.additionalDiagnosis,
         });
       })
     );
   }, [getPatient, match.params.id, getCurrentProfile]);
+
+  const handleReferenceListChange = (event) => {
+    if (referenceList.indexOf(event.target.name) > -1) {
+      setReferenceList(referenceList.filter((id) => id !== event.target.name));
+      return;
+    }
+    setReferenceList([...referenceList, event.target.name]);
+  };
+
+  const handleReference = (value) => {
+    if (value === 'No' || value === 'Non') {
+      setDisplayReferences(false);
+    } else {
+      setDisplayReferences(true);
+    }
+  };
 
   const handleObjectivesChange = (event) => {
     if (objectives.indexOf(event.target.name) > -1) {
@@ -528,14 +254,6 @@ const NewReport = ({
     setPlanOfManagement([...planOfManagement, event.target.name]);
   };
 
-  const handleReferenceListChange = (event) => {
-    if (referenceList.indexOf(event.target.name) > -1) {
-      setReferenceList(referenceList.filter((id) => id !== event.target.name));
-      return;
-    }
-    setReferenceList([...referenceList, event.target.name]);
-  };
-
   const formik = useFormik({
     initialValues: {
       investigationResults: '',
@@ -543,13 +261,14 @@ const NewReport = ({
       additionalInvestigationSpecify: '',
       neckOrLowerBackCondition: null,
       spinalDiagnosticClassification: null,
-      diagnosis: '',
-      additionalDiagnosis: '',
-      differentialDiagnosis: '',
-      numberOfTreatments: '',
-      frequency: null,
+      diagnosis: oldReportInput.diagnosis,
+      additionalDiagnosis: oldReportInput.additionalDiagnosis,
+      differentialDiagnosis: oldReportInput.differentialDiagnosis,
+      numberOfTreatmentsProvided: '',
+      numberOfAdditionalTreatments: '',
+      frequency: oldReportInput.frequency,
       frequencySpecify: '',
-      planOfManagementOther: '',
+      planOfManagementOther: oldReportInput.planOfManagementOther,
       currentEmploymentStatus: '',
       continueActivities: null,
       continueActivitiesSpecify: '',
@@ -558,16 +277,19 @@ const NewReport = ({
       reference: null,
       referenceListOther: '',
       referenceListReason: '',
+      globalImpressionOfClinicalChange: 0,
       globalExpectationOfClinicalChange: 0,
-      geccSpecify: '',
+      maximalMedicalImprovement: '',
+      maximalMedicalImprovementSpecify: '',
+      globalExpectationOfClinicalChangeSpecify: '',
     },
+    enableReinitialize: true,
     onSubmit: async (data) => {
-      await sendReport(match.params.id, {
+      await sendReEvaluationReport(match.params.id, {
         ...data,
         ...intake,
         objectives,
         planOfManagement,
-        referenceList,
       });
       history.goBack();
     },
@@ -575,23 +297,11 @@ const NewReport = ({
 
   const { t } = useTranslation();
 
-  // const handleLoaded = () => {
-  //   setDisabled(false);
-  // };
-
   const handleNeckOrLowerBackCondition = (value) => {
     if (value === 'Yes' || value === 'Oui') {
       setDisplaySpinalDiagnosticClassification(true);
     } else {
       setDisplaySpinalDiagnosticClassification(false);
-    }
-  };
-
-  const handleReference = (value) => {
-    if (value === 'No' || value === 'Non') {
-      setDisplayReferences(false);
-    } else {
-      setDisplayReferences(true);
     }
   };
 
@@ -604,13 +314,13 @@ const NewReport = ({
       ploading ? (
         <Spinner />
       ) : (
-        <GridContainer>
+        <GridContainer justifyContent="center">
           <Alert />
           <GridItem xs={12}>
             <Card>
               <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
-                  {t('report.newReport')}
+                  {t('report.newReEvaluationReport')}
                 </h4>
               </CardHeader>
               <CardBody>
@@ -665,6 +375,10 @@ const NewReport = ({
                             {format(intake.date, 'yyyy/MM/dd')}
                           </GridItem>
                           <GridItem xs={12}>
+                            {t('report.initialReportDate')}:{' '}
+                            {format(intake.initialReportDate, 'yyyy/MM/dd')}
+                          </GridItem>
+                          <GridItem xs={12}>
                             {t('report.professional')}:{' '}
                             {intake.professionalName}
                           </GridItem>
@@ -677,33 +391,8 @@ const NewReport = ({
                       </CardBody>
                     </Card>
                   </GridItem>
-                  <GridItem xs={12} sm={6}>
-                    <Card>
-                      <CardHeader color="danger">
-                        <p className={classes.cardTitleWhite}>
-                          {t('report.demographics')}
-                        </p>
-                      </CardHeader>
-                      <CardBody>
-                        <GridContainer>
-                          <GridItem xs={12}>
-                            {t('report.civilStatus')}: {intake.civilStatus}
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.nbChildrens')}: {intake.nbChildrens}
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.occupation')}: {intake.occupation}
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.employmentStatus')}:{' '}
-                            {intake.employmentStatus}
-                          </GridItem>
-                        </GridContainer>
-                      </CardBody>
-                    </Card>
-                  </GridItem>
-                  <GridItem xs={12} sm={6}>
+
+                  <GridItem xs={12}>
                     <Card>
                       <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
@@ -721,20 +410,14 @@ const NewReport = ({
                             {intake.chiefComplaintStart}
                           </GridItem>
                           <GridItem xs={12}>
-                            {t('report.onsetType')}:{' '}
-                            {intake.chiefComplaintAppear}
+                            {t(
+                              'report.initialGlobalExpectationOfClinicalChange'
+                            )}
+                            : {intake.initialGlobalExpectationOfClinicalChange}
                           </GridItem>
                           <GridItem xs={12}>
-                            {t('report.injuryMechanism')}:{' '}
-                            {intake.chiefComplaintAppearDescription}
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.evolution')}:{' '}
-                            {intake.chiefComplaintEvolving}
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.recurrence')}:{' '}
-                            {intake.chiefComplaintRecurrence}
+                            {t('report.chiefComplaintInitialDiagnosis')}:{' '}
+                            {intake.chiefComplaintInitialDiagnosis}
                           </GridItem>
 
                           {intake.otherComplaints && (
@@ -743,10 +426,17 @@ const NewReport = ({
                               {intake.otherComplaints}
                             </GridItem>
                           )}
+                          {intake.secondaryComplaintInitialDiagnosis && (
+                            <GridItem xs={12}>
+                              {t('report.secondaryComplaintInitialDiagnosis')}:{' '}
+                              {intake.secondaryComplaintInitialDiagnosis}
+                            </GridItem>
+                          )}
                         </GridContainer>
                       </CardBody>
                     </Card>
                   </GridItem>
+
                   <GridItem xs={12} sm={6}>
                     <Card>
                       <CardHeader color="danger">
@@ -872,6 +562,7 @@ const NewReport = ({
                         </p>
                       </CardHeader>
                       <CardBody>
+                        {intake.relevantScore.length === 0 && t('report.none')}
                         {intake.relevantScore &&
                           intake.relevantScore.map((score, i) => (
                             <GridContainer
@@ -890,42 +581,76 @@ const NewReport = ({
                                 )}
                                 ):
                               </GridItem>
-                              {score.score.map(({ title, value }, y) => (
-                                <GridItem key={y + i} xs={12}>
-                                  {t(`professional.patient.score.${title}`)}:{' '}
-                                  {/\d/.test(value)
-                                    ? value
-                                    : t(`professional.patient.score.${value}`)}
-                                </GridItem>
-                              ))}
+                              {score.score.map(
+                                ({ title, value, improvement }, y) => (
+                                  <React.Fragment key={y + i}>
+                                    <GridItem xs={12}>
+                                      {t(`professional.patient.score.${title}`)}
+                                      :{' '}
+                                      {/\d/.test(value)
+                                        ? value
+                                        : t(
+                                            `professional.patient.score.${value}`
+                                          )}
+                                    </GridItem>
+                                    {improvement ? (
+                                      <GridItem xs={12}>
+                                        {t('report.improvement')}:{' '}
+                                        {Math.round(improvement)}%
+                                      </GridItem>
+                                    ) : null}
+                                  </React.Fragment>
+                                )
+                              )}
                             </GridContainer>
                           ))}
+                      </CardBody>
+                    </Card>
+                  </GridItem>
 
+                  <GridItem xs={12}>
+                    <Card>
+                      <CardHeader color="danger">
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.improvement')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
                         <GridContainer>
                           <GridItem xs={12}>
-                            {t('report.healthQuality')}: {intake.health}
+                            {t('report.improvementPain')}:{' '}
+                            {intake.improvementPain}
+                            /10
                           </GridItem>
                           <GridItem xs={12}>
-                            {t('report.qualityOfLife')}: {intake.qualityOfLife}
+                            {t('report.improvementFunction')}:{' '}
+                            {intake.improvementFunction}/10
                           </GridItem>
                           <GridItem xs={12}>
-                            {t('report.healthSatisfaction')}:{' '}
-                            {intake.healthSatisfaction}
+                            {t('report.improvementQualityOfLife')}:{' '}
+                            {intake.improvementQualityOfLife}/10
                           </GridItem>
                         </GridContainer>
-                        <br />
+                      </CardBody>
+                    </Card>
+                  </GridItem>
+
+                  <GridItem xs={12}>
+                    <Card>
+                      <CardHeader color="danger">
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.satisfaction')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
                         <GridContainer>
                           <GridItem xs={12}>
-                            {t('report.gecPain')}:{' '}
-                            {intake.globalExpectationOfChange.pain}/10
+                            {t('report.treatmentsSatisfaction')}:{' '}
+                            {intake.treatmentsSatisfaction}/10
                           </GridItem>
                           <GridItem xs={12}>
-                            {t('report.gecFunction')}:{' '}
-                            {intake.globalExpectationOfChange.function}/10
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.gecQualityOfLife')}:{' '}
-                            {intake.globalExpectationOfChange.qualityOfLife}/10
+                            {t('report.chiropractorSatisfaction')}:{' '}
+                            {intake.chiropractorSatisfaction}/10
                           </GridItem>
                         </GridContainer>
                       </CardBody>
@@ -1151,6 +876,7 @@ const NewReport = ({
                                     />
                                   </FormControl>
                                 </GridItem>
+
                                 <GridItem xs={12}>
                                   <FormControl
                                     fullWidth
@@ -1175,26 +901,144 @@ const NewReport = ({
                           <Card>
                             <CardHeader color="danger">
                               <p className={classes.cardTitleWhite}>
-                                {t('report.currentEpisode')}
+                                {t('report.evolution')}
                               </p>
                             </CardHeader>
                             <CardBody>
                               <GridContainer>
-                                <GridItem xs={12} sm={4}>
+                                <GridItem xs={12} sm={6}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                  >
+                                    <Typography
+                                      id="discrete-slider"
+                                      gutterBottom
+                                    >
+                                      {t('report.gicc')}
+                                    </Typography>
+                                    <Slider
+                                      onChange={(element, value) =>
+                                        formik.setFieldValue(
+                                          'globalImpressionOfClinicalChange',
+                                          value
+                                        )
+                                      }
+                                      defaultValue={0}
+                                      value={
+                                        formik.values
+                                          .globalImpressionOfClinicalChange
+                                      }
+                                      aria-labelledby="discrete-slider"
+                                      valueLabelDisplay="auto"
+                                      step={1}
+                                      min={-10}
+                                      max={10}
+                                    />
+                                  </FormControl>
+                                </GridItem>
+                                <GridItem xs={12}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                    component="fieldset"
+                                  >
+                                    <FormLabel component="legend">
+                                      {t('report.maximalMedicalImprovement')}
+                                    </FormLabel>
+
+                                    <RadioGroup
+                                      aria-label="maximalMedicalImprovement"
+                                      name="maximalMedicalImprovement"
+                                      value={
+                                        formik.values.maximalMedicalImprovement
+                                      }
+                                      onChange={formik.handleChange}
+                                    >
+                                      <FormControlLabel
+                                        value={t('report.no')}
+                                        control={<Radio required />}
+                                        label={t('report.no')}
+                                      />
+                                      <FormControlLabel
+                                        value={t('report.yes')}
+                                        control={<Radio />}
+                                        label={t('report.yes')}
+                                      />
+                                    </RadioGroup>
+                                  </FormControl>
+                                </GridItem>
+                                <GridItem xs={12}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                  >
+                                    <TextField
+                                      label={t('report.specify')}
+                                      type="text"
+                                      id={'maximalMedicalImprovementSpecify'}
+                                      value={
+                                        formik.values
+                                          .maximalMedicalImprovementSpecify
+                                      }
+                                      onChange={formik.handleChange}
+                                    />
+                                  </FormControl>
+                                </GridItem>
+                              </GridContainer>
+                            </CardBody>
+                          </Card>
+                        </GridItem>
+                        <GridItem xs={12}>
+                          <Card>
+                            <CardHeader color="danger">
+                              <p className={classes.cardTitleWhite}>
+                                {t('report.planOfManagement')}
+                              </p>
+                            </CardHeader>
+                            <CardBody>
+                              <GridContainer>
+                                <GridItem xs={12} sm={6}>
                                   <FormControl
                                     fullWidth
                                     className={inputClasses.formControl}
                                   >
                                     <TextField
                                       required
-                                      label={t('report.nbTx')}
+                                      label={t(
+                                        'report.numberOfTreatmentsProvided'
+                                      )}
                                       type="number"
-                                      id={'numberOfTreatments'}
-                                      value={formik.values.numberOfTreatments}
+                                      id={'numberOfTreatmentsProvided'}
+                                      value={
+                                        formik.values.numberOfTreatmentsProvided
+                                      }
                                       onChange={formik.handleChange}
                                     />
                                   </FormControl>
                                 </GridItem>
+
+                                <GridItem xs={12} sm={6}>
+                                  <FormControl
+                                    fullWidth
+                                    className={inputClasses.formControl}
+                                  >
+                                    <TextField
+                                      required
+                                      label={t(
+                                        'report.numberOfAdditionalTreatments'
+                                      )}
+                                      type="number"
+                                      id={'numberOfAdditionalTreatments'}
+                                      value={
+                                        formik.values
+                                          .numberOfAdditionalTreatments
+                                      }
+                                      onChange={formik.handleChange}
+                                    />
+                                  </FormControl>
+                                </GridItem>
+
                                 <GridItem xs={12}>
                                   <FormControl
                                     fullWidth
@@ -1354,7 +1198,7 @@ const NewReport = ({
                                     </FormGroup>
                                   </FormControl>
                                 </GridItem>
-                                <GridItem xs={12}>
+                                <GridItem xs={12} sm={6}>
                                   <FormControl
                                     fullWidth
                                     className={inputClasses.formControl}
@@ -1767,6 +1611,7 @@ const NewReport = ({
                             </CardBody>
                           </Card>
                         </GridItem>
+
                         <GridItem xs={12}>
                           <Card>
                             <CardHeader color="danger">
@@ -1788,6 +1633,7 @@ const NewReport = ({
                                       {t('report.gecc')}
                                     </Typography>
                                     <Slider
+                                      required
                                       onChange={(element, value) =>
                                         formik.setFieldValue(
                                           'globalExpectationOfClinicalChange',
@@ -1815,8 +1661,13 @@ const NewReport = ({
                                     <TextField
                                       label={t('report.specify')}
                                       type="text"
-                                      id={'geccSpecify'}
-                                      value={formik.values.geccSpecify}
+                                      id={
+                                        'globalExpectationOfClinicalChangeSpecify'
+                                      }
+                                      value={
+                                        formik.values
+                                          .globalExpectationOfClinicalChangeSpecify
+                                      }
                                       onChange={formik.handleChange}
                                     />
                                   </FormControl>
@@ -1824,8 +1675,7 @@ const NewReport = ({
                               </GridContainer>
                             </CardBody>
                           </Card>
-                        </GridItem>
-                        <GridItem xs={12}>
+
                           <GridContainer>
                             <GridItem xs={12}>
                               <Button
@@ -1857,10 +1707,10 @@ const NewReport = ({
   );
 };
 
-NewReport.propTypes = {
+NewReEvaluationReport.propTypes = {
   getPatient: PropTypes.func.isRequired,
   professional: PropTypes.object.isRequired,
-  sendReport: PropTypes.func.isRequired,
+  sendReEvaluationReport: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -1871,5 +1721,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getPatient,
   getCurrentProfile,
-  sendReport,
-})(withRouter(NewReport));
+  sendReEvaluationReport,
+})(withRouter(NewReEvaluationReport));

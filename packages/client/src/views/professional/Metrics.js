@@ -117,10 +117,10 @@ const Metrics = () => {
       {!allPatients ? (
         <Spinner />
       ) : (
-        <GridContainer justifyContent='center'>
+        <GridContainer justifyContent="center">
           <Alert />
           <Card>
-            <CardHeader color='danger'>
+            <CardHeader color="danger">
               <h4 className={classes.cardTitleWhite}>{t('metrics.title')}</h4>
               <p className={classes.cardCategoryWhite}>
                 {t('metrics.description')}
@@ -133,12 +133,12 @@ const Metrics = () => {
                   <ToggleButtonGroup
                     value={visuals}
                     onChange={handleVisuals}
-                    aria-label='visuals'
+                    aria-label="visuals"
                   >
-                    <ToggleButton value='charts' aria-label='charts'>
+                    <ToggleButton value="charts" aria-label="charts">
                       <EqualizerIcon />
                     </ToggleButton>
-                    <ToggleButton value='tables' aria-label='tables'>
+                    <ToggleButton value="tables" aria-label="tables">
                       <TableChartIcon />
                     </ToggleButton>
                   </ToggleButtonGroup>
@@ -226,16 +226,16 @@ const Metrics = () => {
                       <GridItem xs={12}>
                         <Box mt={2}>
                           <TableContainer component={Paper}>
-                            <Table size='small'>
+                            <Table size="small">
                               <TableHead>
                                 <TableRow>
                                   <TableCell>
                                     {t('metrics.ageTableTitle')}
                                   </TableCell>
-                                  <TableCell align='right'>
+                                  <TableCell align="right">
                                     n={allPatients.length}
                                   </TableCell>
-                                  <TableCell align='right'>%</TableCell>
+                                  <TableCell align="right">%</TableCell>
                                 </TableRow>
                               </TableHead>
                               <TableBody>
@@ -255,13 +255,13 @@ const Metrics = () => {
 
                                   return (
                                     <TableRow key={i}>
-                                      <TableCell component='th' scope='row'>
+                                      <TableCell component="th" scope="row">
                                         {categories[i]}
                                       </TableCell>
-                                      <TableCell align='right'>
+                                      <TableCell align="right">
                                         {ageAmount}
                                       </TableCell>
-                                      <TableCell align='right'>
+                                      <TableCell align="right">
                                         {Math.round(
                                           (ageAmount / allPatients.length) *
                                             10000
@@ -329,16 +329,16 @@ const Metrics = () => {
                       <GridItem xs={12}>
                         <Box mt={2}>
                           <TableContainer component={Paper}>
-                            <Table size='small'>
+                            <Table size="small">
                               <TableHead>
                                 <TableRow>
                                   <TableCell>
                                     {t('professional.patient.gender')}
                                   </TableCell>
-                                  <TableCell align='right'>
+                                  <TableCell align="right">
                                     n={allPatients.length}
                                   </TableCell>
-                                  <TableCell align='right'>%</TableCell>
+                                  <TableCell align="right">%</TableCell>
                                 </TableRow>
                               </TableHead>
                               <TableBody>
@@ -353,13 +353,13 @@ const Metrics = () => {
 
                                   return (
                                     <TableRow key={i}>
-                                      <TableCell component='th' scope='row'>
+                                      <TableCell component="th" scope="row">
                                         {categories[i]}
                                       </TableCell>
-                                      <TableCell align='right'>
+                                      <TableCell align="right">
                                         {gendersAmount}
                                       </TableCell>
-                                      <TableCell align='right'>
+                                      <TableCell align="right">
                                         {Math.round(
                                           (gendersAmount / allPatients.length) *
                                             10000

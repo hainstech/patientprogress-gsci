@@ -85,10 +85,10 @@ const Questionnaire = ({
       loading ? (
         <Spinner />
       ) : (
-        <GridContainer justifyContent='center'>
+        <GridContainer justifyContent="center">
           <GridItem xs={12}>
             <Card>
-              <CardHeader color='danger'>
+              <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
                   {`${questionnaire && questionnaire.title} (${
                     questionnaire && questionnaire.questionnaire.language
@@ -106,8 +106,8 @@ const Questionnaire = ({
                     <Switch
                       checked={useId}
                       onChange={toggleUseId}
-                      name='useId'
-                      color='primary'
+                      name="useId"
+                      color="primary"
                     />
                   }
                   label={t('professional.patient.useID')}
@@ -202,7 +202,7 @@ const Questionnaire = ({
                 )}
               </CardBody>
               <CardFooter>
-                <Button onClick={() => history.goBack()} color='danger'>
+                <Button onClick={() => history.goBack()} color="danger">
                   {t('professional.patient.back')}
                 </Button>
                 <PDFDownloadLink
@@ -215,7 +215,7 @@ const Questionnaire = ({
                   }
                   fileName={`${questionnaire.title}.pdf`}
                 >
-                  <Button color='info'>
+                  <Button color="info">
                     {t('professional.patient.export')}
                   </Button>
                 </PDFDownloadLink>

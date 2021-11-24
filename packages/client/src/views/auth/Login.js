@@ -80,11 +80,11 @@ const Login = ({ login, getCaptcha, isAuthenticated, type }) => {
   }
 
   return (
-    <GridContainer justifyContent='center'>
+    <GridContainer justifyContent="center">
       <GridItem xs={12} md={6}>
         <Alert />
         <Card>
-          <CardHeader color='danger'>
+          <CardHeader color="danger">
             <h4 className={classes.cardTitleWhite}>{t('guest.login.title')}</h4>
           </CardHeader>
           <form onSubmit={formik.handleSubmit}>
@@ -94,7 +94,7 @@ const Login = ({ login, getCaptcha, isAuthenticated, type }) => {
                   <FormControl fullWidth>
                     <InputLabel
                       className={inputClasses.labelRoot}
-                      htmlFor='email'
+                      htmlFor="email"
                     >
                       {t('guest.login.email')}
                     </InputLabel>
@@ -107,7 +107,7 @@ const Login = ({ login, getCaptcha, isAuthenticated, type }) => {
                           inputClasses.underline
                         ),
                       }}
-                      type='email'
+                      type="email"
                       id={'email'}
                       value={formik.values.email}
                       onChange={formik.handleChange}
@@ -118,7 +118,7 @@ const Login = ({ login, getCaptcha, isAuthenticated, type }) => {
                   <FormControl fullWidth className={inputClasses.formControl}>
                     <InputLabel
                       className={inputClasses.labelRoot}
-                      htmlFor='password'
+                      htmlFor="password"
                     >
                       {t('guest.login.password')}
                     </InputLabel>
@@ -131,8 +131,8 @@ const Login = ({ login, getCaptcha, isAuthenticated, type }) => {
                           inputClasses.underline
                         ),
                       }}
-                      autoComplete='true'
-                      type='password'
+                      autoComplete="true"
+                      type="password"
                       id={'password'}
                       value={formik.values.password}
                       onChange={formik.handleChange}
@@ -144,7 +144,7 @@ const Login = ({ login, getCaptcha, isAuthenticated, type }) => {
                     <FormControl fullWidth>
                       <InputLabel
                         className={inputClasses.labelRoot}
-                        htmlFor='emailCode'
+                        htmlFor="emailCode"
                         shrink
                       >
                         {t('guest.login.emailCode')}
@@ -158,7 +158,7 @@ const Login = ({ login, getCaptcha, isAuthenticated, type }) => {
                             inputClasses.underline
                           ),
                         }}
-                        type='number'
+                        type="number"
                         id={'emailCode'}
                         value={formik.values.emailCode}
                         onChange={formik.handleChange}
@@ -171,7 +171,7 @@ const Login = ({ login, getCaptcha, isAuthenticated, type }) => {
                     <Box mt={3}>
                       <ReCAPTCHA
                         ref={recaptchaRef}
-                        sitekey='6LcFZ0EbAAAAAO3o623ERVuLe5mb17Oj_UT9LNG4'
+                        sitekey="6LcFZ0EbAAAAAO3o623ERVuLe5mb17Oj_UT9LNG4"
                       />
                     </Box>
                   </GridItem>
@@ -179,10 +179,10 @@ const Login = ({ login, getCaptcha, isAuthenticated, type }) => {
               </GridContainer>
             </CardBody>
             <CardFooter>
-              <Button color='success' type='submit'>
+              <Button color="success" type="submit">
                 {t('guest.login.submit')}
               </Button>
-              <Link to='/forgot'>{t('forgot.link')}</Link>
+              <Link to="/forgot">{t('forgot.link')}</Link>
             </CardFooter>
           </form>
         </Card>

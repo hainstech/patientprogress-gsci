@@ -128,11 +128,11 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
 
   return (
     <>
-      <GridContainer justifyContent='center'>
+      <GridContainer justifyContent="center">
         <GridItem xs={12} lg={10} xl={8}>
           <Alert />
           <Card>
-            <CardHeader color='danger'>
+            <CardHeader color="danger">
               <h4 className={classes.cardTitleWhite}>{t('register.title')}</h4>
             </CardHeader>
             <form onSubmit={formik.handleSubmit}>
@@ -142,7 +142,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                     <FormControl fullWidth className={inputClasses.formControl}>
                       <InputLabel
                         className={inputClasses.labelRoot}
-                        htmlFor='firstName'
+                        htmlFor="firstName"
                       >
                         {t('register.firstName')}
                       </InputLabel>
@@ -155,7 +155,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                             inputClasses.underline
                           ),
                         }}
-                        type='text'
+                        type="text"
                         id={'firstName'}
                         value={formik.values.firstName}
                         onChange={formik.handleChange}
@@ -166,7 +166,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                     <FormControl fullWidth className={inputClasses.formControl}>
                       <InputLabel
                         className={inputClasses.labelRoot}
-                        htmlFor='lastName'
+                        htmlFor="lastName"
                       >
                         {t('register.lastName')}
                       </InputLabel>
@@ -179,7 +179,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                             inputClasses.underline
                           ),
                         }}
-                        type='text'
+                        type="text"
                         id={'lastName'}
                         value={formik.values.lastName}
                         onChange={formik.handleChange}
@@ -190,7 +190,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                     <FormControl fullWidth className={inputClasses.formControl}>
                       <InputLabel
                         className={inputClasses.labelRoot}
-                        htmlFor='language'
+                        htmlFor="language"
                       >
                         {t('register.language')}
                       </InputLabel>
@@ -203,9 +203,9 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                           id: 'language',
                         }}
                       >
-                        <option value='' defaultValue disabled></option>
-                        <option value='en'>English</option>
-                        <option value='fr'>Français</option>
+                        <option value="" defaultValue disabled></option>
+                        <option value="en">English</option>
+                        <option value="fr">Français</option>
                       </NativeSelect>
                     </FormControl>
                   </GridItem>
@@ -213,7 +213,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                     <FormControl fullWidth className={inputClasses.formControl}>
                       <InputLabel
                         className={inputClasses.labelRoot}
-                        htmlFor='gender'
+                        htmlFor="gender"
                       >
                         {t('register.gender')}
                       </InputLabel>
@@ -225,10 +225,10 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                           id: 'gender',
                         }}
                       >
-                        <option value='' defaultValue disabled></option>
-                        <option value='Male'>{t('register.male')}</option>
-                        <option value='Female'>{t('register.female')}</option>
-                        <option value='Other'>{t('register.other')}</option>
+                        <option value="" defaultValue disabled></option>
+                        <option value="Male">{t('register.male')}</option>
+                        <option value="Female">{t('register.female')}</option>
+                        <option value="Other">{t('register.other')}</option>
                       </NativeSelect>
                     </FormControl>
                   </GridItem>
@@ -240,7 +240,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                       >
                         <InputLabel
                           className={inputClasses.labelRoot}
-                          htmlFor='genderOther'
+                          htmlFor="genderOther"
                         >
                           {t('register.genderOther')}
                         </InputLabel>
@@ -253,7 +253,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                               inputClasses.underline
                             ),
                           }}
-                          type='text'
+                          type="text"
                           id={'genderOther'}
                           value={formik.values.genderOther}
                           onChange={formik.handleChange}
@@ -265,9 +265,9 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                     <Box className={inputClasses.formControl}>
                       <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
-                          format='MM/dd/yyyy'
-                          id='dob'
-                          variant='inline'
+                          format="MM/dd/yyyy"
+                          id="dob"
+                          variant="inline"
                           label={t('register.dob')}
                           value={formik.values.dob}
                           onChange={(value) =>
@@ -284,7 +284,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                     <FormControl fullWidth className={inputClasses.formControl}>
                       <InputLabel
                         className={inputClasses.labelRoot}
-                        htmlFor='email'
+                        htmlFor="email"
                       >
                         {t('register.email')}
                       </InputLabel>
@@ -297,7 +297,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                             inputClasses.underline
                           ),
                         }}
-                        type='text'
+                        type="text"
                         id={'email'}
                         value={formik.values.email}
                         onChange={formik.handleChange}
@@ -308,7 +308,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                     <FormControl fullWidth className={inputClasses.formControl}>
                       <InputLabel
                         className={inputClasses.labelRoot}
-                        htmlFor='password'
+                        htmlFor="password"
                       >
                         {t('register.password')}
                       </InputLabel>
@@ -321,7 +321,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                             inputClasses.underline
                           ),
                         }}
-                        type='password'
+                        type="password"
                         id={'password'}
                         value={formik.values.password}
                         onChange={formik.handleChange}
@@ -335,7 +335,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                     <FormControl fullWidth className={inputClasses.formControl}>
                       <InputLabel
                         className={inputClasses.labelRoot}
-                        htmlFor='password2'
+                        htmlFor="password2"
                       >
                         {t('register.passwordConfirmation')}
                       </InputLabel>
@@ -348,7 +348,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                             inputClasses.underline
                           ),
                         }}
-                        type='password'
+                        type="password"
                         id={'password2'}
                         value={formik.values.password2}
                         onChange={formik.handleChange}
@@ -362,24 +362,24 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                         <Switch
                           checked={formik.values.research}
                           onChange={formik.handleChange}
-                          name='research'
+                          name="research"
                         />
                       }
                       label={
                         <p>
                           {t('register.consent')}{' '}
                           <a
-                            href='https://app.patientprogress.ca/privacy'
-                            target='_blank'
-                            rel='noopener noreferrer'
+                            href="https://app.patientprogress.ca/privacy"
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
                             Privacy Policy
                           </a>{' '}
                           &{' '}
                           <a
-                            href='https://app.patientprogress.ca/terms'
-                            target='_blank'
-                            rel='noopener noreferrer'
+                            href="https://app.patientprogress.ca/terms"
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
                             Terms and conditions
                           </a>
@@ -392,14 +392,14 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                   <Box mt={3}>
                     <ReCAPTCHA
                       ref={recaptchaRef}
-                      sitekey='6LcFZ0EbAAAAAO3o623ERVuLe5mb17Oj_UT9LNG4'
+                      sitekey="6LcFZ0EbAAAAAO3o623ERVuLe5mb17Oj_UT9LNG4"
                     />
                   </Box>
                 </GridItem>
               </CardBody>
               <CardFooter>
                 <GridItem xs={12}>
-                  <Button color='danger' type='submit'>
+                  <Button color="danger" type="submit">
                     {t('register.submit')}
                   </Button>
                 </GridItem>

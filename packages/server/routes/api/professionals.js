@@ -123,13 +123,17 @@ router.put(
       description,
       language,
       phone,
+      yearOfBirth,
       yearDegree,
       country,
-      meanNbPatients,
-      practiceDescription,
+      college,
       otherDegree,
-      manipulativeTechniques,
-      nonAdjustiveTechniques,
+      otherDegreeSpecify,
+      averagePatientsVisits,
+      averageNewPatients,
+      practiceDescription,
+      radiologyService,
+      techniques,
     } = req.body;
 
     try {
@@ -139,13 +143,19 @@ router.put(
       professional.description = description;
       professional.language = language;
       professional.phone = phone;
-      professional.profile.yearDegree = yearDegree;
-      professional.profile.country = country;
-      professional.profile.meanNbPatients = meanNbPatients;
-      professional.profile.practiceDescription = practiceDescription;
-      professional.profile.otherDegree = otherDegree;
-      professional.profile.manipulativeTechniques = manipulativeTechniques;
-      professional.profile.nonAdjustiveTechniques = nonAdjustiveTechniques;
+      professional.profile = {
+        yearOfBirth,
+        yearDegree,
+        country,
+        college,
+        otherDegree,
+        otherDegreeSpecify,
+        averagePatientsVisits,
+        averageNewPatients,
+        practiceDescription,
+        radiologyService,
+        techniques,
+      };
 
       await professional.save();
 

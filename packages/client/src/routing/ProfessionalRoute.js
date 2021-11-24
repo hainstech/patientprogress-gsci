@@ -20,7 +20,7 @@ const ProfessionalRoute = ({
         ) : isAuthenticated && type === 'professional' ? (
           <Component {...props} />
         ) : (
-          <Redirect to='/login' />
+          <Redirect to="/login" />
         )
       }
     />

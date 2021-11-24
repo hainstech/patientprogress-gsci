@@ -23,15 +23,15 @@ const QuestionnaireBuilder = ({ createQuestionnaire }) => {
   };
 
   return (
-    <GridContainer justifyContent='center'>
+    <GridContainer justifyContent="center">
       <GridItem xs={12} md={12}>
         <Alert />
         <Card>
-          <Button color='danger' onClick={handleClick}>
+          <Button color="danger" onClick={handleClick}>
             CREATE QUESTIONNAIRE
           </Button>
           <FormBuilder
-            className='questionnaire-builder'
+            className="questionnaire-builder"
             schema={state.schema}
             uischema={state.uischema}
             onChange={(newSchema, newUiSchema) => {

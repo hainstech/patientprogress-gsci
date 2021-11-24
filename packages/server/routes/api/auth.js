@@ -15,7 +15,12 @@ const Professional = require('../../models/Professional');
 const MAX_FAILED_ATTEMPTS = 5;
 
 //Redis
-const client = new Redis();
+const client = process.env.DOCKER
+  ? new Redis({
+      host: 'redis',
+      port: 6379,
+    })
+  : new Redis();
 
 // Slow down requests
 const speedLimiter = slowDown({

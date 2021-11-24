@@ -39,6 +39,7 @@ router.get('/me', patient, async (req, res) => {
     patient.user = undefined;
     patient.questionnaires = undefined;
     patient.reports = undefined;
+    patient.reEvaluationReports = undefined;
     patient.questionnairesToFill = patient.questionnairesToFill.filter(
       (questionnaire) => questionnaire.sent
     );
@@ -251,6 +252,39 @@ router.post('/:id/report', professional, async (req, res) => {
     }
 
     patient.reports.push(req.body.report);
+
+    await patient.save();
+
+    res.json(patient);
+  } catch (err) {
+    if (err.kind == 'ObjectId') {
+      return res.status(404).json({ msg: 'Object error' });
+    }
+    res.status(500).json({ msg: 'Server Error' });
+  }
+});
+
+// @route POST api/patients/:id/reevaluationreport
+// @desc Add a re-evaluation report to a patient by ID
+// @access professional
+router.post('/:id/reevaluationreport', professional, async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.user.id);
+    const patient = await Patient.findById(req.params.id).populate({
+      path: 'questionnaires.questionnaire',
+    });
+
+    if (!patient) {
+      return res.status(404).json({ msg: 'Patient not found' });
+    }
+
+    if (
+      patient.professional.toString() != currentUser.professionalId.toString()
+    ) {
+      return res.status(403).json({ msg: 'Permission denied' });
+    }
+
+    patient.reEvaluationReports.push(req.body.report);
 
     await patient.save();
 

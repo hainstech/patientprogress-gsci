@@ -43,9 +43,9 @@ export default function Footer(props) {
           <span>
             &copy; {1900 + new Date().getYear()}{' '}
             <a
-              href='https://patientprogress.ca'
-              target='_blank'
-              rel='noopener noreferrer'
+              href="https://patientprogress.ca"
+              target="_blank"
+              rel="noopener noreferrer"
               className={classes.a}
             >
               PatientProgress

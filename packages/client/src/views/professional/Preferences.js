@@ -50,6 +50,85 @@ const useCountryInputStyles = makeStyles({
   },
 });
 
+let techniquesIds = [
+  'blairAnalysisAndAdjustingTechnique',
+  'cranialTherapy',
+  'diversifiedTechnique',
+  'extremityManipulating/Adjusting',
+  'fullSpineSpecificChiropracticTechnique',
+  'gonsteadTechnique',
+  'manualMobilisation &Traction',
+  'mcTimoney',
+  'nationalUpperCervicalChiropracticAssociation',
+  'pediatricAdjustment',
+  'petitbonAdjustingInstrument &Technique',
+  'touchAndHoldTechnique',
+  'activatorAdjustingInstrument &Technique',
+  'appliedSpinalBiomechanicalEngineering',
+  'arthroStim',
+  'atlasOrthogonalSweatAdustingInstrumentTechnique',
+  'coxTechnique',
+  'impulseAdjustingInstrument',
+  'jenneticsProcedureAndInstrument',
+  'leanderTechnique',
+  'neuroImpulseProtocol',
+  'neuroVertebralDecompressionTherapy',
+  'pierceResultsSystem',
+  'proAdjusterSigmaInstruments',
+  'pulStarSystem',
+  'sacroOccipitalTechnique',
+  'thompsonTechnique',
+  'toftnessAdjustingTechnique',
+  'toggleRecoilTechnique',
+  'torqueReleaseTechniqueAndInstrument',
+  'activeReleaseTechnique',
+  'crossFiberFrictionTechnique',
+  'cryotherapy',
+  'dryNeedlingTherapy/acupuncture',
+  'electrotherapy',
+  'graston',
+  'heatTherapy',
+  'highPowerLaserTherapy',
+  'instrumentAssistedSoftTissueMobilization',
+  'kinesiotaping',
+  'lowLevelLaserTherapy',
+  'massage',
+  'muscleEnergyTechnique',
+  'myofascialRelease',
+  'nimmo',
+  'pinAndReleaseTechnique',
+  'shockwaveTherapy',
+  'spray &StetchTechnique',
+  'strain/counterStrainTechnique',
+  'therapeuticVibration',
+  'triggerPointTherapy &IschemicCompression',
+  'ultrasoundTherapy',
+  'webster',
+  'bioEnergeticSynchronizationTechnique',
+  'bioGeometricIntegration',
+  'chiropracticManipulativeReflexTechnique',
+  'directionalNonForceTechniqueVanRumpt',
+  'korenSpecificTechnique',
+  'loganBasicTechnique',
+  'networkSpinalAnalysis',
+  'neuroEmotionalTechnique',
+  'talskyTonalChiropractic',
+  'tonalIntegrativeTechnique',
+  'education',
+  'ergonomicAdvices',
+  'exercisePrescription',
+  'footOrthotics',
+  'herbalMedicine',
+  'nutritionalPrescription',
+  'orthotics &Brace',
+  'psychosocialRiskFactorManagement',
+  'weightReductionProgram',
+  'appliedKinesiology',
+  'chiropracticBioPhysics',
+  'exerciseSupervision',
+  'functionalNeurology',
+];
+
 // ISO 3166-1 alpha-2
 // ⚠️ No support for IE 11
 function countryToFlag(isoCode) {
@@ -61,6 +140,26 @@ function countryToFlag(isoCode) {
         )
     : isoCode;
 }
+
+const TechniqueItem = ({ id, techniques, handleTechniquesChange, t }) => (
+  <GridItem xs={12} lg={6}>
+    <FormControlLabel
+      checked={techniques.includes(id)}
+      onChange={handleTechniquesChange}
+      name={id}
+      control={<Checkbox name={id} />}
+      label={t(`report.techniques.${id}`)}
+    />
+  </GridItem>
+);
+
+const SectionTitle = ({ title, t }) => (
+  <GridItem xs={12} style={{ marginTop: 15 }}>
+    <FormLabel component="legend">
+      {t(`report.techniques.categories.${title}`)}
+    </FormLabel>
+  </GridItem>
+);
 
 const Preferences = ({
   profile: { profile, loading },
@@ -74,8 +173,7 @@ const Preferences = ({
   const { t } = useTranslation();
 
   const [otherDegree, setOtherDegree] = useState([]);
-  const [manipulativeTechniques, setManipulativeTechniques] = useState([]);
-  const [nonAdjustiveTechniques, setNonAdjustiveTechniques] = useState([]);
+  const [techniques, setTechniques] = useState([]);
 
   useEffect(() => {
     if (!profile) getCurrentProfile('professional');
@@ -91,8 +189,27 @@ const Preferences = ({
         'language',
         !profile.language ? '' : profile.language
       );
+      profile.profile.yearOfBirth &&
+        formik.setFieldValue('yearOfBirth', profile.profile.yearOfBirth);
       profile.profile.yearDegree &&
         formik.setFieldValue('yearDegree', profile.profile.yearDegree);
+      profile.profile.college &&
+        formik.setFieldValue('college', profile.profile.college);
+      profile.profile.otherDegreeSpecify &&
+        formik.setFieldValue(
+          'otherDegreeSpecify',
+          profile.profile.otherDegreeSpecify
+        );
+      profile.profile.averagePatientsVisits &&
+        formik.setFieldValue(
+          'averagePatientsVisits',
+          profile.profile.averagePatientsVisits
+        );
+      profile.profile.averageNewPatients &&
+        formik.setFieldValue(
+          'averageNewPatients',
+          profile.profile.averageNewPatients
+        );
       profile.profile.country &&
         formik.setFieldValue('country', profile.profile.country);
       profile.profile.meanNbPatients &&
@@ -102,18 +219,16 @@ const Preferences = ({
           'practiceDescription',
           profile.profile.practiceDescription
         );
+      profile.profile.radiologyService &&
+        formik.setFieldValue(
+          'radiologyService',
+          profile.profile.radiologyService
+        );
       setOtherDegree(
         !profile.profile.otherDegree ? [] : profile.profile.otherDegree
       );
-      setManipulativeTechniques(
-        !profile.profile.manipulativeTechniques
-          ? []
-          : profile.profile.manipulativeTechniques
-      );
-      setNonAdjustiveTechniques(
-        !profile.profile.nonAdjustiveTechniques
-          ? []
-          : profile.profile.nonAdjustiveTechniques
+      setTechniques(
+        !profile.profile.techniques ? [] : profile.profile.techniques
       );
     }
     // eslint-disable-next-line
@@ -127,24 +242,13 @@ const Preferences = ({
     setOtherDegree([...otherDegree, event.target.name]);
   };
 
-  const handleManipulativeTechniquesChange = (event) => {
-    if (manipulativeTechniques.indexOf(event.target.name) > -1) {
-      setManipulativeTechniques(
-        manipulativeTechniques.filter((id) => id !== event.target.name)
-      );
+  const handleTechniquesChange = (event) => {
+    console.log(techniques);
+    if (techniques.indexOf(event.target.name) > -1) {
+      setTechniques(techniques.filter((id) => id !== event.target.name));
       return;
     }
-    setManipulativeTechniques([...manipulativeTechniques, event.target.name]);
-  };
-
-  const handleNonAdjustiveTechniquesChange = (event) => {
-    if (nonAdjustiveTechniques.indexOf(event.target.name) > -1) {
-      setNonAdjustiveTechniques(
-        nonAdjustiveTechniques.filter((id) => id !== event.target.name)
-      );
-      return;
-    }
-    setNonAdjustiveTechniques([...nonAdjustiveTechniques, event.target.name]);
+    setTechniques([...techniques, event.target.name]);
   };
 
   const formik = useFormik({
@@ -154,10 +258,15 @@ const Preferences = ({
       description: '',
       phone: '',
       language: '',
+      yearOfBirth: '',
       yearDegree: '',
       country: null,
-      meanNbPatients: '',
+      college: '',
+      otherDegreeSpecify: '',
+      averagePatientsVisits: '',
+      averageNewPatients: '',
       practiceDescription: '',
+      radiologyService: '',
     },
     onSubmit: async (data) => {
       await editProfile(
@@ -165,8 +274,7 @@ const Preferences = ({
         {
           ...data,
           otherDegree,
-          manipulativeTechniques,
-          nonAdjustiveTechniques,
+          techniques,
         },
         history
       );
@@ -179,11 +287,11 @@ const Preferences = ({
       {profile === null ? (
         <Spinner />
       ) : (
-        <GridContainer justifyContent='center'>
+        <GridContainer justifyContent="center">
           <GridItem xs={12} lg={8}>
             <Alert />
             <Card>
-              <CardHeader color='danger'>
+              <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>
                   {t('professional.preferences.title')}
                 </h4>
@@ -202,7 +310,7 @@ const Preferences = ({
                       >
                         <TextField
                           label={t('professional.preferences.name')}
-                          type='text'
+                          type="text"
                           id={'name'}
                           value={formik.values.name}
                           onChange={formik.handleChange}
@@ -216,7 +324,7 @@ const Preferences = ({
                       >
                         <TextField
                           label={t('professional.preferences.clinic')}
-                          type='text'
+                          type="text"
                           id={'clinic'}
                           value={formik.values.clinic}
                           onChange={formik.handleChange}
@@ -230,7 +338,7 @@ const Preferences = ({
                       >
                         <TextField
                           label={t('professional.preferences.phone')}
-                          type='text'
+                          type="text"
                           id={'phone'}
                           value={formik.values.phone}
                           onChange={formik.handleChange}
@@ -244,21 +352,21 @@ const Preferences = ({
                       >
                         <TextField
                           label={t('professional.preferences.yourDescription')}
-                          type='text'
+                          type="text"
                           id={'description'}
                           value={formik.values.description}
                           onChange={formik.handleChange}
                         />
                       </FormControl>
                     </GridItem>
-                    <GridItem xs={12} lg={2}>
+                    <GridItem xs={12} lg={4}>
                       <FormControl
                         fullWidth
                         className={inputClasses.formControl}
                       >
                         <InputLabel
                           className={inputClasses.labelRoot}
-                          htmlFor='language'
+                          htmlFor="language"
                         >
                           {t('professional.preferences.language')}
                         </InputLabel>
@@ -271,10 +379,24 @@ const Preferences = ({
                             id: 'language',
                           }}
                         >
-                          <option value='' defaultValue disabled></option>
-                          <option value='en'>English</option>
-                          <option value='fr'>Français</option>
+                          <option value="" defaultValue disabled></option>
+                          <option value="en">English</option>
+                          <option value="fr">Français</option>
                         </NativeSelect>
+                      </FormControl>
+                    </GridItem>
+                    <GridItem xs={12} lg={4}>
+                      <FormControl
+                        fullWidth
+                        className={inputClasses.formControl}
+                      >
+                        <TextField
+                          label={t('professional.preferences.yearOfBirth')}
+                          type="text"
+                          id={'yearOfBirth'}
+                          value={formik.values.yearOfBirth}
+                          onChange={formik.handleChange}
+                        />
                       </FormControl>
                     </GridItem>
                   </GridContainer>
@@ -287,7 +409,7 @@ const Preferences = ({
                       >
                         <TextField
                           label={t('professional.preferences.yearDegree')}
-                          type='text'
+                          type="text"
                           id={'yearDegree'}
                           value={formik.values.yearDegree}
                           onChange={formik.handleChange}
@@ -300,7 +422,7 @@ const Preferences = ({
                         className={inputClasses.formControl}
                       >
                         <Autocomplete
-                          id='country-select'
+                          id="country-select"
                           options={countries}
                           classes={{
                             option: countryInputStyles.option,
@@ -340,35 +462,49 @@ const Preferences = ({
                         />
                       </FormControl>
                     </GridItem>
+                    <GridItem xs={12} lg={12}>
+                      <FormControl
+                        fullWidth
+                        className={inputClasses.formControl}
+                      >
+                        <TextField
+                          label={t('professional.preferences.college')}
+                          type="text"
+                          id={'college'}
+                          value={formik.values.college}
+                          onChange={formik.handleChange}
+                        />
+                      </FormControl>
+                    </GridItem>
                     <GridItem xs={12}>
                       <FormControl
                         fullWidth
                         className={inputClasses.formControl}
-                        component='fieldset'
+                        component="fieldset"
                       >
-                        <FormLabel component='legend'>
+                        <FormLabel component="legend">
                           {t('professional.preferences.otherDegree')}
                         </FormLabel>
                         <FormGroup>
                           <FormControlLabel
                             checked={otherDegree.includes('BSc degree')}
                             onChange={handleDegreeChange}
-                            name='BSc degree'
-                            control={<Checkbox name='BSc degree' />}
+                            name="BSc degree"
+                            control={<Checkbox name="BSc degree" />}
                             label={t('professional.preferences.bsc')}
                           />
                           <FormControlLabel
                             checked={otherDegree.includes('MSc degree')}
                             onChange={handleDegreeChange}
-                            name='MSc degree'
-                            control={<Checkbox name='MSc degree' />}
+                            name="MSc degree"
+                            control={<Checkbox name="MSc degree" />}
                             label={t('professional.preferences.msc')}
                           />
                           <FormControlLabel
                             checked={otherDegree.includes('PhD degree')}
                             onChange={handleDegreeChange}
-                            name='PhD degree'
-                            control={<Checkbox name='PhD degree' />}
+                            name="PhD degree"
+                            control={<Checkbox name="PhD degree" />}
                             label={t('professional.preferences.phd')}
                           />
                           <FormControlLabel
@@ -376,9 +512,9 @@ const Preferences = ({
                               'Chiropractic specialty degree'
                             )}
                             onChange={handleDegreeChange}
-                            name='Chiropractic specialty degree'
+                            name="Chiropractic specialty degree"
                             control={
-                              <Checkbox name='Chiropractic specialty degree' />
+                              <Checkbox name="Chiropractic specialty degree" />
                             }
                             label={t(
                               'professional.preferences.chiropracticSpecialtyDegree'
@@ -389,9 +525,9 @@ const Preferences = ({
                               'Post graduate diploma / micro-program'
                             )}
                             onChange={handleDegreeChange}
-                            name='Post graduate diploma / micro-program'
+                            name="Post graduate diploma / micro-program"
                             control={
-                              <Checkbox name='Post graduate diploma / micro-program' />
+                              <Checkbox name="Post graduate diploma / micro-program" />
                             }
                             label={t(
                               'professional.preferences.postGraduateDiploma'
@@ -400,16 +536,16 @@ const Preferences = ({
                         </FormGroup>
                       </FormControl>
                     </GridItem>
-                    <GridItem xs={12}>
+                    <GridItem xs={12} lg={12}>
                       <FormControl
                         fullWidth
                         className={inputClasses.formControl}
                       >
                         <TextField
-                          label={t('professional.preferences.nbPatients')}
-                          type='number'
-                          id={'meanNbPatients'}
-                          value={formik.values.meanNbPatients}
+                          label={t('report.specify')}
+                          type="text"
+                          id={'otherDegreeSpecify'}
+                          value={formik.values.otherDegreeSpecify}
                           onChange={formik.handleChange}
                         />
                       </FormControl>
@@ -418,30 +554,62 @@ const Preferences = ({
                       <FormControl
                         fullWidth
                         className={inputClasses.formControl}
-                        component='fieldset'
                       >
-                        <FormLabel component='legend'>
+                        <TextField
+                          label={t(
+                            'professional.preferences.averagePatientsVisits'
+                          )}
+                          type="number"
+                          id={'averagePatientsVisits'}
+                          value={formik.values.averagePatientsVisits}
+                          onChange={formik.handleChange}
+                        />
+                      </FormControl>
+                    </GridItem>
+                    <GridItem xs={12}>
+                      <FormControl
+                        fullWidth
+                        className={inputClasses.formControl}
+                      >
+                        <TextField
+                          label={t(
+                            'professional.preferences.averageNewPatients'
+                          )}
+                          type="number"
+                          id={'averageNewPatients'}
+                          value={formik.values.averageNewPatients}
+                          onChange={formik.handleChange}
+                        />
+                      </FormControl>
+                    </GridItem>
+                    <GridItem xs={12}>
+                      <FormControl
+                        fullWidth
+                        className={inputClasses.formControl}
+                        component="fieldset"
+                      >
+                        <FormLabel component="legend">
                           {t('professional.preferences.describe')}
                         </FormLabel>
 
                         <RadioGroup
-                          aria-label='practice description'
-                          name='practiceDescription'
+                          aria-label="practice description"
+                          name="practiceDescription"
                           value={formik.values.practiceDescription}
                           onChange={formik.handleChange}
                         >
                           <FormControlLabel
-                            value='Solo practitioner'
+                            value="Solo practitioner"
                             control={<Radio />}
                             label={t('professional.preferences.solo')}
                           />
                           <FormControlLabel
-                            value='Other chiropractor(s) at practice'
+                            value="Other chiropractor(s) at practice"
                             control={<Radio />}
                             label={t('professional.preferences.otherChiros')}
                           />
                           <FormControlLabel
-                            value='Other non-chiropractic healthcare practitioner available at same location'
+                            value="Other non-chiropractic healthcare practitioner available at same location"
                             control={<Radio />}
                             label={t(
                               'professional.preferences.otherNonChiropractic'
@@ -450,496 +618,87 @@ const Preferences = ({
                         </RadioGroup>
                       </FormControl>
                     </GridItem>
+                    <GridItem xs={12}>
+                      <FormControl
+                        fullWidth
+                        className={inputClasses.formControl}
+                        component="fieldset"
+                      >
+                        <FormLabel component="legend">
+                          {t('professional.preferences.radiologyService')}
+                        </FormLabel>
+
+                        <RadioGroup
+                          aria-label="radiologyService"
+                          name="radiologyService"
+                          value={formik.values.radiologyService}
+                          onChange={formik.handleChange}
+                        >
+                          <FormControlLabel
+                            value={t('report.no')}
+                            control={<Radio />}
+                            label={t('report.no')}
+                          />
+                          <FormControlLabel
+                            value={t('report.yes')}
+                            control={<Radio />}
+                            label={t('report.yes')}
+                          />
+                        </RadioGroup>
+                      </FormControl>
+                    </GridItem>
                   </GridContainer>
-                  <p>{t('professional.preferences.approach')}</p>
                   <GridContainer>
                     <GridItem xs={12}>
                       <FormControl
                         fullWidth
                         className={inputClasses.formControl}
-                        component='fieldset'
+                        component="fieldset"
                       >
-                        <FormLabel component='legend'>
-                          {t('professional.preferences.manipulative')}
+                        <FormLabel component="legend">
+                          {t('report.techniques.title')}
                         </FormLabel>
                         <FormGroup>
                           <GridContainer>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={manipulativeTechniques.includes(
-                                  'diversified'
+                            {techniquesIds.map((id) => (
+                              <React.Fragment key={id}>
+                                {id ===
+                                  'blairAnalysisAndAdjustingTechnique' && (
+                                  <SectionTitle title={'hvla'} t={t} />
                                 )}
-                                onChange={handleManipulativeTechniquesChange}
-                                name='diversified'
-                                control={<Checkbox name='diversified' />}
-                                label={t('report.techniques.diversified')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={manipulativeTechniques.includes(
-                                  'extremityManipulating'
+                                {id ===
+                                  'activatorAdjustingInstrument &Technique' && (
+                                  <SectionTitle
+                                    title={'mechanicalAssisted'}
+                                    t={t}
+                                  />
                                 )}
-                                onChange={handleManipulativeTechniquesChange}
-                                name='extremityManipulating'
-                                control={
-                                  <Checkbox name='extremityManipulating' />
-                                }
-                                label={t(
-                                  'report.techniques.extremityManipulating'
+                                {id === 'activeReleaseTechnique' && (
+                                  <SectionTitle title={'softTissue'} t={t} />
                                 )}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={manipulativeTechniques.includes(
-                                  'activatorMethod'
+                                {id ===
+                                  'bioEnergeticSynchronizationTechnique' && (
+                                  <SectionTitle title={'tonal'} t={t} />
                                 )}
-                                onChange={handleManipulativeTechniquesChange}
-                                name='activatorMethod'
-                                control={<Checkbox name='activatorMethod' />}
-                                label={t('report.techniques.activatorMethod')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={manipulativeTechniques.includes(
-                                  'arthroStim'
+                                {id === 'education' && (
+                                  <SectionTitle
+                                    title={'recommendations'}
+                                    t={t}
+                                  />
                                 )}
-                                onChange={handleManipulativeTechniquesChange}
-                                name='arthroStim'
-                                control={<Checkbox name='arthroStim' />}
-                                label={t('report.techniques.arthroStim')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={manipulativeTechniques.includes(
-                                  'impulseAdjustingInstrument'
+                                {id === 'appliedKinesiology' && (
+                                  <SectionTitle title={'other'} t={t} />
                                 )}
-                                onChange={handleManipulativeTechniquesChange}
-                                name='impulseAdjustingInstrument'
-                                control={
-                                  <Checkbox name='impulseAdjustingInstrument' />
-                                }
-                                label={t(
-                                  'report.techniques.impulseAdjustingInstrument'
-                                )}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={manipulativeTechniques.includes(
-                                  'gonstead'
-                                )}
-                                onChange={handleManipulativeTechniquesChange}
-                                name='gonstead'
-                                control={<Checkbox name='gonstead' />}
-                                label={t('report.techniques.gonstead')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={manipulativeTechniques.includes('cox')}
-                                onChange={handleManipulativeTechniquesChange}
-                                name='cox'
-                                control={<Checkbox name='cox' />}
-                                label={t('report.techniques.cox')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={manipulativeTechniques.includes(
-                                  'thompson'
-                                )}
-                                onChange={handleManipulativeTechniquesChange}
-                                name='thompson'
-                                control={<Checkbox name='thompson' />}
-                                label={t('report.techniques.thompson')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={manipulativeTechniques.includes('sot')}
-                                onChange={handleManipulativeTechniquesChange}
-                                name='sot'
-                                control={<Checkbox name='sot' />}
-                                label={t('report.techniques.sot')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={manipulativeTechniques.includes('hio')}
-                                onChange={handleManipulativeTechniquesChange}
-                                name='hio'
-                                control={<Checkbox name='hio' />}
-                                label={t('report.techniques.hio')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={manipulativeTechniques.includes(
-                                  'nimmo-tonus'
-                                )}
-                                onChange={handleManipulativeTechniquesChange}
-                                name='nimmo-tonus'
-                                control={<Checkbox name='nimmo-tonus' />}
-                                label={t('report.techniques.nimmo-tonus')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={manipulativeTechniques.includes(
-                                  'loganBasic'
-                                )}
-                                onChange={handleManipulativeTechniquesChange}
-                                name='loganBasic'
-                                control={<Checkbox name='loganBasic' />}
-                                label={t('report.techniques.loganBasic')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={manipulativeTechniques.includes(
-                                  'meric'
-                                )}
-                                onChange={handleManipulativeTechniquesChange}
-                                name='meric'
-                                control={<Checkbox name='meric' />}
-                                label={t('report.techniques.meric')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={manipulativeTechniques.includes(
-                                  'pierce-stillwagon'
-                                )}
-                                onChange={handleManipulativeTechniquesChange}
-                                name='pierce-stillwagon'
-                                control={<Checkbox name='pierce-stillwagon' />}
-                                label={t('report.techniques.pierce-stillwagon')}
-                              />
-                            </GridItem>
-                          </GridContainer>
-                        </FormGroup>
-                      </FormControl>
-                    </GridItem>
-                    <GridItem xs={12}>
-                      <FormControl
-                        fullWidth
-                        className={inputClasses.formControl}
-                        component='fieldset'
-                      >
-                        <FormLabel component='legend'>
-                          {t('professional.preferences.nonAdjustive')}
-                        </FormLabel>
-                        <FormGroup>
-                          <GridContainer>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'mobilization'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='mobilization'
-                                control={<Checkbox name='mobilization' />}
-                                label={t('report.techniques.mobilization')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'graston'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='graston'
-                                control={<Checkbox name='graston' />}
-                                label={t('report.techniques.graston')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'myofascialRelease'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='myofascialRelease'
-                                control={<Checkbox name='myofascialRelease' />}
-                                label={t('report.techniques.myofascialRelease')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'ischemicCompression'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='ischemicCompression'
-                                control={
-                                  <Checkbox name='ischemicCompression' />
-                                }
-                                label={t(
-                                  'report.techniques.ischemicCompression'
-                                )}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'massageTherapy'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='massageTherapy'
-                                control={<Checkbox name='massageTherapy' />}
-                                label={t('report.techniques.massageTherapy')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'motorizedTraction'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='motorizedTraction'
-                                control={<Checkbox name='motorizedTraction' />}
-                                label={t('report.techniques.motorizedTraction')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'formalPatientEducation'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='formalPatientEducation'
-                                control={
-                                  <Checkbox name='formalPatientEducation' />
-                                }
-                                label={t(
-                                  'report.techniques.formalPatientEducation'
-                                )}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'ergonomicInstructions'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='ergonomicInstructions'
-                                control={
-                                  <Checkbox name='ergonomicInstructions' />
-                                }
-                                label={t(
-                                  'report.techniques.ergonomicInstructions'
-                                )}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'nutritionalCounseling'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='nutritionalCounseling'
-                                control={
-                                  <Checkbox name='nutritionalCounseling' />
-                                }
-                                label={t(
-                                  'report.techniques.nutritionalCounseling'
-                                )}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'exerciseInstruction'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='exerciseInstruction'
-                                control={
-                                  <Checkbox name='exerciseInstruction' />
-                                }
-                                label={t(
-                                  'report.techniques.exerciseInstruction'
-                                )}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'cold'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='cold'
-                                control={<Checkbox name='cold' />}
-                                label={t('report.techniques.cold')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'heat'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='heat'
-                                control={<Checkbox name='heat' />}
-                                label={t('report.techniques.heat')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'orthotics'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='orthotics'
-                                control={<Checkbox name='orthotics' />}
-                                label={t('report.techniques.orthotics')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'orthopedicSupports'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='orthopedicSupports'
-                                control={<Checkbox name='orthopedicSupports' />}
-                                label={t(
-                                  'report.techniques.orthopedicSupports'
-                                )}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'casting'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='casting'
-                                control={<Checkbox name='casting' />}
-                                label={t('report.techniques.casting')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'electricalStimulation'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='electricalStimulation'
-                                control={
-                                  <Checkbox name='electricalStimulation' />
-                                }
-                                label={t(
-                                  'report.techniques.electricalStimulation'
-                                )}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'interferentialCurrent'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='interferentialCurrent'
-                                control={
-                                  <Checkbox name='interferentialCurrent' />
-                                }
-                                label={t(
-                                  'report.techniques.interferentialCurrent'
-                                )}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'directCurrent'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='directCurrent'
-                                control={<Checkbox name='directCurrent' />}
-                                label={t('report.techniques.directCurrent')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'diathermy'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='diathermy'
-                                control={<Checkbox name='diathermy' />}
-                                label={t('report.techniques.diathermy')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'ultrasound'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='ultrasound'
-                                control={<Checkbox name='ultrasound' />}
-                                label={t('report.techniques.directCurrent')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'acupuncture'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='acupuncture'
-                                control={<Checkbox name='acupuncture' />}
-                                label={t('report.techniques.acupuncture')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'dryNeedling'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='dryNeedling'
-                                control={<Checkbox name='dryNeedling' />}
-                                label={t('report.techniques.dryNeedling')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'shockwave'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='shockwave'
-                                control={<Checkbox name='shockwave' />}
-                                label={t('report.techniques.shockwave')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'coldLaser'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='coldLaser'
-                                control={<Checkbox name='coldLaser' />}
-                                label={t('report.techniques.coldLaser')}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} lg={6}>
-                              <FormControlLabel
-                                checked={nonAdjustiveTechniques.includes(
-                                  'other'
-                                )}
-                                onChange={handleNonAdjustiveTechniquesChange}
-                                name='other'
-                                control={<Checkbox name='other' />}
-                                label={t('report.techniques.other')}
-                              />
-                            </GridItem>
+                                <TechniqueItem
+                                  id={id}
+                                  techniques={techniques}
+                                  handleTechniquesChange={
+                                    handleTechniquesChange
+                                  }
+                                  t={t}
+                                />
+                              </React.Fragment>
+                            ))}
                           </GridContainer>
                         </FormGroup>
                       </FormControl>
@@ -947,7 +706,7 @@ const Preferences = ({
                   </GridContainer>
                 </CardBody>
                 <CardFooter>
-                  <Button color='success' type='submit'>
+                  <Button color="success" type="submit">
                     {t('professional.preferences.submit')}
                   </Button>
                 </CardFooter>

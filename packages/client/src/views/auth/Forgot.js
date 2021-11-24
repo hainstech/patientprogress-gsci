@@ -57,11 +57,11 @@ const Forgot = ({ sendForgotEmail, isAuthenticated, type }) => {
   }
 
   return (
-    <GridContainer justifyContent='center'>
+    <GridContainer justifyContent="center">
       <GridItem xs={12} md={6}>
         <Alert />
         <Card>
-          <CardHeader color='danger'>
+          <CardHeader color="danger">
             <h4 className={classes.cardTitleWhite}>{t('forgot.reset')}</h4>
             <p className={classes.cardCategoryWhite}>
               {t('forgot.directions')}
@@ -74,7 +74,7 @@ const Forgot = ({ sendForgotEmail, isAuthenticated, type }) => {
                   <FormControl fullWidth>
                     <InputLabel
                       className={inputClasses.labelRoot}
-                      htmlFor='email'
+                      htmlFor="email"
                     >
                       {t('guest.login.email')}
                     </InputLabel>
@@ -87,7 +87,7 @@ const Forgot = ({ sendForgotEmail, isAuthenticated, type }) => {
                           inputClasses.underline
                         ),
                       }}
-                      type='text'
+                      type="text"
                       id={'email'}
                       value={formik.values.email}
                       onChange={formik.handleChange}
@@ -99,14 +99,14 @@ const Forgot = ({ sendForgotEmail, isAuthenticated, type }) => {
                   <Box mt={3}>
                     <ReCAPTCHA
                       ref={recaptchaRef}
-                      sitekey='6LcFZ0EbAAAAAO3o623ERVuLe5mb17Oj_UT9LNG4'
+                      sitekey="6LcFZ0EbAAAAAO3o623ERVuLe5mb17Oj_UT9LNG4"
                     />
                   </Box>
                 </GridItem>
               </GridContainer>
             </CardBody>
             <CardFooter>
-              <Button color='success' type='submit'>
+              <Button color="success" type="submit">
                 {t('register.submit')}
               </Button>
             </CardFooter>

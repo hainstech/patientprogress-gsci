@@ -29,10 +29,6 @@ const ProfessionalSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  yearOfBirth: {
-    type: String,
-    required: true,
-  },
   gender: {
     type: String,
     required: true,
@@ -46,13 +42,17 @@ const ProfessionalSchema = new mongoose.Schema({
   ],
 
   profile: {
+    yearOfBirth: { type: String },
     yearDegree: { type: String },
     country: { code: { type: String }, label: { type: String } },
+    college: { type: String },
     otherDegree: [{ type: String }],
-    meanNbPatients: { type: String },
+    otherDegreeSpecify: { type: String },
+    averagePatientsVisits: { type: String },
+    averageNewPatients: { type: String },
     practiceDescription: { type: String },
-    manipulativeTechniques: [{ type: String }],
-    nonAdjustiveTechniques: [{ type: String }],
+    radiologyService: { type: String },
+    techniques: [{ type: String }],
   },
 });
 

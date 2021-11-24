@@ -63,6 +63,10 @@ var patientSchema = new mongoose.Schema({
   ],
   reports: [
     {
+      dob: {
+        type: Date,
+        required: true,
+      },
       age: {
         type: String,
         required: true,
@@ -111,10 +115,8 @@ var patientSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      chiefComplaintRegion: {
-        type: String,
-        required: true,
-      },
+      allPainAreas: [{ type: String }],
+      relatedPainAreas: [{ type: String }],
       chiefComplaintStart: {
         type: String,
         required: true,
@@ -163,6 +165,11 @@ var patientSchema = new mongoose.Schema({
         function: { type: String, required: true },
         qualityOfLife: { type: String, required: true },
       },
+      investigationResults: { type: String },
+      additionalInvestigation: { type: String, required: true },
+      additionalInvestigationSpecify: { type: String },
+      neckOrLowerBackCondition: { type: String, required: true },
+      spinalDiagnosticClassification: { type: String },
       diagnosis: {
         type: String,
         required: true,
@@ -170,6 +177,7 @@ var patientSchema = new mongoose.Schema({
       additionalDiagnosis: {
         type: String,
       },
+      differentialDiagnosis: { type: String },
       numberOfTreatments: {
         type: String,
         required: true,
@@ -178,12 +186,157 @@ var patientSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      frequencySpecify: { type: String },
       objectives: [String],
       planOfManagement: [String],
       planOfManagementOther: [String],
-      planOfManagementExternalConsultation: { type: String },
+      currentEmploymentStatus: { type: String, required: true },
+      continueActivities: { type: String, required: true },
+      continueActivitiesSpecify: { type: String },
+      functionalLimitation: { type: String, required: true },
+      functionalLimitationSpecify: { type: String },
+      reference: { type: String, required: true },
+      referenceList: [String],
+      referenceListOther: { type: String },
+      referenceListReason: { type: String },
       globalExpectationOfClinicalChange: { type: String, required: true },
-      comments: { type: String },
+      geccSpecify: { type: String },
+    },
+  ],
+  reEvaluationReports: [
+    {
+      dob: {
+        type: Date,
+        required: true,
+      },
+      age: {
+        type: String,
+        required: true,
+      },
+      intakeUsed: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Patient.questionnaires',
+        required: true,
+      },
+      initialReportDate: {
+        type: Date,
+        required: true,
+      },
+      date: {
+        type: Date,
+        required: true,
+      },
+      professionalName: {
+        type: String,
+        required: true,
+      },
+      professionalProfession: {
+        type: String,
+        required: true,
+      },
+      // Chief complaint
+      chiefComplaint: {
+        type: String,
+        required: true,
+      },
+      allPainAreas: [{ type: String }],
+      relatedPainAreas: [{ type: String }],
+      chiefComplaintStart: {
+        type: String,
+        required: true,
+      },
+      otherComplaints: {
+        type: String,
+      },
+      initialGlobalExpectationOfClinicalChange: {
+        type: String,
+        required: true,
+      },
+      chiefComplaintInitialDiagnosis: {
+        type: String,
+        required: true,
+      },
+      secondaryComplaintInitialDiagnosis: {
+        type: String,
+      },
+      comorbidities: [
+        {
+          name: { type: String, required: true },
+          treatment: { type: String, required: true },
+          activityLimitation: { type: String, required: true },
+        },
+      ],
+      redFlags: [String],
+      // Facultative scores
+      relevantScore: [
+        {
+          name: { type: String },
+          score: [
+            {
+              title: { type: String },
+              value: { type: String },
+              improvement: { type: Number },
+            },
+          ],
+          date: { type: Date },
+        },
+      ],
+      // Follow up
+      improvementPain: {},
+      improvementFunction: {},
+      improvementQualityOfLife: {},
+      treatmentsSatisfaction: {},
+      chiropractorSatisfaction: {},
+      // Report
+      investigationResults: { type: String },
+      additionalInvestigation: { type: String, required: true },
+      additionalInvestigationSpecify: { type: String },
+      neckOrLowerBackCondition: { type: String, required: true },
+      spinalDiagnosticClassification: { type: String },
+
+      diagnosis: {
+        type: String,
+        required: true,
+      },
+      additionalDiagnosis: {
+        type: String,
+      },
+      differentialDiagnosis: { type: String },
+      initialGlobalExpectationOfClinicalChange: {
+        type: String,
+        required: true,
+      },
+      numberOfTreatmentsProvided: {
+        type: String,
+        required: true,
+      },
+      numberOfAdditionalTreatments: {
+        type: String,
+        required: true,
+      },
+      frequency: {
+        type: String,
+        required: true,
+      },
+
+      frequencySpecify: { type: String },
+      objectives: [String],
+      planOfManagement: [String],
+      planOfManagementOther: [String],
+      currentEmploymentStatus: { type: String, required: true },
+      continueActivities: { type: String, required: true },
+      continueActivitiesSpecify: { type: String },
+      functionalLimitation: { type: String, required: true },
+      functionalLimitationSpecify: { type: String },
+      reference: { type: String, required: true },
+      referenceList: [String],
+      referenceListOther: { type: String },
+      referenceListReason: { type: String },
+      globalImpressionOfClinicalChange: { type: String, required: true },
+      globalExpectationOfClinicalChange: { type: String, required: true },
+      maximalMedicalImprovement: { type: String, required: true },
+      maximalMedicalImprovementSpecify: { type: String },
+      globalExpectationOfClinicalChangeSpecify: { type: String },
     },
   ],
   questionnairesToFill: [

@@ -23,9 +23,9 @@ export default function Snackbar(props) {
     action = [
       <IconButton
         className={classes.iconButton}
-        key='close'
-        aria-label='Close'
-        color='inherit'
+        key="close"
+        aria-label="Close"
+        color="inherit"
         onClick={() => props.closeNotification()}
       >
         <Close className={classes.close} />

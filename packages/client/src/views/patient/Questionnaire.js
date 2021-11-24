@@ -51,7 +51,7 @@ const BodyMap = (props) => {
       <ImageMapper
         src={URL}
         map={{
-          name: 'body-map',
+          name: `${props.schema.description}`,
           areas: areasJSON,
         }}
         responsive
@@ -64,6 +64,14 @@ const BodyMap = (props) => {
         disabled={disabled}
       />
     </>
+  );
+};
+
+const Title = function (props) {
+  return (
+    <h4>
+      <strong>{props.schema.title}</strong>{' '}
+    </h4>
   );
 };
 
@@ -86,7 +94,7 @@ const NativeSelectWidget = function (props) {
           id: props.label,
         }}
       >
-        {!props.default && <option aria-label='None' value='' />}
+        {!props.default && <option aria-label="None" value="" />}
 
         {props.options.enumOptions.map(({ label, value }) => (
           <option key={`${label}`} value={value}>
@@ -132,6 +140,7 @@ function Questionnaire({
 
   const widgets = {
     nativeSelect: NativeSelectWidget,
+    title: Title,
   };
 
   const fields = {
@@ -143,7 +152,7 @@ function Questionnaire({
       {questionnaire === null ? (
         <Spinner />
       ) : (
-        <GridContainer justifyContent='center'>
+        <GridContainer justifyContent="center">
           <GridItem xs={12}>
             <Card>
               <CardBody>

@@ -39,11 +39,11 @@ function Invite({ invitePatient }) {
 
   return (
     <>
-      <GridContainer justifyContent='center'>
+      <GridContainer justifyContent="center">
         <GridItem xs={12} md={6}>
           <Alert />
           <Card>
-            <CardHeader color='danger'>
+            <CardHeader color="danger">
               <h4 className={classes.cardTitleWhite}>
                 {t('professional.invite.title')}
               </h4>
@@ -55,7 +55,7 @@ function Invite({ invitePatient }) {
                     <FormControl fullWidth>
                       <InputLabel
                         className={inputClasses.labelRoot}
-                        htmlFor='email'
+                        htmlFor="email"
                       >
                         {t('guest.login.email')}
                       </InputLabel>
@@ -68,7 +68,7 @@ function Invite({ invitePatient }) {
                             inputClasses.underline
                           ),
                         }}
-                        type='text'
+                        type="text"
                         id={'email'}
                         value={formik.values.email}
                         onChange={formik.handleChange}
@@ -78,7 +78,7 @@ function Invite({ invitePatient }) {
                 </GridContainer>
               </CardBody>
               <CardFooter>
-                <Button color='success' type='submit'>
+                <Button color="success" type="submit">
                   {t('professional.invite.submit')}
                 </Button>
               </CardFooter>

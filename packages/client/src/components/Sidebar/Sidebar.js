@@ -57,7 +57,7 @@ const Sidebar = (props) => {
           <NavLink
             to={prop.layout + prop.path}
             className={activePro + classes.item}
-            activeClassName='active'
+            activeClassName="active"
             key={key}
           >
             <ListItem button className={classes.itemLink + listItemClasses}>
@@ -85,7 +85,7 @@ const Sidebar = (props) => {
         <NavLink
           className={' ' + classes.item}
           onClick={() => toggleLanguage()}
-          to='#'
+          to="#"
         >
           <ListItem button className={classes.itemLink}>
             <LanguageIcon className={classes.itemIcon} />
@@ -119,9 +119,9 @@ const Sidebar = (props) => {
   );
   var brand = (
     <div className={classes.logo}>
-      <a href='/' className={classNames(classes.logoLink)}>
+      <a href="/" className={classNames(classes.logoLink)}>
         <div className={classes.logoImage}>
-          <img src={logo} alt='logo' className={classes.img} />
+          <img src={logo} alt="logo" className={classes.img} />
         </div>
         {logoText}
       </a>
@@ -129,9 +129,9 @@ const Sidebar = (props) => {
   );
   return (
     <div>
-      <Hidden mdUp implementation='css'>
+      <Hidden mdUp implementation="css">
         <Drawer
-          variant='temporary'
+          variant="temporary"
           anchor={'right'}
           open={props.open}
           classes={{
@@ -152,10 +152,10 @@ const Sidebar = (props) => {
           ) : null}
         </Drawer>
       </Hidden>
-      <Hidden smDown implementation='css'>
+      <Hidden smDown implementation="css">
         <Drawer
-          anchor='left'
-          variant='permanent'
+          anchor="left"
+          variant="permanent"
           open
           classes={{
             paper: classNames(classes.drawerPaper),

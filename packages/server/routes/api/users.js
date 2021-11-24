@@ -66,21 +66,26 @@ router.post(
     } = req.body;
 
     try {
-      if (!recaptchaValue) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'Please complete reCaptcha' }] });
-      }
+      // Disable when testing
+      if (!process.env.TEST_MODE) {
+        if (!recaptchaValue) {
+          return res
+            .status(400)
+            .json({ errors: [{ msg: 'Please complete reCaptcha' }] });
+        }
 
-      const { body } = await got.post(
-        `https://www.google.com/recaptcha/api/siteverify?secret=${config.get(
-          'recaptchaSecret'
-        )}&response=${recaptchaValue}`,
-        { responseType: 'json' }
-      );
+        const { body } = await got.post(
+          `https://www.google.com/recaptcha/api/siteverify?secret=${config.get(
+            'recaptchaSecret'
+          )}&response=${recaptchaValue}`,
+          { responseType: 'json' }
+        );
 
-      if (!body.success) {
-        return res.status(400).json({ errors: [{ msg: 'Invalid reCaptcha' }] });
+        if (!body.success) {
+          return res
+            .status(400)
+            .json({ errors: [{ msg: 'Invalid reCaptcha' }] });
+        }
       }
 
       let professionalFound = await Professional.findById(professional);
@@ -175,8 +180,8 @@ router.post(
           .status(404)
           .json({ errors: [{ msg: 'Invalid professional ID' }] });
       }
+      console.log(err);
       res.status(500).send('Server error');
-      console.log(err.message);
     }
   }
 );
@@ -201,7 +206,6 @@ router.post(
       check('description', 'Description is required').not().isEmpty(),
       check('language', 'Language is required').not().isEmpty(),
       check('gender', 'Gender is required').not().isEmpty(),
-      check('yearOfBirth', 'Year of birth is required').not().isEmpty(),
       check('phone', 'Please enter a valid phone number').isMobilePhone(),
     ],
   ],
@@ -221,7 +225,6 @@ router.post(
       description,
       language,
       phone,
-      yearOfBirth,
       gender,
     } = req.body;
 
@@ -259,7 +262,6 @@ router.post(
           language,
           phone,
           user: user.id,
-          yearOfBirth,
           gender,
         });
 
