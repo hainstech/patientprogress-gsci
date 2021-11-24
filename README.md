@@ -58,8 +58,6 @@ PORT=5000
 
 Go to package/server/config/ and create a new file named default.json
 
-> Replace "production" by "development" depending on your environment
-
 ```
 {
   "mongoURI_dev": "<YOUR_MONGO_DEVELOPMENT_URL>",
