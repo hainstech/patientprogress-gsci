@@ -2,6 +2,7 @@ var CronJob = require('cron').CronJob;
 const Patient = require('./models/Patient');
 const nodemailer = require('nodemailer');
 const User = require('./models/User');
+const config = require('config');
 
 module.exports = {
   startSender: function () {
@@ -23,12 +24,12 @@ module.exports = {
 
                 // Send a email notification
                 const transporter = nodemailer.createTransport({
-                  host: '***REMOVED***',
-                  port: 465,
+                  host: config.get('nodemailerHost'),
+                  port: config.get('nodemailerPort'),
                   secure: true,
                   auth: {
-                    user: 'dominic@hainstech.com',
-                    pass: '***REMOVED***',
+                    user: config.get('nodemailerUser'),
+                    pass: config.get('nodemailerPass'),
                   },
                 });
 

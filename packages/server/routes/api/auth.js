@@ -9,6 +9,7 @@ const { check, validationResult } = require('express-validator');
 const got = require('got');
 const slowDown = require('express-slow-down');
 const Redis = require('ioredis');
+
 const User = require('../../models/User');
 const Professional = require('../../models/Professional');
 
@@ -161,12 +162,12 @@ router.post(
 
             // Send the code via email
             const transporter = nodemailer.createTransport({
-              host: '***REMOVED***',
-              port: 465,
+              host: config.get('nodemailerHost'),
+              port: config.get('nodemailerPort'),
               secure: true,
               auth: {
-                user: 'dominic@hainstech.com',
-                pass: '***REMOVED***',
+                user: config.get('nodemailerUser'),
+                pass: config.get('nodemailerPass'),
               },
             });
 
@@ -269,12 +270,12 @@ router.post(
         const url = `https://app.patientprogress.ca/forgot/${user.id}/${token}`;
 
         const transporter = nodemailer.createTransport({
-          host: '***REMOVED***',
-          port: 465,
+          host: config.get('nodemailerHost'),
+          port: config.get('nodemailerPort'),
           secure: true,
           auth: {
-            user: 'dominic@hainstech.com',
-            pass: '***REMOVED***',
+            user: config.get('nodemailerUser'),
+            pass: config.get('nodemailerPass'),
           },
         });
 

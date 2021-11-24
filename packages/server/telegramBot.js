@@ -2,8 +2,9 @@ const got = require('got');
 var CronJob = require('cron').CronJob;
 const Patient = require('./models/Patient');
 const Professional = require('./models/Professional');
+const config = require('config');
 
-const TelegramAPIKey = '***REMOVED***';
+const TelegramAPIKey = config.get('TelegramAPIKey');
 
 module.exports = {
   startBot: function () {
@@ -16,7 +17,9 @@ module.exports = {
           const Message = `API running in ${process.env.NODE_ENV} (${process.env.INSTANCE}) ✅ \n${patientCount} patients 👦 \n${professionalCount} professionals 👨‍⚕️`;
           got.post(
             encodeURI(
-              `https://api.telegram.org/bot${TelegramAPIKey}/sendMessage?chat_id=***REMOVED***&text=${Message}`
+              `https://api.telegram.org/bot${TelegramAPIKey}/sendMessage?chat_id=${config.get(
+                'TelegramChatID'
+              )}&text=${Message}`
             )
           );
         },

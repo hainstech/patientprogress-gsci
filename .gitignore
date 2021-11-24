@@ -6,3 +6,5 @@ temp/
 *.log
 # Local Netlify folder
 .netlify
+default.json
+*.DS_Store

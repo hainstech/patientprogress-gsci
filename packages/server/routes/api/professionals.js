@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 var nodemailer = require('nodemailer');
+const config = require('config');
 
 const Professional = require('../../models/Professional');
 
@@ -187,12 +188,12 @@ router.post(
       const url = `https://app.patientprogress.ca/register/${id}`;
 
       const transporter = nodemailer.createTransport({
-        host: '***REMOVED***',
-        port: 465,
+        host: config.get('nodemailerHost'),
+        port: config.get('nodemailerPort'),
         secure: true,
         auth: {
-          user: 'dominic@hainstech.com',
-          pass: '***REMOVED***',
+          user: config.get('nodemailerUser'),
+          pass: config.get('nodemailerPass'),
         },
       });
 
