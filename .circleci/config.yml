@@ -24,6 +24,9 @@ jobs:
             - yarn-packages-v1-{{ .Branch }}-
             - yarn-packages-v1-
 
+      - run: npm install --g lerna
+      - run: npm install netlify-cli -g
+
       - run: yarn install --freeze-lockfile
 
       - save_cache:
@@ -36,9 +39,6 @@ jobs:
 
       - run: git config --global user.email $GITHUB_EMAIL
       - run: git config --global user.name $GITHUB_USER
-
-      - run: npm install --g lerna
-      - run: npm install netlify-cli -g
 
       - run: git tag
       - run: yarn ci:deploy
