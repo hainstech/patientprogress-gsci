@@ -2,8 +2,6 @@
 
 ## _Medical dashboard for research_
 
-[![hainsdominic](https://circleci.com/gh/hainsdominic/patientprogress.svg?style=shield&circle-token=d7f995a631868a35babd4f2aaf5d4aeed40e0194)](https://circleci.com/gh/hainsdominic/patientprogress)
-
 PatientProgress is a mobile-ready front-end application built with React and a RESTful API built with Node.
 The PatientProgress web-app is made to facilitate medical research, while being very convenient and time-saving
 for the professional and the patient.
