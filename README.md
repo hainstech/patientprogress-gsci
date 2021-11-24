@@ -56,6 +56,25 @@ NODE_ENV=production
 PORT=5000
 ```
 
+Go to package/server/config/ and create a new file named default.json
+
+> Replace "production" by "development" depending on your environment
+
+```
+{
+  "mongoURI_dev": "<YOUR_MONGO_DEVELOPMENT_URL>",
+  "mongoURI_prod": "<YOUR_MONGO_PRODUCTION_URL>",
+  "jwtSecret": "<YOUR_JWT_SECRET>",
+  "recaptchaSecret": "<YOUR_RECAPTCHA_SECRET>",
+  "TelegramAPIKey": "<YOUR_TELEGRAM_API_KEY>",
+  "TelegramChatID": "<YOUR_TELEGRAM_CHAT_ID>",
+  "nodemailerHost": "<YOUR_EMAIL_PROVIDER (stmp server)>",
+  "nodemailerPort": "<YOUR_EMAIL_PORT>",
+  "nodemailerUser":"<YOUR_EMAIL>",
+  "nodemailerPass":"<YOUR_EMAIL_PASSWORD>"
+}
+```
+
 Install the dependencies and devDependencies and start the server.
 
 ```sh
