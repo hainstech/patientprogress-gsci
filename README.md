@@ -86,4 +86,4 @@ yarn dev
 
 ## Team
 
-Dominic Hains - Developer
+Dominic Hains - Maintainer & Developer
