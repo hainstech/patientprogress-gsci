@@ -24,7 +24,7 @@ jobs:
             - yarn-packages-v1-{{ .Branch }}-
             - yarn-packages-v1-
 
-      # - run: npm install --g lerna
+      - run: npm install --g lerna
       - run: npm install netlify-cli -g
 
       - run: yarn install
