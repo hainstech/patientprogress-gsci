@@ -16,7 +16,7 @@ module.exports = {
           const Message = `API running in ${process.env.NODE_ENV} (${process.env.INSTANCE}) ✅ \n${patientCount} patients 👦 \n${professionalCount} professionals 👨‍⚕️`;
           got.post(
             encodeURI(
-              `https://api.telegram.org/bot${TelegramAPIKey}/sendMessage?***REMOVED***&text=${Message}`
+              `https://api.telegram.org/bot${TelegramAPIKey}/sendMessage?chat_id=***REMOVED***&text=${Message}`
             )
           );
         },
