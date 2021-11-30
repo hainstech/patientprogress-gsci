@@ -1,6 +1,6 @@
 # PatientProgress
 
-[![CircleCI](https://circleci.com/gh/hainsdominic/patientprogress-2021/tree/master.svg?style=svg)](https://circleci.com/gh/hainsdominic/patientprogress-2021/tree/master)
+[![CircleCI](https://circleci.com/gh/hainsdominic/patientprogress/tree/master.svg?style=svg)](https://circleci.com/gh/hainsdominic/patientprogress/tree/master)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/32d4cd27-4f5a-4c5c-a2e5-333abe88f0d6/deploy-status)](https://app.netlify.com/sites/patientprogress/deploys)
 
