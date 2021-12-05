@@ -15,8 +15,6 @@ module.exports = async function (req, res, next) {
 
     const ip = req.header('x-forwarded-for') || req.socket.remoteAddress;
 
-    console.log(ip);
-
     if (researcher && researcher.authorizedIps.includes(ip)) {
       researcher.requestsCount++;
       researcher.save();
