@@ -66,7 +66,7 @@ router.get('/', [researcher, rateLimiter], async (req, res) => {
         .update(patient.name + patient._id)
         .digest('hex');
 
-      patient.professional.patients = undefined;
+      patient.professional?.patients = undefined;
 
       return patient;
     });
