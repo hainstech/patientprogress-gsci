@@ -11,7 +11,7 @@ const researcher = require('../../middleware/researcher');
 
 const rateLimiter = rateLimit({
   windowMs: 60 * 60 * 1000 * 24, // 1 day
-  max: 1, // 1 request per day
+  max: 10, // 10 request per day
   handler: function (req, res) {
     return res.status(429).json({ errors: [{ msg: 'Try again later.' }] });
   },

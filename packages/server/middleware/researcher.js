@@ -12,11 +12,14 @@ module.exports = async function (req, res, next) {
   // Verify key and ip
   try {
     const researcher = await Researcher.findOne({ key: key });
+
     const ip = req.header('x-forwarded-for') || req.socket.remoteAddress;
 
     console.log(ip);
 
     if (researcher && researcher.authorizedIps.includes(ip)) {
+      researcher.requestsCount++;
+      researcher.save();
       next();
     } else {
       res.status(401).json({ msg: 'Permission denied' });
