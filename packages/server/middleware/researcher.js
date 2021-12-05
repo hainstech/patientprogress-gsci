@@ -17,7 +17,7 @@ module.exports = async function (req, res, next) {
 
     if (researcher && researcher.authorizedIps.includes(ip)) {
       researcher.requestsCount++;
-      researcher.save();
+      await researcher.save();
       next();
     } else {
       res.status(401).json({ msg: 'Permission denied' });
