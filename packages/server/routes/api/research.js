@@ -60,18 +60,20 @@ router.get('/', [researcher, rateLimiter], async (req, res) => {
       .populate('professional')
       .select(['-user', '-_id']);
 
-    const anonPatients = patients.map((patient) => {
-      patient.name = crypto
-        .createHash('sha256')
-        .update(patient.name + patient._id)
-        .digest('hex');
+    const anonPatients = patients
+      .filter(({ research }) => research)
+      .map((patient) => {
+        patient.name = crypto
+          .createHash('sha256')
+          .update(patient.name + patient._id)
+          .digest('hex');
 
-      if (patient.professional) {
-        patient.professional.patients = undefined;
-      }
+        if (patient.professional) {
+          patient.professional.patients = undefined;
+        }
 
-      return patient;
-    });
+        return patient;
+      });
 
     res.send(anonPatients);
   } catch (err) {
