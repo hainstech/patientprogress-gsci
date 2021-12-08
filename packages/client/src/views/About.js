@@ -1,5 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import Faq from 'react-faq-component';
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import GridContainer from '../components/Grid/GridContainer';
 import GridItem from '../components/Grid/GridItem.js';
@@ -7,7 +10,6 @@ import Card from '../components/Card/Card.js';
 import CardHeader from '../components/Card/CardHeader.js';
 import CardBody from '../components/Card/CardBody.js';
 
-import { makeStyles } from '@material-ui/core/styles';
 import styles from '../assets/jss/material-dashboard-react/views/dashboardStyle';
 const useStyles = makeStyles(styles);
 
@@ -20,10 +22,10 @@ const About = () => {
         <GridItem xs={12}>
           <Card>
             <CardHeader color="danger">
-              <h4 className={classes.cardTitleWhite}>
-                {t('guest.about.title')}
+              <Typography variant="h5" className={classes.cardTitleWhite}>
+                PatientProgress
                 {process.env.REACT_APP_BETA && ' - BETA VERSION'}
-              </h4>
+              </Typography>
             </CardHeader>
             <CardBody>
               {process.env.REACT_APP_BETA && (
@@ -36,29 +38,58 @@ const About = () => {
                   <br />
                 </div>
               )}
-              <p>{t('guest.about.p1')}</p>
-              <p>
-                <b>{t('guest.about.features')}:</b>
-              </p>
-              <p>{t('guest.about.patient')}</p>
-              <ul>
-                <li>{t('guest.about.patient1')}</li>
-                <li>{t('guest.about.patient2')}</li>
-                <li>{t('guest.about.patient3')}</li>
-              </ul>
-              <p>{t('guest.about.professional')}</p>
-              <ul>
-                <li>{t('guest.about.professional1')}</li>
-                <li>{t('guest.about.professional2')}</li>
-                <li>{t('guest.about.professional3')}</li>
-                <li>{t('guest.about.professional4')}</li>
-                <li>{t('guest.about.professional5')}</li>
-              </ul>
-              <p>{t('guest.about.researcher')}</p>
-              <ul>
-                <li>{t('guest.about.researcher1')}</li>
-                <li>{t('guest.about.researcher2')}</li>
-              </ul>
+              <Typography variant="subtitle1">{t('guest.about.p1')}</Typography>
+              <br />
+              <Typography variant="subtitle1">{t('guest.about.p2')}</Typography>
+              <br />
+              <Typography variant="h5">{t('guest.about.sub1')}</Typography>
+
+              <Typography variant="body1">{t('guest.about.p3')}</Typography>
+              <br />
+              <Typography variant="h5">{t('guest.about.sub2')}</Typography>
+
+              <Typography variant="body1">{t('guest.about.p4')}</Typography>
+              <br />
+              <Typography variant="h5">{t('guest.about.sub3')}</Typography>
+
+              <Typography variant="body1">{t('guest.about.p5')}</Typography>
+              <br />
+              <Faq
+                data={{
+                  title: 'FAQ',
+                  rows: [
+                    {
+                      title: t('guest.about.q1'),
+                      content: t('guest.about.r1'),
+                    },
+                    {
+                      title: t('guest.about.q2'),
+                      content: t('guest.about.r2'),
+                    },
+                    {
+                      title: t('guest.about.q3'),
+                      content: t('guest.about.r3'),
+                    },
+                    {
+                      title: t('guest.about.q4'),
+                      content: (
+                        <>
+                          {t('guest.about.r4')}
+                          <a
+                            href="https://github.com/hainsdominic/patientprogress"
+                            target="_blank"
+                            rel="noopener norefer"
+                          >
+                            PatientProgress
+                          </a>
+                        </>
+                      ),
+                    },
+                  ],
+                }}
+              />
+              <br />
+              <Typography variant="body2">{t('guest.about.email')}</Typography>
             </CardBody>
           </Card>
         </GridItem>
