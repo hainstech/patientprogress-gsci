@@ -78,7 +78,7 @@ const About = () => {
                           <a
                             href="https://github.com/hainsdominic/patientprogress"
                             target="_blank"
-                            rel="noopener norefer"
+                            rel="noreferrer"
                           >
                             PatientProgress
                           </a>
