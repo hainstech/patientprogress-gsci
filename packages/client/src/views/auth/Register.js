@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
@@ -27,6 +27,8 @@ import {
 } from '@material-ui/pickers';
 import { pwnedPassword } from 'hibp';
 
+import Consent from './Consent';
+
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem.js';
 import Card from '../../components/Card/Card.js';
@@ -49,6 +51,8 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
   const recaptchaRef = React.createRef();
 
   const { t } = useTranslation();
+
+  const [consentData, setConsentData] = useState({});
 
   const formik = useFormik({
     initialValues: {
@@ -354,6 +358,13 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                         onChange={formik.handleChange}
                       />
                     </FormControl>
+                  </GridItem>
+                  <GridItem xs={12}>
+                    <br />
+                    <Consent
+                      setConsentData={setConsentData}
+                      consentData={consentData}
+                    />
                   </GridItem>
                   <GridItem xs={12}>
                     <FormControlLabel
