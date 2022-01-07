@@ -192,9 +192,15 @@
   },
   "pdf": {
     "generated": "Généré par PatientProgress",
-    "redflags": "Drapeaux Rouges",
-    "comorbidities": "Comorbidités",
-    "familyHistory": "Antécédants Familiaux"
+    "redflags": "Section 3/8 - Dépistage des drapeaux rouges",
+    "comorbidities": "Section 4/8 - Comorbidités",
+    "familyHistory": "Section 6/8 - Antécédents personnels et familiaux",
+    "fileOpening": "File Opening",
+    "generalInformation": "Section 1/8 - Information générale",
+    "chiefComplaint": "Section 2/8 - Motifs de consultation principaux et secondaires",
+    "medication": "Section 5/8 - Médication",
+    "qualityOfLife": "Section 7/8 - Qualité de vie, exercice et attentes",
+    "examinationConsent": "Section 8/8 - Consentement aux examens"
   },
   "report": {
     "newReport": "Nouveau rapport",
