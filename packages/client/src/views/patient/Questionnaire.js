@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import Form from '@rjsf/material-ui';
 import { InputLabel, NativeSelect } from '@material-ui/core';
 import ImageMapper from 'react-img-mapper';
+import { useTranslation } from 'react-i18next';
 
 import URL from '../../assets/img/bodyMap.jpg';
 import areasJSON from '../../assets/bodyMap.json';
@@ -13,6 +14,7 @@ import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem.js';
 import Card from '../../components/Card/Card.js';
 import CardBody from '../../components/Card/CardBody.js';
+import Button from '../../components/CustomButtons/Button.js';
 
 import { getCurrentProfile } from '../../actions/profile';
 
@@ -115,6 +117,7 @@ function Questionnaire({
 }) {
   const [questionnaire, setQuestionnaire] = useState(null);
   const [startTime, setStartTime] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     (async () => {
@@ -164,7 +167,13 @@ function Questionnaire({
                   formData={formData}
                   onChange={(e) => setFormData(e.formData)}
                   onSubmit={(e) => onSubmit(e)}
-                />
+                >
+                  <div>
+                    <Button color="success" type="submit">
+                      {t('register.submit')}
+                    </Button>
+                  </div>
+                </Form>
               </CardBody>
             </Card>
           </GridItem>
