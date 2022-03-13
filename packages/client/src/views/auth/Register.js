@@ -13,8 +13,6 @@ import {
   Input,
   NativeSelect,
   Box,
-  Switch,
-  FormControlLabel,
   FormHelperText,
 } from '@material-ui/core';
 import classNames from 'classnames';
