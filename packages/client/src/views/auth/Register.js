@@ -366,38 +366,6 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                       consentData={consentData}
                     />
                   </GridItem>
-                  <GridItem xs={12}>
-                    <FormControlLabel
-                      className={inputClasses.formControl}
-                      control={
-                        <Switch
-                          checked={formik.values.research}
-                          onChange={formik.handleChange}
-                          name="research"
-                        />
-                      }
-                      label={
-                        <p>
-                          {t('register.consent')}{' '}
-                          <a
-                            href="https://app.patientprogress.ca/privacy"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Privacy Policy
-                          </a>{' '}
-                          &{' '}
-                          <a
-                            href="https://app.patientprogress.ca/terms"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Terms and conditions
-                          </a>
-                        </p>
-                      }
-                    />
-                  </GridItem>
                 </GridContainer>
                 <GridItem xs={12}>
                   <Box mt={3}>
