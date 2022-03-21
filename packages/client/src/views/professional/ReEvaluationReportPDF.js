@@ -184,14 +184,6 @@ const ReEvaluationReportPDF = ({ report, patient }) => {
           ))}
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              {t('report.redFlags')}:{' '}
-              {report.redFlags.toString()
-                ? report.redFlags.join(', ')
-                : t('report.none')}
-            </Text>
-          </View>
-          <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>
               {t('report.relevantScores')}:{' '}
               {report.relevantScore.length === 0 && t('report.none')}
             </Text>

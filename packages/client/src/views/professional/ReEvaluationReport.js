@@ -303,21 +303,6 @@ const ReEvaluationReport = ({
                     <Card>
                       <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
-                          {t('report.redFlags')}
-                        </p>
-                      </CardHeader>
-                      <CardBody>
-                        {report.redFlags.toString()
-                          ? report.redFlags.join(', ')
-                          : t('report.none')}
-                      </CardBody>
-                    </Card>
-                  </GridItem>
-
-                  <GridItem xs={12}>
-                    <Card>
-                      <CardHeader color="danger">
-                        <p className={classes.cardTitleWhite}>
                           {t('report.relevantScores')}
                         </p>
                       </CardHeader>
