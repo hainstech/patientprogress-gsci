@@ -29,8 +29,8 @@ router.get('/', admin, async (req, res) => {
 router.get('/list', professional, async (req, res) => {
   try {
     let questionnaires = await Questionnaire.find();
-    questionnaires = questionnaires.map(({ _id, title, language }) => {
-      return { id: _id, title, language };
+    questionnaires = questionnaires.map(({ _id, title, language, schema }) => {
+      return { id: _id, title, displayTitle: schema.title, language };
     });
     res.json(questionnaires);
   } catch (err) {

@@ -87,6 +87,7 @@
       "approach": "Could you please indicate which treatment approach you usemost frequently. These treatment options will appear in the section related to your patients Plan of Management."
     },
     "patient": {
+      "noIntake": "No initial intake filled yet",
       "view": "View",
       "answers": "Answers",
       "questionnaire": "Questionnaire(s)",
@@ -146,7 +147,13 @@
       "newReEvaluationReport": "New Re-Evaluation Report",
       "type": "Type",
       "initial": "Initial",
-      "reEvaluation": "Re-evaluation"
+      "reEvaluation": "Re-evaluation",
+      "questionnaires": {
+        "NECK_BUNDLE": "Bundle: Neck follow-up",
+        "BACK_BUNDLE": "Bundle: Back follow-up",
+        "MS_BUNDLE": "Bundle: MS follow-up",
+        "MI_BUNDLE": "Bundle: MI follow-up"
+      }
     }
   },
   "sidebar": {

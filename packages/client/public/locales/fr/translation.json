@@ -86,6 +86,7 @@
       "approach": "Pourriez-vous s'il vous plaît indiquer quelle approche de traitement vous utilisez le plus fréquemment. Ces options de traitement apparaîtront dans la section relative au plan de gestion de vos patients."
     },
     "patient": {
+      "noIntake": "Aucun questionnaire initial rempli",
       "view": "Voir",
       "answers": "Réponses",
       "questionnaire": "Questionnaire(s)",
@@ -145,7 +146,13 @@
       "newReEvaluationReport": "Nouveau Rapport de Ré-évaluation",
       "type": "Type",
       "initial": "Initial",
-      "reEvaluation": "Ré-évaluation"
+      "reEvaluation": "Ré-évaluation",
+      "bundles": {
+        "NECK_BUNDLE": "Paquet: Suivi du cou",
+        "BACK_BUNDLE": "Paquet: Suivi du dos",
+        "MS_BUNDLE": "Paquet: Suivi MS",
+        "MI_BUNDLE": "Paquet: Suivi MI"
+      }
     }
   },
   "sidebar": {
