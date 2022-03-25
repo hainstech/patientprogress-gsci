@@ -196,12 +196,12 @@ router.post('/:id/questionnaireToFill', professional, async (req, res) => {
       let subject = '';
       switch (patient.language) {
         case 'en':
-          message = `<h3>You have a new questionnaire to fill!</h3><p>Please <a href="https://app.patientprogress.ca/login">sign into the application</a> as soon as possible to fill it.</p><br><p>Thank you,</p><p>The PatientProgress Team</p>`;
-          subject = 'New questionnaire';
+          message = `<p>Dear Patient,</p><p>Your chiropractor needs you to fill out a few questionnaires prior to your next consultation.</p><p>Please <a href="https://app.patientprogress.ca/login">sign into the PatientProgress web application</a> as soon as possible to fill them out.</p><br><p>Thank you,</p><br><p>The PatientProgress Team</p>`;
+          subject = 'New questionnaire to fill out';
           break;
         case 'fr':
-          message = `<h3>Vous avez un nouveau questionnaire à remplir!</h3><p>Veuillez <a href="https://app.patientprogress.ca/login"> vous connecter</a> dès que possible afin de le remplir.</p><br><p>Merci,</p><p>L'équipe PatientProgress</p>`;
-          subject = 'Nouveau questionnaire';
+          message = `<p>Cher.ère patient.e,</p><p>Votre chiropraticien.ne vous demande de remplir quelques questionnaires avant votre prochaine consultation.</p><p>Veuillez <a href="https://app.patientprogress.ca/login"> vous connecter</a> dès que possible afin de les remplir.</p><br><p>Merci beaucoup,</p><br><p>L'équipe PatientProgress</p>`;
+          subject = 'Nouveau Questionnaire à remplir';
           break;
 
         default:
