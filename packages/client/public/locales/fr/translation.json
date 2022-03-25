@@ -148,10 +148,10 @@
       "initial": "Initial",
       "reEvaluation": "Ré-évaluation",
       "bundles": {
-        "NECK_BUNDLE": "Paquet: Suivi du cou",
-        "BACK_BUNDLE": "Paquet: Suivi du dos",
-        "MS_BUNDLE": "Paquet: Suivi MS",
-        "MI_BUNDLE": "Paquet: Suivi MI"
+        "NECK_BUNDLE": "Ensemble: Cou",
+        "BACK_BUNDLE": "Ensemble: Dos",
+        "MS_BUNDLE": "Ensemble: Membre supérieur",
+        "MI_BUNDLE": "Ensemble: Membre inférieur"
       }
     }
   },

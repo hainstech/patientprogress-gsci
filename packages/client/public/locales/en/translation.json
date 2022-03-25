@@ -149,10 +149,10 @@
       "initial": "Initial",
       "reEvaluation": "Re-evaluation",
       "questionnaires": {
-        "NECK_BUNDLE": "Bundle: Neck follow-up",
-        "BACK_BUNDLE": "Bundle: Back follow-up",
-        "MS_BUNDLE": "Bundle: MS follow-up",
-        "MI_BUNDLE": "Bundle: MI follow-up"
+        "NECK_BUNDLE": "Bundle: Neck",
+        "BACK_BUNDLE": "Bundle: Back",
+        "MS_BUNDLE": "Bundle: Upper Limb",
+        "MI_BUNDLE": "Bundle: Lower Limb"
       }
     }
   },
