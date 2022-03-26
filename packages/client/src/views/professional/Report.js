@@ -330,36 +330,6 @@ const Report = ({
                     <Card>
                       <CardHeader color="danger">
                         <p className={classes.cardTitleWhite}>
-                          {t('report.findings')}
-                        </p>
-                      </CardHeader>
-                      <CardBody>
-                        <GridContainer>
-                          <GridItem xs={12}>
-                            {t('report.investigationResults')}:{' '}
-                            {report.investigationResults}
-                          </GridItem>
-                        </GridContainer>
-                        <GridContainer>
-                          <GridItem xs={12}>
-                            {t('report.additionalInvestigation')}:{' '}
-                            {report.additionalInvestigation}
-                          </GridItem>
-                          {report.additionalInvestigationSpecify && (
-                            <GridItem xs={12}>
-                              {t('report.specify')}:{' '}
-                              {report.additionalInvestigationSpecify}
-                            </GridItem>
-                          )}
-                        </GridContainer>
-                      </CardBody>
-                    </Card>
-                  </GridItem>
-
-                  <GridItem xs={12}>
-                    <Card>
-                      <CardHeader color="danger">
-                        <p className={classes.cardTitleWhite}>
                           {t('report.relevantScores')}
                         </p>
                       </CardHeader>
@@ -423,6 +393,37 @@ const Report = ({
                       </CardBody>
                     </Card>
                   </GridItem>
+
+                  <GridItem xs={12}>
+                    <Card>
+                      <CardHeader color="danger">
+                        <p className={classes.cardTitleWhite}>
+                          {t('report.findings')}
+                        </p>
+                      </CardHeader>
+                      <CardBody>
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.investigationResults')}:{' '}
+                            {report.investigationResults}
+                          </GridItem>
+                        </GridContainer>
+                        <GridContainer>
+                          <GridItem xs={12}>
+                            {t('report.additionalInvestigation')}:{' '}
+                            {report.additionalInvestigation}
+                          </GridItem>
+                          {report.additionalInvestigationSpecify && (
+                            <GridItem xs={12}>
+                              {t('report.specify')}:{' '}
+                              {report.additionalInvestigationSpecify}
+                            </GridItem>
+                          )}
+                        </GridContainer>
+                      </CardBody>
+                    </Card>
+                  </GridItem>
+
                   <GridItem xs={12}>
                     <Card>
                       <CardHeader color="danger">

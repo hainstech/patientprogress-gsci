@@ -196,12 +196,6 @@ const ReportPDF = ({ report, patient }) => {
 
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
-              {t('report.investigationResults')}: {report.investigationResults}
-            </Text>
-          </View>
-
-          <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>
               {t('report.additionalInvestigation')}:{' '}
               {report.additionalInvestigation}
             </Text>
@@ -274,6 +268,12 @@ const ReportPDF = ({ report, patient }) => {
           </View>
           <View wrap={false} style={styles.subtitle}>
             <Text>{t('report.filledProfessional')}</Text>
+          </View>
+
+          <View wrap={false} style={styles.answerRow}>
+            <Text style={styles.answer}>
+              {t('report.investigationResults')}: {report.investigationResults}
+            </Text>
           </View>
 
           <View wrap={false} style={styles.answerRow}>
