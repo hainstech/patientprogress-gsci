@@ -218,6 +218,9 @@
     "date": "Date",
     "professional": "Professional's Name",
     "profession": "Profession",
+    "professions": {
+      "chiropractic": "Chiropractic"
+    },
     "civilStatus": "Civil status",
     "nbChildrens": "Number of children",
     "occupation": "Occupation",

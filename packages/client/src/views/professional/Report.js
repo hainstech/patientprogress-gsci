@@ -131,9 +131,10 @@ const Report = ({
                             {report.professionalName}
                           </GridItem>
                           <GridItem xs={12}>
-                            {/* #TODO Translate the profession */}
                             {t('report.profession')}:{' '}
-                            {report.professionalProfession}
+                            {t(
+                              `report.professions.${report.professionalProfession}`
+                            )}
                           </GridItem>
                         </GridContainer>
                       </CardBody>

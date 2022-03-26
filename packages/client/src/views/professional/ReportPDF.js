@@ -100,7 +100,8 @@ const ReportPDF = ({ report, patient }) => {
               {t('report.professional')}: {report.professionalName}
             </Text>
             <Text style={styles.answer}>
-              {t('report.profession')}: {report.professionalProfession}
+              {t('report.profession')}:{' '}
+              {t(`report.professions.${report.professionalProfession}`)}
             </Text>
           </View>
           <View wrap={false} style={styles.answerRow}>
