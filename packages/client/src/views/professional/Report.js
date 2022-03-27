@@ -506,6 +506,10 @@ const Report = ({
                                   : '')
                               : t('report.none')}
                           </GridItem>
+                          <GridItem xs={12}>
+                            <br />
+                            {t('report.activityRecommendation')}
+                          </GridItem>
 
                           <GridItem xs={12}>
                             {t('report.currentEmploymentStatus')}:{' '}
@@ -537,6 +541,7 @@ const Report = ({
                           )}
 
                           <GridItem xs={12}>
+                            <br />
                             {t('report.reference.title')}: {report.reference}
                           </GridItem>
 

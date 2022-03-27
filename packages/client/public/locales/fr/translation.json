@@ -111,6 +111,7 @@
       "none": "Aucun",
       "export": "Exporter au format PDF",
       "score": {
+        "interpretation": "Interprétation",
         "score": "Pointage",
         "total": "Pointage total",
         "pain": "Douleur",
@@ -404,7 +405,7 @@
       "sciatica": "Lombalgie avec radiculopathie / sciatalgie"
     },
     "activityRecommendation": "Recommendation d'Activité",
-    "currentEmploymentStatus": "Current Employment Status",
+    "currentEmploymentStatus": "Statut d’emploi actuel",
     "continueActivities": "Maintien des activité de la vie quotidienne(AVQ)",
     "functionalLimitation": "Limitation ou restriction fonctionnelle",
     "reference": {
