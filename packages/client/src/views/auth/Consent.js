@@ -47,7 +47,6 @@ function Consent({ consentData, setConsentData }) {
       participantConsent: '',
     },
     onSubmit: async (data) => {
-      console.log(data);
       setConsentData(data);
     },
   });

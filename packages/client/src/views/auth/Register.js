@@ -63,7 +63,6 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
       email: '',
       password: '',
       password2: '',
-      research: false,
     },
     onSubmit: async ({
       firstName,
@@ -75,7 +74,6 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
       email,
       password,
       password2,
-      research,
     }) => {
       // Checks if the password has been exposed in a data breach
       let pwned = await pwnedPassword(password);
@@ -109,9 +107,11 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
           dob,
           email: email.toLowerCase(),
           password,
-          research,
+          research: consentData.dataConsent && consentData.participantConsent,
           professional: match.params.id,
           recaptchaRef,
+          dataConsent: consentData.dataConsent,
+          participantConsent: consentData.participantConsent,
         });
       }
     },
