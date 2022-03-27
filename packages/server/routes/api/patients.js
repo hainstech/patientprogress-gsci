@@ -252,6 +252,24 @@ router.post('/:id/report', professional, async (req, res) => {
 
     patient.reports.push(req.body.report);
 
+    // send a BPI to fill in 2 weeks
+    let currentTime = new Date();
+    currentTime.setDate(currentTime.getDate() + 14);
+    let questionnaire = {
+      questionnaire: null,
+      date: currentTime,
+      sent: false,
+    };
+
+    if (patient.language == 'fr') {
+      questionnaire.questionnaire = '609da91b6c1c1266606a69e8';
+    } else {
+      // falls back to english
+      questionnaire.questionnaire = '609da83d6c1c1266606a69e7';
+    }
+
+    patient.questionnairesToFill.push(questionnaire);
+
     await patient.save();
 
     res.json(patient);
