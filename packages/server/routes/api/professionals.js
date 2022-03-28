@@ -42,6 +42,8 @@ router.get('/me', professional, async (req, res) => {
       profession,
       patients,
       profile,
+      dataConsent,
+      participantConsent,
     } = professional;
 
     // Return only the essential fields for optimisation
@@ -55,6 +57,8 @@ router.get('/me', professional, async (req, res) => {
       user,
       profession,
       profile,
+      dataConsent,
+      participantConsent,
       patients: patients.map(({ name, _id, dob }) => {
         return { name, _id, dob };
       }),
@@ -110,6 +114,11 @@ router.put(
       check('description', 'Description is required').not().isEmpty(),
       check('language', 'Language is required').not().isEmpty(),
       check('phone', 'Please enter a valid phone number').isMobilePhone(),
+      check('dataConsent', 'Data consent is required').isBoolean(),
+      check(
+        'participantConsent',
+        'Participant consent is required'
+      ).isBoolean(),
     ],
   ],
   async (req, res) => {
@@ -135,6 +144,8 @@ router.put(
       practiceDescription,
       radiologyService,
       techniques,
+      dataConsent,
+      participantConsent,
     } = req.body;
 
     try {
@@ -157,6 +168,8 @@ router.put(
         radiologyService,
         techniques,
       };
+      professional.dataConsent = dataConsent;
+      professional.participantConsent = participantConsent;
 
       await professional.save();
 

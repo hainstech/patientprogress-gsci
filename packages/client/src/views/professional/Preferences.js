@@ -31,6 +31,7 @@ import CardBody from '../../components/Card/CardBody.js';
 import CardFooter from '../../components/Card/CardFooter.js';
 import Button from '../../components/CustomButtons/Button.js';
 import Alert from '../layout/Alert';
+import ProfessionalConsent from '../auth/ProfessionalConsent';
 
 import { countries } from '../../assets/countries';
 
@@ -174,10 +175,16 @@ const Preferences = ({
 
   const [otherDegree, setOtherDegree] = useState([]);
   const [techniques, setTechniques] = useState([]);
+  const [consentData, setConsentData] = useState({});
 
   useEffect(() => {
     if (!profile) getCurrentProfile('professional');
     if (!loading && profile) {
+      console.log(profile);
+      setConsentData({
+        dataConsent: profile.dataConsent,
+        participantConsent: profile.participantConsent,
+      });
       formik.setFieldValue('name', !profile.name ? '' : profile.name);
       formik.setFieldValue('clinic', !profile.clinic ? '' : profile.clinic);
       formik.setFieldValue(
@@ -275,6 +282,7 @@ const Preferences = ({
           ...data,
           otherDegree,
           techniques,
+          ...consentData,
         },
         history
       );
@@ -398,6 +406,13 @@ const Preferences = ({
                           onChange={formik.handleChange}
                         />
                       </FormControl>
+                    </GridItem>
+                    <GridItem xs={12}>
+                      <br />
+                      <ProfessionalConsent
+                        setConsentData={setConsentData}
+                        consentData={consentData}
+                      />
                     </GridItem>
                   </GridContainer>
                   <h5>{t('professional.preferences.about')}</h5>
