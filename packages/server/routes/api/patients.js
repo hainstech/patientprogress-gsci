@@ -129,6 +129,11 @@ router.put(
         .isISO8601()
         .toDate(),
       check('language', 'Language is required').not().isEmpty(),
+      check('dataConsent', 'Data consent is required').isBoolean(),
+      check(
+        'participantConsent',
+        'Participant consent is required'
+      ).isBoolean(),
     ],
   ],
   async (req, res) => {
@@ -137,7 +142,7 @@ router.put(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, dob, language } = req.body;
+    const { name, dob, language, dataConsent, participantConsent } = req.body;
 
     try {
       const patient = await Patient.findOne({ user: req.user.id });
@@ -145,6 +150,9 @@ router.put(
       patient.name = name;
       patient.dob = dob;
       patient.language = language;
+      patient.dataConsent = dataConsent;
+      patient.participantConsent = participantConsent;
+      patient.research = dataConsent && participantConsent;
 
       await patient.save();
 

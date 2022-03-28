@@ -86,6 +86,7 @@
       "approach": "Pourriez-vous s'il vous plaît indiquer quelle approche de traitement vous utilisez le plus fréquemment. Ces options de traitement apparaîtront dans la section relative au plan de gestion de vos patients."
     },
     "patient": {
+      "research": "Consentement à la recherche",
       "noIntake": "Aucun questionnaire initial rempli",
       "view": "Voir",
       "answers": "Réponses",

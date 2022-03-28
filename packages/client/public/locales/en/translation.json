@@ -87,6 +87,7 @@
       "approach": "Could you please indicate which treatment approach you usemost frequently. These treatment options will appear in the section related to your patients Plan of Management."
     },
     "patient": {
+      "research": "Research consent",
       "noIntake": "No initial intake filled yet",
       "view": "View",
       "answers": "Answers",

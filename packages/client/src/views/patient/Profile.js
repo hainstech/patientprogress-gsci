@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -22,6 +22,7 @@ import {
 
 import { editProfile, getCurrentProfile } from '../../actions/profile';
 import Spinner from '../../components/Spinner/Spinner';
+import Consent from '../auth/Consent';
 
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem.js';
@@ -46,6 +47,7 @@ const EditProfile = ({
 }) => {
   const classes = useStyles();
   const inputClasses = useInputStyles();
+  const [consentData, setConsentData] = useState({});
 
   const { t } = useTranslation();
 
@@ -56,7 +58,7 @@ const EditProfile = ({
       dob: null,
     },
     onSubmit: async (data) => {
-      await editProfile('patient', data, history);
+      await editProfile('patient', { ...data, ...consentData }, history);
       await getCurrentProfile('patient');
     },
   });
@@ -70,6 +72,10 @@ const EditProfile = ({
         !profile.language ? '' : profile.language
       );
       formik.setFieldValue('dob', !profile.dob ? '' : profile.dob);
+      setConsentData({
+        dataConsent: profile.dataConsent,
+        participantConsent: profile.participantConsent,
+      });
     }
     // eslint-disable-next-line
   }, [loading, getCurrentProfile, profile]);
@@ -165,6 +171,12 @@ const EditProfile = ({
                           />
                         </MuiPickersUtilsProvider>
                       </Box>
+                    </GridItem>
+                    <GridItem xs={12}>
+                      <Consent
+                        setConsentData={setConsentData}
+                        consentData={consentData}
+                      />
                     </GridItem>
                   </GridContainer>
                 </CardBody>

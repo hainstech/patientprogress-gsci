@@ -39,7 +39,7 @@ function Consent({ consentData, setConsentData }) {
         descriptionElement.focus();
       }
     }
-  }, [open]);
+  }, [open, consentData]);
 
   const formik = useFormik({
     initialValues: {
@@ -47,7 +47,12 @@ function Consent({ consentData, setConsentData }) {
       participantConsent: '',
     },
     onSubmit: async (data) => {
-      setConsentData(data);
+      const consent = {
+        dataConsent: data.dataConsent || consentData.dataConsent,
+        participantConsent:
+          data.participantConsent || consentData.participantConsent,
+      };
+      setConsentData(consent);
     },
   });
 
@@ -83,12 +88,16 @@ function Consent({ consentData, setConsentData }) {
                 <p>{t('consent.dataConsent')}</p>
 
                 <NativeSelect
-                  value={formik.values.dataConsent}
+                  value={consentData.dataConsent || formik.values.dataConsent}
                   onChange={formik.handleChange}
                   inputProps={{
                     type: 'text',
                     id: 'dataConsent',
                   }}
+                  disabled={
+                    consentData.dataConsent === 'true' ||
+                    consentData.dataConsent === true
+                  }
                 >
                   <option value="" defaultValue disabled></option>
                   <option value="true">{t('report.yes')}</option>
@@ -108,12 +117,19 @@ function Consent({ consentData, setConsentData }) {
                 <p>{t('consent.participantConsent')}</p>
 
                 <NativeSelect
-                  value={formik.values.participantConsent}
+                  value={
+                    consentData.participantConsent ||
+                    formik.values.participantConsent
+                  }
                   onChange={formik.handleChange}
                   inputProps={{
                     type: 'text',
                     id: 'participantConsent',
                   }}
+                  disabled={
+                    consentData.participantConsent === 'true' ||
+                    consentData.participantConsent === true
+                  }
                 >
                   <option value="" defaultValue disabled></option>
                   <option value="true">{t('report.yes')}</option>

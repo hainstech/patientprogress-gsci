@@ -348,6 +348,15 @@ const PatientOverview = ({
                       ? t(`professional.patient.${patient.gender}`)
                       : patient.gender}
                   </GridItem>
+
+                  <GridItem
+                    xs={12}
+                    xl={4}
+                    style={!patient.research ? { color: 'red' } : null}
+                  >
+                    {t('professional.patient.research')}:{' '}
+                    {patient.research ? t('report.yes') : t('report.no')}
+                  </GridItem>
                 </GridContainer>
               </CardBody>
             </Card>

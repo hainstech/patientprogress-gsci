@@ -40,7 +40,6 @@ export const editProfile = (type, formData, history) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-
     await axios.put(`${URI}/api/${type}s`, formData, config);
 
     dispatch(setAlert(i18n.t('alert.updatedSuccessfully'), 'success'));
