@@ -172,7 +172,7 @@
     "metrics": "Your Metrics"
   },
   "register": {
-    "fillConsent": "Consent form",
+    "fillConsent": "Research consent form",
     "passwordError": "Passwords do not match",
     "title": "Register into the application",
     "firstName": "First Name",
