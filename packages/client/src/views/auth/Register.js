@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
@@ -13,8 +13,6 @@ import {
   Input,
   NativeSelect,
   Box,
-  Switch,
-  FormControlLabel,
   FormHelperText,
 } from '@material-ui/core';
 import classNames from 'classnames';
@@ -26,6 +24,8 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import { pwnedPassword } from 'hibp';
+
+import Consent from './Consent';
 
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem.js';
@@ -50,6 +50,8 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
 
   const { t } = useTranslation();
 
+  const [consentData, setConsentData] = useState({});
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -61,7 +63,6 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
       email: '',
       password: '',
       password2: '',
-      research: false,
     },
     onSubmit: async ({
       firstName,
@@ -73,7 +74,6 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
       email,
       password,
       password2,
-      research,
     }) => {
       // Checks if the password has been exposed in a data breach
       let pwned = await pwnedPassword(password);
@@ -107,9 +107,11 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
           dob,
           email: email.toLowerCase(),
           password,
-          research,
+          research: consentData.dataConsent && consentData.participantConsent,
           professional: match.params.id,
           recaptchaRef,
+          dataConsent: consentData.dataConsent,
+          participantConsent: consentData.participantConsent,
         });
       }
     },
@@ -356,35 +358,10 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                     </FormControl>
                   </GridItem>
                   <GridItem xs={12}>
-                    <FormControlLabel
-                      className={inputClasses.formControl}
-                      control={
-                        <Switch
-                          checked={formik.values.research}
-                          onChange={formik.handleChange}
-                          name="research"
-                        />
-                      }
-                      label={
-                        <p>
-                          {t('register.consent')}{' '}
-                          <a
-                            href="https://app.patientprogress.ca/privacy"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Privacy Policy
-                          </a>{' '}
-                          &{' '}
-                          <a
-                            href="https://app.patientprogress.ca/terms"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Terms and conditions
-                          </a>
-                        </p>
-                      }
+                    <br />
+                    <Consent
+                      setConsentData={setConsentData}
+                      consentData={consentData}
                     />
                   </GridItem>
                 </GridContainer>

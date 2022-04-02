@@ -383,9 +383,10 @@ const NewReEvaluationReport = ({
                             {intake.professionalName}
                           </GridItem>
                           <GridItem xs={12}>
-                            {/* #TODO Translate the profession */}
                             {t('report.profession')}:{' '}
-                            {intake.professionalProfession}
+                            {t(
+                              `report.professions.${intake.professionalProfession}`
+                            )}
                           </GridItem>
                         </GridContainer>
                       </CardBody>
@@ -538,21 +539,6 @@ const NewReEvaluationReport = ({
                       </Card>
                     </GridItem>
                   )}
-
-                  <GridItem xs={12}>
-                    <Card>
-                      <CardHeader color="danger">
-                        <p className={classes.cardTitleWhite}>
-                          {t('report.redFlags')}
-                        </p>
-                      </CardHeader>
-                      <CardBody>
-                        {intake.redFlags.toString()
-                          ? intake.redFlags.join(', ')
-                          : t('report.none')}
-                      </CardBody>
-                    </Card>
-                  </GridItem>
 
                   <GridItem xs={12}>
                     <Card>

@@ -20,15 +20,13 @@ module.exports = {
         let total = Object.values(answers).reduce((a, b) => a + parseInt(b), 0);
         let interpretation = '';
 
-        if (total < 5) {
-          interpretation = 'noDisability';
-        } else if (total < 15) {
+        if (total < 21) {
           interpretation = 'mildDisability';
-        } else if (total < 25) {
+        } else if (total < 29) {
           interpretation = 'moderateDisability';
-        } else if (total < 35) {
+        } else if (total < 69) {
           interpretation = 'severeDisability';
-        } else if (total < 51) {
+        } else {
           interpretation = 'completeDisability';
         }
 
@@ -187,15 +185,13 @@ module.exports = {
         );
         let interpretationODI = '';
 
-        if (totalODI < 5) {
-          interpretationODI = 'noDisability';
-        } else if (totalODI < 15) {
+        if (totalODI < 21) {
           interpretationODI = 'mildDisability';
-        } else if (totalODI < 25) {
+        } else if (totalODI < 41) {
           interpretationODI = 'moderateDisability';
-        } else if (totalODI < 35) {
+        } else if (totalODI < 61) {
           interpretationODI = 'severeDisability';
-        } else if (totalODI < 51) {
+        } else {
           interpretationODI = 'completeDisability';
         }
 

@@ -42,6 +42,8 @@ router.get('/me', professional, async (req, res) => {
       profession,
       patients,
       profile,
+      dataConsent,
+      participantConsent,
     } = professional;
 
     // Return only the essential fields for optimisation
@@ -55,6 +57,8 @@ router.get('/me', professional, async (req, res) => {
       user,
       profession,
       profile,
+      dataConsent,
+      participantConsent,
       patients: patients.map(({ name, _id, dob }) => {
         return { name, _id, dob };
       }),
@@ -110,6 +114,11 @@ router.put(
       check('description', 'Description is required').not().isEmpty(),
       check('language', 'Language is required').not().isEmpty(),
       check('phone', 'Please enter a valid phone number').isMobilePhone(),
+      check('dataConsent', 'Data consent is required').isBoolean(),
+      check(
+        'participantConsent',
+        'Participant consent is required'
+      ).isBoolean(),
     ],
   ],
   async (req, res) => {
@@ -135,6 +144,8 @@ router.put(
       practiceDescription,
       radiologyService,
       techniques,
+      dataConsent,
+      participantConsent,
     } = req.body;
 
     try {
@@ -157,6 +168,8 @@ router.put(
         radiologyService,
         techniques,
       };
+      professional.dataConsent = dataConsent;
+      professional.participantConsent = participantConsent;
 
       await professional.save();
 
@@ -200,8 +213,8 @@ router.post(
       const emailContent = {
         from: '"PatientProgress" <no-reply@hainstech.com>',
         to: req.body.email,
-        subject: 'PatientProgress Invitation Link',
-        html: `<h3>Welcome to PatientProgress!</h3><a href="${url}">Click here to register into the application.</a><br><p>Thank you,</p><p>The PatientProgress Team</p>`,
+        subject: 'PatientProgress: inscription | registration',
+        html: `<p>Cher.ère patient.e,</p><p>Vous venez de prendre un rendez-vous avec votre chiropraticien.ne. Tel que demandé, pourriez-vous maintenant vous inscrire sur l’application web PatientProgress en suivant ce lien. </p><a href="${url}">${url}</a> <p> Vous pourrez alors compléter les questionnaires que votre chiropraticien.ne a besoin pour l’aider à préparer votre première consultation et définir les soins de santé dont vous pourriez avoir besoin. </p><br/> <p>Merci beaucoup,</p><p>L’équipe PatientProgress</p><br/> <hr/> <br/> <p>Dear Patient,</p><p> You have just scheduled an appointment with your chiropractor. As requested, could you now register on the Web App PatientProgress using the following link. </p><a href="${url}">${url}</a> <p> You will then be able to complete the questionnaires your chiropractor need to prepare your first visit and to define the health care you may need. </p><br/> <p>Thank you,</p><p>The PatientProgress Team</p>`,
       };
 
       transporter.sendMail(emailContent);

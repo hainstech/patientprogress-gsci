@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { DataGrid } from '@material-ui/data-grid';
 import { format, parseISO } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
+import i18next from 'i18next';
 
 import {
   TextField,
@@ -41,6 +42,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import styles from '../../assets/jss/material-dashboard-react/views/dashboardStyle';
 const useStyles = makeStyles(styles);
 
+const BUNDLES = ['NECK_BUNDLE', 'BACK_BUNDLE', 'MS_BUNDLE', 'MI_BUNDLE'];
+
 const PatientOverview = ({
   professional: { patient, loading },
   match,
@@ -50,7 +53,6 @@ const PatientOverview = ({
   removeQuestionnaire,
 }) => {
   const classes = useStyles();
-
   const [displayList, setDisplayList] = useState([]);
   const [questionnaireList, setQuestionnaireList] = useState([]);
   const [scheduled, setScheduled] = useState(false);
@@ -59,13 +61,30 @@ const PatientOverview = ({
 
   const parseDisplayList = useCallback(({ data: list }) => {
     setQuestionnaireList(list);
-    const newList = [];
+    let newList = [];
     list.forEach((questionnaire) => {
-      //si il est pas la on l'ajoute
-      if (!newList.find((q) => q.title === questionnaire.title)) {
-        newList.push({ title: questionnaire.title });
+      if (i18next.language === questionnaire.language) {
+        newList.push(questionnaire);
+      } else if (
+        list.find(
+          (q) =>
+            q.language !== i18next.language &&
+            q.title === questionnaire.title &&
+            q.language === 'en' &&
+            newList.includes(q)
+        )
+      ) {
+        newList.push(questionnaire);
       }
     });
+
+    // add questionnaire bundles to the displayed list
+    newList = [
+      ...BUNDLES.map((title) => ({
+        title,
+      })),
+      ...newList,
+    ];
     setDisplayList(newList);
   }, []);
 
@@ -90,8 +109,115 @@ const PatientOverview = ({
     // sinon envoie maintenant
 
     const toFill = [];
+    let debundledQuestionnaires = [];
 
     questionnaires.forEach((questionnaire) => {
+      if (BUNDLES.includes(questionnaire.title)) {
+        switch (questionnaire.title) {
+          case 'NECK_BUNDLE':
+            debundledQuestionnaires.push(
+              questionnaireList.find((q) => q.title === 'Brief Pain Inventory')
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find((q) => q.title === 'Neck Disability Index')
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find(
+                (q) => q.title === 'Modified MSK STarT Back Screening Tool'
+              )
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find(
+                (q) => q.title === 'Follow-up questionnaire'
+              )
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find(
+                (q) => q.title === 'mHealth App Usability Questionnaire'
+              )
+            );
+            break;
+          case 'BACK_BUNDLE':
+            debundledQuestionnaires.push(
+              questionnaireList.find((q) => q.title === 'Brief Pain Inventory')
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find(
+                (q) => q.title === 'Oswestry Disability Index'
+              )
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find(
+                (q) => q.title === 'The Keele STarT Back Screening Tool'
+              )
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find(
+                (q) => q.title === 'Follow-up questionnaire'
+              )
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find(
+                (q) => q.title === 'mHealth App Usability Questionnaire'
+              )
+            );
+            break;
+          case 'MS_BUNDLE':
+            debundledQuestionnaires.push(
+              questionnaireList.find((q) => q.title === 'Brief Pain Inventory')
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find((q) => q.title === 'Brief Pain Inventory')
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find(
+                (q) => q.title === 'Modified MSK STarT Back Screening Tool'
+              )
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find(
+                (q) => q.title === 'Follow-up questionnaire'
+              )
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find(
+                (q) => q.title === 'mHealth App Usability Questionnaire'
+              )
+            );
+            break;
+          case 'MI_BUNDLE':
+            debundledQuestionnaires.push(
+              questionnaireList.find((q) => q.title === 'Brief Pain Inventory')
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find(
+                (q) => q.title === 'Lower Extremity Functional Scale (LEFS)'
+              )
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find(
+                (q) => q.title === 'Modified MSK STarT Back Screening Tool'
+              )
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find(
+                (q) => q.title === 'Follow-up questionnaire'
+              )
+            );
+            debundledQuestionnaires.push(
+              questionnaireList.find(
+                (q) => q.title === 'mHealth App Usability Questionnaire'
+              )
+            );
+            break;
+          default:
+        }
+      } else {
+        debundledQuestionnaires.push(questionnaire);
+      }
+    });
+
+    debundledQuestionnaires.forEach((questionnaire) => {
       // @v trouver le ID a envoyer
       // on regarde si il existe dans la langue du patient
       // si oui on l'envoie sinon on l'envoie en anglais
@@ -222,6 +348,15 @@ const PatientOverview = ({
                       ? t(`professional.patient.${patient.gender}`)
                       : patient.gender}
                   </GridItem>
+
+                  <GridItem
+                    xs={12}
+                    xl={4}
+                    style={!patient.research ? { color: 'red' } : null}
+                  >
+                    {t('professional.patient.research')}:{' '}
+                    {patient.research ? t('report.yes') : t('report.no')}
+                  </GridItem>
                 </GridContainer>
               </CardBody>
             </Card>
@@ -241,7 +376,7 @@ const PatientOverview = ({
                     </Button>
                   </Link>
                 ) : (
-                  'No initial intake filled yet'
+                  t('professional.patient.noIntake')
                 )}
                 {patient.reports.length > 0 &&
                   patient.questionnaires.some(
@@ -339,7 +474,15 @@ const PatientOverview = ({
                         id="questionnaireToSend"
                         name="questionnaire"
                         options={displayList}
-                        getOptionLabel={(option) => option.title}
+                        getOptionLabel={(option) => {
+                          if (BUNDLES.includes(option.title)) {
+                            return t(
+                              `professional.patient.bundles.${option.title}`
+                            );
+                          } else {
+                            return option.displayTitle;
+                          }
+                        }}
                         getOptionSelected={(option) => {
                           let val = false;
                           questionnaires.forEach((q) => {
@@ -414,7 +557,7 @@ const PatientOverview = ({
                         ({ _id, questionnaire, date, sent }, i) => {
                           const title = questionnaireList.find(
                             (q) => q.id === questionnaire
-                          ).title;
+                          ).displayTitle;
                           return {
                             id: `${i}-${questionnaire}`,
                             questionnaire: _id,
@@ -482,10 +625,10 @@ const PatientOverview = ({
                     <DataGrid
                       disableSelectionOnClick
                       rows={patient.questionnaires
-                        .map(({ title, time, _id }) => {
+                        .map(({ title, time, _id, questionnaire }) => {
                           return {
                             id: _id,
-                            title,
+                            title: questionnaire.schema.title,
                             time: format(
                               zonedTimeToUtc(
                                 parseISO(time),

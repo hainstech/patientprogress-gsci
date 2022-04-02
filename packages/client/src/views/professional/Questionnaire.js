@@ -39,7 +39,7 @@ const Questionnaire = ({
 
   const [questionnaire, setQuestionnaire] = useState({});
 
-  const [useId, setUseId] = useState(true);
+  const [useId, setUseId] = useState(false);
 
   const answersData = [];
 

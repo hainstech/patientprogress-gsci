@@ -51,6 +51,8 @@ export const register =
     research,
     professional,
     recaptchaRef,
+    dataConsent,
+    participantConsent,
   }) =>
   async (dispatch) => {
     const config = {
@@ -71,6 +73,8 @@ export const register =
       research,
       professional,
       recaptchaValue,
+      dataConsent,
+      participantConsent,
     });
 
     try {

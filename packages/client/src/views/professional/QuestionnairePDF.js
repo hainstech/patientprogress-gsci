@@ -2,6 +2,7 @@ import React from 'react';
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
+import areasJSON from '../../assets/bodyMap.json';
 
 const styles = StyleSheet.create({
   credits: {
@@ -27,13 +28,14 @@ const styles = StyleSheet.create({
   answer: {
     fontSize: 12,
     margin: 4,
+    marginTop: 10,
     flexGrow: 1,
     padding: 4,
     border: '1px solid #d3d3d3',
     borderRadius: 5,
   },
   subSectionTitle: {
-    fontSize: 12,
+    fontSize: 14,
     margin: 4,
     flexGrow: 1,
     padding: 4,
@@ -166,6 +168,9 @@ const QuestionnairePDF = ({ questionnaire, patient, answers }) => {
         ) : (
           <View style={styles.answersContainer}>
             <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.subSectionTitle}>{t('pdf.fileOpening')}</Text>
+            </View>
+            <View wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>
                 {t('register.gender')}:{' '}
                 {patient.gender === 'Male' || patient.gender === 'Female'
@@ -195,6 +200,11 @@ const QuestionnairePDF = ({ questionnaire, patient, answers }) => {
             <View wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>
                 {getAnswer(answers, 'cellularPhoneNumber').text}
+              </Text>
+            </View>
+            <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.subSectionTitle}>
+                {t('pdf.generalInformation')}
               </Text>
             </View>
             <View wrap={false} style={styles.answerRow}>
@@ -365,8 +375,44 @@ const QuestionnairePDF = ({ questionnaire, patient, answers }) => {
               </Text>
             </View>
             <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.subSectionTitle}>
+                {t('pdf.chiefComplaint')}
+              </Text>
+            </View>
+            <View wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>
-                {getAnswer(answers, 'chiefComplaintRegion').text}
+                {t('report.relatedPainAreas')}:{' '}
+                {answers
+                  .filter((e) => e.key === 'relatedPainAreas')
+                  .map((e) => e.value).length > 0
+                  ? areasJSON
+                      .filter(({ id }) =>
+                        answers
+                          .filter((e) => e.key === 'relatedPainAreas')
+                          .map((e) => e.value)
+                          .includes(id)
+                      )
+                      .map(({ title }) => title)
+                      .join(', ')
+                  : t('report.none')}
+              </Text>
+            </View>
+            <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.answer}>
+                {t('report.allPainAreas')}:{' '}
+                {answers
+                  .filter((e) => e.key === 'relatedPainAreas')
+                  .map((e) => e.value).length > 0
+                  ? areasJSON
+                      .filter(({ id }) =>
+                        answers
+                          .filter((e) => e.key === 'relatedPainAreas')
+                          .map((e) => e.value)
+                          .includes(id)
+                      )
+                      .map(({ title }) => title)
+                      .join(', ')
+                  : t('report.none')}
               </Text>
             </View>
             <View wrap={false} style={styles.answerRow}>
@@ -374,6 +420,7 @@ const QuestionnairePDF = ({ questionnaire, patient, answers }) => {
                 {getAnswer(answers, 'chiefComplaint').text}
               </Text>
             </View>
+
             <View wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>
                 {getAnswer(answers, 'chiefComplaintStart').text}
@@ -456,8 +503,15 @@ const QuestionnairePDF = ({ questionnaire, patient, answers }) => {
                 </Text>
               )}
             </View>
-            <Text style={styles.subSectionTitle}>{t('pdf.comorbidities')}</Text>
+            <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.subSectionTitle}>
+                {t('pdf.comorbidities')}
+              </Text>
+            </View>
             <GetCommorbidities answers={answers} />
+            <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.subSectionTitle}>{t('pdf.medication')}</Text>
+            </View>
             <View wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>
                 {
@@ -543,8 +597,11 @@ const QuestionnairePDF = ({ questionnaire, patient, answers }) => {
                 </Text>
               )}
             </View>
-
-            <Text style={styles.subSectionTitle}>{t('pdf.familyHistory')}</Text>
+            <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.subSectionTitle}>
+                {t('pdf.familyHistory')}
+              </Text>
+            </View>
 
             <View wrap={false} style={styles.answerRow}>
               {checkAffirmative(answers, 'motherSelector.mother') && (
@@ -611,6 +668,12 @@ const QuestionnairePDF = ({ questionnaire, patient, answers }) => {
                 </Text>
               )}
             </View>
+
+            <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.subSectionTitle}>
+                {t('pdf.qualityOfLife')}
+              </Text>
+            </View>
             <View wrap={false} style={styles.answerRow}>
               <Text style={styles.answer}>
                 {getAnswer(answers, 'health').text}
@@ -657,6 +720,16 @@ const QuestionnairePDF = ({ questionnaire, patient, answers }) => {
                   getAnswer(answers, 'globalExpectationOfChange.qualityOfLife')
                     .text
                 }
+              </Text>
+            </View>
+            <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.subSectionTitle}>
+                {t('pdf.examinationConsent')}
+              </Text>
+            </View>
+            <View wrap={false} style={styles.answerRow}>
+              <Text style={styles.answer}>
+                {getAnswer(answers, 'consent').text}
               </Text>
             </View>
           </View>

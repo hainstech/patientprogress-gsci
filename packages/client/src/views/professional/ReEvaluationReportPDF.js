@@ -112,7 +112,8 @@ const ReEvaluationReportPDF = ({ report, patient }) => {
             </Text>
 
             <Text style={styles.answer}>
-              {t('report.profession')}: {report.professionalProfession}
+              {t('report.profession')}:{' '}
+              {t(`report.professions.${report.professionalProfession}`)}
             </Text>
           </View>
           <View wrap={false} style={styles.answerRow}>
@@ -182,14 +183,6 @@ const ReEvaluationReportPDF = ({ report, patient }) => {
               </Text>
             </View>
           ))}
-          <View wrap={false} style={styles.answerRow}>
-            <Text style={styles.answer}>
-              {t('report.redFlags')}:{' '}
-              {report.redFlags.toString()
-                ? report.redFlags.join(', ')
-                : t('report.none')}
-            </Text>
-          </View>
           <View wrap={false} style={styles.answerRow}>
             <Text style={styles.answer}>
               {t('report.relevantScores')}:{' '}

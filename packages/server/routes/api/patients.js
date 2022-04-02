@@ -129,6 +129,11 @@ router.put(
         .isISO8601()
         .toDate(),
       check('language', 'Language is required').not().isEmpty(),
+      check('dataConsent', 'Data consent is required').isBoolean(),
+      check(
+        'participantConsent',
+        'Participant consent is required'
+      ).isBoolean(),
     ],
   ],
   async (req, res) => {
@@ -137,7 +142,7 @@ router.put(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, dob, language } = req.body;
+    const { name, dob, language, dataConsent, participantConsent } = req.body;
 
     try {
       const patient = await Patient.findOne({ user: req.user.id });
@@ -145,6 +150,9 @@ router.put(
       patient.name = name;
       patient.dob = dob;
       patient.language = language;
+      patient.dataConsent = dataConsent;
+      patient.participantConsent = participantConsent;
+      patient.research = dataConsent && participantConsent;
 
       await patient.save();
 
@@ -180,45 +188,43 @@ router.post('/:id/questionnaireToFill', professional, async (req, res) => {
 
     patient.questionnairesToFill.push(...questionnairesToFill);
 
-    questionnairesToFill.forEach((questionnaire) => {
-      if (questionnaire.sent) {
-        // Send a email notification
-        const transporter = nodemailer.createTransport({
-          host: config.get('nodemailerHost'),
-          port: config.get('nodemailerPort'),
-          secure: true,
-          auth: {
-            user: config.get('nodemailerUser'),
-            pass: config.get('nodemailerPass'),
-          },
-        });
+    if (questionnairesToFill.find((questionnaire) => questionnaire.sent)) {
+      // Send a email notification
+      const transporter = nodemailer.createTransport({
+        host: config.get('nodemailerHost'),
+        port: config.get('nodemailerPort'),
+        secure: true,
+        auth: {
+          user: config.get('nodemailerUser'),
+          pass: config.get('nodemailerPass'),
+        },
+      });
 
-        let message = '';
-        let subject = '';
-        switch (patient.language) {
-          case 'en':
-            message = `<h3>You have a new questionnaire to fill!</h3><p>Please <a href="https://app.patientprogress.ca/login">sign into the application</a> as soon as possible to fill it.</p><br><p>Thank you,</p><p>The PatientProgress Team</p>`;
-            subject = 'New questionnaire';
-            break;
-          case 'fr':
-            message = `<h3>Vous avez un nouveau questionnaire à remplir!</h3><p>Veuillez <a href="https://app.patientprogress.ca/login"> vous connecter</a> dès que possible afin de le remplir.</p><br><p>Merci,</p><p>L'équipe PatientProgress</p>`;
-            subject = 'Nouveau questionnaire';
-            break;
+      let message = '';
+      let subject = '';
+      switch (patient.language) {
+        case 'en':
+          message = `<p>Dear Patient,</p><p>Your chiropractor needs you to fill out a few questionnaires prior to your next consultation.</p><p>Please <a href="https://app.patientprogress.ca/login">sign into the PatientProgress web application</a> as soon as possible to fill them out.</p><br><p>Thank you,</p><br><p>The PatientProgress Team</p>`;
+          subject = 'New questionnaire to fill out';
+          break;
+        case 'fr':
+          message = `<p>Cher.ère patient.e,</p><p>Votre chiropraticien.ne vous demande de remplir quelques questionnaires avant votre prochaine consultation.</p><p>Veuillez <a href="https://app.patientprogress.ca/login"> vous connecter</a> dès que possible afin de les remplir.</p><br><p>Merci beaucoup,</p><br><p>L'équipe PatientProgress</p>`;
+          subject = 'Nouveau Questionnaire à remplir';
+          break;
 
-          default:
-            break;
-        }
-
-        const emailContent = {
-          from: '"PatientProgress" <no-reply@hainstech.com>',
-          to: patientUser.email,
-          subject: subject,
-          html: message,
-        };
-
-        transporter.sendMail(emailContent);
+        default:
+          break;
       }
-    });
+
+      const emailContent = {
+        from: '"PatientProgress" <no-reply@hainstech.com>',
+        to: patientUser.email,
+        subject: subject,
+        html: message,
+      };
+
+      transporter.sendMail(emailContent);
+    }
 
     await patient.save();
 
@@ -253,6 +259,24 @@ router.post('/:id/report', professional, async (req, res) => {
     }
 
     patient.reports.push(req.body.report);
+
+    // send a BPI to fill in 2 weeks
+    let currentTime = new Date();
+    currentTime.setDate(currentTime.getDate() + 14);
+    let questionnaire = {
+      questionnaire: null,
+      date: currentTime,
+      sent: false,
+    };
+
+    if (patient.language == 'fr') {
+      questionnaire.questionnaire = '609da91b6c1c1266606a69e8';
+    } else {
+      // falls back to english
+      questionnaire.questionnaire = '609da83d6c1c1266606a69e7';
+    }
+
+    patient.questionnairesToFill.push(questionnaire);
 
     await patient.save();
 

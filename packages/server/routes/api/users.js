@@ -18,7 +18,7 @@ const auth = require('../../middleware/auth');
 // Rate limiter for register route
 const registerLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 60 minutes
-  max: 5, // 5 requests per hour
+  max: 1000, // 5 requests per hour
   handler: function (req, res) {
     return res.status(429).json({ errors: [{ msg: 'Try again later.' }] });
   },
@@ -44,6 +44,11 @@ router.post(
       check('gender', 'Gender is required').not().isEmpty(),
       check('language', 'Language is required').not().isEmpty(),
       check('research', 'Consent is required').isBoolean(),
+      check('dataConsent', 'Data consent is required').isBoolean(),
+      check(
+        'participantConsent',
+        'Participant consent is required'
+      ).isBoolean(),
       check('professional', 'Professionals id is required').not().isEmpty(),
     ],
   ],
@@ -63,6 +68,8 @@ router.post(
       research,
       professional,
       recaptchaValue,
+      dataConsent,
+      participantConsent,
     } = req.body;
 
     try {
@@ -134,6 +141,8 @@ router.post(
         research,
         user: user.id,
         professional,
+        dataConsent,
+        participantConsent,
         questionnairesToFill: [
           {
             questionnaire: initialIntake._id,

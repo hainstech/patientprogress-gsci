@@ -21,6 +21,14 @@ var patientSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  dataConsent: {
+    type: Boolean,
+    required: true,
+  },
+  participantConsent: {
+    type: Boolean,
+    required: true,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
