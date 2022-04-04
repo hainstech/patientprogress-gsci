@@ -237,7 +237,7 @@ router.post(
       gender,
     } = req.body;
 
-    if (language != 'en' && 'fr') {
+    if (language != 'en' && language != 'fr') {
       return res.status(400).json({ errors: [{ msg: 'Invalid language' }] });
     }
 
