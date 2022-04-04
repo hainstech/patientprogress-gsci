@@ -53,6 +53,7 @@ function Consent({ consentData, setConsentData }) {
           data.participantConsent || consentData.participantConsent,
       };
       setConsentData(consent);
+      handleClose();
     },
   });
 
@@ -88,6 +89,7 @@ function Consent({ consentData, setConsentData }) {
                 <p>{t('consent.dataConsent')}</p>
 
                 <NativeSelect
+                  required
                   value={consentData.dataConsent || formik.values.dataConsent}
                   onChange={formik.handleChange}
                   inputProps={{
@@ -117,6 +119,7 @@ function Consent({ consentData, setConsentData }) {
                 <p>{t('consent.participantConsent')}</p>
 
                 <NativeSelect
+                  required
                   value={
                     consentData.participantConsent ||
                     formik.values.participantConsent
@@ -139,7 +142,7 @@ function Consent({ consentData, setConsentData }) {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="success" type="submit">
+            <Button color="success" type="submit">
               {t('register.submit')}
             </Button>
           </DialogActions>
