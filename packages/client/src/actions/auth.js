@@ -53,6 +53,7 @@ export const register =
     recaptchaRef,
     dataConsent,
     participantConsent,
+    terms,
   }) =>
   async (dispatch) => {
     const config = {
@@ -75,6 +76,7 @@ export const register =
       recaptchaValue,
       dataConsent,
       participantConsent,
+      terms,
     });
 
     try {

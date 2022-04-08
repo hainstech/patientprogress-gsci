@@ -44,6 +44,7 @@ router.get('/me', professional, async (req, res) => {
       profile,
       dataConsent,
       participantConsent,
+      terms,
     } = professional;
 
     // Return only the essential fields for optimisation
@@ -59,6 +60,7 @@ router.get('/me', professional, async (req, res) => {
       profile,
       dataConsent,
       participantConsent,
+      terms,
       patients: patients.map(({ name, _id, dob }) => {
         return { name, _id, dob };
       }),
@@ -119,6 +121,7 @@ router.put(
         'participantConsent',
         'Participant consent is required'
       ).isBoolean(),
+      check('terms', 'Accepting the terms is required').isBoolean(),
     ],
   ],
   async (req, res) => {
@@ -146,9 +149,16 @@ router.put(
       techniques,
       dataConsent,
       participantConsent,
+      terms,
     } = req.body;
 
     try {
+      if (!terms) {
+        return res.status(400).json({
+          errors: [{ msg: 'Please accept the terms to use the application' }],
+        });
+      }
+
       const professional = await Professional.findOne({ user: req.user.id });
       professional.name = name;
       professional.clinic = clinic;
@@ -170,6 +180,7 @@ router.put(
       };
       professional.dataConsent = dataConsent;
       professional.participantConsent = participantConsent;
+      professional.terms = terms;
 
       await professional.save();
 

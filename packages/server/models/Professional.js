@@ -27,6 +27,9 @@ const ProfessionalSchema = new mongoose.Schema({
   participantConsent: {
     type: Boolean,
   },
+  terms: {
+    type: Boolean,
+  },
   phone: {
     type: String,
     required: true,

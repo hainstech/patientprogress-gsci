@@ -12,6 +12,8 @@ import {
   InputLabel,
   Input,
   NativeSelect,
+  Switch,
+  FormControlLabel,
   Box,
   FormHelperText,
 } from '@material-ui/core';
@@ -74,6 +76,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
       email,
       password,
       password2,
+      terms,
     }) => {
       // Checks if the password has been exposed in a data breach
       let pwned = await pwnedPassword(password);
@@ -112,6 +115,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
           recaptchaRef,
           dataConsent: consentData.dataConsent,
           participantConsent: consentData.participantConsent,
+          terms,
         });
       }
     },
@@ -362,6 +366,38 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                     <Consent
                       setConsentData={setConsentData}
                       consentData={consentData}
+                    />
+                  </GridItem>
+                  <GridItem xs={12}>
+                    <FormControlLabel
+                      className={inputClasses.formControl}
+                      control={
+                        <Switch
+                          checked={formik.values.terms}
+                          onChange={formik.handleChange}
+                          name="terms"
+                        />
+                      }
+                      label={
+                        <p>
+                          {t('register.consent')}{' '}
+                          <a
+                            href="https://app.patientprogress.ca/privacy"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {t('privacyPolicyTitle')}
+                          </a>{' '}
+                          &{' '}
+                          <a
+                            href="https://app.patientprogress.ca/terms"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {t('termsOfUseTitle')}
+                          </a>
+                        </p>
+                      }
                     />
                   </GridItem>
                 </GridContainer>

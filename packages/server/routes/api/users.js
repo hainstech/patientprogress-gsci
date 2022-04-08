@@ -49,6 +49,10 @@ router.post(
         'participantConsent',
         'Participant consent is required'
       ).isBoolean(),
+      check(
+        'terms',
+        'Please accept the terms to use the application'
+      ).isBoolean(),
       check('professional', 'Professionals id is required').not().isEmpty(),
     ],
   ],
@@ -70,9 +74,16 @@ router.post(
       recaptchaValue,
       dataConsent,
       participantConsent,
+      terms,
     } = req.body;
 
     try {
+      if (!terms) {
+        return res.status(400).json({
+          errors: [{ msg: 'Please accept the terms to use the application' }],
+        });
+      }
+
       // Disable when testing
       if (!process.env.TEST_MODE) {
         if (!recaptchaValue) {
