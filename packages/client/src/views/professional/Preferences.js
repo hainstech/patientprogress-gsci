@@ -17,6 +17,7 @@ import {
   Checkbox,
   Radio,
   RadioGroup,
+  Switch,
 } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
@@ -180,7 +181,6 @@ const Preferences = ({
   useEffect(() => {
     if (!profile) getCurrentProfile('professional');
     if (!loading && profile) {
-      console.log(profile);
       setConsentData({
         dataConsent: profile.dataConsent,
         participantConsent: profile.participantConsent,
@@ -191,6 +191,7 @@ const Preferences = ({
         'description',
         !profile.description ? '' : profile.description
       );
+      formik.setFieldValue('terms', profile.terms);
       formik.setFieldValue('phone', !profile.phone ? '' : profile.phone);
       formik.setFieldValue(
         'language',
@@ -265,6 +266,7 @@ const Preferences = ({
       description: '',
       phone: '',
       language: '',
+      terms: false,
       yearOfBirth: '',
       yearDegree: '',
       country: null,
@@ -414,311 +416,353 @@ const Preferences = ({
                         consentData={consentData}
                       />
                     </GridItem>
-                  </GridContainer>
-                  <h5>{t('professional.preferences.about')}</h5>
-                  <GridContainer>
-                    <GridItem xs={12} lg={6}>
-                      <FormControl
-                        fullWidth
+                    <GridItem xs={12}>
+                      <FormControlLabel
                         className={inputClasses.formControl}
-                      >
-                        <TextField
-                          label={t('professional.preferences.yearDegree')}
-                          type="text"
-                          id={'yearDegree'}
-                          value={formik.values.yearDegree}
-                          onChange={formik.handleChange}
-                        />
-                      </FormControl>
+                        control={
+                          <Switch
+                            id={'terms'}
+                            checked={formik.values.terms}
+                            onChange={formik.handleChange}
+                            name="terms"
+                          />
+                        }
+                        label={
+                          <p>
+                            {t('register.consent')}{' '}
+                            <a
+                              href="https://app.patientprogress.ca/privacy"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {t('privacyPolicyTitle')}
+                            </a>{' '}
+                            &{' '}
+                            <a
+                              href="https://app.patientprogress.ca/terms"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {t('termsOfUseTitle')}
+                            </a>
+                          </p>
+                        }
+                      />
                     </GridItem>
-                    <GridItem xs={12} lg={6}>
-                      <FormControl
-                        fullWidth
-                        className={inputClasses.formControl}
-                      >
-                        <Autocomplete
-                          id="country-select"
-                          options={countries}
-                          classes={{
-                            option: countryInputStyles.option,
-                          }}
-                          autoHighlight
-                          getOptionLabel={(option) =>
-                            option.label ? option.label : ''
-                          }
-                          getOptionSelected={(option) =>
-                            option.label
-                              ? option.label === formik.values.country.label
-                              : option.label === ''
-                          }
-                          renderOption={(option) => (
-                            <>
-                              <span>{countryToFlag(option.code)}</span>
-                              {option.label} ({option.code})
-                            </>
-                          )}
-                          renderInput={(params) => (
+                  </GridContainer>
+                  {formik.values.terms && (
+                    <>
+                      <h5>{t('professional.preferences.about')}</h5>
+                      <GridContainer>
+                        <GridItem xs={12} lg={6}>
+                          <FormControl
+                            fullWidth
+                            className={inputClasses.formControl}
+                          >
                             <TextField
-                              {...params}
-                              label={t('professional.preferences.country')}
-                              inputProps={{
-                                ...params.inputProps,
-                                autoComplete: 'new-password', // disable autocomplete and autofill
-                              }}
+                              label={t('professional.preferences.yearDegree')}
+                              type="text"
+                              id={'yearDegree'}
+                              value={formik.values.yearDegree}
+                              onChange={formik.handleChange}
                             />
-                          )}
-                          value={formik.values.country}
-                          onChange={(e, value) =>
-                            formik.setFieldValue(
-                              'country',
-                              value ? value : null
-                            )
-                          }
-                        />
-                      </FormControl>
-                    </GridItem>
-                    <GridItem xs={12} lg={12}>
-                      <FormControl
-                        fullWidth
-                        className={inputClasses.formControl}
-                      >
-                        <TextField
-                          label={t('professional.preferences.college')}
-                          type="text"
-                          id={'college'}
-                          value={formik.values.college}
-                          onChange={formik.handleChange}
-                        />
-                      </FormControl>
-                    </GridItem>
-                    <GridItem xs={12}>
-                      <FormControl
-                        fullWidth
-                        className={inputClasses.formControl}
-                        component="fieldset"
-                      >
-                        <FormLabel component="legend">
-                          {t('professional.preferences.otherDegree')}
-                        </FormLabel>
-                        <FormGroup>
-                          <FormControlLabel
-                            checked={otherDegree.includes('BSc degree')}
-                            onChange={handleDegreeChange}
-                            name="BSc degree"
-                            control={<Checkbox name="BSc degree" />}
-                            label={t('professional.preferences.bsc')}
-                          />
-                          <FormControlLabel
-                            checked={otherDegree.includes('MSc degree')}
-                            onChange={handleDegreeChange}
-                            name="MSc degree"
-                            control={<Checkbox name="MSc degree" />}
-                            label={t('professional.preferences.msc')}
-                          />
-                          <FormControlLabel
-                            checked={otherDegree.includes('PhD degree')}
-                            onChange={handleDegreeChange}
-                            name="PhD degree"
-                            control={<Checkbox name="PhD degree" />}
-                            label={t('professional.preferences.phd')}
-                          />
-                          <FormControlLabel
-                            checked={otherDegree.includes(
-                              'Chiropractic specialty degree'
-                            )}
-                            onChange={handleDegreeChange}
-                            name="Chiropractic specialty degree"
-                            control={
-                              <Checkbox name="Chiropractic specialty degree" />
-                            }
-                            label={t(
-                              'professional.preferences.chiropracticSpecialtyDegree'
-                            )}
-                          />
-                          <FormControlLabel
-                            checked={otherDegree.includes(
-                              'Post graduate diploma / micro-program'
-                            )}
-                            onChange={handleDegreeChange}
-                            name="Post graduate diploma / micro-program"
-                            control={
-                              <Checkbox name="Post graduate diploma / micro-program" />
-                            }
-                            label={t(
-                              'professional.preferences.postGraduateDiploma'
-                            )}
-                          />
-                        </FormGroup>
-                      </FormControl>
-                    </GridItem>
-                    <GridItem xs={12} lg={12}>
-                      <FormControl
-                        fullWidth
-                        className={inputClasses.formControl}
-                      >
-                        <TextField
-                          label={t('report.specify')}
-                          type="text"
-                          id={'otherDegreeSpecify'}
-                          value={formik.values.otherDegreeSpecify}
-                          onChange={formik.handleChange}
-                        />
-                      </FormControl>
-                    </GridItem>
-                    <GridItem xs={12}>
-                      <FormControl
-                        fullWidth
-                        className={inputClasses.formControl}
-                      >
-                        <TextField
-                          label={t(
-                            'professional.preferences.averagePatientsVisits'
-                          )}
-                          type="number"
-                          id={'averagePatientsVisits'}
-                          value={formik.values.averagePatientsVisits}
-                          onChange={formik.handleChange}
-                        />
-                      </FormControl>
-                    </GridItem>
-                    <GridItem xs={12}>
-                      <FormControl
-                        fullWidth
-                        className={inputClasses.formControl}
-                      >
-                        <TextField
-                          label={t(
-                            'professional.preferences.averageNewPatients'
-                          )}
-                          type="number"
-                          id={'averageNewPatients'}
-                          value={formik.values.averageNewPatients}
-                          onChange={formik.handleChange}
-                        />
-                      </FormControl>
-                    </GridItem>
-                    <GridItem xs={12}>
-                      <FormControl
-                        fullWidth
-                        className={inputClasses.formControl}
-                        component="fieldset"
-                      >
-                        <FormLabel component="legend">
-                          {t('professional.preferences.describe')}
-                        </FormLabel>
-
-                        <RadioGroup
-                          aria-label="practice description"
-                          name="practiceDescription"
-                          value={formik.values.practiceDescription}
-                          onChange={formik.handleChange}
-                        >
-                          <FormControlLabel
-                            value="Solo practitioner"
-                            control={<Radio />}
-                            label={t('professional.preferences.solo')}
-                          />
-                          <FormControlLabel
-                            value="Other chiropractor(s) at practice"
-                            control={<Radio />}
-                            label={t('professional.preferences.otherChiros')}
-                          />
-                          <FormControlLabel
-                            value="Other non-chiropractic healthcare practitioner available at same location"
-                            control={<Radio />}
-                            label={t(
-                              'professional.preferences.otherNonChiropractic'
-                            )}
-                          />
-                        </RadioGroup>
-                      </FormControl>
-                    </GridItem>
-                    <GridItem xs={12}>
-                      <FormControl
-                        fullWidth
-                        className={inputClasses.formControl}
-                        component="fieldset"
-                      >
-                        <FormLabel component="legend">
-                          {t('professional.preferences.radiologyService')}
-                        </FormLabel>
-
-                        <RadioGroup
-                          aria-label="radiologyService"
-                          name="radiologyService"
-                          value={formik.values.radiologyService}
-                          onChange={formik.handleChange}
-                        >
-                          <FormControlLabel
-                            value={t('report.no')}
-                            control={<Radio />}
-                            label={t('report.no')}
-                          />
-                          <FormControlLabel
-                            value={t('report.yes')}
-                            control={<Radio />}
-                            label={t('report.yes')}
-                          />
-                        </RadioGroup>
-                      </FormControl>
-                    </GridItem>
-                  </GridContainer>
-                  <GridContainer>
-                    <GridItem xs={12}>
-                      <FormControl
-                        fullWidth
-                        className={inputClasses.formControl}
-                        component="fieldset"
-                      >
-                        <FormLabel component="legend">
-                          {t('report.techniques.title')}
-                        </FormLabel>
-                        <FormGroup>
-                          <GridContainer>
-                            {techniquesIds.map((id) => (
-                              <React.Fragment key={id}>
-                                {id ===
-                                  'blairAnalysisAndAdjustingTechnique' && (
-                                  <SectionTitle title={'hvla'} t={t} />
-                                )}
-                                {id ===
-                                  'activatorAdjustingInstrument &Technique' && (
-                                  <SectionTitle
-                                    title={'mechanicalAssisted'}
-                                    t={t}
-                                  />
-                                )}
-                                {id === 'activeReleaseTechnique' && (
-                                  <SectionTitle title={'softTissue'} t={t} />
-                                )}
-                                {id ===
-                                  'bioEnergeticSynchronizationTechnique' && (
-                                  <SectionTitle title={'tonal'} t={t} />
-                                )}
-                                {id === 'education' && (
-                                  <SectionTitle
-                                    title={'recommendations'}
-                                    t={t}
-                                  />
-                                )}
-                                {id === 'appliedKinesiology' && (
-                                  <SectionTitle title={'other'} t={t} />
-                                )}
-                                <TechniqueItem
-                                  id={id}
-                                  techniques={techniques}
-                                  handleTechniquesChange={
-                                    handleTechniquesChange
-                                  }
-                                  t={t}
+                          </FormControl>
+                        </GridItem>
+                        <GridItem xs={12} lg={6}>
+                          <FormControl
+                            fullWidth
+                            className={inputClasses.formControl}
+                          >
+                            <Autocomplete
+                              id="country-select"
+                              options={countries}
+                              classes={{
+                                option: countryInputStyles.option,
+                              }}
+                              autoHighlight
+                              getOptionLabel={(option) =>
+                                option.label ? option.label : ''
+                              }
+                              getOptionSelected={(option) =>
+                                option.label
+                                  ? option.label === formik.values.country.label
+                                  : option.label === ''
+                              }
+                              renderOption={(option) => (
+                                <>
+                                  <span>{countryToFlag(option.code)}</span>
+                                  {option.label} ({option.code})
+                                </>
+                              )}
+                              renderInput={(params) => (
+                                <TextField
+                                  {...params}
+                                  label={t('professional.preferences.country')}
+                                  inputProps={{
+                                    ...params.inputProps,
+                                    autoComplete: 'new-password', // disable autocomplete and autofill
+                                  }}
                                 />
-                              </React.Fragment>
-                            ))}
-                          </GridContainer>
-                        </FormGroup>
-                      </FormControl>
-                    </GridItem>
-                  </GridContainer>
+                              )}
+                              value={formik.values.country}
+                              onChange={(e, value) =>
+                                formik.setFieldValue(
+                                  'country',
+                                  value ? value : null
+                                )
+                              }
+                            />
+                          </FormControl>
+                        </GridItem>
+                        <GridItem xs={12} lg={12}>
+                          <FormControl
+                            fullWidth
+                            className={inputClasses.formControl}
+                          >
+                            <TextField
+                              label={t('professional.preferences.college')}
+                              type="text"
+                              id={'college'}
+                              value={formik.values.college}
+                              onChange={formik.handleChange}
+                            />
+                          </FormControl>
+                        </GridItem>
+                        <GridItem xs={12}>
+                          <FormControl
+                            fullWidth
+                            className={inputClasses.formControl}
+                            component="fieldset"
+                          >
+                            <FormLabel component="legend">
+                              {t('professional.preferences.otherDegree')}
+                            </FormLabel>
+                            <FormGroup>
+                              <FormControlLabel
+                                checked={otherDegree.includes('BSc degree')}
+                                onChange={handleDegreeChange}
+                                name="BSc degree"
+                                control={<Checkbox name="BSc degree" />}
+                                label={t('professional.preferences.bsc')}
+                              />
+                              <FormControlLabel
+                                checked={otherDegree.includes('MSc degree')}
+                                onChange={handleDegreeChange}
+                                name="MSc degree"
+                                control={<Checkbox name="MSc degree" />}
+                                label={t('professional.preferences.msc')}
+                              />
+                              <FormControlLabel
+                                checked={otherDegree.includes('PhD degree')}
+                                onChange={handleDegreeChange}
+                                name="PhD degree"
+                                control={<Checkbox name="PhD degree" />}
+                                label={t('professional.preferences.phd')}
+                              />
+                              <FormControlLabel
+                                checked={otherDegree.includes(
+                                  'Chiropractic specialty degree'
+                                )}
+                                onChange={handleDegreeChange}
+                                name="Chiropractic specialty degree"
+                                control={
+                                  <Checkbox name="Chiropractic specialty degree" />
+                                }
+                                label={t(
+                                  'professional.preferences.chiropracticSpecialtyDegree'
+                                )}
+                              />
+                              <FormControlLabel
+                                checked={otherDegree.includes(
+                                  'Post graduate diploma / micro-program'
+                                )}
+                                onChange={handleDegreeChange}
+                                name="Post graduate diploma / micro-program"
+                                control={
+                                  <Checkbox name="Post graduate diploma / micro-program" />
+                                }
+                                label={t(
+                                  'professional.preferences.postGraduateDiploma'
+                                )}
+                              />
+                            </FormGroup>
+                          </FormControl>
+                        </GridItem>
+                        <GridItem xs={12} lg={12}>
+                          <FormControl
+                            fullWidth
+                            className={inputClasses.formControl}
+                          >
+                            <TextField
+                              label={t('report.specify')}
+                              type="text"
+                              id={'otherDegreeSpecify'}
+                              value={formik.values.otherDegreeSpecify}
+                              onChange={formik.handleChange}
+                            />
+                          </FormControl>
+                        </GridItem>
+                        <GridItem xs={12}>
+                          <FormControl
+                            fullWidth
+                            className={inputClasses.formControl}
+                          >
+                            <TextField
+                              label={t(
+                                'professional.preferences.averagePatientsVisits'
+                              )}
+                              type="number"
+                              id={'averagePatientsVisits'}
+                              value={formik.values.averagePatientsVisits}
+                              onChange={formik.handleChange}
+                            />
+                          </FormControl>
+                        </GridItem>
+                        <GridItem xs={12}>
+                          <FormControl
+                            fullWidth
+                            className={inputClasses.formControl}
+                          >
+                            <TextField
+                              label={t(
+                                'professional.preferences.averageNewPatients'
+                              )}
+                              type="number"
+                              id={'averageNewPatients'}
+                              value={formik.values.averageNewPatients}
+                              onChange={formik.handleChange}
+                            />
+                          </FormControl>
+                        </GridItem>
+                        <GridItem xs={12}>
+                          <FormControl
+                            fullWidth
+                            className={inputClasses.formControl}
+                            component="fieldset"
+                          >
+                            <FormLabel component="legend">
+                              {t('professional.preferences.describe')}
+                            </FormLabel>
+
+                            <RadioGroup
+                              aria-label="practice description"
+                              name="practiceDescription"
+                              value={formik.values.practiceDescription}
+                              onChange={formik.handleChange}
+                            >
+                              <FormControlLabel
+                                value="Solo practitioner"
+                                control={<Radio />}
+                                label={t('professional.preferences.solo')}
+                              />
+                              <FormControlLabel
+                                value="Other chiropractor(s) at practice"
+                                control={<Radio />}
+                                label={t(
+                                  'professional.preferences.otherChiros'
+                                )}
+                              />
+                              <FormControlLabel
+                                value="Other non-chiropractic healthcare practitioner available at same location"
+                                control={<Radio />}
+                                label={t(
+                                  'professional.preferences.otherNonChiropractic'
+                                )}
+                              />
+                            </RadioGroup>
+                          </FormControl>
+                        </GridItem>
+                        <GridItem xs={12}>
+                          <FormControl
+                            fullWidth
+                            className={inputClasses.formControl}
+                            component="fieldset"
+                          >
+                            <FormLabel component="legend">
+                              {t('professional.preferences.radiologyService')}
+                            </FormLabel>
+
+                            <RadioGroup
+                              aria-label="radiologyService"
+                              name="radiologyService"
+                              value={formik.values.radiologyService}
+                              onChange={formik.handleChange}
+                            >
+                              <FormControlLabel
+                                value={t('report.no')}
+                                control={<Radio />}
+                                label={t('report.no')}
+                              />
+                              <FormControlLabel
+                                value={t('report.yes')}
+                                control={<Radio />}
+                                label={t('report.yes')}
+                              />
+                            </RadioGroup>
+                          </FormControl>
+                        </GridItem>
+                      </GridContainer>
+                      <GridContainer>
+                        <GridItem xs={12}>
+                          <FormControl
+                            fullWidth
+                            className={inputClasses.formControl}
+                            component="fieldset"
+                          >
+                            <FormLabel component="legend">
+                              {t('report.techniques.title')}
+                            </FormLabel>
+                            <FormGroup>
+                              <GridContainer>
+                                {techniquesIds.map((id) => (
+                                  <React.Fragment key={id}>
+                                    {id ===
+                                      'blairAnalysisAndAdjustingTechnique' && (
+                                      <SectionTitle title={'hvla'} t={t} />
+                                    )}
+                                    {id ===
+                                      'activatorAdjustingInstrument &Technique' && (
+                                      <SectionTitle
+                                        title={'mechanicalAssisted'}
+                                        t={t}
+                                      />
+                                    )}
+                                    {id === 'activeReleaseTechnique' && (
+                                      <SectionTitle
+                                        title={'softTissue'}
+                                        t={t}
+                                      />
+                                    )}
+                                    {id ===
+                                      'bioEnergeticSynchronizationTechnique' && (
+                                      <SectionTitle title={'tonal'} t={t} />
+                                    )}
+                                    {id === 'education' && (
+                                      <SectionTitle
+                                        title={'recommendations'}
+                                        t={t}
+                                      />
+                                    )}
+                                    {id === 'appliedKinesiology' && (
+                                      <SectionTitle title={'other'} t={t} />
+                                    )}
+                                    <TechniqueItem
+                                      id={id}
+                                      techniques={techniques}
+                                      handleTechniquesChange={
+                                        handleTechniquesChange
+                                      }
+                                      t={t}
+                                    />
+                                  </React.Fragment>
+                                ))}
+                              </GridContainer>
+                            </FormGroup>
+                          </FormControl>
+                        </GridItem>
+                      </GridContainer>
+                    </>
+                  )}
                 </CardBody>
                 <CardFooter>
                   <Button color="success" type="submit">
