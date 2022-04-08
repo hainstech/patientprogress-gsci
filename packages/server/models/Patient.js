@@ -21,6 +21,9 @@ var patientSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  terms: {
+    type: Boolean,
+  },
   dataConsent: {
     type: Boolean,
     required: true,
