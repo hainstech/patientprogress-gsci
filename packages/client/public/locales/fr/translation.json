@@ -399,11 +399,13 @@
     "no": "Non",
     "neckOrLowerBackCondition": "Le motif de consultation principal est-il attribuable à une condition du cou ou du bas du dos?",
     "spinalDiagnosticClassification": {
-      "title": "Classification diagnostique de la condition vertébrale liée au motif principal de consultation",
-      "grade1-2": "Cervicalgie de grade 1-2 / non-spécifique / d’origine mécanique",
-      "grade3": "Cervicalgie de grade 3 /avec radiculopathie",
-      "lowBackPainNonSpecific": "Lombalgie non-spécifique/ d’origine mécanique",
-      "sciatica": "Lombalgie avec radiculopathie / sciatalgie"
+      "title": "Indiquez à quelle classe appartient ce trouble de la colonne vertébrale:",
+      "class0": "Classe 0: Pas ou très peu de symptôme",
+      "class1": "Classe I: Incapacité et douleur légères",
+      "class2": "Classe II: Incapacité et douleur modérées ou sévères",
+      "class3": "Classe III: Symptômes ou signes neurologiques",
+      "class4": "Classe IV: Fracture, instabilité ou déformation osseuse vertébrale sévère",
+      "class5": "Classe V: Pathologie sérieuse ou systémique sous-jacente"
     },
     "activityRecommendation": "Recommendation d'Activité",
     "currentEmploymentStatus": "Statut d’emploi actuel",

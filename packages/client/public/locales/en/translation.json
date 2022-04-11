@@ -399,11 +399,13 @@
     "no": "No",
     "neckOrLowerBackCondition": "Is the chief complaint is attributable to a neck or lower back condition?",
     "spinalDiagnosticClassification": {
-      "title": "Spinal diagnostic classification for chief complaint",
-      "grade1-2": "Non-specific / Mechanical / Grade 1-2 Neck Pain",
-      "grade3": "Grade 3 Neck pain / with radiculopathy",
-      "lowBackPainNonSpecific": "Non specific / mechanical Low Back Pain",
-      "sciatica": "Low back pain with radiculopathy / sciatica"
+      "title": "Indicate the Class of Spinal Disorder:",
+      "class0": "Class 0: No or minimal symptoms",
+      "class1": "Class I: Mild pain and disability",
+      "class2": "Class II: Moderate or severe pain and disability",
+      "class3": "Class III: Neurological symptoms or signs",
+      "class4": "Class IV: Spinal fracture/ instability or severe structural bony spinal deformity",
+      "class5": "Class V: Underlying serious or systemic pathology"
     },
     "activityRecommendation": "Activity Recommendation",
     "currentEmploymentStatus": "Current Employment Status",
