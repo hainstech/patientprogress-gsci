@@ -1082,38 +1082,56 @@ const NewReport = ({
                                       >
                                         <FormControlLabel
                                           value={t(
-                                            'report.spinalDiagnosticClassification.grade1-2'
+                                            'report.spinalDiagnosticClassification.class0'
                                           )}
                                           control={<Radio />}
                                           label={t(
-                                            'report.spinalDiagnosticClassification.grade1-2'
+                                            'report.spinalDiagnosticClassification.class0'
                                           )}
                                         />
                                         <FormControlLabel
                                           value={t(
-                                            'report.spinalDiagnosticClassification.grade3'
+                                            'report.spinalDiagnosticClassification.class1'
                                           )}
                                           control={<Radio />}
                                           label={t(
-                                            'report.spinalDiagnosticClassification.grade3'
+                                            'report.spinalDiagnosticClassification.class1'
                                           )}
                                         />
                                         <FormControlLabel
                                           value={t(
-                                            'report.spinalDiagnosticClassification.lowBackPainNonSpecific'
+                                            'report.spinalDiagnosticClassification.class2'
                                           )}
                                           control={<Radio />}
                                           label={t(
-                                            'report.spinalDiagnosticClassification.lowBackPainNonSpecific'
+                                            'report.spinalDiagnosticClassification.class2'
                                           )}
                                         />
                                         <FormControlLabel
                                           value={t(
-                                            'report.spinalDiagnosticClassification.sciatica'
+                                            'report.spinalDiagnosticClassification.class3'
                                           )}
                                           control={<Radio />}
                                           label={t(
-                                            'report.spinalDiagnosticClassification.sciatica'
+                                            'report.spinalDiagnosticClassification.class3'
+                                          )}
+                                        />
+                                        <FormControlLabel
+                                          value={t(
+                                            'report.spinalDiagnosticClassification.class4'
+                                          )}
+                                          control={<Radio />}
+                                          label={t(
+                                            'report.spinalDiagnosticClassification.class4'
+                                          )}
+                                        />
+                                        <FormControlLabel
+                                          value={t(
+                                            'report.spinalDiagnosticClassification.class5'
+                                          )}
+                                          control={<Radio />}
+                                          label={t(
+                                            'report.spinalDiagnosticClassification.class5'
                                           )}
                                         />
                                       </RadioGroup>
