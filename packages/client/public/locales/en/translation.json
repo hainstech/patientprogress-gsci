@@ -149,7 +149,7 @@
       "type": "Type",
       "initial": "Initial",
       "reEvaluation": "Re-evaluation",
-      "questionnaires": {
+      "bundles": {
         "NECK_BUNDLE": "Bundle: Neck",
         "BACK_BUNDLE": "Bundle: Back",
         "MS_BUNDLE": "Bundle: Upper Limb",
