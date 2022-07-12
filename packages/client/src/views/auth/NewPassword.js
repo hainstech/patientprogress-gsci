@@ -62,11 +62,7 @@ const NewPassword = ({
           5000
         );
         recaptchaRef.current.reset();
-      } else if (
-        !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
-          password
-        )
-      ) {
+      } else if (password.length < 8) {
         setAlert(
           `${t('register.invalidPassword')}: ${t(
             'register.passwordRequirements'
