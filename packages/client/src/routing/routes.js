@@ -130,6 +130,13 @@ export const adminLinks = [
     component: QuestionnaireBuilder,
     layout: '/admin',
   },
+  {
+    path: '/professional-register',
+    name: 'professional-register',
+    icon: Language,
+    component: QuestionnaireBuilder,
+    layout: '/admin',
+  },
 ];
 
 export const adminRoutes = [];

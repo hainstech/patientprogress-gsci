@@ -169,7 +169,8 @@
     "login": "Connexion",
     "builder": "Constructeur",
     "forgot": "Mot de passe oublié",
-    "metrics": "Vos statistiques"
+    "metrics": "Vos statistiques",
+    "professional-register": "Inscription d'un professionnel"
   },
   "register": {
     "fillConsent": "Consentement pour la recherche",

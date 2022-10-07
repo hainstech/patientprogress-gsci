@@ -169,7 +169,8 @@
     "login": "Sign In",
     "builder": "Builder",
     "forgot": "Forgot Password",
-    "metrics": "Your Metrics"
+    "metrics": "Your Metrics",
+    "professional-register": "Register a Professional"
   },
   "register": {
     "fillConsent": "Research consent form",
