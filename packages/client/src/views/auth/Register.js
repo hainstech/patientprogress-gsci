@@ -5,7 +5,6 @@ import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import ReCAPTCHA from 'react-google-recaptcha';
 
 import {
   FormControl,
@@ -48,8 +47,6 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
   const classes = useStyles();
   const inputClasses = useInputStyles();
 
-  const recaptchaRef = React.createRef();
-
   const { t } = useTranslation();
 
   const [consentData, setConsentData] = useState({});
@@ -86,7 +83,6 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
           'danger',
           5000
         );
-        recaptchaRef.current.reset();
       } else if (
         !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
           password
@@ -98,10 +94,8 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
           )}`,
           'danger'
         );
-        recaptchaRef.current.reset();
       } else if (password !== password2) {
         setAlert(t('register.passwordError'), 'danger');
-        recaptchaRef.current.reset();
       } else {
         register({
           name: `${firstName} ${lastName}`,
@@ -112,7 +106,6 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
           password,
           research: consentData.dataConsent && consentData.participantConsent,
           professional: match.params.id,
-          recaptchaRef,
           dataConsent: consentData.dataConsent,
           participantConsent: consentData.participantConsent,
           terms,
@@ -401,14 +394,6 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                     />
                   </GridItem>
                 </GridContainer>
-                <GridItem xs={12}>
-                  <Box mt={3}>
-                    <ReCAPTCHA
-                      ref={recaptchaRef}
-                      sitekey="6LcFZ0EbAAAAAO3o623ERVuLe5mb17Oj_UT9LNG4"
-                    />
-                  </Box>
-                </GridItem>
               </CardBody>
               <CardFooter>
                 <GridItem xs={12}>

@@ -71,7 +71,6 @@ router.post(
       language,
       research,
       professional,
-      recaptchaValue,
       dataConsent,
       participantConsent,
       terms,
@@ -82,28 +81,6 @@ router.post(
         return res.status(400).json({
           errors: [{ msg: 'Please accept the terms to use the application' }],
         });
-      }
-
-      // Disable when testing
-      if (!process.env.TEST_MODE) {
-        if (!recaptchaValue) {
-          return res
-            .status(400)
-            .json({ errors: [{ msg: 'Please complete reCaptcha' }] });
-        }
-
-        const { body } = await got.post(
-          `https://www.google.com/recaptcha/api/siteverify?secret=${config.get(
-            'recaptchaSecret'
-          )}&response=${recaptchaValue}`,
-          { responseType: 'json' }
-        );
-
-        if (!body.success) {
-          return res
-            .status(400)
-            .json({ errors: [{ msg: 'Invalid reCaptcha' }] });
-        }
       }
 
       let professionalFound = await Professional.findById(professional);

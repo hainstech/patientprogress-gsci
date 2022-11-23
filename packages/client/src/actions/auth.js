@@ -50,7 +50,6 @@ export const register =
     password,
     research,
     professional,
-    recaptchaRef,
     dataConsent,
     participantConsent,
     terms,
@@ -62,8 +61,6 @@ export const register =
       },
     };
 
-    const recaptchaValue = recaptchaRef.current.getValue();
-
     const body = JSON.stringify({
       name,
       language,
@@ -73,7 +70,6 @@ export const register =
       password,
       research,
       professional,
-      recaptchaValue,
       dataConsent,
       participantConsent,
       terms,
@@ -89,8 +85,6 @@ export const register =
       dispatch(loadUser());
     } catch (err) {
       const errors = err.response.data.errors;
-
-      recaptchaRef.current?.reset();
 
       if (errors) {
         errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
