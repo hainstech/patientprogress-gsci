@@ -54,7 +54,7 @@ let corsOptions;
 if (process.env.NODE_ENV === 'production') {
   const allowedOrigins = [
     `https://${process.env.INSTANCE}.patientprogress.ca`,
-    `https://pro-sante.patientprogress.ca`,
+    `https://prosante.patientprogress.ca`,
   ];
   corsOptions = {
     origin: function (origin, callback) {
