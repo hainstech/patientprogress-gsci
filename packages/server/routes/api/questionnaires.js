@@ -242,4 +242,43 @@ router.post('/:id', patient, async (req, res) => {
   }
 });
 
+// @route POST api/questionnaires/:id
+// @desc Post filled questionnaire by professional
+// @access professional
+router.post('/:id/professional', professional, async (req, res) => {
+  try {
+    const { title, data, time, questionnaireId } = req.body;
+
+    const completedQuestionnaire = {
+      questionnaire: questionnaireId,
+      time: new Date(),
+      answers: data,
+      title,
+      score: scoreCalculator(title, data),
+      timeToComplete: time,
+    };
+
+    const patient = await Patient.findById(req.params.id);
+
+    patient.questionnairesToFill.splice(
+      patient.questionnairesToFill
+        .map((q) => q.questionnaire)
+        .indexOf(req.params.id),
+      1
+    );
+
+    patient.questionnaires.push(completedQuestionnaire);
+
+    await patient.save();
+
+    res.json(patient);
+  } catch (err) {
+    if (err.kind == 'ObjectId') {
+      return res.status(404).json({ msg: 'Questionnaire not found' });
+    }
+    res.status(500).json({ msg: 'Server Error' });
+    console.error(err);
+  }
+});
+
 module.exports = router;
