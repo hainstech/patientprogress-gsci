@@ -205,20 +205,6 @@ router.post('/:id', patient, async (req, res) => {
         );
       }
 
-      const questionnairesToSend30DaysAfter = [
-        getQuestionnaireId('Brief Pain Inventory'),
-        getQuestionnaireId('Follow-up questionnaire'),
-        ...questionnairesToSend,
-      ];
-
-      questionnairesToSend30DaysAfter.forEach((id) => {
-        patient.questionnairesToFill.push({
-          questionnaire: id,
-          date: new Date(new Date().setDate(new Date().getDate() + 30)),
-          sent: false,
-        });
-      });
-
       questionnairesToSend.forEach((id) => {
         patient.questionnairesToFill.push({
           questionnaire: id,
