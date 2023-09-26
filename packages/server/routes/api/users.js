@@ -18,7 +18,7 @@ const auth = require('../../middleware/auth');
 // Rate limiter for register route
 const registerLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 60 minutes
-  max: 1000, // 5 requests per hour
+  max: 1000, // 1000 requests per hour
   handler: function (req, res) {
     return res.status(429).json({ errors: [{ msg: 'Try again later.' }] });
   },

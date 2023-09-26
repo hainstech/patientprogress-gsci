@@ -149,12 +149,7 @@ export const login =
 
 // Check if the captcha is required or not
 export const getCaptcha = () => async (dispatch) => {
-  try {
-    const res = await axios.get(`${URI}/api/auth/captcha`);
-    return res.data.captcha;
-  } catch (err) {
-    console.log(err.message);
-  }
+  return false; // force false - GSCI
 };
 
 // Send Password reset email

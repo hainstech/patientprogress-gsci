@@ -11,9 +11,6 @@ var noBots = require('express-nobots');
 
 const connectDB = require('./config/db');
 const logger = require('./logger');
-const { startBot } = require('./telegramBot');
-const { startSender } = require('./questionnaireSender');
-const { startDeleter } = require('./trustedIpsDeleter');
 
 const app = express();
 
@@ -136,12 +133,5 @@ app.listen(PORT, () => {
     );
   }
 });
-
-startSender();
-
-if (process.env.NODE_ENV === 'production') {
-  startBot();
-  startDeleter();
-}
 
 module.exports = app;
