@@ -14,7 +14,7 @@ import {
 } from './types';
 
 const prefix = process.env.REACT_APP_BETA ? 'beta.' : '';
-const URI =
+export const URI =
   process.env.NODE_ENV === 'production'
     ? `https://${prefix}api.patientprogress.ca`
     : '';

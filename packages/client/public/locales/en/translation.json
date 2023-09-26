@@ -177,6 +177,7 @@
     "fillConsent": "Research consent form",
     "passwordError": "Passwords do not match",
     "title": "Register into the application",
+    "fromInviteTitle": "Register a new patient",
     "firstName": "First Name",
     "lastName": "Last Name",
     "language": "Language",

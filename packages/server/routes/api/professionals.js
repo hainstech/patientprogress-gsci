@@ -3,8 +3,11 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 var nodemailer = require('nodemailer');
 const config = require('config');
+const bcrypt = require('bcryptjs');
 
 const Professional = require('../../models/Professional');
+const Patient = require('../../models/Patient');
+const User = require('../../models/User');
 
 const admin = require('../../middleware/admin');
 const auth = require('../../middleware/auth');
@@ -234,6 +237,150 @@ router.post(
     } catch (err) {
       console.log(err.message);
       res.status(500).json({ msg: 'Server Error' });
+    }
+  }
+);
+
+// @route POST api/professionals/invite
+// @desc Register a new patient
+// @access Professional
+router.post(
+  '/register',
+  [
+    professional,
+    [
+      check('email', 'Please include a valid email').isEmail(),
+      check(
+        'password',
+        'Please enter a password with 8 or more characters'
+      ).isLength({ min: 8 }),
+      check('name', 'Name is required').not().isEmpty(),
+      check('dob', 'Enter a valid date following the YYYY-MM-DD format')
+        .isISO8601()
+        .toDate(),
+      check('gender', 'Gender is required').not().isEmpty(),
+      check('language', 'Language is required').not().isEmpty(),
+      check('research', 'Consent is required').isBoolean(),
+      check('dataConsent', 'Data consent is required').isBoolean(),
+      check(
+        'participantConsent',
+        'Participant consent is required'
+      ).isBoolean(),
+      check(
+        'terms',
+        'Please accept the terms to use the application'
+      ).isBoolean(),
+    ],
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const {
+      email,
+      password,
+      name,
+      dob,
+      gender,
+      language,
+      research,
+      dataConsent,
+      participantConsent,
+      terms,
+    } = req.body;
+
+    try {
+      if (!terms) {
+        return res.status(400).json({
+          errors: [{ msg: 'Please accept the terms to use the application' }],
+        });
+      }
+
+      let professionalFound = await Professional.findOne({
+        user: req.user.id,
+      });
+
+      if (!professionalFound) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Invalid professional ID' }] });
+      }
+
+      let user = await User.findOne({ email });
+
+      if (user) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'User already exists' }] });
+      }
+
+      user = new User({
+        type: 'patient',
+        email,
+        password,
+      });
+
+      const salt = await bcrypt.genSalt(10);
+
+      user.password = await bcrypt.hash(password, salt);
+
+      //@feature create patient file
+
+      // Get initial questionnaires to send: intake + BPI
+      const initialIntake = await Questionnaire.findOne({
+        title: 'Initial Intake Form',
+        language,
+      });
+      const BPI = await Questionnaire.findOne({
+        title: 'Brief Pain Inventory',
+        language,
+      });
+
+      let patient = new Patient({
+        name,
+        dob,
+        gender,
+        language,
+        research,
+        user: user.id,
+        professional: professionalFound.id,
+        dataConsent,
+        participantConsent,
+        questionnairesToFill: [
+          {
+            questionnaire: initialIntake._id,
+            date: new Date(),
+            sent: true,
+          },
+          {
+            questionnaire: BPI._id,
+            date: new Date(),
+            sent: true,
+          },
+        ],
+      });
+
+      user.patientId = patient.id;
+
+      await patient.save();
+      await user.save();
+
+      //add patientId to professionals patients
+      professionalFound.patients.push(patient.id);
+
+      await professionalFound.save();
+
+      res.status(201).json({ msg: 'Patient registered' });
+    } catch (err) {
+      if (err.kind == 'ObjectId') {
+        return res
+          .status(404)
+          .json({ errors: [{ msg: 'Invalid professional ID' }] });
+      }
+      console.log(err);
+      res.status(500).send('Server error');
     }
   }
 );

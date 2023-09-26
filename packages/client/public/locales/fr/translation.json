@@ -177,6 +177,7 @@
     "fillConsent": "Consentement pour la recherche",
     "passwordError": "Les mots de passe ne correspondent pas",
     "title": "S'inscrire dans l'application",
+    "fromInviteTitle": "Inscrire un nouveau patient",
     "firstName": "Prénom",
     "lastName": "Nom",
     "language": "Langue",
