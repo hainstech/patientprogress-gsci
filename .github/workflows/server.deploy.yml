@@ -23,7 +23,7 @@ jobs:
 
       - name: Create Expo google-services-expo file
         run: |
-          echo -n "${{ secrets.DEFAULT_JSON }}" | base64 -d > ./packages/server/default.json
+          echo -n "${{ secrets.DEFAULT_JSON }}" | base64 -d > ./packages/server/config/default.json
 
       - name: Google Auth
         id: auth
