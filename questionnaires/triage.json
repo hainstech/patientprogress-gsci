@@ -1,0 +1,189 @@
+{
+  "type": "object",
+  "title": "Triage and Classification of spinal disorder",
+  "description": "",
+  "properties": {
+    "Please indicate who is completing this questionnaire": {
+      "enum": [
+        "Nurse",
+        "Medical Assistant or Community health worker",
+        "Physician",
+        "Massage therapist",
+        "Chiropractor",
+        "Physical therapist",
+        "Massage therapist",
+        "Other"
+      ],
+      "title": "Please indicate who is completing this questionnaire",
+      "type": "string"
+    },
+    "Primary location of spinal disorder": {
+      "title": "Primary location of spinal disorder",
+      "type": "object",
+      "properties": {
+        "Where are the spine symptoms or concerns of this person?": {
+          "enum": ["Neck", "Mid-back", "Low-back"],
+          "title": "Where are the spine symptoms or concerns of this person?",
+          "type": "string"
+        }
+      },
+      "dependencies": {},
+      "required": []
+    },
+    "Duration & Evolution": {
+      "title": "Duration & Evolution",
+      "type": "object",
+      "properties": {
+        "For how long has the person had the symptoms?": {
+          "enum": [
+            "Less than 3 months (Acute)",
+            "More than 3 months (Chronic)"
+          ],
+          "title": "For how long has the person had the symptoms?",
+          "type": "string"
+        },
+        "How is the overall condition evolving?": {
+          "enum": [
+            "Non-progressive",
+            "Rapidly progressive",
+            "Slowly progressive",
+            "Rapidly progressive",
+            "Unknown"
+          ],
+          "title": "How is the overall condition evolving?",
+          "type": "string"
+        }
+      },
+      "dependencies": {},
+      "required": []
+    },
+    "Pain Intensity / Activity limitation": {
+      "title": "Pain Intensity / Activity limitation",
+      "type": "object",
+      "properties": {
+        "What is the pain intensity level ? (0-10)": {
+          "enum": [
+            "No or minimal (Pain 0-1/10)",
+            "Mild (Pain 2-4/10)",
+            "Moderate (Pain 5-7/10)",
+            "Severe (Pain 8-10/10)"
+          ],
+          "title": "What is the pain intensity level ? (0-10)",
+          "type": "string"
+        },
+        "Do pain symptoms radiate beyond the spine?": {
+          "enum": ["No", "Head", "Arms", "Chest", "Legs"],
+          "title": "Do pain or neurological symptoms radiate beyond the spine?",
+          "type": "string"
+        },
+        "How much do symptoms cause difficulty with normal activities?": {
+          "enum": [
+            "None",
+            "Person can do most but not all normal activities",
+            "Person has difficulty doing most activities"
+          ],
+          "title": "How much do symptoms cause difficulty with normal activities?",
+          "type": "string"
+        }
+      },
+      "dependencies": {},
+      "required": []
+    },
+    "Risk of serious spinal or systemic pathology": {
+      "title": "Risk of serious spinal or systemic pathology",
+      "type": "object",
+      "properties": {
+        "Is there a history of cancer in the past 5 years or other red flags like unexplained weight loss?": {
+          "enum": ["Yes", "No", "Unknown"],
+          "title": "Is there a history of cancer in the past 5 years or other red flags like unexplained weight loss?",
+          "type": "string"
+        },
+        "Is there a history of prior infection such as TB or HIV, use intravenous drug use or persistent or unexplained fever?": {
+          "enum": ["Yes", "No", "Unknown"],
+          "title": "Is there a history of prior infection such as TB or HIV, use intravenous drug use or persistent or unexplained fever?",
+          "type": "string"
+        },
+        "Is there an history of osteoporosis or long term use of corticosteroid?": {
+          "enum": ["Yes", "No", "Unknown"],
+          "title": "Is there an history of osteoporosis or long term use of corticosteroid?",
+          "type": "string"
+        },
+        "Is there a history of Inflammatory or rheumatoid joint disease?": {
+          "enum": ["Yes", "No", "Unknown"],
+          "title": "Is there a history of Inflammatory or rheumatoid joint disease?",
+          "type": "string"
+        },
+        "Is there a history of or suspected serious neurological disease?": {
+          "enum": ["Yes", "No", "Unknown"],
+          "title": "Is there a history of or suspected serious neurological disease?",
+          "type": "string"
+        },
+        "Is there a history suggesting that symptoms originate from a non-spinal pathology (ie: visceral pathology such as kidney stone, angina, etc.)?": {
+          "enum": ["Yes", "No", "Unknown"],
+          "title": "Is there a history suggesting that symptoms originate from a non-spinal pathology (ie: visceral pathology such as kidney stone, angina, etc.)?",
+          "type": "string"
+        }
+      },
+      "dependencies": {},
+      "required": []
+    },
+    "Structural Spinal Pathology": {
+      "title": "Structural Spinal Pathology",
+      "type": "object",
+      "properties": {
+        "Does the person have a significant spinal deformity, scoliosis or kyphosis?": {
+          "enum": [
+            "No",
+            "Yes ; appear stable or not causing pain.",
+            "Yes ; getting worst or causing pain",
+            "Unknown"
+          ],
+          "title": "Does the person have a significant spinal deformity, scoliosis or kyphosis?",
+          "type": "string"
+        },
+        "Has the person experienced a recent physical trauma, such as a serious accident or fall?": {
+          "enum": ["No", "Yes", "Unknown"],
+          "title": "Has the person experienced a recent physical trauma, such as a serious accident or fall?",
+          "type": "string"
+        }
+      },
+      "dependencies": {},
+      "required": []
+    },
+    "Neurologial symptoms or deficits": {
+      "title": "Neurologial symptoms or deficits",
+      "type": "object",
+      "properties": {
+        "Any numbness or tingling in the arms or legs?": {
+          "enum": ["Yes", "No", "Unknown"],
+          "title": "Any numbness or tingling in the arms or legs?",
+          "type": "string"
+        },
+        "Any muscle weakness in the arms or legs?": {
+          "enum": ["Yes", "No", "Unknown"],
+          "title": "Any muscle weakness in the arms or legs?",
+          "type": "string"
+        },
+        "Any gait difficulty or loss of balance?": {
+          "enum": ["Yes", "No", "Unknown"],
+          "title": "Any gait difficulty or loss of balance?",
+          "type": "string"
+        },
+        "Any new onset of bladder or bowel problems like loss of control?": {
+          "enum": ["Yes", "No", "Unknown"],
+          "title": "Any new onset of bladder or bowel problems like loss of control?",
+          "type": "string"
+        },
+        "Do pain or neurological symptoms radiate beyond the spine (to legs, arms, head or chest)?": {
+          "enum": ["Yes", "No", "Unknown"],
+          "title": "Do pain or neurological symptoms radiate beyond the spine (to legs, arms, head or chest)?",
+          "type": "string"
+        }
+      },
+      "dependencies": {},
+      "required": []
+    }
+  },
+  "dependencies": {},
+  "required": []
+}

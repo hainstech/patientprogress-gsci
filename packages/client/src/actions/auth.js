@@ -16,7 +16,7 @@ import {
 const prefix = process.env.REACT_APP_BETA ? 'beta.' : '';
 export const URI =
   process.env.NODE_ENV === 'production'
-    ? `https://${prefix}api.patientprogress.ca`
+    ? `https://${prefix}patientprogress-server-wqqoimymxa-ue.a.run.app`
     : '';
 
 // Load User

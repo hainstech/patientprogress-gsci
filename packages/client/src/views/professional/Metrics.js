@@ -36,7 +36,7 @@ const getAllPatients = async () => {
   const prefix = process.env.REACT_APP_BETA ? 'beta.' : '';
   const URI =
     process.env.NODE_ENV === 'production'
-      ? `https://${prefix}api.patientprogress.ca`
+      ? `https://${prefix}patientprogress-server-wqqoimymxa-ue.a.run.app`
       : '';
   try {
     const res = await axios.get(`${URI}/api/patients/all`);

@@ -23,7 +23,7 @@ const useInputStyles = makeStyles(inputStyles);
 const prefix = process.env.REACT_APP_BETA ? 'beta.' : '';
 const URI =
   process.env.NODE_ENV === 'production'
-    ? `https://${prefix}api.patientprogress.ca`
+    ? `https://${prefix}patientprogress-server-wqqoimymxa-ue.a.run.app`
     : '';
 
 const ProfessionalRegister = () => {

@@ -52,7 +52,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "BUILD_PATH='./deploy/build' react-scripts build",
     "test": "react-scripts test",
     "dev": "npm start",
     "eject": "react-scripts eject",

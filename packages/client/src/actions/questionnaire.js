@@ -5,7 +5,7 @@ import i18n from '../i18n';
 const prefix = process.env.REACT_APP_BETA ? 'beta.' : '';
 const URI =
   process.env.NODE_ENV === 'production'
-    ? `https://${prefix}api.patientprogress.ca`
+    ? `https://${prefix}patientprogress-server-wqqoimymxa-ue.a.run.app`
     : '';
 
 // Get questionnaire with the params id

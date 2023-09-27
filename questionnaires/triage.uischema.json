@@ -1,0 +1,98 @@
+{
+  "Please indicate who is completing this questionnaire": {
+    "ui:widget": "radio"
+  },
+  "Primary location of spinal disorder": {
+    "Where are the spine symptoms or concerns of this person?": {
+      "ui:widget": "radio"
+    },
+    "ui:order": ["Where are the spine symptoms or concerns of this person?"]
+  },
+  "Duration & Evolution": {
+    "For how long has the person had the symptoms?": { "ui:widget": "radio" },
+    "How is the overall condition evolving?": { "ui:widget": "radio" },
+    "ui:order": [
+      "For how long has the person had the symptoms?",
+      "How is the overall condition evolving?"
+    ]
+  },
+  "Pain Intensity / Activity limitation": {
+    "What is the pain intensity level ? (0-10)": { "ui:widget": "radio" },
+    "Do pain symptoms radiate beyond the spine?": { "ui:widget": "radio" },
+    "How much do symptoms cause difficulty with normal activities?": {
+      "ui:widget": "radio"
+    },
+    "ui:order": [
+      "What is the pain intensity level ? (0-10)",
+      "Do pain symptoms radiate beyond the spine?",
+      "How much do symptoms cause difficulty with normal activities?"
+    ]
+  },
+  "Risk of serious spinal or systemic pathology": {
+    "Is there a history of cancer in the past 5 years or other red flags like unexplained weight loss?": {
+      "ui:widget": "radio"
+    },
+    "Is there a history of prior infection such as TB or HIV, use intravenous drug use or persistent or unexplained fever?": {
+      "ui:widget": "radio"
+    },
+    "Is there an history of osteoporosis or long term use of corticosteroid?": {
+      "ui:widget": "radio"
+    },
+    "Is there a history of Inflammatory or rheumatoid joint disease?": {
+      "ui:widget": "radio"
+    },
+    "Is there a history of or suspected serious neurological disease?": {
+      "ui:widget": "radio"
+    },
+    "Is there a history suggesting that symptoms originate from a non-spinal pathology (ie: visceral pathology such as kidney stone, angina, etc.)?": {
+      "ui:widget": "radio"
+    },
+    "ui:order": [
+      "Is there a history of cancer in the past 5 years or other red flags like unexplained weight loss?",
+      "Is there a history of prior infection such as TB or HIV, use intravenous drug use or persistent or unexplained fever?",
+      "Is there an history of osteoporosis or long term use of corticosteroid?",
+      "Is there a history of Inflammatory or rheumatoid joint disease?",
+      "Is there a history of or suspected serious neurological disease?",
+      "Is there a history suggesting that symptoms originate from a non-spinal pathology (ie: visceral pathology such as kidney stone, angina, etc.)?"
+    ]
+  },
+  "Structural Spinal Pathology": {
+    "Does the person have a significant spinal deformity, scoliosis or kyphosis?": {
+      "ui:widget": "radio"
+    },
+    "Has the person experienced a recent physical trauma, such as a serious accident or fall?": {
+      "ui:widget": "radio"
+    },
+    "ui:order": [
+      "Does the person have a significant spinal deformity, scoliosis or kyphosis?",
+      "Has the person experienced a recent physical trauma, such as a serious accident or fall?"
+    ]
+  },
+  "Neurologial symptoms or deficits": {
+    "Any numbness or tingling in the arms or legs?": { "ui:widget": "radio" },
+    "Any muscle weakness in the arms or legs?": { "ui:widget": "radio" },
+    "Any gait difficulty or loss of balance?": { "ui:widget": "radio" },
+    "Any new onset of bladder or bowel problems like loss of control?": {
+      "ui:widget": "radio"
+    },
+    "Do pain or neurological symptoms radiate beyond the spine (to legs, arms, head or chest)?": {
+      "ui:widget": "radio"
+    },
+    "ui:order": [
+      "Any numbness or tingling in the arms or legs?",
+      "Any muscle weakness in the arms or legs?",
+      "Any gait difficulty or loss of balance?",
+      "Any new onset of bladder or bowel problems like loss of control?",
+      "Do pain or neurological symptoms radiate beyond the spine (to legs, arms, head or chest)?"
+    ]
+  },
+  "ui:order": [
+    "Please indicate who is completing this questionnaire",
+    "Primary location of spinal disorder",
+    "Duration & Evolution",
+    "Pain Intensity / Activity limitation",
+    "Risk of serious spinal or systemic pathology",
+    "Structural Spinal Pathology",
+    "Neurologial symptoms or deficits"
+  ]
+}

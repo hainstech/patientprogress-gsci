@@ -7,7 +7,7 @@ import { GET_PATIENT, PATIENT_ERROR } from './types';
 const prefix = process.env.REACT_APP_BETA ? 'beta.' : '';
 const URI =
   process.env.NODE_ENV === 'production'
-    ? `https://${prefix}api.patientprogress.ca`
+    ? `https://${prefix}patientprogress-server-wqqoimymxa-ue.a.run.app`
     : '';
 
 // Send email to api so it can send the email
