@@ -241,7 +241,7 @@ router.post(
   }
 );
 
-// @route POST api/professionals/invite
+// @route POST api/professionals/register
 // @desc Register a new patient
 // @access Professional
 router.post(
@@ -347,11 +347,6 @@ router.post(
         questionnairesToFill: [
           {
             questionnaire: initialIntake._id,
-            date: new Date(),
-            sent: true,
-          },
-          {
-            questionnaire: BPI._id,
             date: new Date(),
             sent: true,
           },
