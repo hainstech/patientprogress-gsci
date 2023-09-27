@@ -1,1 +1,59 @@
-{"type":"object","title":"EQ-5D","properties":{"Mobility":{"enum":["I have no problems in walking about","I have some problems in walking about","I am confined to bed"],"title":"Mobility","type":"string"},"Self-Care":{"enum":["I have no problems with self-care","I have some problems washing or dressing myself","I am unable to wash or dress myself"],"title":"Self-Care","type":"string"},"Usual Activities (e.g. work, study, housework, family or leisure activities)":{"enum":["I have no problems with performing my usual activities","I have some problems with performing my usual activities","I am unable to perform my usual activities"],"title":"Usual Activities (e.g. work, study, housework, family or leisure activities)","type":"string"},"Pain/Discomfort":{"enum":["I have no pain or discomfort","I have moderate pain or discomfort","I have extreme pain or discomfort"],"title":"Pain/Discomfort","type":"string"},"Anxiety/Depression":{"enum":["I am not anxious or depressed","I am moderately anxious or depressed","I am extremely anxious or depressed"],"title":"Anxiety/Depression","type":"string"},"Health state":{"title":"Health state","type":"string","description":"To help people say how good or bad a health state is, we have drawn a scale (rather like a thermometer) on which the best state you can imagine is marked 100 and the worst state you can imagine is marked 0. We would like you to indicate on this scale how good or bad your own health is today, in your opinion. Please do this by drawing a line from the box below to whichever point on the scale indicates how good or bad your health state is today."}},"dependencies":{},"required":[],"description":"By placing a tick in one box in each group below, please indicate which statements best describe your own health state today."}
+{
+  "type": "object",
+  "title": "EQ-5D",
+  "properties": {
+    "Mobility": {
+      "enum": [
+        "I have no problems in walking about",
+        "I have some problems in walking about",
+        "I am confined to bed"
+      ],
+      "title": "Mobility",
+      "type": "string"
+    },
+    "Self-Care": {
+      "enum": [
+        "I have no problems with self-care",
+        "I have some problems washing or dressing myself",
+        "I am unable to wash or dress myself"
+      ],
+      "title": "Self-Care",
+      "type": "string"
+    },
+    "Usual Activities (e.g. work, study, housework, family or leisure activities)": {
+      "enum": [
+        "I have no problems with performing my usual activities",
+        "I have some problems with performing my usual activities",
+        "I am unable to perform my usual activities"
+      ],
+      "title": "Usual Activities (e.g. work, study, housework, family or leisure activities)",
+      "type": "string"
+    },
+    "Pain/Discomfort": {
+      "enum": [
+        "I have no pain or discomfort",
+        "I have moderate pain or discomfort",
+        "I have extreme pain or discomfort"
+      ],
+      "title": "Pain/Discomfort",
+      "type": "string"
+    },
+    "Anxiety/Depression": {
+      "enum": [
+        "I am not anxious or depressed",
+        "I am moderately anxious or depressed",
+        "I am extremely anxious or depressed"
+      ],
+      "title": "Anxiety/Depression",
+      "type": "string"
+    },
+    "Health state": {
+      "title": "Health state",
+      "type": "string",
+      "description": "To help people say how good or bad a health state is, we have drawn a scale (rather like a thermometer) on which the best state you can imagine is marked 100 and the worst state you can imagine is marked 0. We would like you to indicate on this scale how good or bad your own health is today, in your opinion. Please do this by drawing a line from the box below to whichever point on the scale indicates how good or bad your health state is today."
+    }
+  },
+  "dependencies": {},
+  "required": [],
+  "description": "By placing a tick in one box in each group below, please indicate which statements best describe your own health state today."
+}

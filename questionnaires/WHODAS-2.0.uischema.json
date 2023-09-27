@@ -1,1 +1,31 @@
-{"S1":{"ui:widget":"radio"},"S2":{"ui:widget":"radio"},"S3":{"ui:widget":"radio"},"S4":{"ui:widget":"radio"},"S5":{"ui:widget":"radio"},"S6":{"ui:widget":"radio"},"S7":{"ui:widget":"radio"},"S8":{"ui:widget":"radio"},"S9":{"ui:widget":"radio"},"S10":{"ui:widget":"radio"},"S11":{"ui:widget":"radio"},"S12":{"ui:widget":"radio"},"ui:order":["S1","S2","S3","S4","S5","S6","S7","S8","S9","S10","S11","S12","H1","H2","H3"]}
+{
+  "S1": { "ui:widget": "radio" },
+  "S2": { "ui:widget": "radio" },
+  "S3": { "ui:widget": "radio" },
+  "S4": { "ui:widget": "radio" },
+  "S5": { "ui:widget": "radio" },
+  "S6": { "ui:widget": "radio" },
+  "S7": { "ui:widget": "radio" },
+  "S8": { "ui:widget": "radio" },
+  "S9": { "ui:widget": "radio" },
+  "S10": { "ui:widget": "radio" },
+  "S11": { "ui:widget": "radio" },
+  "S12": { "ui:widget": "radio" },
+  "ui:order": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9",
+    "S10",
+    "S11",
+    "S12",
+    "H1",
+    "H2",
+    "H3"
+  ]
+}

@@ -328,13 +328,9 @@ router.post(
 
       //@feature create patient file
 
-      // Get initial questionnaires to send: intake + BPI
+      // Get initial questionnaires to send
       const initialIntake = await Questionnaire.findOne({
         title: 'Initial Intake Form',
-        language,
-      });
-      const BPI = await Questionnaire.findOne({
-        title: 'Brief Pain Inventory',
         language,
       });
 

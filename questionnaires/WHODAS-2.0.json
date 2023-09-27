@@ -1,1 +1,81 @@
-{"type":"object","title":"WHODAS 2.0","description":"This questionnaire asks about difficulties due to health conditions. Health conditions include diseases or illnesses, other health problems that may be short or long lasting, injuries, mental or emotional problems, and problems with alcohol or drugs. Think back over the past 30 days and answer these questions, thinking about how much difficulty you had doing the following activities. For each question, please circle only one response.","properties":{"S1":{"enum":["None","Mild","Moderate","Severe","Extreme or cannot do"],"title":"In the past 30 days, how much difficulty did you have in: Standing for long periods such as 30 minutes?","type":"string"},"S2":{"enum":["None","Mild","Moderate","Severe","Extreme or cannot do"],"title":"Taking care of your household responsibilities?","type":"string"},"S3":{"enum":["None","Mild","Moderate","Severe","Extreme or cannot do"],"title":"Learning a new task, for example, learning how to get to a new place?","type":"string"},"S4":{"enum":["None","Mild","Moderate","Severe","Extreme or cannot do"],"title":"How much of a problem did you have joining in community activities (for example, festivities, religious or other activities) in the same way as anyone else can?","type":"string"},"S5":{"enum":["None","Mild","Moderate","Severe","Extreme or cannot do"],"title":"How much have you been emotionally affected by your health problems?","type":"string"},"S6":{"enum":["None","Mild","Moderate","Severe","Extreme or cannot do"],"title":"Concentrating on doing something for ten minutes?","type":"string"},"S7":{"enum":["None","Mild","Moderate","Severe","Extreme or cannot do"],"title":"Walking a long distance such as a kilometre (or equivalent)?","type":"string"},"S8":{"enum":["None","Mild","Moderate","Severe","Extreme or cannot do"],"title":"Washing your whole body?","type":"string"},"S9":{"enum":["None","Mild","Moderate","Severe","Extreme or cannot do"],"title":"Getting dressed?","type":"string"},"S10":{"enum":["None","Mild","Moderate","Severe","Extreme or cannot do"],"title":"Dealing with people you do not know?","type":"string"},"S11":{"enum":["None","Mild","Moderate","Severe","Extreme or cannot do"],"title":"Maintaining a friendship?","type":"string"},"S12":{"enum":["None","Mild","Moderate","Severe","Extreme or cannot do"],"title":"Your day-to-day work?","type":"string"},"H1":{"title":"Overall, in the past 30 days, how many days were these difficulties present?","type":"number"},"H2":{"title":"In the past 30 days, for how many days were you totally unable to carry out your usual activities or work because of any health condition?","type":"number"},"H3":{"title":"In the past 30 days, not counting the days that you were totally unable, for how many days did you cut back or reduce your usual activities or work because of any health condition?","type":"number"}},"dependencies":{},"required":[]}
+{
+  "type": "object",
+  "title": "WHODAS 2.0",
+  "description": "This questionnaire asks about difficulties due to health conditions. Health conditions include diseases or illnesses, other health problems that may be short or long lasting, injuries, mental or emotional problems, and problems with alcohol or drugs. Think back over the past 30 days and answer these questions, thinking about how much difficulty you had doing the following activities. For each question, please circle only one response.",
+  "properties": {
+    "S1": {
+      "enum": ["None", "Mild", "Moderate", "Severe", "Extreme or cannot do"],
+      "title": "In the past 30 days, how much difficulty did you have in: Standing for long periods such as 30 minutes?",
+      "type": "string"
+    },
+    "S2": {
+      "enum": ["None", "Mild", "Moderate", "Severe", "Extreme or cannot do"],
+      "title": "Taking care of your household responsibilities?",
+      "type": "string"
+    },
+    "S3": {
+      "enum": ["None", "Mild", "Moderate", "Severe", "Extreme or cannot do"],
+      "title": "Learning a new task, for example, learning how to get to a new place?",
+      "type": "string"
+    },
+    "S4": {
+      "enum": ["None", "Mild", "Moderate", "Severe", "Extreme or cannot do"],
+      "title": "How much of a problem did you have joining in community activities (for example, festivities, religious or other activities) in the same way as anyone else can?",
+      "type": "string"
+    },
+    "S5": {
+      "enum": ["None", "Mild", "Moderate", "Severe", "Extreme or cannot do"],
+      "title": "How much have you been emotionally affected by your health problems?",
+      "type": "string"
+    },
+    "S6": {
+      "enum": ["None", "Mild", "Moderate", "Severe", "Extreme or cannot do"],
+      "title": "Concentrating on doing something for ten minutes?",
+      "type": "string"
+    },
+    "S7": {
+      "enum": ["None", "Mild", "Moderate", "Severe", "Extreme or cannot do"],
+      "title": "Walking a long distance such as a kilometre (or equivalent)?",
+      "type": "string"
+    },
+    "S8": {
+      "enum": ["None", "Mild", "Moderate", "Severe", "Extreme or cannot do"],
+      "title": "Washing your whole body?",
+      "type": "string"
+    },
+    "S9": {
+      "enum": ["None", "Mild", "Moderate", "Severe", "Extreme or cannot do"],
+      "title": "Getting dressed?",
+      "type": "string"
+    },
+    "S10": {
+      "enum": ["None", "Mild", "Moderate", "Severe", "Extreme or cannot do"],
+      "title": "Dealing with people you do not know?",
+      "type": "string"
+    },
+    "S11": {
+      "enum": ["None", "Mild", "Moderate", "Severe", "Extreme or cannot do"],
+      "title": "Maintaining a friendship?",
+      "type": "string"
+    },
+    "S12": {
+      "enum": ["None", "Mild", "Moderate", "Severe", "Extreme or cannot do"],
+      "title": "Your day-to-day work?",
+      "type": "string"
+    },
+    "H1": {
+      "title": "Overall, in the past 30 days, how many days were these difficulties present?",
+      "type": "integer"
+    },
+    "H2": {
+      "title": "In the past 30 days, for how many days were you totally unable to carry out your usual activities or work because of any health condition?",
+      "type": "integer"
+    },
+    "H3": {
+      "title": "In the past 30 days, not counting the days that you were totally unable, for how many days did you cut back or reduce your usual activities or work because of any health condition?",
+      "type": "integer"
+    }
+  },
+  "dependencies": {},
+  "required": []
+}

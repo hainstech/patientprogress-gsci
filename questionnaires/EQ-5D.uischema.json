@@ -1,1 +1,17 @@
-{"Mobility":{"ui:widget":"radio"},"Self-Care":{"ui:widget":"radio"},"Usual Activities (e.g. work, study, housework, family or leisure activities)":{"ui:widget":"radio"},"Pain/Discomfort":{"ui:widget":"radio"},"Anxiety/Depression":{"ui:widget":"radio"},"ui:order":["Mobility","Self-Care","Usual Activities (e.g. work, study, housework, family or leisure activities)","Pain/Discomfort","Anxiety/Depression","Health state"]}
+{
+  "Mobility": { "ui:widget": "radio" },
+  "Self-Care": { "ui:widget": "radio" },
+  "Usual Activities (e.g. work, study, housework, family or leisure activities)": {
+    "ui:widget": "radio"
+  },
+  "Pain/Discomfort": { "ui:widget": "radio" },
+  "Anxiety/Depression": { "ui:widget": "radio" },
+  "ui:order": [
+    "Mobility",
+    "Self-Care",
+    "Usual Activities (e.g. work, study, housework, family or leisure activities)",
+    "Pain/Discomfort",
+    "Anxiety/Depression",
+    "Health state"
+  ]
+}
