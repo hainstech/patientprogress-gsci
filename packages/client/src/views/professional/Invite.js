@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -31,7 +31,6 @@ import CardBody from '../../components/Card/CardBody.js';
 import CardFooter from '../../components/Card/CardFooter.js';
 import Button from '../../components/CustomButtons/Button.js';
 import Alert from '../layout/Alert';
-import Consent from '../auth/Consent';
 import { URI } from '../../actions/auth';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -54,8 +53,6 @@ function Invite({ invitePatient }) {
       invitePatient(email);
     },
   });
-
-  const [consentData, setConsentData] = useState({});
 
   const formikRegister = useFormik({
     initialValues: {
@@ -94,9 +91,9 @@ function Invite({ invitePatient }) {
         dob,
         email,
         password,
-        research: consentData.dataConsent && consentData.participantConsent,
-        dataConsent: consentData.dataConsent,
-        participantConsent: consentData.participantConsent,
+        research: true,
+        dataConsent: true,
+        participantConsent: true,
         terms: true,
       });
 
@@ -344,13 +341,6 @@ function Invite({ invitePatient }) {
                         onChange={formikRegister.handleChange}
                       />
                     </FormControl>
-                  </GridItem>
-                  <GridItem xs={12}>
-                    <br />
-                    <Consent
-                      setConsentData={setConsentData}
-                      consentData={consentData}
-                    />
                   </GridItem>
                   <GridItem xs={12}>
                     <FormControlLabel

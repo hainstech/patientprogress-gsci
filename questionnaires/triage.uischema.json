@@ -17,7 +17,7 @@
     ]
   },
   "Pain Intensity / Activity limitation": {
-    "What is the pain intensity level ? (0-10)": { "ui:widget": "radio" },
+    "What is the pain intensity level ? (0-10)": { "ui:widget": "radioFaces" },
     "Do pain symptoms radiate beyond the spine?": { "ui:widget": "radio" },
     "How much do symptoms cause difficulty with normal activities?": {
       "ui:widget": "radio"
@@ -44,7 +44,7 @@
     "Is there a history of or suspected serious neurological disease?": {
       "ui:widget": "radio"
     },
-    "Is there a history suggesting that symptoms originate from a non-spinal pathology (ie: visceral pathology such as kidney stone, angina, etc.)?": {
+    "Is there a history suggesting that symptoms originate from a non-spinal pathology (ie: visceral pathology such as kidney stone, angina, etc)?": {
       "ui:widget": "radio"
     },
     "ui:order": [
@@ -53,7 +53,7 @@
       "Is there an history of osteoporosis or long term use of corticosteroid?",
       "Is there a history of Inflammatory or rheumatoid joint disease?",
       "Is there a history of or suspected serious neurological disease?",
-      "Is there a history suggesting that symptoms originate from a non-spinal pathology (ie: visceral pathology such as kidney stone, angina, etc.)?"
+      "Is there a history suggesting that symptoms originate from a non-spinal pathology (ie: visceral pathology such as kidney stone, angina, etc)?"
     ]
   },
   "Structural Spinal Pathology": {

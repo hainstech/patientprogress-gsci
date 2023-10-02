@@ -157,7 +157,7 @@ const QuestionnairePDF = ({ questionnaire, patient, answers }) => {
         <View wrap={false} style={styles.subtitle}>
           <Text>{t('professional.patient.answers')}:</Text>
         </View>
-        {questionnaire.title !== 'Initial Intake Form' ? (
+        {questionnaire.title !== 'TEMP Pre-visit Intake Form' ? (
           <View wrap={false} style={styles.answersContainer}>
             {answers.map(({ title, value }, i) => (
               <Text key={i} style={styles.answer}>

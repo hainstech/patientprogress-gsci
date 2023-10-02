@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 import URL from '../../assets/img/bodyMap.jpg';
 import areasJSON from '../../assets/bodyMap.json';
+import faces from '../../assets/img/faces.png';
 
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem.js';
@@ -109,6 +110,38 @@ const NativeSelectWidget = function (props) {
   );
 };
 
+const RadioFacesWidget = function (props) {
+  const handleChange = (event) => {
+    const value = event.target.value;
+    props.onChange(value);
+  };
+
+  return (
+    <>
+      <InputLabel shrink htmlFor={props.label}>
+        {props.label}
+      </InputLabel>
+      <img src={faces} alt="faces" />
+      <NativeSelect
+        value={props.value}
+        onChange={handleChange}
+        inputProps={{
+          name: props.id,
+          id: props.label,
+        }}
+      >
+        {!props.default && <option aria-label="None" value="" />}
+
+        {props.options.enumOptions.map(({ label, value }) => (
+          <option key={`${label}`} value={value}>
+            {label}
+          </option>
+        ))}
+      </NativeSelect>
+    </>
+  );
+};
+
 function FillQuestionnaire({
   getQuestionnaire,
   addQuestionnaireFilledByProfessional,
@@ -148,6 +181,7 @@ function FillQuestionnaire({
 
   const widgets = {
     nativeSelect: NativeSelectWidget,
+    radioFaces: RadioFacesWidget,
     title: Title,
   };
 

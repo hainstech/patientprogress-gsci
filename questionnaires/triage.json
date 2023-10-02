@@ -11,7 +11,6 @@
         "Massage therapist",
         "Chiropractor",
         "Physical therapist",
-        "Massage therapist",
         "Other"
       ],
       "title": "Please indicate who is completing this questionnaire",
@@ -45,7 +44,6 @@
         "How is the overall condition evolving?": {
           "enum": [
             "Non-progressive",
-            "Rapidly progressive",
             "Slowly progressive",
             "Rapidly progressive",
             "Unknown"
@@ -118,9 +116,9 @@
           "title": "Is there a history of or suspected serious neurological disease?",
           "type": "string"
         },
-        "Is there a history suggesting that symptoms originate from a non-spinal pathology (ie: visceral pathology such as kidney stone, angina, etc.)?": {
+        "Is there a history suggesting that symptoms originate from a non-spinal pathology (ie: visceral pathology such as kidney stone, angina, etc)?": {
           "enum": ["Yes", "No", "Unknown"],
-          "title": "Is there a history suggesting that symptoms originate from a non-spinal pathology (ie: visceral pathology such as kidney stone, angina, etc.)?",
+          "title": "Is there a history suggesting that symptoms originate from a non-spinal pathology (ie: visceral pathology such as kidney stone, angina, etc)?",
           "type": "string"
         }
       },

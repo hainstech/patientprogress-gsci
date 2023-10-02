@@ -108,6 +108,37 @@ const NativeSelectWidget = function (props) {
   );
 };
 
+const RadioFacesWidget = function (props) {
+  const handleChange = (event) => {
+    const value = event.target.value;
+    props.onChange(value);
+  };
+
+  return (
+    <>
+      <InputLabel shrink htmlFor={props.label}>
+        {props.label}
+      </InputLabel>
+      <NativeSelect
+        value={props.value}
+        onChange={handleChange}
+        inputProps={{
+          name: props.id,
+          id: props.label,
+        }}
+      >
+        {!props.default && <option aria-label="None" value="" />}
+
+        {props.options.enumOptions.map(({ label, value }) => (
+          <option key={`${label}`} value={value}>
+            {label}
+          </option>
+        ))}
+      </NativeSelect>
+    </>
+  );
+};
+
 function Questionnaire({
   getQuestionnaire,
   addQuestionnaire,
@@ -143,6 +174,7 @@ function Questionnaire({
 
   const widgets = {
     nativeSelect: NativeSelectWidget,
+    radioFaces: RadioFacesWidget,
     title: Title,
   };
 

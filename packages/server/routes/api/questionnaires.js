@@ -99,7 +99,7 @@ router.post('/:id', patient, async (req, res) => {
       1
     );
 
-    if (title === 'Initial Intake Form') {
+    if (title === 'Pre-visit Intake Form') {
       let questionnairesToSend = [];
 
       let questionnaires = await Questionnaire.find();

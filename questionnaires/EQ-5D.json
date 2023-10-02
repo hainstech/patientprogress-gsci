@@ -20,13 +20,13 @@
       "title": "Self-Care",
       "type": "string"
     },
-    "Usual Activities (e.g. work, study, housework, family or leisure activities)": {
+    "Usual Activities": {
       "enum": [
         "I have no problems with performing my usual activities",
         "I have some problems with performing my usual activities",
         "I am unable to perform my usual activities"
       ],
-      "title": "Usual Activities (e.g. work, study, housework, family or leisure activities)",
+      "title": "Usual Activities (eg work, study, housework, family or leisure activities)",
       "type": "string"
     },
     "Pain/Discomfort": {
@@ -49,8 +49,10 @@
     },
     "Health state": {
       "title": "Health state",
-      "type": "string",
-      "description": "To help people say how good or bad a health state is, we have drawn a scale (rather like a thermometer) on which the best state you can imagine is marked 100 and the worst state you can imagine is marked 0. We would like you to indicate on this scale how good or bad your own health is today, in your opinion. Please do this by drawing a line from the box below to whichever point on the scale indicates how good or bad your health state is today."
+      "type": "integer",
+      "description": "To help people say how good or bad a health state is, we have drawn a scale (rather like a thermometer) on which the best state you can imagine is marked 100 and the worst state you can imagine is marked 0. We would like you to indicate on this scale how good or bad your own health is today, in your opinion. Please choose whichever point on the scale indicates how good or bad your health state is today.",
+      "minimum": 0,
+      "maximum": 100
     }
   },
   "dependencies": {},

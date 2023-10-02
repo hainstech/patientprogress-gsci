@@ -460,7 +460,7 @@ const NewReport = ({
       getPatient(match.params.id).then((patient) => {
         const lastIntake = getLastQuestionnaire(
           patient.questionnaires,
-          'Initial Intake Form'
+          'Pre-visit Intake Form'
         );
         setIntake({
           dob: patient.dob,
@@ -912,21 +912,6 @@ const NewReport = ({
                           <GridItem xs={12}>
                             {t('report.healthSatisfaction')}:{' '}
                             {intake.healthSatisfaction}
-                          </GridItem>
-                        </GridContainer>
-                        <br />
-                        <GridContainer>
-                          <GridItem xs={12}>
-                            {t('report.gecPain')}:{' '}
-                            {intake.globalExpectationOfChange.pain}/10
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.gecFunction')}:{' '}
-                            {intake.globalExpectationOfChange.function}/10
-                          </GridItem>
-                          <GridItem xs={12}>
-                            {t('report.gecQualityOfLife')}:{' '}
-                            {intake.globalExpectationOfChange.qualityOfLife}/10
                           </GridItem>
                         </GridContainer>
                       </CardBody>

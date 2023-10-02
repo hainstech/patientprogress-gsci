@@ -8,20 +8,12 @@ import { format, parseISO } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 import i18next from 'i18next';
 
-import {
-  TextField,
-  FormControl,
-  FormControlLabel,
-  Switch,
-  IconButton,
-} from '@material-ui/core';
+import { TextField, FormControl, IconButton } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import DatePicker from 'react-multi-date-picker';
-import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 
 import Spinner from '../../components/Spinner/Spinner';
 
@@ -58,7 +50,6 @@ const PatientOverview = ({
   const classes = useStyles();
   const [displayList, setDisplayList] = useState([]);
   const [questionnaireList, setQuestionnaireList] = useState([]);
-  const [scheduled, setScheduled] = useState(false);
   const [dates, setDates] = useState([]);
   const [questionnaires, setQuestionnaires] = useState([]);
 
@@ -81,13 +72,6 @@ const PatientOverview = ({
       }
     });
 
-    // add questionnaire bundles to the displayed list
-    newList = [
-      ...BUNDLES.map((title) => ({
-        title,
-      })),
-      ...newList,
-    ];
     setDisplayList(newList);
   }, []);
 
@@ -319,15 +303,6 @@ const PatientOverview = ({
     return params.row.sent ? <CheckIcon /> : <ClearIcon />;
   };
 
-  const toggleScheduled = (e) => {
-    setScheduled(e.target.checked);
-    setDates([]);
-  };
-
-  function handleDateChange(dates) {
-    setDates(dates);
-  }
-
   return (
     <>
       {patient === null || questionnaireList.length === 0 || loading ? (
@@ -385,7 +360,7 @@ const PatientOverview = ({
               </CardHeader>
               <CardBody>
                 {patient.questionnaires.filter(
-                  ({ title }) => title === 'Initial Intake Form'
+                  ({ title }) => title === 'Pre-visit Intake Form'
                 ).length > 0 ? (
                   <Link to={`/professional/patients/${match.params.id}/report`}>
                     <Button color="success" style={{ marginBottom: 15 }}>
@@ -524,37 +499,7 @@ const PatientOverview = ({
                       {t('professional.invite.submit')}
                     </Button>
                   </GridItem>
-
-                  <GridItem xs={12}>
-                    <FormControlLabel
-                      control={
-                        <Switch
-                          checked={scheduled}
-                          onChange={toggleScheduled}
-                          name="scheduled"
-                          color="primary"
-                        />
-                      }
-                      label={t('professional.patient.scheduled')}
-                    />
-                  </GridItem>
                 </GridContainer>
-                {scheduled && (
-                  <GridContainer wrap="nowrap">
-                    <GridItem>
-                      <p>{t('professional.patient.selectDates')}:</p>
-                    </GridItem>
-                    <GridItem xs={5}>
-                      <DatePicker
-                        style={{ margin: '14px 0px' }}
-                        value={dates}
-                        onChange={handleDateChange}
-                        multiple
-                        plugins={[<DatePanel />]}
-                      />
-                    </GridItem>
-                  </GridContainer>
-                )}
               </CardBody>
             </Card>
           </GridItem>

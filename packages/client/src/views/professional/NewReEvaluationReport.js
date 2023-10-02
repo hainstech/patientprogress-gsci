@@ -169,7 +169,7 @@ const NewReEvaluationReport = ({
 
         const lastIntake = getLastQuestionnaire(
           patient.questionnaires,
-          'Initial Intake Form'
+          'Pre-visit Intake Form'
         );
 
         const lastInitialReport = getLastInitialReport(patient.reports);

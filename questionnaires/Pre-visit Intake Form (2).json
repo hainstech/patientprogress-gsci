@@ -1,0 +1,490 @@
+{
+  "title": "Pre-visit Intake Form",
+  "description": "Could you please fill up these pre-visit questionnaires.  The information collected will help your chiropractor provide the most efficient and effective care.",
+  "type": "object",
+  "properties": {
+    "whoCompleted": {
+      "enum": [
+        "Patient seeking care",
+        "Patient with assistance - Community member",
+        "Patient with assistance - Medical Assistant/Community health worker",
+        "Patient with assistance - Nurse",
+        "Patient with assistance - Physician",
+        "Patient with assistance - Chiropractor",
+        "Patient with assistance - Physiotherapist",
+        "Patient with assistance - Massage therapist",
+        "Patient with assistance - Other"
+      ],
+      "title": "Please indicate who is completing this questionnaire",
+      "type": "string"
+    },
+    "address": { "title": "Address", "type": "string" },
+    "city": { "title": "City", "type": "string" },
+    "province": { "title": "Province", "type": "string" },
+    "postalCode": { "title": "Postal Code", "type": "string" },
+    "homePhoneNumber": { "title": "Home Phone Number", "type": "string" },
+    "officePhoneNumber": { "title": "Office Phone Number", "type": "string" },
+    "cellularPhoneNumber": {
+      "title": "Cellular Phone Number",
+      "type": "string"
+    },
+    "section1": {
+      "title": "Section 1 - General information",
+      "type": "string"
+    },
+    "civilStatus": {
+      "title": "What is your Civil Status?",
+      "type": "string",
+      "enum": [
+        "Single",
+        "Married or living with a common-law partner",
+        "Divorced or separated",
+        "Widowed"
+      ]
+    },
+    "nbChildrens": {
+      "title": "How many children do you have?",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 15,
+      "default": 0
+    },
+    "educationCompleted": {
+      "title": "What is the highest degree or level of education you have completed?",
+      "type": "string",
+      "enum": [
+        "Some high school education",
+        "High School diploma (secondary school) or equivalent",
+        "Registered Apprenticeship or trade certificate or diploma",
+        "College, non-university certificate or CEGEP or diploma",
+        "University certificate or diploma or degree"
+      ]
+    },
+    "employmentStatusSelection": {
+      "title": "",
+      "type": "object",
+      "properties": {
+        "employmentStatus": {
+          "title": "What is your current employment status?",
+          "type": "string",
+          "enum": [
+            "Working fulltime",
+            "Working part time",
+            "Looking for work, not working",
+            "Sick leave",
+            "Maternity/ paternity leave",
+            "Disability leave related to the chief presenting complaint",
+            "Disability leave not related to the chief presenting complaint",
+            "Student",
+            "Temporary layoff",
+            "Retired",
+            "Staying at home",
+            "Unknown",
+            "Other"
+          ]
+        }
+      },
+      "required": ["employmentStatus"],
+      "dependencies": {
+        "employmentStatus": {
+          "oneOf": [
+            {
+              "properties": {
+                "employmentStatus": { "enum": ["Other"] },
+                "employmentStatusOther": {
+                  "title": "Please specify",
+                  "type": "string"
+                }
+              },
+              "required": ["employmentStatusOther"]
+            },
+            {
+              "properties": {
+                "employmentStatus": {
+                  "enum": [
+                    "Working fulltime",
+                    "Working part time",
+                    "Sick leave",
+                    "Maternity/ paternity leave",
+                    "Disability leave related to the chief presenting complaint",
+                    "Disability leave not related to the chief presenting complaint",
+                    "Student",
+                    "Temporary layoff, looking for work, not working",
+                    "Retired",
+                    "Staying at home",
+                    "Unknown"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "occupation": {
+      "title": "What is your occupation?",
+      "type": "string",
+      "enum": [
+        "Agriculture, farming",
+        "Processing, manufacturing",
+        "Business, finance, administration",
+        "Sales and service",
+        "Healthcare",
+        "Education, social science, government service, religion, art, culture, sports, entertainment and recreation, tourism",
+        "Trades (exemples: electrician, plumber, carpenters, transport, equipment operator)",
+        "Mining, forestry",
+        "Natural and applied sciences (exemple: agricultural specialists, engineering, technician, biologists)",
+        "Other"
+      ]
+    },
+    "accidentSelector": {
+      "title": "",
+      "type": "object",
+      "properties": {
+        "accident": {
+          "title": "Is your chief complaint related to?",
+          "type": "string",
+          "enum": [
+            "A motor vehicle accident",
+            "A work related accident",
+            "None of the above"
+          ]
+        }
+      },
+      "required": ["accident"],
+      "dependencies": {
+        "accident": {
+          "oneOf": [
+            {
+              "properties": {
+                "accident": {
+                  "enum": [
+                    "A motor vehicle accident",
+                    "A work related accident"
+                  ]
+                },
+                "accidentAgentName": {
+                  "title": "Name of the agent:",
+                  "type": "string"
+                },
+                "accidentFileNumber": {
+                  "title": "File number:",
+                  "type": "string"
+                }
+              }
+            },
+            { "properties": { "accident": { "enum": ["None of the above"] } } }
+          ]
+        }
+      }
+    },
+    "extendedCoverageSelector": {
+      "title": "",
+      "type": "object",
+      "properties": {
+        "extendedCoverage": {
+          "title": "Do you have extended care coverage?",
+          "type": "string",
+          "enum": ["Yes", "No"]
+        }
+      },
+      "required": ["extendedCoverage"],
+      "dependencies": {
+        "extendedCoverage": {
+          "oneOf": [
+            {
+              "properties": {
+                "extendedCoverage": { "enum": ["Yes"] },
+                "extendedCoverageInsuranceName": {
+                  "title": "Insurance’s name:",
+                  "type": "string"
+                },
+                "extendedCoveragePolicyNumber": {
+                  "title": "Policy number:",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "extendedCoverageInsuranceName",
+                "extendedCoveragePolicyNumber"
+              ]
+            },
+            { "properties": { "extendedCoverage": { "enum": ["No"] } } }
+          ]
+        }
+      }
+    },
+    "familyPhysicianSelector": {
+      "title": "",
+      "type": "object",
+      "properties": {
+        "familyPhysician": {
+          "title": "Do you have a family physician?",
+          "type": "string",
+          "enum": ["Yes", "No"]
+        }
+      },
+      "required": ["familyPhysician"],
+      "dependencies": {
+        "familyPhysician": {
+          "oneOf": [
+            {
+              "properties": {
+                "familyPhysician": { "enum": ["Yes"] },
+                "familyPhysicianName": {
+                  "title": "Name of your family physician",
+                  "type": "string"
+                },
+                "familyPhysicianAddress": {
+                  "title": "Address of family physician",
+                  "type": "string"
+                },
+                "lastAppointmentDate": {
+                  "title": "Date of last appointment",
+                  "type": "string",
+                  "format": "date"
+                }
+              }
+            },
+            { "properties": { "familyPhysician": { "enum": ["No"] } } }
+          ]
+        }
+      }
+    },
+    "referenceSelector": {
+      "title": "",
+      "type": "object",
+      "properties": {
+        "reference": {
+          "title": "Who referred you?",
+          "type": "string",
+          "enum": [
+            "Heard about in the community",
+            "Facebook",
+            "Google",
+            "Spouse",
+            "Friend",
+            "Family",
+            "Co-worker",
+            "Health professional",
+            "Other"
+          ]
+        }
+      },
+      "required": ["reference"],
+      "dependencies": {
+        "reference": {
+          "oneOf": [
+            {
+              "properties": {
+                "reference": { "enum": ["Health professional"] },
+                "referenceOther": {
+                  "title": "Please specify",
+                  "type": "string"
+                }
+              },
+              "required": ["referenceOther"]
+            },
+            {
+              "properties": {
+                "reference": {
+                  "enum": [
+                    "Website",
+                    "Facebook",
+                    "Google",
+                    "Spouse",
+                    "Friend",
+                    "Family",
+                    "Co-worker",
+                    "Other"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "emergencyName": {
+      "title": "Provide the name of the person to contact in case of an emergency",
+      "type": "string"
+    },
+    "emergencyPhone": {
+      "title": "Provide the phone number of the person to contact in case of an emergency",
+      "type": "string"
+    },
+    "emailContact": {
+      "title": "Do you authorize the clinic to contact you by E-mail?",
+      "type": "string",
+      "enum": ["Yes", "No"]
+    },
+    "weight": {
+      "title": "What is your weight in KILOGRAMS?",
+      "type": "integer",
+      "minimum": 0
+    },
+    "height": {
+      "title": "What is your height in CENTIMETERS?",
+      "type": "integer",
+      "minimum": 0
+    },
+    "section2": {
+      "title": "Section 2 - Primary and secondary complaints",
+      "type": "string"
+    },
+    "allPainAreas": {
+      "title": "Body Map",
+      "description": "Select all the body regions where you are experiencing symptoms or concerns. Please click and highlight them",
+      "type": "array"
+    },
+    "relatedPainAreas": {
+      "title": "Body Map",
+      "description": "Select all the body regions where you are experiencing symptoms or concerns related to your chief complaint. Please click and highlight them",
+      "type": "array"
+    },
+    "painIntensity": {
+      "enum": [
+        "No or minimal discomfort (pain 0-1/10)",
+        "Mild (pain 2-4/10)",
+        "Moderate (pain 5-7/10)",
+        "Severe (pain 8-10/10)"
+      ],
+      "title": "What is the intensity of the pain related to that chief complaint?",
+      "type": "string"
+    },
+    "numbness": {
+      "enum": ["Yes", "No", "Unknown"],
+      "title": "Do you suffer from numbness or tingling",
+      "type": "string"
+    },
+    "weakness": {
+      "enum": ["Yes", "No", "Unknown"],
+      "title": "Do you suffer from muscle weakness",
+      "type": "string"
+    },
+    "lossBalance": {
+      "enum": ["Yes", "No", "Unknown"],
+      "title": "Do you suffer from loss of balance",
+      "type": "string"
+    },
+    "bladderBowelProblems": {
+      "enum": ["Yes", "No", "Unknown"],
+      "title": "Have you experienced a new onset of bladder or bowel problems such as incontinence",
+      "type": "string"
+    },
+    "spinalDeformity": {
+      "enum": ["Yes", "No", "Unknown"],
+      "title": "Do you have a spinal deformity or scoliosis",
+      "type": "string"
+    },
+    "symptomsDuration": {
+      "enum": ["Less than 3 months", "More than 3 months"],
+      "title": "How long have the symptoms been present?",
+      "type": "string"
+    },
+    "primaryComplaintStarted": {
+      "format": "date",
+      "title": "Please indicate approximatively when symptoms or concerns related to the primary complaint started",
+      "type": "string"
+    },
+    "painRadiate": {
+      "enum": ["Yes", "No"],
+      "title": "Do pain or neurological symptoms radiate beyond the spine?",
+      "type": "string"
+    },
+    "difficulty": {
+      "enum": [
+        "Not at all",
+        "Most but not all normal activities can be done (moderate disability)",
+        "There is  difficulty doing most activities (severe disability)"
+      ],
+      "title": "How much do symptoms cause difficulty with normal activities?",
+      "type": "string"
+    },
+    "recentTrauma": {
+      "enum": ["No", "Yes"],
+      "title": "Has there been a recent trauma, such as a serious accident or fall?",
+      "type": "string"
+    },
+    "cancer": {
+      "enum": ["No", "Yes", "Unknown"],
+      "title": "Have you ever suffered from cancer?",
+      "type": "string"
+    },
+    "weightloss": {
+      "enum": ["Yes", "No", "Unknown"],
+      "title": "Have you noted unexpected weight loss, onging fever or night sweats?",
+      "type": "string"
+    },
+    "infection": {
+      "enum": ["Yes", "No", "Unknown"],
+      "title": "Have you suffered from an infection such as Tuberculosis or HIV?",
+      "type": "string"
+    },
+    "osteoporosis": {
+      "enum": ["Yes", "No", "Unknown"],
+      "title": "Do you suffer from osteoporosis?",
+      "type": "string"
+    },
+    "cortisone": {
+      "enum": ["Yes", "No", "Unknown"],
+      "title": "Are you taking or used corticosteroid (cortisone) medication?",
+      "type": "string"
+    },
+    "jointDisease": {
+      "enum": ["Yes", "No", "Unknown"],
+      "title": "Have you been diagnosed with inflammatory joint disease or rheumatoid arthritis, lupus, ankylosing sponylitis?",
+      "type": "string"
+    },
+    "neurologicalDisease": {
+      "enum": ["Yes", "No", "Unknown"],
+      "title": "Have you previously been diagnosed with a serious neurological disease?",
+      "type": "string"
+    },
+    "consulted": {
+      "enum": [
+        "No",
+        "Nurse",
+        "Medical doctor",
+        "Chiropractor",
+        "Physiotherapist",
+        "Traditional healer",
+        "Osteopath",
+        "Acupuncturist",
+        "Massage therapist",
+        "Other"
+      ],
+      "title": "Was anyone else consulted or has anyone treated this problem?",
+      "type": "string"
+    },
+    "section3": {
+      "title": "Section 3 - Examination consent",
+      "type": "string"
+    },
+    "consent": {
+      "title": "I declare that I have filled out this questionnaire to the best of my knowledge and I hereby authorize the chiropractor to conduct the examination that he or she deems necessary to open my file. Some patients may feel soreness or mild aggravation of symptoms following the examination. Although these symptoms generally do not last long, it is important to mention them to the chiropractor at your next ",
+      "type": "string",
+      "enum": ["Yes", "No"]
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "province",
+    "postalCode",
+    "homePhoneNumber",
+    "civilStatus",
+    "educationCompleted",
+    "occupation",
+    "emergencyName",
+    "emergencyPhone",
+    "emailContact",
+    "weight",
+    "height",
+    "allPainAreas",
+    "relatedPainAreas",
+    "primaryComplaintStarted",
+    "recentTrauma",
+    "consent"
+  ]
+}
