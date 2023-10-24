@@ -68,7 +68,7 @@
       "Has the person experienced a recent physical trauma, such as a serious accident or fall?"
     ]
   },
-  "Neurologial symptoms or deficits": {
+  "Neurological symptoms or deficits": {
     "Any numbness or tingling in the arms or legs?": { "ui:widget": "radio" },
     "Any muscle weakness in the arms or legs?": { "ui:widget": "radio" },
     "Any gait difficulty or loss of balance?": { "ui:widget": "radio" },
@@ -93,6 +93,6 @@
     "Pain Intensity / Activity limitation",
     "Risk of serious spinal or systemic pathology",
     "Structural Spinal Pathology",
-    "Neurologial symptoms or deficits"
+    "Neurological symptoms or deficits"
   ]
 }

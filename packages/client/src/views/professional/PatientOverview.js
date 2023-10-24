@@ -574,7 +574,7 @@ const PatientOverview = ({
                           renderCell: renderDeleteButton,
                         },
                       ]}
-                      pageSize={2}
+                      pageSize={4}
                     />
                   </div>
                 ) : (

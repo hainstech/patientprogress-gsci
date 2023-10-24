@@ -2,6 +2,17 @@ module.exports = {
   scoreCalculator: function (title, answers) {
     let scores = [];
     switch (title) {
+      case 'Triage':
+        let pathway = {
+          '3-emergency': 'Refer patient to nearest health center (emergency)',
+          '3-non-emergency':
+            'Refer patient to nearest health center (non emergency)',
+          1: 'Offer reassurance, education, manual therapy, exercises, massage',
+          0: 'Offer reassurance and education',
+        };
+
+        let emergency = false;
+
       case 'Neck Disability Index':
         let total = Object.values(answers).reduce((a, b) => a + parseInt(b), 0);
         let interpretation = '';

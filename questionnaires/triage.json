@@ -148,8 +148,8 @@
       "dependencies": {},
       "required": []
     },
-    "Neurologial symptoms or deficits": {
-      "title": "Neurologial symptoms or deficits",
+    "Neurological symptoms or deficits": {
+      "title": "Neurological symptoms or deficits",
       "type": "object",
       "properties": {
         "Any numbness or tingling in the arms or legs?": {
