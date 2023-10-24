@@ -431,7 +431,7 @@ const Preferences = ({
                           <p>
                             {t('register.consent')}{' '}
                             <a
-                              href="https://app.patientprogress.ca/privacy"
+                              href="https://gsci-dot-yoki-355502.ue.r.appspot.com/privacy"
                               target="_blank"
                               rel="noopener noreferrer"
                             >
@@ -439,7 +439,7 @@ const Preferences = ({
                             </a>{' '}
                             &{' '}
                             <a
-                              href="https://app.patientprogress.ca/terms"
+                              href="https://gsci-dot-yoki-355502.ue.r.appspot.com/terms"
                               target="_blank"
                               rel="noopener noreferrer"
                             >

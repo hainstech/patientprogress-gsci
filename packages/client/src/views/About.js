@@ -32,8 +32,10 @@ const About = () => {
                 <div>
                   <h5>Warning: This is the Beta version of PatientProgress</h5>
                   <h5>
-                    <a href="https://app.patientprogress.ca">Click here</a> to
-                    access the latest stable version.
+                    <a href="https://gsci-dot-yoki-355502.ue.r.appspot.com">
+                      Click here
+                    </a>{' '}
+                    to access the latest stable version.
                   </h5>
                   <br />
                 </div>

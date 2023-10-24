@@ -212,7 +212,7 @@ router.post(
         user: req.user.id,
       }).select('_id');
 
-      const url = `https://app.patientprogress.ca/register/${id}`;
+      const url = `https://gsci-dot-yoki-355502.ue.r.appspot.com/register/${id}`;
 
       const transporter = nodemailer.createTransport({
         host: config.get('nodemailerHost'),

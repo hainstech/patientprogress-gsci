@@ -375,7 +375,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                         <p>
                           {t('register.consent')}{' '}
                           <a
-                            href="https://app.patientprogress.ca/privacy"
+                            href="https://gsci-dot-yoki-355502.ue.r.appspot.com/privacy"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -383,7 +383,7 @@ const Register = ({ setAlert, register, isAuthenticated, type, match }) => {
                           </a>{' '}
                           &{' '}
                           <a
-                            href="https://app.patientprogress.ca/terms"
+                            href="https://gsci-dot-yoki-355502.ue.r.appspot.com/terms"
                             target="_blank"
                             rel="noopener noreferrer"
                           >

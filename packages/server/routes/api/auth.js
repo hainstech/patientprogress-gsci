@@ -134,7 +134,7 @@ router.post(
       };
 
       const sendForgotEmail = (token) => {
-        const url = `https://app.patientprogress.ca/forgot/${user.id}/${token}`;
+        const url = `https://gsci-dot-yoki-355502.ue.r.appspot.com/forgot/${user.id}/${token}`;
 
         const transporter = nodemailer.createTransport({
           host: config.get('nodemailerHost'),
